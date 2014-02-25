@@ -59,7 +59,7 @@ Hunt.extendRoutes(function (core) {
   });
 });
 
-Hunt.on('http', function (httpEvent) {
+Hunt.on('httpSuccess', function (httpEvent) {
   Hunt.emit('broadcast', httpEvent);
 });
 

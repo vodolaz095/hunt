@@ -40,22 +40,35 @@ if (Hunt.config.enableMongoose) {
 }
 
 
-/**
+/*
  * Settig up static assets - css and javascripts
  */
 Hunt.extendApp(function(core){
-  core.app.locals.menu=[{'url':'/','name':'Trophies'},{'url':'/new','name':'Create new trophy'}];
+  core.app.locals.menu=[
+    {'url':'/trophies','name':'Trophies'},
+    {'url':'/new','name':'Create new trophy'}
+  ];
   core.app.locals.css.push({'href': '/css/style.css', 'media': 'screen'});
   core.app.locals.javascripts.push({'url': '/javascripts/clock.js'});
 });
 
-/**
- * Setting up top level api endpoind to trophies
- * https://github.com/visionmedia/express-resource#top-level-resource
+/*
+ * Setting up api endpoind to trophies
+ * https://github.com/visionmedia/express-resource
  */
 Hunt.extendRoutes(function(core){
-  core.app.resource(require('./api/trophy.api.js'));
+  core.app.resource('trophies',require('./api/trophy.api.js'));
 });
+
+/*
+ * Route for index page to make redirects
+ */
+Hunt.extendRoutes(function(core){
+  core.app.get('/', function(req, res){
+    res.redirect('/trophies');
+  });
+});
+
 
 Hunt.once('start', function () {
 //populating the trophies' collection in database

@@ -68,21 +68,19 @@ Hunt.on('httpError', function(err){
 //also we notify admin that there is some sort of error
 //by default it is done by direct mail transport, so it will work alwayes,
 //but the message will likely be marked as spam
-  Hunt.sendEmail('support@example.com', 'Our application error!', JSON.stringify(err), console.error);
+  Hunt.sendEmail('support@example.com', 'Our application did a bad bad thing!', JSON.stringify(err), console.error);
 });
 
 
-/**
+/*
  * Starting cluster of webserveres
  * We start 2 worker processes and 1 master process
  * We listen to port 3000
  */
 //Hunt.startWebCluster(3,3000);
-
-//But let us Hunt to decide
-//how many worker process is spawned (1 for every CPU core present)
-//and what port to use (from config or process.env.port or default - 3000)
+/*
+ *But let us Hunt to decide
+ *how many worker process is spawned (1 for every CPU core present)
+ *and what port to use (from config or process.env.port or default - 3000)
+ */
 Hunt.startWebCluster();
-
-
-

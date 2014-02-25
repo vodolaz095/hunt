@@ -37,7 +37,7 @@ exports.create = function(req, res){
 };
 
 exports.show = function(req, res){
-  req.model.Trophy.findById(req.params.id, function (err, trophy) {
+  req.model.Trophy.findById(req.params.trophy, function (err, trophy) {
     if (err) throw err;
     if(req.is('json')){
       if(trophy){
