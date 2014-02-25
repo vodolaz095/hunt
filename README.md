@@ -1,6 +1,6 @@
 Hunt
 ====================
-[![Build Status](https://travis-ci.org/vodolaz095/hunt.png)](https://travis-ci.org/vodolaz095/hunt)
+[![Build Status](https://drone.io/bitbucket.org/vodolaz095/hunt/status.png)](https://drone.io/bitbucket.org/vodolaz095/hunt/latest)
 [![Dependency Status](https://gemnasium.com/vodolaz095/hunt.png)](https://gemnasium.com/vodolaz095/hunt)
 
 **What do you get from the box?**
