@@ -16,14 +16,9 @@ function Hunt(config) {
   EventEmitter.call(this);
   this.config = configGenerator(config);
 
-  //guarding core internals from Hunt.extendCore
+//guarding core internals from Hunt.extendCore
   this.app = 'app';
   this.http = require('http');
-/**
- * @method Hunt#rack
- * @description
- * Generate realy long random string
- */
   this.rack = require('./lib/rack.js');
   this.httpServer = true;
   this.passport = require('passport');
@@ -120,6 +115,7 @@ function Hunt(config) {
    * @method Hunt#extendModel
    * @param {string} modelName - property name to assign to hunt.model[modelName]
    * @param {function} modelConstructor - factory function to generate model using Hunt kernel
+   * @see model
    * @description
    * Inject public property with model object to hunt.model.
    * @returns {Hunt} hunt object
@@ -132,7 +128,7 @@ function Hunt(config) {
    *          'name': {type: String, unique: true},
    *          'scored': Boolean
    *        });
-
+   *
    *        TrophySchema.index({
    *          name: 1
    *        });
@@ -176,6 +172,7 @@ function Hunt(config) {
    * Add new passportJS strategy to application by adding them to Hunt.passport object
    * All strategies have to redirect to `/auth/success` on success or `/auth/failure`
    * @param {object} Strategy object
+   * @see passport
    * @example
    * ```javascript
    *    var HashStrategy = require('passport-hash').Strategy;

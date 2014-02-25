@@ -19,6 +19,7 @@ var validator = require('validator');
  * @property {User} fromProfile
  * @property {Date} createdAt
  * @property {string} message
+ * @property {Number} ago
  * */
 
 module.exports = exports = function (core) {
@@ -29,13 +30,25 @@ module.exports = exports = function (core) {
     'fromProfile': { type: core.mongoose.Schema.Types.ObjectId, ref: 'User' },
     'createdAt': { type: Date, default: Date.now },
     'message': {type: String, trim: true } //trim whitespaces - http://mongoosejs.com/docs/api.html#schema_string_SchemaString-trim
-  });
+  },
+  {
+    toObject: { getters: true, virtuals: true }, //http://mongoosejs.com/docs/api.html#document_Document-toObject
+    toJSON: { getters: true, virtuals: true }
+  }
+  );
 
   messageSchema.pre('save', function (next) {
     var msg = this;
     msg.message = validator.escape(msg.message);
     next();
   });
+
+  messageSchema.virtual('ago')
+    .get(function () {
+      var now = new Date().getTime();
+      return Math.floor((now - this.createdAt.getTime()) /1000);
+    });
+
 
   messageSchema.index({
     to: 1,

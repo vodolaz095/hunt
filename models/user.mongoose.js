@@ -138,7 +138,11 @@ module.exports = exports = function (core) {
 
   UserSchema.virtual('username')
     .get(function () {
-      return this.keychain.username;
+      if(this.keychain){
+        return this.keychain.username || null;
+      } else {
+        return this.displayName || this.id;
+      }
     })
     .set(function (username) {
       this.set('keychain.username', username);

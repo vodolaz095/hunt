@@ -1,7 +1,9 @@
-/**
+/*
  * Dialog example - user authorizes by login and password, and can interact with other users, if he is given the key
  */
-var hunt = require('./../index.js');
+var hunt = require('./../index.js'),
+  dialogHelperApi = require('./api/dialogHelper.api.js'),
+  profileHelperApi = require('./api/profileHelper.api.js');
 
 var config = {
   'io': {
@@ -9,7 +11,13 @@ var config = {
   },
   //for password strategies
   'passport': {
-    'local': true //authorization by username/email and password, POST to /auth/login
+    'local': true, //authorization by username/email and password, POST to /auth/login,
+    'signUpByEmail': true, //user can signup by making POST /auth/signhup with email and password
+    'verifyEmail': true, //user have to follow link in email address
+    'verifyEmailTemplate': 'email/verifyEmail', //template for verifying email message
+    'resetPasswordEmailTemplate': 'email/resetEmail', //template for email used for reseting password
+    'resetPasswordPageTemplate': 'cabinet/resetPasswordStage2',
+    'resetPassword': true, //allow user to reset password for account
   },
   'dialog': true,//enable dialogs api on /api/dialog
   'public': __dirname + '/public', //directory for assets - css, images, client side javascripts
@@ -18,7 +26,7 @@ var config = {
 
 var Hunt = hunt(config);
 
-/**
+/*
  * Settig up static assets - css and javascripts
  */
 Hunt.extendApp(function (core) {
@@ -27,51 +35,42 @@ Hunt.extendApp(function (core) {
   core.app.locals.javascripts.push({'url': '/javascripts/dialog.js'});
 });
 
-/**
- * Setting routes
+/*
+ * Setting middleware to irritate user who have not verified his account
+ */
+Hunt.extendMiddleware(function (core) {
+  return function (req, res, next) {
+    if (req.user) {
+      if (req.user.accountVerified) {
+        next();
+      } else {
+        req.flash('error', 'Verify your email address please!');
+        next();
+      }
+    } else {
+      next();
+    }
+  };
+});
+
+/*
+ * Setting custom routes
  */
 Hunt.extendRoutes(function (core) {
   core.app.get('/', function (req, res) {
-    res.render('dialog', {
+    res.render('dialog/index', {
       'title': 'Hunt dialog system example',
       'description': 'If you know user\'s key, you can chat with him/her.',
       'id': req.query.id
     });
   });
-
-  core.app.post('/', function (req, res) {
-    if (req.body.id) {
-      res.redirect('/' + req.body.id);
-    } else {
-      res.redirect('/');
-    }
-  });
-
-  core.app.get('/:id', function (req, res) {
-    if (req.user) {
-      req.model.User.findOne({'_id': req.params.id}, function (err, userFound) {
-        if (err) {
-          throw err;
-        } else {
-          if (userFound) {
-            if (userFound.id == req.user.id) {
-              req.flash('error', 'Talking to yourself is very interesting)');
-              res.redirect('/');
-            } else {
-              res.send('ok');
-            }
-          } else {
-            req.flash('error', 'User with this id do not exists!');
-            res.redirect('/');
-          }
-        }
-      });
-    } else {
-      req.flash('error', 'Authorize or register please!');
-      res.redirect('/?id=' + req.params.id);
-    }
-  });
 });
+
+/*
+ * Setting some shared routes
+ */
+Hunt.extendRoutes(dialogHelperApi);
+Hunt.extendRoutes(profileHelperApi);
 
 Hunt.once('dts', console.info); //catching `dts` event`
 

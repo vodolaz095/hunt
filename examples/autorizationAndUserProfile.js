@@ -1,7 +1,8 @@
 /**
  * Authorization, oauth profile merging and user profile example.
  */
-var hunt = require('./../index.js');
+var hunt = require('./../index.js'),
+  profileHelperApi = require('./api/profileHelper.api.js');
 
 var config = {
   //'secret' : 'someLongAndHardStringToMakeHackersSadAndEldersHappy',
@@ -89,42 +90,11 @@ Hunt.extendMiddleware(function (core) {
 Hunt.extendRoutes(function(core){
   core.app.get('/', function (req, res) {
     if (req.user) {
-      res.render('cabinet/profile', {title: 'Your profile'});
+      res.redirect('/profile');
     } else {
       res.render('cabinet/login', {
         'title': 'Hunt authorization example',
         'description': 'Authorize please!'
-      });
-    }
-  });
-
-  core.app.get('/profile', function(req,res){
-    if (req.user) {
-      res.render('cabinet/profile',
-        {
-          'title': 'Hunt authorization example',
-          'description': 'Your profile'
-        });
-    } else {
-      res.redirect('/');
-    }
-  });
-
-  core.app.get('/myself', function (req, res) {
-    if (req.user) {
-      res.json(req.user);
-    } else {
-      res.send(403);
-    }
-  });
-
-  core.app.get('/auth/resetPassword', function (req, res) {
-    if (req.user) {
-      res.redirect('/profile');
-    } else {
-      res.render('cabinet/resetPasswordStage1', {
-        'title': 'Reset password for account',
-        'description': 'We can help you'
       });
     }
   });

@@ -1,4 +1,4 @@
-/**
+/*
  * Example, that logs to console all users in default mongo database
  */
 

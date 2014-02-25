@@ -1,7 +1,7 @@
 {{#myself}}
 <img src="{{gravatar100}}" alt="Your gravatar"/>
 <p>Id: {{id}}</p>
-<p>Email: {{email}}</p>
+<p>Email: <a href="mailto:{{email}}">{{email}}</a></p>
 <p>Account verified - {{#accountVerified}}yes{{/accountVerified}} {{^accountVerified}}no{{/accountVerified}}.</p>
 <p>Online: {{isOnline}}</p>
 <p>Given name: {{name.givenName}}</p>
