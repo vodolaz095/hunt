@@ -15,7 +15,6 @@ var config = {
   //'redisUrl' : 'redis://somehost.com:6379',
   //'mongoUrl' : 'mongo://localhost/hunt_dev',
   //'uploadFiles': false, // do not allow upload of files by HTTP-POST
-  //'sessionExpireAfterSeconds':180,
   //'enableMongoose' : true,
   //'enableMongooseUsers' : true,
 
@@ -24,6 +23,7 @@ var config = {
   },
   //for password strategies
   'passport': {
+//    'sessionExpireAfterSeconds':180,
     'local': true, //authorization by username/email and password, POST to /auth/login
     'signUpByEmail': true, //user can signup by making POST /auth/signhup with email and password
     'verifyEmail': true, //user have to follow link in email address
