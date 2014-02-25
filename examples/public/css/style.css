@@ -1,0 +1,19 @@
+body{background-color:#ddd;font-family:"Times New Roman","Times"}
+h1{font-size:200%}
+h2{font-size:150%}
+section{margin:auto;width:90%;background-color:#fff;padding:1em;border:5px solid #ccc}
+p,li{width:40em!important;word-wrap:break-word}
+header{background-color:#356aa0;color:#fff;padding:1em;margin-bottom:.5em}
+header h1{margin:0;padding:0}header h2{margin:0;padding:0}
+nav{background-color:#333;color:#eee;float:left;width:100%;text-align:center;margin-bottom:.5em}
+nav ul{margin:0;padding:0;float:left}nav li{display:inline;margin:0;padding:0;margin-right:.5em}
+nav li a{padding:5px;text-decoration:none;color:#eee;float:left;border-right:1px solid #ccc}
+nav li a:hover{color:#eee;background-color:#555}
+article{padding:2em 5em;word-wrap:break-word}
+article h2{border-bottom:1px solid #ddd;margin-bottom:.5em}
+article img.fancy{border:1px solid #ddd;padding:.5em}
+article img.left{float:left;margin-right:1em}
+article img.right{float:right;margin-left:1em}
+footer{text-align:center;margin-top:.5em}
+.row {width:27%; float: left; padding: .25em;  margin: .5em;}
+.separator {clear: both;}

@@ -1,0 +1,54 @@
+<div class="row">
+<h3>Sign In</h3>
+<form action="/auth/login" method="post">
+<input name="_csrf" type="hidden" value="{{csrf}}"/>
+<p>
+  <label for="emailSignIn">Email</label><br/>
+  <input type="text" name="username" id="emailSignIn" value="" placeholder="yourEmail@example.org"/>
+</p>
+<p>
+  <label for="passwordSignIn">Password</label><br/>
+  <input type="password" name="password" id="passwordSignIn" value=""/>
+</p>
+<p><input type="submit" value="Enter"/></p>
+</form>
+    <p><a href="/auth/resetPassword">I have lost my password...</a></p>
+</div>
+
+<div class="row">
+<h3>Create account</h3>
+    <p>You can enter email address and password </p>
+    <form action="/auth/signup" method="post">
+    <input name="_csrf" type="hidden" value="{{csrf}}"/>
+    <p>
+      <label for="emailSignUp">Email</label><br/>
+      <input type="text" name="email" id="emailSignUp" value="" placeholder="yourEmail@example.org"/>
+    </p>
+    <p>
+      <label for="passwordSignUp">Password</label><br/>
+      <input type="password" name="password" id="passwordSignUp" value=""/>
+    </p>
+    <p><input type="submit" value="SignUp"/></p>
+    </form>
+
+<p>or use oAuth providers</p>
+    <ul>
+      <li><a href="/auth/google">Google</a></li>
+      <li><a href="/auth/github">Github</a></li>
+      <li><a href="/auth/twitter">Twitter</a></li>
+        <li><a href="/auth/vk">Vkontakte</a></li>
+        <li><a href="/auth/facebook">Facebook</a></li>
+    </ul>
+</div>
+
+<div class="row">
+<h3>Rules</h3>
+<ol>
+    <li>Rule 1</li>
+    <li>Rule 2</li>
+    <li>Rule 3</li>
+</ol>
+</div>
+
+<div class="separator"></div>
+

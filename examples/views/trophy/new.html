@@ -1,0 +1,10 @@
+<form action="/" method="post">
+    <input type="hidden" name="_csrf" value="{{csrf}}"/>
+    <p>Name: <input type="text" name="name" value="" placeholder="Enter your name please!"></p>
+    <p>Scored <input type="checkbox" name="scored" value="true"></p>
+    <p>
+        <input type="submit" value="Create">
+        <input type="reset" value="Cancel">
+    </p>
+</form>
+<p><a href="/{{id}}">Back</a></p>

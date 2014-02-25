@@ -1,0 +1,34 @@
+{{#myself}}
+<img src="{{gravatar100}}" alt="Your gravatar"/>
+<p>Id: {{id}}</p>
+<p>Email: {{email}}</p>
+<p>Account verified - {{#accountVerified}}yes{{/accountVerified}} {{^accountVerified}}no{{/accountVerified}}.</p>
+<p>Online: {{isOnline}}</p>
+<p>Given name: {{name.givenName}}</p>
+<p>Family name: {{name.familyName}}</p>
+<h2>Attach accounts to profile</h2>
+{{#keychain}}
+
+{{#github}}
+<p>Github profile #{{github}} attached.</p>
+{{/github}}
+{{^github}}
+<p><a href="/auth/github">Attach github profile</a></p>
+{{/github}}
+
+{{#twitter}}
+<p>Twitter profile #{{twitter}} attached.</p>
+{{/twitter}}
+{{^twitter}}
+<p><a href="/auth/twitter">Attach Twitter profile</a></p>
+{{/twitter}}
+
+{{#vkontakte}}
+<p>Vkontakte profile #{{vkontakte}} attached.</p>
+{{/vkontakte}}
+{{^vkontakte}}
+<p><a href="/auth/vk">Attach Vkontakte profile</a></p>
+{{/vkontakte}}
+
+{{/keychain}}
+{{/myself}}

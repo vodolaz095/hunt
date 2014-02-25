@@ -1,0 +1,28 @@
+{
+  "tags": {
+    "allowUnknownTags": false
+  },
+  "source": {
+    "include" : [
+      "README.md",
+      "index.js",
+      "models/",
+      "lib/",
+      "lib/dataStorage",
+      "lib/passportStrategies"
+    ],
+    "includePattern": ".+\\.js(doc)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "plugins": [],
+  "templates": {
+    "cleverLinks": true,
+    "monospaceLinks": true,
+    "default": {
+      "outputSourceFiles": true
+    }
+  },
+  "opts":{
+    "destination":"./examples/public/documentation"
+  }
+}

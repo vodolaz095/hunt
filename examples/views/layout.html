@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>{{title}}</title>
+{{#css}}
+    <link rel="stylesheet" href="{{href}}" type="text/css" media="{{media}}" />
+{{/css}}
+    <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+</head>
+<body>
+<section>
+    <header>
+        <h1>{{title}}</h1>
+        <h2>{{description}}</h2>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/documentation">Documentation</a></li>
+{{#menu}}
+            <li><a href="{{url}}">{{name}}</a></li>
+{{/menu}}
+{{#myself}}
+            <li><a href="/profile"><img width="10"" height="10" src="{{gravatar}}"/>{{displayName}}</a></li>
+            <li><a href="/auth/logout">LogOut</a></li>
+{{/myself}}
+            <li><a href="#" id="clock" data-bind="text: clock" title="This is clock, we have websockets support!">00:00:00</a>
+            </li>
+        </ul>
+    </nav>
+  <div id="notify">
+      {{#flash}}
+      <div class="error">{{#error}}<p>{{error}}</p>{{/error}}</div>
+      <div class="success">{{#success}}<p>{{success}}</p>{{/success}}</div>
+      <div class="info">{{#info}}<p>{{info}}</p>{{/info}}</div>
+      {{/flash}}
+  </div>
+    <article>
+        {{{ yield }}}
+    </article>
+</section>
+<footer>
+    &copy; 2013 <a href="//github.com/vodolaz095">vodolaz095</a>. - Design by <a href="http://darkfate.info/">darkfate</a>
+</footer>
+{{#javascripts}}
+<script type="text/javascript" src="{{url}}"></script>
+{{/javascripts}}
+</body>
+</html>

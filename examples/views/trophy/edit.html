@@ -1,0 +1,20 @@
+{{#trophy}}
+<form action="/{{id}}/" method="post">
+    <input type="hidden" name="_csrf" value="{{csrf}}"/>
+    <input type="hidden" name="_method" value="put"/>
+    <p>Name: <input type="text" name="name" value="{{name}}"></p>
+    <p>Scored <input type="checkbox" name="scored" value="true" {{#scored}}checked{{/scored}}></p>
+    <p>
+        <input type="submit" value="Save">
+        <input type="reset" value="Cancel">
+    </p>
+</form>
+<form action="/{{id}}/" method="post" onsubmit="return window.confirm('Are you really sure?');">
+    <input type="hidden" name="_csrf" value="{{csrf}}"/>
+    <input type="hidden" name="_method" value="delete"/>
+    <p>
+        <input type="submit" value="Remove">
+    </p>
+</form>
+<p><a href="/{{id}}">Back</a></p>
+{{/trophy}}
