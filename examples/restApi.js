@@ -3,7 +3,6 @@
  */
 
 var hunt = require('./../index.js'),
-  async = require('async'),
   Hunt = hunt({
     //'mongoUrl' : 'mongodb://localhost/hunt_dev', //this is default value
     'enableMongoose' : true, //we need mongoose database for this example
@@ -58,36 +57,7 @@ Hunt.extendRoutes(function(core){
 
 
 Hunt.once('start', function () {
-//populating the trophies' collection in database
-  async.parallel([
-    function (cb) {
-      Hunt.model.Trophy.findOneAndUpdate({'name': 'Alan Schaefer'}, {scored: false}, {upsert: true}, cb);
-    },
-    function (cb) {
-      Hunt.model.Trophy.findOneAndUpdate({'name': 'George Dillon'}, {scored: true}, {upsert: true}, cb);
-    },
-    function (cb) {
-      Hunt.model.Trophy.findOneAndUpdate({'name': 'Rick Hawkins'}, {scored: true}, {upsert: true}, cb);
-    },
-    function (cb) {
-      Hunt.model.Trophy.findOneAndUpdate({'name': 'Blain Cooper'}, {scored: true}, {upsert: true}, cb);
-    },
-    function (cb) {
-      Hunt.model.Trophy.findOneAndUpdate({'name': 'Billy Sole'}, {scored: true}, {upsert: true}, cb);
-    },
-    function (cb) {
-      Hunt.model.Trophy.findOneAndUpdate({'name': 'Mac Eliot'}, {scored: true}, {upsert: true}, cb);
-    },
-    function (cb) {
-      Hunt.model.Trophy.findOneAndUpdate({'name': 'Anna Goncalves'}, {scored: false}, {upsert: true}, cb);
-    }
-  ], function (err, trophies) {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log('' + trophies.length + ' trophies recorded.');
-    }
-  });
+  require('./lib/populateDatabase')(Hunt);
 
   setInterval(function () {
     var now = new Date().toLocaleTimeString();

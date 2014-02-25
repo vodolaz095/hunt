@@ -4,7 +4,6 @@
  */
 
 var hunt = require('./../index.js'),
-  async = require('async'),
   dialogHelperApi = require('./api/dialogHelper.api.js'),
   profileHelperApi = require('./api/profileHelper.api.js');
 
@@ -31,7 +30,7 @@ var config = {
     'resetPassword': true, //allow user to reset password for account
 
 //authorization by gmail account, GET /auth/google
-    'google': true,
+    'google': true
 
 // Github oAuth strategy, GET /auth/github
 //populated from enviroment values
@@ -82,10 +81,10 @@ if (Hunt.config.enableMongoose) {
  */
 Hunt.extendApp(function (core) {
   core.app.locals.menu=[
-    {'url':'/auth/login', 'name':'Sign up or sign in'},
-    {'url':'/online','name':'See stream of recent HTTP requests online'}
+    {'url':'/dialog','name':'Private messages'},
+    {'url':'/online','name':'See stream of recent HTTP requests online'},
     {'url':'/trophies','name':'Trophies'},
-    {'url':'/trophies/new','name':'Create new trophy'},
+    {'url':'/trophies/new','name':'Create new trophy'}
   ];
   core.app.locals.css.push({'href': '/css/style.css', 'media': 'screen'});
   core.app.locals.javascripts.push({'url': '//yandex.st/jquery/2.0.3/jquery.min.js'});
@@ -123,6 +122,14 @@ Hunt.extendRoutes(function(core){
 
   core.app.get('/', function(req, res){
     res.send('ok');//todo - make awesome home page
+  });
+
+  core.app.get('/dialog', function (req, res) {
+    res.render('dialog/index', {
+      'title': 'Hunt dialog system example',
+      'description': 'If you know user\'s key, you can chat with him/her.',
+      'id': req.query.id
+    });
   });
 
   core.app.get('/auth/login', function (req, res) {
@@ -172,37 +179,7 @@ Hunt.on('httpError', function(err){
 });
 
 Hunt.once('start', function () {
-//populating the trophies' collection in database
-  async.parallel([
-    function (cb) {
-      Hunt.model.Trophy.findOneAndUpdate({'name': 'Alan Schaefer'}, {scored: false}, {upsert: true}, cb);
-    },
-    function (cb) {
-      Hunt.model.Trophy.findOneAndUpdate({'name': 'George Dillon'}, {scored: true}, {upsert: true}, cb);
-    },
-    function (cb) {
-      Hunt.model.Trophy.findOneAndUpdate({'name': 'Rick Hawkins'}, {scored: true}, {upsert: true}, cb);
-    },
-    function (cb) {
-      Hunt.model.Trophy.findOneAndUpdate({'name': 'Blain Cooper'}, {scored: true}, {upsert: true}, cb);
-    },
-    function (cb) {
-      Hunt.model.Trophy.findOneAndUpdate({'name': 'Billy Sole'}, {scored: true}, {upsert: true}, cb);
-    },
-    function (cb) {
-      Hunt.model.Trophy.findOneAndUpdate({'name': 'Mac Eliot'}, {scored: true}, {upsert: true}, cb);
-    },
-    function (cb) {
-      Hunt.model.Trophy.findOneAndUpdate({'name': 'Anna Goncalves'}, {scored: false}, {upsert: true}, cb);
-    }
-  ], function (err, trophies) {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log('' + trophies.length + ' trophies recorded.');
-    }
-  });
-
+  require('./lib/populateDatabase')(Hunt);
   setInterval(function () {
     var now = new Date().toLocaleTimeString();
     Hunt.emit('broadcast', {'time':now}); //to be broadcasted by socket.io

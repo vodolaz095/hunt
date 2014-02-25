@@ -60,7 +60,7 @@ exports.show = function(req, res){
 };
 
 exports.edit = function(req, res){
-  req.model.Trophy.findById(req.params.id, function (err, trophy) {
+  req.model.Trophy.findById(req.params.trophy, function (err, trophy) {
     if (err) throw err;
     if(req.is('json')){
       if(trophy){
@@ -82,7 +82,7 @@ exports.edit = function(req, res){
 exports.update = function(req, res){
   req.model.Trophy.findOneAndUpdate(
     {
-      '_id':req.params.id
+      '_id':req.params.trophy
     },
     {
       'name':req.body.name,
@@ -105,12 +105,12 @@ exports.update = function(req, res){
 };
 
 exports.destroy = function(req, res){
-  req.model.Trophy.remove({'_id':req.params.id}, function(err){
+  req.model.Trophy.remove({'_id':req.params.trophy}, function(err){
     if(err){
       req.flash('error',err.toString());
     } else {
       req.flash('info','Trophy removed!');
     }
-    res.redirect('/');
+    res.redirect('/trophies');
   });
 };
