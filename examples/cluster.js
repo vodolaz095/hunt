@@ -20,7 +20,7 @@ var hunt = require('./../index.js'),
 Hunt.extendApp(function(core){
   core.app.locals.menu=[{'url':'/boom','name':'Make boom'}];
   core.app.locals.css.push({'href': '/css/style.css', 'media': 'screen'});
-  core.app.locals.javascripts.push({'url': '/javascripts/clock.js'});
+  core.app.locals.javascripts.push({'url': '/javascripts/hunt.js'});
 });
 
 /**

@@ -9,7 +9,7 @@
         <input type="reset" value="Cancel">
     </p>
 </form>
-<form action="/trophies/{{id}}/" method="post" onsubmit="return window.confirm('Are you really sure?');">
+<form action="/trophies/{{id}}/" method="post" onsubmit="return window.confirm('Are you sure?');">
     <input type="hidden" name="_csrf" value="{{csrf}}"/>
     <input type="hidden" name="_method" value="delete"/>
     <p>

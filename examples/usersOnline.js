@@ -17,7 +17,7 @@ var hunt = require('./../index.js'),
  */
 Hunt.extendApp(function (core) {
   core.app.locals.css.push({'href': '/css/style.css', 'media': 'screen'});
-  core.app.locals.javascripts.push({'url': '/javascripts/online.js'});
+  core.app.locals.javascripts.push({'url': '/javascripts/hunt.js'});
 });
 
 /**
@@ -60,7 +60,7 @@ Hunt.extendRoutes(function (core) {
 });
 
 Hunt.on('httpSuccess', function (httpEvent) {
-  Hunt.emit('broadcast', httpEvent);
+  Hunt.emit('broadcast', {'httpSuccess':httpEvent});
 });
 
 /**

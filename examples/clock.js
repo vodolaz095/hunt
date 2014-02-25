@@ -17,7 +17,7 @@ var hunt = require('./../index.js'),
  */
 Hunt.extendApp(function(core){
   core.app.locals.css.push({'href': '/css/style.css', 'media': 'screen'});
-  core.app.locals.javascripts.push({'url': '/javascripts/clock.js'});
+  core.app.locals.javascripts.push({'url': '/javascripts/hunt.js'});
 });
 
 /**
@@ -37,7 +37,7 @@ Hunt.once('start', function () {
   setInterval(function () {
     var now = new Date().toLocaleTimeString();
     Hunt.emit('dts', 'Time now is ' + now); //to be catched by console
-    Hunt.emit('broadcast', now); //to be broadcasted by socket.io
+    Hunt.emit('broadcast', {'time':now}); //to be broadcasted by socket.io
   }, 500);
 });
 

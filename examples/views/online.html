@@ -1,10 +1,15 @@
 <h2>Recent visit</h2>
-<p>User's display name <span id="displayName"></span></p>
-<p>IP: <span id="ip"></span></p>
-<p>URI: <span id="method"></span> <span id="uri"></span> <span id="statusCode"></span></p>
+<table id="recentVisits" border="1">
+    <thead>
+        <tr>
+            <th>IP</th>
+            <th>Method</th>
+            <th>URI</th>
+            <th>Status Code</th>
+            <th>User</th>
+        </tr>
+    </thead>
+    <tbody>
 
-<ol>
-    {{#online}}
-    <li>{{online}}</li>
-    {{/online}}
-</ol>
+    </tbody>
+</table>

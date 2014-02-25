@@ -19,20 +19,7 @@ var hunt = require('./../index.js'),
  * Creating mongoose model of Trophies
  */
 if (Hunt.config.enableMongoose) {
-  Hunt.extendModel('Trophy', function (core) {
-    var TrophySchema = new core.mongoose.Schema({
-      'name': {type: String, unique: true},
-      'scored': Boolean
-    });
-
-    TrophySchema.index({
-      name: 1
-    });
-//this step is very important - bind mongoose model to current mongo database connection
-// and assign it to collection in mongo database
-    return core.mongoConnection.model('Trophy', TrophySchema);
-  });
-
+  Hunt.extendModel('Trophy', require('./models/trophy.model.js'));
 // So, this model is accessible by
 // Hunt.model.Trophy
 } else {
@@ -46,10 +33,10 @@ if (Hunt.config.enableMongoose) {
 Hunt.extendApp(function(core){
   core.app.locals.menu=[
     {'url':'/trophies','name':'Trophies'},
-    {'url':'/new','name':'Create new trophy'}
+    {'url':'/trophies/new','name':'Create new trophy'}
   ];
   core.app.locals.css.push({'href': '/css/style.css', 'media': 'screen'});
-  core.app.locals.javascripts.push({'url': '/javascripts/clock.js'});
+  core.app.locals.javascripts.push({'url': '/javascripts/hunt.js'});
 });
 
 /*

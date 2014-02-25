@@ -32,7 +32,7 @@ var Hunt = hunt(config);
 Hunt.extendApp(function (core) {
   core.app.locals.css.push({'href': '/css/style.css', 'media': 'screen'});
   core.app.locals.javascripts.push({'url': '//yandex.st/jquery/2.0.3/jquery.min.js'});
-  core.app.locals.javascripts.push({'url': '/javascripts/dialog.js'});
+  core.app.locals.javascripts.push({'url': '/javascripts/hunt.js'});
 });
 
 /*

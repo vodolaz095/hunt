@@ -63,7 +63,7 @@ var Hunt = hunt(config);
  */
 Hunt.extendApp(function(core){
   core.app.locals.css.push({'href': '/css/style.css', 'media': 'screen'});
-  core.app.locals.javascripts.push({'url': '/javascripts/clock.js'});
+  core.app.locals.javascripts.push({'url': '/javascripts/hunt.js'});
 });
 
 /**
