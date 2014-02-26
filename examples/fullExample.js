@@ -119,14 +119,9 @@ Hunt.extendRoutes(function(core){
     res.send('ok');//todo - make awesome home page
   });
 
-  core.app.get('/dialog', function (req, res) {
-    res.render('dialog/index', {
-      'title': 'Hunt dialog system example',
-      'description': 'If you know user\'s key, you can chat with him/her.',
-      'id': req.query.id
-    });
-  });
-
+/*
+ * Page for users to authorize
+ */
   core.app.get('/auth/login', function (req, res) {
     if (req.user) {
       res.redirect('/profile');
@@ -138,6 +133,9 @@ Hunt.extendRoutes(function(core){
     }
   });
 
+/*
+ * Page to demonstrate socket.io integration in few wayes
+ */
   core.app.get('/online', function (req, res) {
     res.render('online', {
       'title': 'Hunt socket.io and users online example',
@@ -184,6 +182,8 @@ Hunt.once('start', function () {
     socket.on('sioNumber', function(payload){
       if(payload && parseInt(payload)){
         socket.emit('sioAnswer', (2*parseInt(payload)));
+      } else {
+        socket.emit('sioAnswer','Error! Not a number!');
       }
     });
   });

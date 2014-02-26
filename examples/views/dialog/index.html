@@ -1,72 +1,22 @@
-{{#myself}}
 <div class="row">
-    <h3>Welcome to our site!</h3>
-
-    <p>Your id is </p>
-
-    <p><a href="{{hostUrl}}dialog/{{myself.id}}">{{hostUrl}}dialog/{{myself.id}}</a></p>
-
-    <p>You can use this link to allow others to chat to you!</p>
-</div>
-{{/myself}}
+<h3>Welcome to our site!</h3>
 
 {{^myself}}
-<div class="row">
-    <h3>Sign In</h3>
-
-    <form action="/auth/login" method="post">
-        <input name="_csrf" type="hidden" value="{{csrf}}"/>
-
-        <p>
-            <label for="emailSignIn">Email</label><br/>
-            <input type="text" name="username" id="emailSignIn" value="" placeholder="yourEmail@example.org"/>
-        </p>
-
-        <p>
-            <label for="passwordSignIn">Password</label><br/>
-            <input type="password" name="password" id="passwordSignIn" value=""/>
-        </p>
-
-        <p><input type="submit" value="Enter"/></p>
-    </form>
-</div>
-<div class="row">
-    <h3>Create account</h3>
-
-    <p>You can enter email address and password </p>
-
-    <form action="/auth/signup" method="post">
-        <input name="_csrf" type="hidden" value="{{csrf}}"/>
-
-        <p>
-            <label for="emailSignUp">Email</label><br/>
-            <input type="text" name="email" id="emailSignUp" value="" placeholder="yourEmail@example.org"/>
-        </p>
-
-        <p>
-            <label for="passwordSignUp">Password</label><br/>
-            <input type="password" name="password" id="passwordSignUp" value=""/>
-        </p>
-
-        <p><input type="submit" value="SignUp"/></p>
-    </form>
-</div>
+<p><a href="/auth/login">Sign Up or Sign In please!</a></p>
 {{/myself}}
-
-<div class="row">
-    <h3>Talk to person</h3>
-
-    <form method="post" action="/dialog">
-        <input type="hidden" name="_csrf" value="{{csrf}}"/>
-
-        <p>Enter user's id here and you can talk to this user:</p>
-
-        <p><input type="text" name="id" value="{{id}}" placeholder="DEADBEAF1111"/><input type="submit" value="Talk">
-        </p>
-    </form>
-</div>
-<div class="separator"></div>
 
 {{#myself}}
-<script type="text/javascript" src="/javascripts/dialogAuthorized.js"></script>
+<p>Your id is </p>
+<p><a href="{{hostUrl}}dialog/{{myself.id}}">{{hostUrl}}dialog/{{myself.id}}</a></p>
+<p>You can use this link to allow others to chat to you!</p>
+</div>
+<div class="row">
+  <h3>Talk to person</h3>
+  <form method="post" action="/dialog">
+      <input type="hidden" name="_csrf" value="{{csrf}}"/>
+      <p>Enter user's id here and you can talk to this user:</p>
+      <p><input type="text" name="id" value="{{id}}" placeholder="DEADBEAF1111"/><input type="submit" value="Talk">
+  </form>
 {{/myself}}
+</div>
+<div class="separator"></div>
