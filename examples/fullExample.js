@@ -60,6 +60,7 @@ var config = {
   'views': __dirname + '/views' //directory for templates
 
   //'emailConfig':false //we use directmail transport
+  'maxWorkers':2
 };
 
 var Hunt = hunt(config);
