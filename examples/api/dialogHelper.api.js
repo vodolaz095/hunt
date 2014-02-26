@@ -26,13 +26,12 @@ module.exports = exports = function(core){
           if (userFound) {
             if (userFound.id == req.user.id) {
               req.flash('error', 'Talking to yourself is very interesting)');
-              res.redirect('/');
+              res.redirect('/dialog');
             } else {
-              userFound.getRecentMessages(100, 0, function(err, messages){
+              userFound.getDialog(req.user, 100, 0, function(err, messages){
                 if(err){
                   throw err;
                 } else {
-                  console.log(messages);
                   res.render('dialog/dialog', {
                     'title':'Dialog with user "'+userFound.displayName+'"',
                     'user': userFound,
