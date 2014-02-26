@@ -117,7 +117,10 @@ Hunt.extendRoutes(profileHelperApi);
 Hunt.extendRoutes(function(core){
 
   core.app.get('/', function(req, res){
-    res.send('ok');//todo - make awesome home page
+    res.render('index',{
+      'title':'Hunt - high level nodejs backend framework',
+      'description': 'build on top of expressjs, mongoose, sequilize, socketio and passportjs'
+    });
   });
 
 /*
