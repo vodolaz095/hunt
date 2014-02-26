@@ -53,7 +53,7 @@ var config = {
 //    'FACEBOOK_CLIENT_SECRET': 'SECRETSECRET'
   },
   'io': {
-    'loglevel': 2
+    'loglevel': 0
   },
   'dialog': true,//enable dialogs api on /api/dialog
   'public': __dirname + '/public', //directory for assets - css, images, client side javascripts
