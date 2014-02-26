@@ -57,9 +57,9 @@ var config = {
   },
   'dialog': true,//enable dialogs api on /api/dialog
   'public': __dirname + '/public', //directory for assets - css, images, client side javascripts
-  'views': __dirname + '/views' //directory for templates
+  'views': __dirname + '/views', //directory for templates
 
-  //'emailConfig':false //we use directmail transport
+  //'emailConfig':false, //we use directmail transport
   'maxWorkers':2
 };
 
