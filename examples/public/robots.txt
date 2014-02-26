@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Host: huntjs.herokuapp.com
+Sitemap: https://huntjs.herokuapp.com/sitemap.xml
