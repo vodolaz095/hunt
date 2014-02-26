@@ -66,14 +66,10 @@ var Hunt = hunt(config);
 
 /*
  * Creating mongoose model of Trophies
+ * So, this model is accessible by Hunt.model.Trophy
+ * and by request.model.Trophy in controllers
  */
-if (Hunt.config.enableMongoose) {
-  Hunt.extendModel('Trophy', require('./models/trophy.model.js'));
-// So, this model is accessible by
-// Hunt.model.Trophy
-} else {
-  throw new Error('This example needs mongo database started and config.enableMongoose set to true!');
-}
+Hunt.extendModel('Trophy', require('./models/trophy.model.js'));
 
 
 /*
@@ -82,8 +78,8 @@ if (Hunt.config.enableMongoose) {
 Hunt.extendApp(function (core) {
   core.app.locals.menu=[
     {'url':'/dialog','name':'Private messages'},
-    {'url':'/online','name':'Stream requests'},
-    {'url':'/trophies','name':'Trophies'}
+    {'url':'/online','name':'Socket.io and events'},
+    {'url':'/trophies','name':'REST-api'}
   ];
   core.app.locals.css.push({'href': '/css/style.css', 'media': 'screen'});
   core.app.locals.javascripts.push({'url': '//yandex.st/jquery/2.0.3/jquery.min.js'});
@@ -179,11 +175,26 @@ Hunt.on('httpError', function(err){
 
 Hunt.once('start', function () {
   require('./lib/populateDatabase')(Hunt);
+
+//we process socket.io events here.
+//note, that Hunt.io is generated only after
+//application is started
+
+  Hunt.io.sockets.on('connection', function(socket){
+    socket.on('sioNumber', function(payload){
+      if(payload && parseInt(payload)){
+        socket.emit('sioAnswer', (2*parseInt(payload)));
+      }
+    });
+  });
+
   setInterval(function () {
     var now = new Date().toLocaleTimeString();
     Hunt.emit('broadcast', {'time':now}); //to be broadcasted by socket.io
   }, 500);
 });
+
+
 
 /*
  * Starting cluster of webserveres
@@ -197,6 +208,10 @@ Hunt.once('start', function () {
  *how many worker process is spawned (1 for every CPU core present)
  *and what port to use (from config or process.env.port or default - 3000)
  */
-Hunt.startWebCluster();
 
-//Hunt.startWebServer();
+
+if (Hunt.config.env === 'production') {
+  Hunt.startWebCluster();//i recommend 1 process per CPU core - Anatolij
+} else {
+  Hunt.startWebServer();
+}

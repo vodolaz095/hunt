@@ -1,4 +1,22 @@
-<h2>Recent visit</h2>
+<h1><a href="http://socket.io">Socket.io</a> events interaction</h1>
+<h2>Sending events to backend</h2>
+<p>You can send this number to hunt backend by socket.io,
+and recieve the answer back by socket.io too</p>
+<p>
+<input type="text" id="sioNumber" value="" placeholder="14"/>
+X 2 =
+<input type="text" id="sioAnswer" disabled="disabled" id="sioNumber" value="" placeholder="28"/>
+</p>
+<a name="clock"></a>
+<h2>Clock</h2>
+<p>The clock in the right corner of menu shows
+current time of the day for server.</p>
+
+<h2>Recent visits streaming</h2>
+<p>We use socket.io and event of <a href="/documentation/Hunt.html#event:httpSuccess">httpSuccess</a>
+to broadcast the information about recent user activity on the site.
+You can open some site links as background tabs in browser and see
+this table populated</p>
 <table id="recentVisits" border="1">
     <thead>
         <tr>
