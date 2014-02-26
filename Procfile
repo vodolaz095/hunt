@@ -1,1 +1,1 @@
-web: node examples/fullExample.js
+web: ./generateDocs.sh; node examples/fullExample.js

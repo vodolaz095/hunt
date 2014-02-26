@@ -173,6 +173,7 @@ Hunt.on('httpError', function(err){
 });
 
 Hunt.once('start', function () {
+//we populate mongoose model of Trophies with test data
   require('./lib/populateDatabase')(Hunt);
 
 //we process socket.io events here.
