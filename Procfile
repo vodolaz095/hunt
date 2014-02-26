@@ -1,1 +1,1 @@
-web: node examples/fullExample.js
+web: npm start
