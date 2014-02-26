@@ -82,9 +82,8 @@ if (Hunt.config.enableMongoose) {
 Hunt.extendApp(function (core) {
   core.app.locals.menu=[
     {'url':'/dialog','name':'Private messages'},
-    {'url':'/online','name':'See stream of recent HTTP requests online'},
-    {'url':'/trophies','name':'Trophies'},
-    {'url':'/trophies/new','name':'Create new trophy'}
+    {'url':'/online','name':'Stream requests'},
+    {'url':'/trophies','name':'Trophies'}
   ];
   core.app.locals.css.push({'href': '/css/style.css', 'media': 'screen'});
   core.app.locals.javascripts.push({'url': '//yandex.st/jquery/2.0.3/jquery.min.js'});
