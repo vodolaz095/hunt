@@ -64,7 +64,6 @@
     "passport-vkontakte": "*",
     "mongoose": "*",
     "sequelize": "*",
-    "toobusy": "*",
     "colors": "*",
     "nodemailer": "*"
   },
