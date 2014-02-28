@@ -222,7 +222,7 @@ function Hunt(config) {
    * ```javascript
    *     //example of setting template engine
    *     hunt.extendApp = function (core) {
-   *       core.app.set('views', _dirname + 'views');
+   *       core.app.set('views', __dirname + '/views');
    *       core.app.set('view engine', 'ejs');
    *       core.app.set('layout', 'layout');
    *       core.app.enable('view cache');

@@ -21,6 +21,8 @@ pids
 logs
 results
 
+generateDocs.sh
+jsdoc.conf.json
 
 nbproject
 *sublime*

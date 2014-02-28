@@ -5,6 +5,7 @@
 
 var hunt = require('./../index.js'),
   dialogHelperApi = require('./api/dialogHelper.api.js'),
+  documentationApi = require('./api/documentation.api.js'),
   profileHelperApi = require('./api/profileHelper.api.js');
 
 var config = {
@@ -77,12 +78,15 @@ Hunt.extendModel('Trophy', require('./models/trophy.model.js'));
  * Settig up static assets - css and javascripts
  */
 Hunt.extendApp(function (core) {
-  core.app.locals.menu=[
+  core.app.locals.menu = [
+    {'url':'/documentation','name':'Documentation'},
     {'url':'/dialog','name':'Private messages'},
     {'url':'/online','name':'Socket.io and events'},
     {'url':'/trophies','name':'REST-api'}
   ];
+
   core.app.locals.css.push({'href': '/css/style.css', 'media': 'screen'});
+
   core.app.locals.javascripts.push({'url': '//yandex.st/jquery/2.0.3/jquery.min.js'});
   core.app.locals.javascripts.push({'url': '/javascripts/hunt.js'});
 });
@@ -136,6 +140,12 @@ Hunt.extendRoutes(function(core){
       });
     }
   });
+/*
+ * Serving generated documentation
+ */
+ core.app.get('/documentation', documentationApi.index);
+ core.app.get(/^\/documentation\/([0-9a-zA-Z]+)\.html$/, documentationApi.article);
+
 
 /*
  * Page to demonstrate socket.io integration in few wayes

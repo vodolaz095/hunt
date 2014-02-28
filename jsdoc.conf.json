@@ -8,8 +8,8 @@
       "index.js",
       "models/",
       "lib/",
-      "lib/dataStorage",
-      "lib/passportStrategies"
+      "lib/dataStorage/",
+      "lib/passportStrategies/"
     ],
     "includePattern": ".+\\.js(doc)?$",
     "excludePattern": "(^|\\/|\\\\)_"
@@ -19,10 +19,10 @@
     "cleverLinks": true,
     "monospaceLinks": true,
     "default": {
-      "outputSourceFiles": true
+      "outputSourceFiles": false
     }
   },
   "opts":{
-    "destination":"./examples/public/documentation"
+    "destination":"./examples/views/documentation"
   }
 }
