@@ -2,10 +2,15 @@ Hunt
 ====================
 [![Build Status](https://drone.io/bitbucket.org/vodolaz095/hunt/status.png)](https://drone.io/bitbucket.org/vodolaz095/hunt/latest)
 
+**Documentation and live example**
+[https://huntjs.herokuapp.com/](https://huntjs.herokuapp.com/)
+
+**Shameless advertisement**
+You can hire the author of this package by Odesk - [https://www.odesk.com/users/~0120ba573d09c66c51](https://www.odesk.com/users/~0120ba573d09c66c51s)
 
 **What do you get from the box?**
 
-Just run `npm install hunt` and you get ready to use higher level nodejs framework,
+Just run `npm install hunt` and you get ready to use high level nodejs framework,
 that links together many preconfigured and working perfectly together modules.
 This is it. *Hunt*...
 
@@ -23,7 +28,10 @@ This is it. *Hunt*...
    [PostgreSQL](http://www.postgresql.org/), [sqlite](https://www.sqlite.org/)
    and [MariaDB](https://mariadb.org/) from the box.
 
--  The best sides of express.js framework are supported: routing, [middlewares](http://expressjs.com/api.html#middleware)
+-  The best sides of express.js framework are supported: routing,
+   [middlewares](http://expressjs.com/api.html#middleware), controllers.
+   And this is done in clever way - expressjs application can be easily
+   converted to Hunt application.
 
 -  Popular templating engines are supported - [Mustache](http://mustache.github.io/mustache.5.html),
    [Swig](http://paularmstrong.github.io/swig/), jade (to be implemented shortly)
@@ -45,6 +53,7 @@ This is it. *Hunt*...
 -  Websocket, Htmlfile, xhr-polling, jsonp-polling for real time push messages
     are supported by the means of [socket.io](http://socket.io) and works
     from the box, even with websockets working on [nginx](http://nginx.org/en/docs/http/websocket.html)
+    and [heroku](https://devcenter.heroku.com/articles/node-websockets#deploy)
 
 -  [socket.io](http://socket.io) is perfectly linked with user
     model and passportjs authorization system, so you can send realtime
@@ -67,6 +76,7 @@ This is it. *Hunt*...
       });
 
 ```
+
 System requirements
 =======
 
@@ -113,6 +123,8 @@ This is short, basic, "hello, world!" example, to start http server on 3000 port
 ```
 
 Other examples are published in `examples` directory of this repository
+The full example with full online documentation is running here:
+[https://huntjs.herokuapp.com/](https://huntjs.herokuapp.com/)
 
 Generate documentation
 ====================
