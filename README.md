@@ -124,23 +124,9 @@ This is short, basic, "hello, world!" example, to start http server on 3000 port
 
 ```
 
-Other examples are published in `examples` directory of this repository
+Other [examples](https://github.com/vodolaz095/hunt/tree/master/examples) are published in `examples` directory of this repository
 The full example with full online documentation is running here:
 [https://huntjs.herokuapp.com/](https://huntjs.herokuapp.com/)
-
-Generate documentation
-====================
-
-To to this, you need to run a shell script
-
-```shell
-
-    $ ./generateDocs.sh
-
-```
-
-And the JSDOC documentation will be created in `examples/public/documentation`
-directory as HTML files.
 
 License
 ====================
