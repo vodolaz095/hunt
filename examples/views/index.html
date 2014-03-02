@@ -1,0 +1,138 @@
+<section>
+<article>
+<h1 id="hunt">Hunt</h1>
+<p><a href="https://drone.io/bitbucket.org/vodolaz095/hunt/latest"><img src="https://drone.io/bitbucket.org/vodolaz095/hunt/status.png" alt="Build Status"></a>
+<a href="https://travis-ci.org/vodolaz095/hunt"><img src="https://travis-ci.org/vodolaz095/hunt.png?branch=master" alt="Build Status"></a></p>
+<p><strong>Documentation and live example</strong>
+<a href="https://huntjs.herokuapp.com/">https://huntjs.herokuapp.com/</a></p>
+<p><strong>Shameless advertisement</strong>
+You can hire the author of this package by Odesk - <a href="https://www.odesk.com/users/~0120ba573d09c66c51s">https://www.odesk.com/users/~0120ba573d09c66c51</a></p>
+<p><strong>What do you get from the box?</strong></p>
+<p>Just run <code>npm install hunt</code> and you get ready to use high level nodejs framework,
+that links together many preconfigured and working perfectly together modules.
+This is it. <em>Hunt</em>...</p>
+<ul>
+<li><p>works on latest versions of <a href="http://nodejs.org">NodeJS</a> &gt;=0.10.22</p>
+</li>
+<li><p>is a real event driven (by pattern <a href="https://en.wikipedia.org/wiki/Observer_pattern">Observer</a>)
+framework build on top of <a href="http://expressjs.com">ExpressJS</a>,
+suitable not only for creating HTTP-based web applications, but background services,
+binary protocol applications, websockets or even xmpp based applications.</p>
+</li>
+<li><p><a href="http://www.mongodb.org/">Mongo database</a> and
+ <a href="http://mongoosejs.com/">Mongoose ORM</a> support from the box</p>
+</li>
+<li><p><a href="http://sequelizejs.com/">sequelizejs</a> ORM for <a href="https://www.mysql.com/">MySQL</a>,
+<a href="http://www.postgresql.org/">PostgreSQL</a>, <a href="https://www.sqlite.org/">sqlite</a>
+and <a href="https://mariadb.org/">MariaDB</a> from the box.</p>
+</li>
+<li><p>The best sides of express.js framework are supported: routing,
+<a href="http://expressjs.com/api.html#middleware">middlewares</a>, controllers.
+And this is done in clever way - expressjs application can be easily
+converted to Hunt application.</p>
+</li>
+<li><p>Popular templating engines are supported - <a href="http://mustache.github.io/mustache.5.html">Mustache</a>,
+<a href="http://paularmstrong.github.io/swig/">Swig</a>, jade (to be implemented shortly)</p>
+</li>
+<li><p>Powerful users model to use at your application, with customizable profile, groups,
+ and compatibility with majority of <a href="http://passportjs.org&quot;">passport.js</a>
+ strategies, custom profile data and build up with
+ <a href="https://en.wikipedia.org/wiki/Active_record_pattern">Active Record</a>
+ and <a href="https://en.wikipedia.org/wiki/Observer_pattern">Observer</a> patterns</p>
+</li>
+<li><p><a href="http://redis.io">Redis</a> database support from the box, with default use of it as session storage.</p>
+</li>
+<li><p>Hunt applications are easy to run on <a href="http://heroku.com/">Heroku</a> hosting - many config values
+ (mongo/redis database access URLs, etc...) are populated automatically</p>
+</li>
+<li><p><a href="http://nodejs.org/docs/latest/api/cluster.html">Clustering</a>
+ by the means of nodejs build in load balancer</p>
+</li>
+<li><p>Websocket, Htmlfile, xhr-polling, jsonp-polling for real time push messages
+ are supported by the means of <a href="http://socket.io">socket.io</a> and works
+ from the box, even with websockets working on <a href="http://nginx.org/en/docs/http/websocket.html">nginx</a>
+ and <a href="https://devcenter.heroku.com/articles/node-websockets#deploy">heroku</a></p>
+</li>
+<li><p><a href="http://socket.io">socket.io</a> is perfectly linked with user
+ model and passportjs authorization system, so you can send realtime
+ notifications to users online just like this</p>
+</li>
+</ul>
+<pre><code class="lang-javascript">
+
+    Hunt.model.User.findOne({'email':'somebody@example.org'},
+      function(err, userFound){
+        //notify on user
+        userFound.notifyBySocketIo({
+          'priority':'high',
+          'message':'You are being hunted!'
+        });
+        //notify all online users by means of socket.io broadcast
+        Hunt.emit('broadcast', {
+          'priority':'high',
+          'message':'Everybody hunts Somebody at example dot org!'
+        })
+      });
+
+</code></pre>
+<h1 id="system-requirements">System requirements</h1>
+<ul>
+<li><a href="http://distrowatch.com/dwres.php?resource=major">Linux</a> (this is your problem, if you want to build this package on other operating systems)</li>
+<li><a href="http://nodejs.org/download/">NodeJS</a> &gt;= 0.10.24 (version build from source is preferable, because hunt builds some dependencies from source)</li>
+<li><a href="http://redis.io/download">Redis</a> &gt;= 2.6.16</li>
+<li><a href="http://www.mongodb.org/downloads">Mongo</a> &gt;= 2.4.6 (optional)</li>
+<li><a href="https://dev.mysql.com/downloads/mysql/">MySQL</a> &gt;= 5.6.16 (optional)</li>
+<li><a href="http://www.postgresql.org/download/">PostgreSQL</a> &gt;= 9.2 (optional)</li>
+</ul>
+<h1 id="important">Important</h1>
+<p>Without understanding how <a href="http://expressjs.com/">express.js framework</a> operates, including</p>
+<ul>
+<li>concept of <a href="http://expressjs.com/api.html#express">app</a>,</li>
+<li>concept of <a href="http://expressjs.com/api.html#middleware">middleware</a> and how <a href="http://webapplog.com/intro-to-express-js-parameters-error-handling-and-other-middleware/">it can be used</a></li>
+<li>concept of chaining the middlewares (this is example of adding middleware to a chain <a href="http://expressjs.com/guide.html#users-online">to count users online</a>)</li>
+<li>concept <a href="http://expressjs.com/api.html#app.VERB">route</a></li>
+</ul>
+<p>this module is hard to understand. Please, read this information above before processing with this framework.</p>
+<h1 id="example">Example</h1>
+<p>This is short, basic, &quot;hello, world!&quot; example, to start http server on 3000 port.</p>
+<pre><code class="lang-javascript">
+    var hunt = require('./../index.js'),
+      Hunt = hunt({
+        'port':3000
+      });
+
+    Hunt.extendRoutes(function(core){
+      core.app.get('/', function(req,res){
+        res.send('Hello, world!');
+      });
+    });
+
+    Hunt.startWebServer();</code></pre>
+<p>Other examples are published in <code>examples</code> directory of this repository
+The full example with full online documentation is running here:
+<a href="https://huntjs.herokuapp.com/">https://huntjs.herokuapp.com/</a></p>
+<h1 id="generate-documentation">Generate documentation</h1>
+<p>To to this, you need to run a shell script</p>
+<pre><code class="lang-shell">
+    $ ./generateDocs.sh</code></pre>
+<p>And the JSDOC documentation will be created in <code>examples/public/documentation</code>
+directory as HTML files.</p>
+<h1 id="license">License</h1>
+<p>The MIT License (MIT)</p>
+<p>Copyright (c) 2013 Ostroumov Anatolij <ostroumov095 at gmail dot com></p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the &quot;Software&quot;), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p></article>
+
+</section>
