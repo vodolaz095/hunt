@@ -23,6 +23,8 @@ results
 
 generateDocs.sh
 jsdoc.conf.json
+.travis.yml
+.jshintrc
 
 nbproject
 *sublime*
