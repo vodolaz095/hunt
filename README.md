@@ -36,7 +36,7 @@ This is it. *Hunt*...
    converted to Hunt application.
 
 -  Popular templating engines are supported - [Mustache](http://mustache.github.io/mustache.5.html),
-   [Swig](http://paularmstrong.github.io/swig/), jade (to be implemented shortly)
+   [Swig](http://paularmstrong.github.io/swig/), [jade](https://github.com/visionmedia/jade).
 
 -  Powerful users model to use at your application, with customizable profile, groups,
     and compatibility with majority of [passport.js](http://passportjs.org")
