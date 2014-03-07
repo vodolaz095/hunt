@@ -76,6 +76,7 @@
     "istanbul": "*",
     "should": "*",
     "request": "*",
-    "jsdoc": "*"
+    "jsdoc": "*",
+    "sqlite3":"*"
   }
 }
