@@ -11,7 +11,11 @@ var EventEmitter = require('events').EventEmitter,
 
 
 require('colors');
-
+/**
+ * @class Hunt
+ * @param {config} config
+ * @constructor
+ */
 function Hunt(config) {
   EventEmitter.call(this);
   this.config = configGenerator(config);
@@ -192,7 +196,7 @@ function Hunt(config) {
    *      }));
    *    };
    * ```
-   * @returns {Hunt}
+   * @returns {Hunt} hunt object
    */
   this.extendStrategy = function (Strategy) {
     if (typeof Strategy.strategy === 'function' && typeof Strategy.routes === 'function') {
@@ -230,7 +234,7 @@ function Hunt(config) {
    *     };
    * ```
    *
-   * @returns {Hunt}
+   * @returns {Hunt} hunt object
    */
   this.extendApp = function (environment, settingsFunction) {
     if (prepared) {
@@ -697,7 +701,7 @@ function Hunt(config) {
  * @method Hunt#removeListener
  * @param {string} eventName
  * @param {function} listener
- * @returns {Hunt}
+ * @returns {Hunt} Hunt
  * @description
  * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standart nodejs event emmiter object }, so it supports all event emitter methods.
  * Remove a listener from the listener array for the specified event.
