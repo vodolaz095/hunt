@@ -506,8 +506,12 @@ module.exports = exports = function (core) {
       if (err) {
         callback(err);
       } else {
-        if (userFound) {
-          callback(new Error('This keychain pair "' + provider + '":"' + id + '" is already in use!'));
+        if (userFound) { //todo - check if this is the same user
+          if(thisUser._id === userFound._id) {
+            callback(null);
+          } else {
+            callback(new Error('This keychain pair "' + provider + '":"' + id + '" is already in use!'));
+          }
         } else {
           if (!thisUser.keychain) {
             thisUser.keychain = {};
