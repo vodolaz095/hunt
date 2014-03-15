@@ -1,5 +1,6 @@
 'use strict';
 var EventEmitter = require('events').EventEmitter,
+  async = require('async'),
   util = require('util'),
   configGenerator = require('./lib/configGenerator.js'),
   redisGenerator = require('./lib/dataStorage/redisClientGenerator.js'),
@@ -21,8 +22,24 @@ function Hunt(config) {
   this.config = configGenerator(config);
 
 //guarding core internals from Hunt.extendCore
+/**
+  * @name Hunt#async
+  * @type {Object}
+  * @description
+  * Embedded {@link https://www.npmjs.org/package/async | npm module of async} for better workflow
+  */
+  this.async = require('async');
+
   this.app = 'app';
+/**
+ * @name Hunt#http
+ * @type {Object}
+ * @description
+ * Embedded {@link http://nodejs.org/docs/latest/api/http.html | nodejs http module},
+ * that is used by socket.io and http server.
+ */
   this.http = require('http');
+
   this.rack = require('./lib/rack.js');
   this.httpServer = true;
   this.passport = require('passport');
@@ -110,9 +127,10 @@ function Hunt(config) {
    * @name Hunt#model
    * @type {model}
    * @description
-   * Class to hold {@link model | models} of Hunt application, they are injected into
-   * request object of controller.
+   * Class to hold {@link model | data models} of Hunt application,
+   * they are injected into request object of controller.
    * @see model
+   * @see request
    */
 
   /**
@@ -723,8 +741,7 @@ util.inherits(Hunt, EventEmitter);
 /**
  * @method Hunt#stop
  * @description
- * Stops the current application - close database connections,
- * disables toobusy middleware, etc
+ * Stops the current application - close database connections, etc.
  */
 Hunt.prototype.stop = function () {
   this.redisClient.end();
@@ -794,7 +811,7 @@ module.exports = exports = function (config) {
  * @property {string} mongoUrl - connection string for mongoose ORM,
  * default is 'mongodb://localhost/hunt_dev'.
  * It can be automatically populated from enviromental values of `MONGO_URL`,
- * `MONGOSOUP_URL`,`MONGOHQ_URL`,`MONGO_URL`.
+ * `MONGOSOUP_URL`,`MONGOHQ_URL`,`MONGOLAB_URL`.
  * Connection string has this {@link http://docs.mongodb.org/manual/reference/connection-string/ syntax }
 
  * @property {boolean} enableMongooseUsers - enable mongo based user object,
