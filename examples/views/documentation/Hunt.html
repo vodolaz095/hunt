@@ -13,7 +13,7 @@
     Hunt
     </h2>
     
-        <div class="class-description">Hunt</div>
+        <div class="class-description">Main object, that have everything that we need in it.</div>
     
 
 <article>
@@ -77,7 +77,7 @@
             
             
             
-            <td class="description last"></td>
+            <td class="description last">key-value object with settings</td>
         </tr>
 	
 	
@@ -108,18 +108,46 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 19
+        index.js, line 760
     </li></ul></dd>
     
     
     
     
     
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="config.html">config</a></li>
+        </ul>
+    </dd>
+    
     
     
 </dl>
 
     
+    
+    <h5>Fires:</h5>
+    <ul>
+        <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
+    
+        <li><a href="Hunt.html#event:httpError">Hunt#event:httpError</a></li>
+    
+        <li><a href="Hunt.html#event:httpSuccess">Hunt#event:httpSuccess</a></li>
+    
+        <li><a href="Hunt.html#event:notify">Hunt#event:notify</a></li>
+    
+        <li><a href="Hunt.html#event:notify:all">Hunt#notify:all</a></li>
+    
+        <li><a href="Hunt.html#event:notify:email">Hunt#notify:email</a></li>
+    
+        <li><a href="Hunt.html#event:notify:sio">Hunt#notify:sio</a></li>
+    
+        <li><a href="Hunt.html#event:user:save">Hunt#user:save</a></li>
+    
+        <li><a href="Hunt.html#event:broadcast">Hunt#event:broadcast</a></li>
+    </ul>
     
 
     
@@ -206,6 +234,70 @@
         
             
 <dt>
+    <h4 class="name" id="async"><span class="type-signature"></span>async<span class="type-signature"> :Object</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        Embedded <a href="https://www.npmjs.org/package/async "> npm module of async</a> for better workflow
+    </div>
+    
+    
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        index.js, line 25
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
     <h4 class="name" id="express"><span class="type-signature"></span>express<span class="type-signature"></span></h4>
     
     
@@ -245,6 +337,71 @@ css, client side javascripts, images.
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         lib/appGenerator.js, line 20
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="http"><span class="type-signature"></span>http<span class="type-signature"> :Object</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        Embedded <a href="http://nodejs.org/docs/latest/api/http.html "> nodejs http module</a>,
+that is used by socket.io and http server.
+    </div>
+    
+    
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        index.js, line 34
     </li></ul></dd>
     
     
@@ -386,8 +543,8 @@ css, client side javascripts, images.
 <dd>
     
     <div class="description">
-        Class to hold <code> models</code> of Hunt application, they are injected into
-request object of controller.
+        Class to hold <code> data models</code> of Hunt application,
+they are injected into request object of controller.
     </div>
     
     
@@ -426,7 +583,7 @@ request object of controller.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 109
+        index.js, line 126
     </li></ul></dd>
     
     
@@ -437,6 +594,8 @@ request object of controller.
     <dd class="tag-see">
         <ul>
             <li><a href="model.html">model</a></li>
+        
+            <li><a href="request.html">request</a></li>
         </ul>
     </dd>
     
@@ -880,7 +1039,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 712
+        index.js, line 730
     </li></ul></dd>
     
     
@@ -1032,7 +1191,7 @@ can be something like 'development', ['development','staging'] or null</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 209
+        index.js, line 227
     </li></ul></dd>
     
     
@@ -1226,7 +1385,7 @@ else `value` injected is AS IS.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 52
+        index.js, line 69
     </li></ul></dd>
     
     
@@ -1498,7 +1657,7 @@ can be something like 'development', ['development','staging'] or null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 282
+        index.js, line 300
     </li></ul></dd>
     
     
@@ -1739,7 +1898,7 @@ can be something like 'development', ['development','staging'] or null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 118
+        index.js, line 136
     </li></ul></dd>
     
     
@@ -1918,7 +2077,7 @@ The <a href="https://github.com/visionmedia/express-resource "> REST api helper<
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 443
+        index.js, line 461
     </li></ul></dd>
     
     
@@ -2073,7 +2232,7 @@ All strategies have to redirect to `/auth/success` on success or `/auth/failure`
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 173
+        index.js, line 191
     </li></ul></dd>
     
     
@@ -2266,7 +2425,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 671
+        index.js, line 689
     </li></ul></dd>
     
     
@@ -2435,7 +2594,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 688
+        index.js, line 706
     </li></ul></dd>
     
     
@@ -2672,7 +2831,7 @@ Calls can be chained.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 700
+        index.js, line 718
     </li></ul></dd>
     
     
@@ -3303,7 +3462,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 510
+        index.js, line 528
     </li></ul></dd>
     
     
@@ -3432,7 +3591,7 @@ By default it spawns 1 process per CPU core.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 623
+        index.js, line 641
     </li></ul></dd>
     
     
@@ -3605,7 +3764,7 @@ in web server processes.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 570
+        index.js, line 588
     </li></ul></dd>
     
     
@@ -3756,7 +3915,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 537
+        index.js, line 555
     </li></ul></dd>
     
     
@@ -3799,8 +3958,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     
     <div class="description">
-        Stops the current application - close database connections,
-disables toobusy middleware, etc
+        Stops the current application - close database connections, etc.
     </div>
     
 
@@ -3833,7 +3991,7 @@ disables toobusy middleware, etc
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 723
+        index.js, line 741
     </li></ul></dd>
     
     
@@ -4911,7 +5069,7 @@ for logging.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 555
+        index.js, line 573
     </li></ul></dd>
     
     
@@ -5048,7 +5206,7 @@ for logging.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 524
+        index.js, line 542
     </li></ul></dd>
     
     
@@ -5667,7 +5825,7 @@ with payload of user being saved.
     Hunt
     </h2>
     
-        <div class="class-description">Main object, that have everything that we need in it.</div>
+        <div class="class-description">Hunt</div>
     
 
 <article>
@@ -5731,7 +5889,7 @@ with payload of user being saved.
             
             
             
-            <td class="description last">key-value object with settings</td>
+            <td class="description last"></td>
         </tr>
 	
 	
@@ -5762,46 +5920,18 @@ with payload of user being saved.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 743
+        index.js, line 20
     </li></ul></dd>
     
     
     
     
     
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="config.html">config</a></li>
-        </ul>
-    </dd>
-    
     
     
 </dl>
 
     
-    
-    <h5>Fires:</h5>
-    <ul>
-        <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
-    
-        <li><a href="Hunt.html#event:httpError">Hunt#event:httpError</a></li>
-    
-        <li><a href="Hunt.html#event:httpSuccess">Hunt#event:httpSuccess</a></li>
-    
-        <li><a href="Hunt.html#event:notify">Hunt#event:notify</a></li>
-    
-        <li><a href="Hunt.html#event:notify:all">Hunt#notify:all</a></li>
-    
-        <li><a href="Hunt.html#event:notify:email">Hunt#notify:email</a></li>
-    
-        <li><a href="Hunt.html#event:notify:sio">Hunt#notify:sio</a></li>
-    
-        <li><a href="Hunt.html#event:user:save">Hunt#user:save</a></li>
-    
-        <li><a href="Hunt.html#event:broadcast">Hunt#event:broadcast</a></li>
-    </ul>
     
 
     
@@ -5888,6 +6018,70 @@ with payload of user being saved.
         
             
 <dt>
+    <h4 class="name" id="async"><span class="type-signature"></span>async<span class="type-signature"> :Object</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        Embedded <a href="https://www.npmjs.org/package/async "> npm module of async</a> for better workflow
+    </div>
+    
+    
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        index.js, line 25
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
     <h4 class="name" id="express"><span class="type-signature"></span>express<span class="type-signature"></span></h4>
     
     
@@ -5927,6 +6121,71 @@ css, client side javascripts, images.
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         lib/appGenerator.js, line 20
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="http"><span class="type-signature"></span>http<span class="type-signature"> :Object</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        Embedded <a href="http://nodejs.org/docs/latest/api/http.html "> nodejs http module</a>,
+that is used by socket.io and http server.
+    </div>
+    
+    
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        index.js, line 34
     </li></ul></dd>
     
     
@@ -6068,8 +6327,8 @@ css, client side javascripts, images.
 <dd>
     
     <div class="description">
-        Class to hold <code> models</code> of Hunt application, they are injected into
-request object of controller.
+        Class to hold <code> data models</code> of Hunt application,
+they are injected into request object of controller.
     </div>
     
     
@@ -6108,7 +6367,7 @@ request object of controller.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 109
+        index.js, line 126
     </li></ul></dd>
     
     
@@ -6119,6 +6378,8 @@ request object of controller.
     <dd class="tag-see">
         <ul>
             <li><a href="model.html">model</a></li>
+        
+            <li><a href="request.html">request</a></li>
         </ul>
     </dd>
     
@@ -6562,7 +6823,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 712
+        index.js, line 730
     </li></ul></dd>
     
     
@@ -6714,7 +6975,7 @@ can be something like 'development', ['development','staging'] or null</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 209
+        index.js, line 227
     </li></ul></dd>
     
     
@@ -6908,7 +7169,7 @@ else `value` injected is AS IS.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 52
+        index.js, line 69
     </li></ul></dd>
     
     
@@ -7180,7 +7441,7 @@ can be something like 'development', ['development','staging'] or null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 282
+        index.js, line 300
     </li></ul></dd>
     
     
@@ -7421,7 +7682,7 @@ can be something like 'development', ['development','staging'] or null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 118
+        index.js, line 136
     </li></ul></dd>
     
     
@@ -7600,7 +7861,7 @@ The <a href="https://github.com/visionmedia/express-resource "> REST api helper<
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 443
+        index.js, line 461
     </li></ul></dd>
     
     
@@ -7755,7 +8016,7 @@ All strategies have to redirect to `/auth/success` on success or `/auth/failure`
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 173
+        index.js, line 191
     </li></ul></dd>
     
     
@@ -7948,7 +8209,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 671
+        index.js, line 689
     </li></ul></dd>
     
     
@@ -8117,7 +8378,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 688
+        index.js, line 706
     </li></ul></dd>
     
     
@@ -8354,7 +8615,7 @@ Calls can be chained.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 700
+        index.js, line 718
     </li></ul></dd>
     
     
@@ -8985,7 +9246,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 510
+        index.js, line 528
     </li></ul></dd>
     
     
@@ -9114,7 +9375,7 @@ By default it spawns 1 process per CPU core.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 623
+        index.js, line 641
     </li></ul></dd>
     
     
@@ -9287,7 +9548,7 @@ in web server processes.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 570
+        index.js, line 588
     </li></ul></dd>
     
     
@@ -9438,7 +9699,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 537
+        index.js, line 555
     </li></ul></dd>
     
     
@@ -9481,8 +9742,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     
     <div class="description">
-        Stops the current application - close database connections,
-disables toobusy middleware, etc
+        Stops the current application - close database connections, etc.
     </div>
     
 
@@ -9515,7 +9775,7 @@ disables toobusy middleware, etc
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 723
+        index.js, line 741
     </li></ul></dd>
     
     
@@ -10593,7 +10853,7 @@ for logging.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 555
+        index.js, line 573
     </li></ul></dd>
     
     
@@ -10730,7 +10990,7 @@ for logging.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 524
+        index.js, line 542
     </li></ul></dd>
     
     
@@ -11341,5 +11601,5 @@ with payload of user being saved.
 
 
 
-  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha4</a> on Fri Mar 14 2014 22:55:38 GMT+0400 (MSK)</p>
+  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha4</a> on Sat Mar 15 2014 15:59:58 GMT+0400 (MSK)</p>
 </div>
