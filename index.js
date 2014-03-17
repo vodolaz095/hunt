@@ -8,8 +8,8 @@ var EventEmitter = require('events').EventEmitter,
   sequelizeGenerator = require('./lib/dataStorage/sequilizeModelsGenerator.js'),
   passportGenerator = require('./lib/passportGenerator.js'),
   nodemailerListener = require('./lib/nodemailerListener.js'),
-  appGenerator = require('./lib/appGenerator.js');
-
+  appGenerator = require('./lib/appGenerator.js'),
+  crypt = require('./lib/crypt.js');
 
 require('colors');
 /**
@@ -49,6 +49,15 @@ function Hunt(config) {
   this.mongoose = {};
   this.io = {};
 
+  this.encrypt = function(text, secret){
+    secret = secret || this.config.secret;
+    return crypt.encrypt(text, secret);
+  }
+  this.decrypt = function(text, secret){
+    secret = secret || this.config.secret;
+    return crypt.decrypt(text, secret);
+  }
+
   redisGenerator(this);
 
   if (this.config.enableMongoose) {
@@ -68,8 +77,8 @@ function Hunt(config) {
 
   /**
    * @method Hunt#extendCore
-   * @param {string} field - property name to assign to hunt.shared[fieldName]
-   * @param {(string|object|Array|function)} value - value to assign
+   * @param {string} field - property name to assign to hunt.[fieldName]
+   * @param {(string|object|Date|Array|function)} value - value to assign
    * @description
    * Inject public property to hunt core.
    * If `value` is function, the `value` injected is result of value(hunt),

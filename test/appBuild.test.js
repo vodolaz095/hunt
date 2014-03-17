@@ -155,7 +155,18 @@ describe('Hunt builds single threaded background application', function () {
     it('returns different hashes', function () {
       hash1.should.not.be.eql(hash2);
     });
+  });
 
+  describe('Hunt.encrypt and Hunt.decrypt', function(){
+    it('Hunt.encrypt works for defined secret', function(){
+      Hunt.encrypt('daiMne3Ryblya','lalala').should.be.equal('936129d16f1c66a5116e4df797c1eba8');
+    });
+    it('Hunt.decrypt works for defined secret', function(){
+      Hunt.decrypt('936129d16f1c66a5116e4df797c1eba8','lalala').should.be.equal('daiMne3Ryblya');
+    });
+    it('works somehow for secret value from config', function(){
+      Hunt.decrypt(Hunt.encrypt('daiMne3Ryblya')).should.be.equal('daiMne3Ryblya');
+    });
   });
 
 });

@@ -108,7 +108,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 760
+        index.js, line 769
     </li></ul></dd>
     
     
@@ -583,7 +583,7 @@ they are injected into request object of controller.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 126
+        index.js, line 135
     </li></ul></dd>
     
     
@@ -926,6 +926,195 @@ that is used only when config option of sequilizeUrl is defined.
         
             
 <dt>
+    <h4 class="name" id="decrypt"><span class="type-signature"></span>decrypt<span class="signature">(text, <span class="optional">secret</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Decrypt the given text using config.SECRET by default or using the custom given secret
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">text to decrypt</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>secret</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">secret to use for decryption, if absent, the value of <code>config.secret</code> is used</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        lib/crypt.js, line 21
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="config.html">config</a></li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    - decrypted string
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">string</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
     <h4 class="name" id="emit"><span class="type-signature"></span>emit<span class="signature">(eventName, payload)</span><span class="type-signature"></span></h4>
     
     
@@ -1039,7 +1228,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 730
+        index.js, line 739
     </li></ul></dd>
     
     
@@ -1060,6 +1249,195 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     
     
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="encrypt"><span class="type-signature"></span>encrypt<span class="signature">(text, <span class="optional">secret</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Encrypt the given text by default or using the custom given secret
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">text to encrypt</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>secret</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">secret to use for encryption, if absent, the value of <code>config#secret</code> is used</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        lib/crypt.js, line 4
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="config.html">config</a></li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    - encrypted string
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">string</span>
+
+
+	</dd>
+</dl>
+
+        
     
     
 </dd>
@@ -1191,7 +1569,7 @@ can be something like 'development', ['development','staging'] or null</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 227
+        index.js, line 236
     </li></ul></dd>
     
     
@@ -1322,7 +1700,7 @@ else `value` injected is AS IS.
             
             
             
-            <td class="description last">property name to assign to hunt.shared[fieldName]</td>
+            <td class="description last">property name to assign to hunt.[fieldName]</td>
         </tr>
 	
 	
@@ -1339,6 +1717,9 @@ else `value` injected is AS IS.
 |
 
 <span class="param-type">object</span>
+|
+
+<span class="param-type">Date</span>
 |
 
 <span class="param-type">Array</span>
@@ -1385,7 +1766,7 @@ else `value` injected is AS IS.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 69
+        index.js, line 78
     </li></ul></dd>
     
     
@@ -1657,7 +2038,7 @@ can be something like 'development', ['development','staging'] or null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 300
+        index.js, line 309
     </li></ul></dd>
     
     
@@ -1898,7 +2279,7 @@ can be something like 'development', ['development','staging'] or null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 136
+        index.js, line 145
     </li></ul></dd>
     
     
@@ -2077,7 +2458,7 @@ The <a href="https://github.com/visionmedia/express-resource "> REST api helper<
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 461
+        index.js, line 470
     </li></ul></dd>
     
     
@@ -2232,7 +2613,7 @@ All strategies have to redirect to `/auth/success` on success or `/auth/failure`
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 191
+        index.js, line 200
     </li></ul></dd>
     
     
@@ -2425,7 +2806,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 689
+        index.js, line 698
     </li></ul></dd>
     
     
@@ -2594,7 +2975,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 706
+        index.js, line 715
     </li></ul></dd>
     
     
@@ -2831,7 +3212,7 @@ Calls can be chained.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 718
+        index.js, line 727
     </li></ul></dd>
     
     
@@ -3462,7 +3843,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 528
+        index.js, line 537
     </li></ul></dd>
     
     
@@ -3591,7 +3972,7 @@ By default it spawns 1 process per CPU core.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 641
+        index.js, line 650
     </li></ul></dd>
     
     
@@ -3764,7 +4145,7 @@ in web server processes.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 588
+        index.js, line 597
     </li></ul></dd>
     
     
@@ -3915,7 +4296,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 555
+        index.js, line 564
     </li></ul></dd>
     
     
@@ -3991,7 +4372,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 741
+        index.js, line 750
     </li></ul></dd>
     
     
@@ -4952,6 +5333,143 @@ for logging.
     
     
     <div class="description">
+        Emitted when Hunt is started as background process
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">object</span>
+
+
+            </li>
+        </ul>
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">with a value of string of 'background'</td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        index.js, line 551
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="event:start">start</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
         Emitted when Hunt is started as webserver process
     </div>
     
@@ -5069,7 +5587,7 @@ for logging.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 573
+        index.js, line 582
     </li></ul></dd>
     
     
@@ -5080,143 +5598,6 @@ for logging.
     <dd class="tag-see">
         <ul>
             <li><a href="Hunt.html#startWebServer">Hunt#startWebServer</a></li>
-        </ul>
-    </dd>
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="event:start">start</h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        Emitted when Hunt is started as background process
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">object</span>
-
-
-            </li>
-        </ul>
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-        <h5 class="subsection-title">Properties:</h5>
-        
-        <dl>
-
-<table class="props">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">with a value of string of 'background'</td>
-        </tr>
-	
-	
-	</tbody>
-</table></dl>
-        
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 542
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
         </ul>
     </dd>
     
@@ -6367,7 +6748,7 @@ they are injected into request object of controller.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 126
+        index.js, line 135
     </li></ul></dd>
     
     
@@ -6710,6 +7091,195 @@ that is used only when config option of sequilizeUrl is defined.
         
             
 <dt>
+    <h4 class="name" id="decrypt"><span class="type-signature"></span>decrypt<span class="signature">(text, <span class="optional">secret</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Decrypt the given text using config.SECRET by default or using the custom given secret
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">text to decrypt</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>secret</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">secret to use for decryption, if absent, the value of <code>config.secret</code> is used</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        lib/crypt.js, line 21
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="config.html">config</a></li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    - decrypted string
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">string</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
     <h4 class="name" id="emit"><span class="type-signature"></span>emit<span class="signature">(eventName, payload)</span><span class="type-signature"></span></h4>
     
     
@@ -6823,7 +7393,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 730
+        index.js, line 739
     </li></ul></dd>
     
     
@@ -6844,6 +7414,195 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     
     
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="encrypt"><span class="type-signature"></span>encrypt<span class="signature">(text, <span class="optional">secret</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Encrypt the given text by default or using the custom given secret
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">text to encrypt</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>secret</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">secret to use for encryption, if absent, the value of <code>config#secret</code> is used</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        lib/crypt.js, line 4
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="config.html">config</a></li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    - encrypted string
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">string</span>
+
+
+	</dd>
+</dl>
+
+        
     
     
 </dd>
@@ -6975,7 +7734,7 @@ can be something like 'development', ['development','staging'] or null</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 227
+        index.js, line 236
     </li></ul></dd>
     
     
@@ -7106,7 +7865,7 @@ else `value` injected is AS IS.
             
             
             
-            <td class="description last">property name to assign to hunt.shared[fieldName]</td>
+            <td class="description last">property name to assign to hunt.[fieldName]</td>
         </tr>
 	
 	
@@ -7123,6 +7882,9 @@ else `value` injected is AS IS.
 |
 
 <span class="param-type">object</span>
+|
+
+<span class="param-type">Date</span>
 |
 
 <span class="param-type">Array</span>
@@ -7169,7 +7931,7 @@ else `value` injected is AS IS.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 69
+        index.js, line 78
     </li></ul></dd>
     
     
@@ -7441,7 +8203,7 @@ can be something like 'development', ['development','staging'] or null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 300
+        index.js, line 309
     </li></ul></dd>
     
     
@@ -7682,7 +8444,7 @@ can be something like 'development', ['development','staging'] or null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 136
+        index.js, line 145
     </li></ul></dd>
     
     
@@ -7861,7 +8623,7 @@ The <a href="https://github.com/visionmedia/express-resource "> REST api helper<
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 461
+        index.js, line 470
     </li></ul></dd>
     
     
@@ -8016,7 +8778,7 @@ All strategies have to redirect to `/auth/success` on success or `/auth/failure`
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 191
+        index.js, line 200
     </li></ul></dd>
     
     
@@ -8209,7 +8971,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 689
+        index.js, line 698
     </li></ul></dd>
     
     
@@ -8378,7 +9140,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 706
+        index.js, line 715
     </li></ul></dd>
     
     
@@ -8615,7 +9377,7 @@ Calls can be chained.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 718
+        index.js, line 727
     </li></ul></dd>
     
     
@@ -9246,7 +10008,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 528
+        index.js, line 537
     </li></ul></dd>
     
     
@@ -9375,7 +10137,7 @@ By default it spawns 1 process per CPU core.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 641
+        index.js, line 650
     </li></ul></dd>
     
     
@@ -9548,7 +10310,7 @@ in web server processes.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 588
+        index.js, line 597
     </li></ul></dd>
     
     
@@ -9699,7 +10461,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 555
+        index.js, line 564
     </li></ul></dd>
     
     
@@ -9775,7 +10537,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 741
+        index.js, line 750
     </li></ul></dd>
     
     
@@ -10736,6 +11498,143 @@ for logging.
     
     
     <div class="description">
+        Emitted when Hunt is started as background process
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">object</span>
+
+
+            </li>
+        </ul>
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">with a value of string of 'background'</td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        index.js, line 551
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="event:start">start</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
         Emitted when Hunt is started as webserver process
     </div>
     
@@ -10853,7 +11752,7 @@ for logging.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 573
+        index.js, line 582
     </li></ul></dd>
     
     
@@ -10864,143 +11763,6 @@ for logging.
     <dd class="tag-see">
         <ul>
             <li><a href="Hunt.html#startWebServer">Hunt#startWebServer</a></li>
-        </ul>
-    </dd>
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="event:start">start</h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        Emitted when Hunt is started as background process
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">object</span>
-
-
-            </li>
-        </ul>
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-        <h5 class="subsection-title">Properties:</h5>
-        
-        <dl>
-
-<table class="props">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">with a value of string of 'background'</td>
-        </tr>
-	
-	
-	</tbody>
-</table></dl>
-        
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        index.js, line 542
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
         </ul>
     </dd>
     
@@ -11601,5 +12363,5 @@ with payload of user being saved.
 
 
 
-  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha4</a> on Sat Mar 15 2014 17:52:36 GMT+0400 (MSK)</p>
+  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha4</a> on Mon Mar 17 2014 04:34:35 GMT+0400 (MSK)</p>
 </div>
