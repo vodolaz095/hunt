@@ -128,6 +128,12 @@ Other [examples](https://github.com/vodolaz095/hunt/tree/master/examples) are pu
 The full example with full online documentation is running here:
 [https://huntjs.herokuapp.com/](https://huntjs.herokuapp.com/)
 
+Deploy
+====================
+
+[Some advices on configuration linux server to run huntjs applications](https://github.com/vodolaz095/hunt/tree/master/examples/serverConfigsExamples)
+
+
 License
 ====================
 The MIT License (MIT)
