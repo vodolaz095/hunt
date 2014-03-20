@@ -1,0 +1,11 @@
+[Unit]
+Description=HuntJs application ran on behalf of user  %i
+
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=%h
+ExecStart=/usr/local/bin/node %h/projects/myHuntJSapp/index.js
+
+[Install]
+WantedBy=multi-user.target
