@@ -50,7 +50,10 @@ application like this:
 
 ```
 
+firewall.sh
+==================================
 
+Shell script to properly setup the firewall - open 22, 80, 443 port
 
 
 
