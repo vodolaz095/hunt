@@ -500,7 +500,7 @@ function Hunt(config) {
     }
   };
 
-  function prepareHunt(h) {
+  function prepareHunt(h, buildApp) {
     if (h.config.enableMongoose && h.config.enableMongooseUsers) {
       var mongooseUsers = require('./models/user.mongoose.js'),
         mongooseMessages = require('./models/message.mongoose.js'),
@@ -527,9 +527,10 @@ function Hunt(config) {
 //group message model
       h.extendModel('GroupMessage', mongooseGroupMessages);
     }
-
-    passportGenerator(h, extendPassportStrategiesFunctions, extendRoutesFunctions);
-    appGenerator(h, extendAppFunctions, extendMiddlewareFunctions, extendRoutesFunctions);
+    if(buildApp){
+      passportGenerator(h, extendPassportStrategiesFunctions, extendRoutesFunctions);
+      appGenerator(h, extendAppFunctions, extendMiddlewareFunctions, extendRoutesFunctions);
+    }
     nodemailerListener(h);
     prepared = true;
   }
@@ -547,7 +548,7 @@ function Hunt(config) {
    */
   this.startBackGround = function () {
     console.log('Trying to start Hunt as background service...'.magenta);
-    prepareHunt(this);
+    prepareHunt(this, false);
     /**
      * Emitted when Hunt is started as background process
      *
@@ -576,7 +577,7 @@ function Hunt(config) {
   this.startWebServer = function (port) {
     var p = port || this.config.port;
     console.log(('Trying to start Hunt as web server on port ' + p + '...').magenta);
-    prepareHunt(this);
+    prepareHunt(this, true);
     var h = this;
     this.httpServer.listen(p, function () {
     /**
