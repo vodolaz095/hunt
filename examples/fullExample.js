@@ -185,7 +185,7 @@ Hunt.on('httpError', function(err){
     console.error);
 });
 
-Hunt.once('start', function () {
+Hunt.once('start', function (startParameters) {
 //we populate mongoose model of Trophies with test data
   require('./lib/populateDatabase')(Hunt);
 
@@ -193,15 +193,18 @@ Hunt.once('start', function () {
 //note, that Hunt.io is generated only after
 //application is started
 
-  Hunt.io.sockets.on('connection', function(socket){
-    socket.on('sioNumber', function(payload){
-      if(payload && parseInt(payload)){
-        socket.emit('sioAnswer', (2*parseInt(payload)));
-      } else {
-        socket.emit('sioAnswer','Error! Not a number!');
-      }
+  if(startParameters.type === 'webserver'){
+//if application is started as background service, it do not have socket.io support
+    Hunt.io.sockets.on('connection', function(socket){
+      socket.on('sioNumber', function(payload){
+        if(payload && parseInt(payload)){
+          socket.emit('sioAnswer', (2*parseInt(payload)));
+        } else {
+          socket.emit('sioAnswer','Error! Not a number!');
+        }
+      });
     });
-  });
+  }
 
   setInterval(function () {
     var now = new Date().toLocaleTimeString();
