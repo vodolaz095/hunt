@@ -222,14 +222,15 @@ Hunt.once('start', function (startParameters) {
 
 //Hunt.startWebCluster(3,3000);
 /*
- *But let us Hunt to decide
+ *But let us let Hunt to decide
  *how many worker process is spawned (1 for every CPU core present)
- *and what port to use (from config or process.env.port or default - 3000)
+ *and what port to use (from config or process.env.PORT or default - 3000)
+ *we recommend 1 process per CPU core
  */
 
 
 if (Hunt.config.env === 'production') {
-  Hunt.startWebCluster();//i recommend 1 process per CPU core - Anatolij
+  Hunt.startWebCluster();
 } else {
   Hunt.startWebServer();
 }
