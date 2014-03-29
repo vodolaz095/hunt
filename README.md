@@ -1,13 +1,41 @@
-Hunt
+HuntJS
 ====================
 
 [![Build Status](https://drone.io/bitbucket.org/vodolaz095/hunt/status.png)](https://drone.io/bitbucket.org/vodolaz095/hunt/latest)
 [![Build Status](https://travis-ci.org/vodolaz095/hunt.png?branch=master)](https://travis-ci.org/vodolaz095/hunt)
 
+**"Hello, world!" Example**
+
+This is short, basic, "hello, world!" example, to start http server on 3000 port.
+
+```javascript
+
+    var hunt = require('./../index.js'),
+      Hunt = hunt({
+        'port':3000
+      });
+
+    Hunt.extendRoutes(function(core){
+      core.app.get('/', function(req,res){
+        res.send('Hello, world!');
+      });
+    });
+
+    Hunt.startWebServer();
+
+```
+
 **Documentation and live example**
+
 [https://huntjs.herokuapp.com/](https://huntjs.herokuapp.com/)
 
+
+**More examples**
+
+[https://github.com/vodolaz095/hunt/tree/master/examples/](https://github.com/vodolaz095/hunt/tree/master/examples/)
+
 **Shameless advertisement**
+
 You can hire the author of this package by Odesk - [https://www.odesk.com/users/~0120ba573d09c66c51](https://www.odesk.com/users/~0120ba573d09c66c51s)
 
 **What do you get from the box?**
@@ -79,19 +107,18 @@ This is it. *Hunt*...
 
 ```
 
-System requirements
-=======
+**System requirements**
 
 -  [Linux](http://distrowatch.com/dwres.php?resource=major) (this is your problem, if you want to build this package on other operating systems)
--  [NodeJS](http://nodejs.org/download/) >= 0.10.24 (version build from source is preferable, because hunt builds some dependencies from source)
+-  [NodeJS](http://nodejs.org/download/) >= 0.10.26 (version build from source is preferable, because hunt builds some dependencies from source)
 -  [Redis](http://redis.io/download) >= 2.6.16
 -  [Mongo](http://www.mongodb.org/downloads) >= 2.4.6 (optional)
 -  [MySQL](https://dev.mysql.com/downloads/mysql/) >= 5.6.16 (optional)
 -  [PostgreSQL](http://www.postgresql.org/download/) >= 9.2 (optional)
 
 
-Important
-=======
+**Important!**
+
 Without understanding how [express.js framework](http://expressjs.com/) operates, including
 
  - concept of [app](http://expressjs.com/api.html#express),
@@ -102,34 +129,8 @@ Without understanding how [express.js framework](http://expressjs.com/) operates
 this module is hard to understand. Please, read this information above before processing with this framework.
 
 
-Example
-====================
-This is short, basic, "hello, world!" example, to start http server on 3000 port.
+**Deploying the HuntJS application for production**
 
-```javascript
-
-    var hunt = require('./../index.js'),
-      Hunt = hunt({
-        'port':3000
-      });
-
-    Hunt.extendRoutes(function(core){
-      core.app.get('/', function(req,res){
-        res.send('Hello, world!');
-      });
-    });
-
-    Hunt.startWebServer();
-
-```
-
-Other [examples](https://github.com/vodolaz095/hunt/tree/master/examples) are published in `examples` directory of this repository
-The full example with full online documentation is running here:
-[https://huntjs.herokuapp.com/](https://huntjs.herokuapp.com/)
-
-
-Deploing the HuntJS application for production
-====================
 We will post some advices on server configuration here:
 [https://github.com/vodolaz095/hunt/tree/master/examples/serverConfigsExamples](https://github.com/vodolaz095/hunt/tree/master/examples/serverConfigsExamples)
 
