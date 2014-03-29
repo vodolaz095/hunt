@@ -179,7 +179,8 @@ Hunt.on('httpSuccess', function(httpSuccess){
 //but the message will likely be marked as spam
 Hunt.on('httpError', function(err){
   console.error(err);
-  Hunt.sendEmail('support@example.com',
+  Hunt.sendEmail(
+    process.env.ADMIN_EMAIL || 'support@example.com',
     'Our application did a bad bad thing!',
     JSON.stringify(err.stack),
     console.error);
