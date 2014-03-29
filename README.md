@@ -16,7 +16,7 @@ Just run `npm install hunt` and you get ready to use high level nodejs framework
 that links together many preconfigured and working perfectly together modules.
 This is it. *Hunt*...
 
--  works on latest versions of [NodeJS](http://nodejs.org) >=0.10.22
+-  works on latest versions of [NodeJS](http://nodejs.org) >=0.10.26
 
 -  is a real event driven (by pattern [Observer](https://en.wikipedia.org/wiki/Observer_pattern))
    framework build on top of [ExpressJS](http://expressjs.com),
@@ -92,7 +92,6 @@ System requirements
 
 Important
 =======
-
 Without understanding how [express.js framework](http://expressjs.com/) operates, including
 
  - concept of [app](http://expressjs.com/api.html#express),
@@ -128,17 +127,18 @@ Other [examples](https://github.com/vodolaz095/hunt/tree/master/examples) are pu
 The full example with full online documentation is running here:
 [https://huntjs.herokuapp.com/](https://huntjs.herokuapp.com/)
 
-Deploy
-====================
 
-[Some advices on configuration linux server to run huntjs applications](https://github.com/vodolaz095/hunt/tree/master/examples/serverConfigsExamples)
+Deploing the HuntJS application for production
+====================
+We will post some advices on server configuration here:
+[https://github.com/vodolaz095/hunt/tree/master/examples/serverConfigsExamples](https://github.com/vodolaz095/hunt/tree/master/examples/serverConfigsExamples)
 
 
 License
 ====================
 The MIT License (MIT)
 
-Copyright (c) 2013 Ostroumov Anatolij <ostroumov095 at gmail dot com>
+Copyright (c) 2013 Ostroumov Anatolij <ostroumov095 at gmail dot com> et al.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
