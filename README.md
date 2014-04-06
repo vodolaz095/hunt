@@ -1,6 +1,7 @@
 HuntJS
 ====================
 
+[![NPM version](https://badge.fury.io/js/hunt.svg)](http://badge.fury.io/js/hunt)
 [![Build Status](https://drone.io/bitbucket.org/vodolaz095/hunt/status.png)](https://drone.io/bitbucket.org/vodolaz095/hunt/latest)
 [![Build Status](https://travis-ci.org/vodolaz095/hunt.png?branch=master)](https://travis-ci.org/vodolaz095/hunt)
 
