@@ -6,11 +6,11 @@
     "include" : [
       "README.md",
       "index.js",
-      "models/",
-      "lib/",
-      "lib/dataStorage/",
+      "lib/api/",
+      "lib/generators/",
+      "lib/models/",
       "lib/passportStrategies/",
-      "lib/transports/"
+      "lib/templateEngines/"
     ],
     "includePattern": ".+\\.js(doc)?$",
     "excludePattern": "(^|\\/|\\\\)_"

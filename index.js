@@ -2,14 +2,18 @@
 var EventEmitter = require('events').EventEmitter,
   async = require('async'),
   util = require('util'),
-  configGenerator = require('./lib/configGenerator.js'),
-  redisGenerator = require('./lib/dataStorage/redisClientGenerator.js'),
-  mongooseGenerator = require('./lib/dataStorage/mongooseModelsGenerator.js'),
-  sequelizeGenerator = require('./lib/dataStorage/sequilizeModelsGenerator.js'),
-  passportGenerator = require('./lib/passportGenerator.js'),
-  nodemailerListener = require('./lib/transports/nodemailer.listener.js'),
-  appGenerator = require('./lib/appGenerator.js'),
-  crypt = require('./lib/crypt.js');
+
+  configGenerator = require('./lib/generators/config.js'),
+  redisGenerator = require('./lib/generators/redisClient.js'),
+  mongooseGenerator = require('./lib/generators/mongooseModels.js'),
+  sequelizeGenerator = require('./lib/generators/sequilizeModels.js'),
+  passportGenerator = require('./lib/generators/passport.js'),
+  appGenerator = require('./lib/generators/expressApp.js'),
+  crypt = require('./lib/generators/crypt.js'),
+
+  nodemailerListener = require('./lib/generators/nodemailer.js'),
+  raiListener = require('./lib/generators/rai.js');
+
 
 require('colors');
 /**
@@ -19,55 +23,6 @@ require('colors');
  */
 function Hunt(config) {
   EventEmitter.call(this);
-  this.config = configGenerator(config);
-
-//guarding core internals from Hunt.extendCore
-/**
-  * @name Hunt#async
-  * @type {Object}
-  * @description
-  * Embedded {@link https://www.npmjs.org/package/async | npm module of async} for better workflow
-  */
-  this.async = require('async');
-
-  this.app = 'app';
-/**
- * @name Hunt#http
- * @type {Object}
- * @description
- * Embedded {@link http://nodejs.org/docs/latest/api/http.html | nodejs http module},
- * that is used by socket.io and http server.
- */
-  this.http = require('http');
-
-  this.rack = require('./lib/rack.js');
-  this.httpServer = true;
-  this.passport = require('passport');
-  this.model = {};
-  this.sequelize = {};
-  this.mongoConnection = {};
-  this.mongoose = {};
-  this.io = {};
-
-  this.encrypt = function(text, secret){
-    secret = secret || this.config.secret;
-    return crypt.encrypt(text, secret);
-  };
-
-  this.decrypt = function(text, secret){
-    secret = secret || this.config.secret;
-    return crypt.decrypt(text, secret);
-  };
-
-  redisGenerator(this);
-
-  if (this.config.enableMongoose) {
-    mongooseGenerator(this);
-  }
-
-  if (this.config.sequelizeUrl) {
-    sequelizeGenerator(this);
-  }
 
 //http://www.crockford.com/javascript/private.html
   var prepared = false,
@@ -75,7 +30,6 @@ function Hunt(config) {
     extendAppFunctions = [],
     extendMiddlewareFunctions = [],
     extendRoutesFunctions = [];
-
   /**
    * @method Hunt#extendCore
    * @param {string} field - property name to assign to hunt.[fieldName]
@@ -132,6 +86,66 @@ function Hunt(config) {
       return this;
     }
   };
+
+/**
+ * @name Hunt#config
+ * @type {config}
+ * @description
+ * Object that represents current config object of HuntJS application
+ */
+  this.extendCore('config', function(){
+    return configGenerator(config);
+  });
+
+/**
+  * @name Hunt#async
+  * @type {Object}
+  * @description
+  * Embedded {@link https://www.npmjs.org/package/async | npm module of async} for better workflow
+  */
+  this.extendCore('async', function(){
+    return require('async');
+  });
+
+  this.app = 'app';
+/**
+ * @name Hunt#http
+ * @type {Object}
+ * @description
+ * Embedded {@link http://nodejs.org/docs/latest/api/http.html | nodejs http module},
+ * that is used by socket.io and http server.
+ */
+  this.http = require('http');
+
+  this.rack = require('./lib/generators/rack.js');
+  this.httpServer = true;
+  this.passport = require('passport');
+  this.model = {};
+  this.sequelize = {};
+  this.mongoConnection = {};
+  this.mongoose = {};
+  this.io = {};
+
+  this.encrypt = function(text, secret){
+    secret = secret || this.config.secret;
+    return crypt.encrypt(text, secret);
+  };
+
+  this.decrypt = function(text, secret){
+    secret = secret || this.config.secret;
+    return crypt.decrypt(text, secret);
+  };
+
+  redisGenerator(this);
+
+  if (this.config.enableMongoose) {
+    mongooseGenerator(this);
+  }
+
+  if (this.config.sequelizeUrl) {
+    sequelizeGenerator(this);
+  }
+
 
   /**
    * @name Hunt#model
@@ -504,10 +518,10 @@ function Hunt(config) {
 
   function prepareHunt(h, buildApp) {
     if (h.config.enableMongoose && h.config.enableMongooseUsers) {
-      var mongooseUsers = require('./models/user.mongoose.js'),
-        mongooseMessages = require('./models/message.mongoose.js'),
-        mongooseGroups = require('./models/group.mongoose.js'),
-        mongooseGroupMessages = require('./models/groupmessage.mongoose.js');
+      var mongooseUsers = require('./lib/models/user.mongoose.js'),
+        mongooseMessages = require('./lib/models/message.mongoose.js'),
+        mongooseGroups = require('./lib/models/group.mongoose.js'),
+        mongooseGroupMessages = require('./lib/models/groupmessage.mongoose.js');
 //user model
       h.extendModel('User', mongooseUsers);
       h.model.Users = h.model.User;
@@ -790,83 +804,6 @@ Hunt.prototype.stop = function () {
 module.exports = exports = function (config) {
   return new Hunt(config);
 };
-
-
-/**
- * @class config
- * @classdesc
- * Configuration object, that is passed to Hunt constructor
- *
- * @property {string} hostUrl - url to host of current application,
- * used in oAuth authentication strategies and for building redirects.
- * For example - http://example.org/
- *
- * @property {string} env - application environment, if not set, populated
- * from enviromental value of NODE_ENV. Default is `development`, the values
- * of `staging` and `production` can be used
- *
- * @property {number} port - port for webserver process(es) to bind to.
- * Note: on *nix machines ports with number bellow 1000 are only bindable
- * by applicaiton ran as root user.
- *
- * @property {boolean} enableMongoose - enable mongo database support,
- * default is true - enabled
-
- * @property {string} templateEngine - template engine to use,
- * default is {@link https://github.com/vol4ok/hogan-express | hogan-express}
- * - {@link http://mustache.github.io/ | mustache} based template engine with layouts,
- * partials and locals,
- * other options are {@link http://paularmstrong.github.io/swig/ | swig},
- * ejs and jade (under construction).
-
- * @property {boolean} enableMongoose - enable mongo support via mongoose orm, default is true - enabled
- * @property {string} mongoUrl - connection string for mongoose ORM,
- * default is 'mongodb://localhost/hunt_dev'.
- * It can be automatically populated from enviromental values of `MONGO_URL`,
- * `MONGOSOUP_URL`,`MONGOHQ_URL`,`MONGOLAB_URL`.
- * Connection string has this {@link http://docs.mongodb.org/manual/reference/connection-string/ syntax }
-
- * @property {boolean} enableMongooseUsers - enable mongo based user object,
- * default is true - enabled
-
- * @property {string} redisUrl - connection string for redis, default is
- * 'redis://localhost:6379', can be populated from enviromental variables
- * of 'REDISTOGO_URL', 'OPENREDIS_URL', 'REDISCLOUD_URL',
- *  'REDISGREEN_URL', 'REDIS_URL'
- *
- * @property {string} public - directory for assets - css, images,
- * client side javascripts, that are served by {@link http://www.senchalabs.org/connect/static.html | connect static middleware}
- * for example, 'public': __dirname+'/public'
- *
- * @property {string} views - directory for templates, used by template
- * engine for rendering static HTML pages on server side.
- * {@link http://expressjs.com/api.html#app-settings}
- *
- * @property {string} emailConfig - configuration string for {@link https://npmjs.org/package/nodemailer/ | email delivery system },
- * used for notify users.
- * When left blank, the direct transport is used - it is quite slow, and the emails
- * are usually marked as spam.
- * Examples:
- * 'nodemailer://somebody@gmail.com:somepassword@gmail',
- * 'nodemailer://postmaster@teksi.ru:7tu8z3zsaa421@Mailgun',
- *
- * @property {Boolean} dialog - enable dialog REST-api for private messages
- * @property {Boolean} huntKey - enable authorization huntKey as GET, POST, header, default is false - disabled
- * @property {Boolean} disableCsrf - disable csrf protection, default is false - CSRF protection is enabled
- *
- * @property {number} maxWorkers - limit the number of webserver/background processes cluster spawns. Default - 1 per CPU core.
- *
- * @property {passport} passport - {@link http://passportjs.org | passport.js}
- * configuration object, used for setting the methods users authorize,
- *
- * @property {boolean} uploadFiles -  allow upload of files by HTTP-POST,
- * {@link http://expressjs.com/api.html#req.files},
- * default is false, disabled, and for a good cause {@link https://groups.google.com/forum/#!topic/nodejs/6KOlfk5cpcM}
- *
- * @property {object} io - configuration options for {@link http://socket.io/}
- * @property {string} favicon - path to favicon
- * @property {string} secret - string to preseed session hashes and do other security related things
- */
 
 
 /**
