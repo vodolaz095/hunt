@@ -1,19 +1,21 @@
 <section>
     <article><h1 id="huntjs">HuntJS</h1>
-        <p><a href="https://drone.io/bitbucket.org/vodolaz095/hunt/latest"><img src="https://drone.io/bitbucket.org/vodolaz095/hunt/status.png" alt="Build Status"></a>
+        <p>
+            <a href="https://www.npmjs.org/package/hunt"><img src="https://badge.fury.io/js/hunt.svg" alt="NPM version"></a>
+            <a href="https://drone.io/bitbucket.org/vodolaz095/hunt/latest"><img src="https://drone.io/bitbucket.org/vodolaz095/hunt/status.png" alt="Build Status"></a>
             <a href="https://travis-ci.org/vodolaz095/hunt"><img src="https://travis-ci.org/vodolaz095/hunt.png?branch=master" alt="Build Status"></a></p>
         <p><strong>&quot;Hello, world!&quot; Example</strong></p>
         <p>This is short, basic, &quot;hello, world!&quot; example, to start http server on 3000 port.</p>
 <pre><code class="lang-javascript">
     var hunt = require('./../index.js'),
-    Hunt = hunt({
-    'port':3000
-    });
+      Hunt = hunt({
+        'port':3000
+      });
 
     Hunt.extendRoutes(function(core){
-    core.app.get('/', function(req,res){
-    res.send('Hello, world!');
-    });
+      core.app.get('/', function(req,res){
+      res.send('Hello, world!');
+      });
     });
 
     Hunt.startWebServer();</code></pre>
@@ -111,7 +113,7 @@
             <a href="https://github.com/vodolaz095/hunt/tree/master/examples/serverConfigsExamples">https://github.com/vodolaz095/hunt/tree/master/examples/serverConfigsExamples</a></p>
         <h1 id="license">License</h1>
         <p>The MIT License (MIT)</p>
-        <p>Copyright (c) 2013 Ostroumov Anatolij <ostroumov095 at gmail dot com> et al.</p>
+        <p>Copyright (c) 2013 Ostroumov Anatolij &lt; ostroumov095 at gmail dot com &gt; et al.</p>
         <p>Permission is hereby granted, free of charge, to any person obtaining a copy of
             this software and associated documentation files (the &quot;Software&quot;), to deal in
             the Software without restriction, including without limitation the rights to
