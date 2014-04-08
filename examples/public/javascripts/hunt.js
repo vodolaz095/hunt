@@ -9,11 +9,11 @@ var socket = io.connect('', {
 socket.on('broadcast', function (data) {
 //  console.log(data);
   if (data.time) {
-    document.getElementById('clock').innerHTML = data.time;
+    $('#clock').html(data.time);
   }
 
   if(data.httpSuccess){
-    console.log(data);
+//    console.log(data);
     $('#recentVisits tbody').append(
       '<tr>' +
         '<td><a href="http://who.is/whois-ip/ip-address/'+data.httpSuccess.ip+'">'+data.httpSuccess.ip+'</a></td>'+
@@ -38,5 +38,15 @@ if($('input #sioNumber')){
   socket.on('sioAnswer', function(value){
    $('#sioAnswer').val(value);
   });
-
 }
+
+$('#sioMessage button').click(function(){
+  var message = $('#sioMessage input').val();
+  socket.send(message,function(error){
+    if(error){
+      console.error(error);
+    } else {
+      $('#sioMessage input').val('');
+    }
+  });
+});

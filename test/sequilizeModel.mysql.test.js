@@ -3,6 +3,11 @@ var hunt = require('./../index.js'),
   should = require('should'),
   async = require('async'),
   Hunt;
+
+describe('Sequilize test for MySQL database model', function () {
+  it('will be done!');
+});
+
 /*/
 describe('Sequilize test for SQLite database model', function () {
   before(function (done) {

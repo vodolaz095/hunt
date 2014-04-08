@@ -5,12 +5,20 @@ and recieve the answer back by socket.io too</p>
 <p>
 <input type="text" id="sioNumber" value="" placeholder="14"/>
 X 2 =
-<input type="text" id="sioAnswer" disabled="disabled" id="sioNumber" value="" placeholder="28"/>
+<input type="text" id="sioAnswer" disabled="disabled" value="" placeholder="28"/>
 </p>
 <a name="clock"></a>
 <h2>Clock</h2>
 <p>The clock in the right corner of menu shows
 current time of the day for server.</p>
+<h2>Send message by socket.io directly</h2>
+<div id="sioMessage">
+    <p>
+        <input type="text" placeholder="Your message, please!">
+        <button>Send</button>
+    </p>
+    <p>This message will be shown on console of application's server.</p>
+</div>
 
 <h2>Recent visits streaming</h2>
 <p>We use socket.io and event of <a href="/documentation/Hunt.html#event:httpSuccess">httpSuccess</a>

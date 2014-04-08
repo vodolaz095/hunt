@@ -7,7 +7,7 @@ var EventEmitter = require('events').EventEmitter,
   mongooseGenerator = require('./lib/dataStorage/mongooseModelsGenerator.js'),
   sequelizeGenerator = require('./lib/dataStorage/sequilizeModelsGenerator.js'),
   passportGenerator = require('./lib/passportGenerator.js'),
-  nodemailerListener = require('./lib/nodemailerListener.js'),
+  nodemailerListener = require('./lib/transports/nodemailer.listener.js'),
   appGenerator = require('./lib/appGenerator.js'),
   crypt = require('./lib/crypt.js');
 
@@ -52,11 +52,12 @@ function Hunt(config) {
   this.encrypt = function(text, secret){
     secret = secret || this.config.secret;
     return crypt.encrypt(text, secret);
-  }
+  };
+
   this.decrypt = function(text, secret){
     secret = secret || this.config.secret;
     return crypt.decrypt(text, secret);
-  }
+  };
 
   redisGenerator(this);
 
@@ -231,6 +232,7 @@ function Hunt(config) {
     } else {
       throw new Error('Unable to extend passportjs strategies by Hunt.extendStrategy() with argument ' + JSON.stringify(Strategy) + '!');
     }
+    return this;
   };
 
   /**

@@ -1,5 +1,5 @@
 <div id="docNav">
-    <h2><a href="/documentation/index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="Group.html">Group</a></li><li><a href="GroupMessage.html">GroupMessage</a></li><li><a href="HTTPAuthorizationAPI.html">HTTPAuthorizationAPI</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:httpError">httpError</a></li><li><a href="Hunt.html#event:httpSuccess">httpSuccess</a></li><li><a href="Hunt.html#event:notify">notify</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:notify:all">notify:all</a></li><li><a href="Hunt.html#event:notify:email">notify:email</a></li><li><a href="Hunt.html#event:notify:sio">notify:sio</a></li><li><a href="Hunt.html#event:user:save">user:save</a></li></ul>
+    <h2><a href="/documentation/index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="Group.html">Group</a></li><li><a href="GroupMessage.html">GroupMessage</a></li><li><a href="HTTPAuthorizationAPI.html">HTTPAuthorizationAPI</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:httpError">httpError</a></li><li><a href="Hunt.html#event:httpSuccess">httpSuccess</a></li><li><a href="Hunt.html#event:notify">notify</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:message:sio">message:sio</a></li><li><a href="Hunt.html#event:notify:all">notify:all</a></li><li><a href="Hunt.html#event:notify:email">notify:email</a></li><li><a href="Hunt.html#event:notify:sio">notify:sio</a></li><li><a href="Hunt.html#event:user:save">user:save</a></li></ul>
 </div>
 <div id="documentation">
     <h1 class="page-title">Class: Hunt</h1>
@@ -108,7 +108,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L770">index.js line 770</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L772">index.js line 772</a>
     </li></ul></dd>
     
     
@@ -216,7 +216,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L29">lib/appGenerator.js line 29</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L30">lib/appGenerator.js line 30</a>
     </li></ul></dd>
     
     
@@ -336,7 +336,7 @@ css, client side javascripts, images.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L21">lib/appGenerator.js line 21</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L22">lib/appGenerator.js line 22</a>
     </li></ul></dd>
     
     
@@ -455,7 +455,7 @@ that is used by socket.io and http server.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L36">lib/appGenerator.js line 36</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L37">lib/appGenerator.js line 37</a>
     </li></ul></dd>
     
     
@@ -518,7 +518,7 @@ that is used by socket.io and http server.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L72">lib/appGenerator.js line 72</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/transports/socket.io.listener.js#L10">lib/transports/socket.io.listener.js line 10</a>
     </li></ul></dd>
     
     
@@ -583,7 +583,7 @@ they are injected into request object of controller.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L135">index.js line 135</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L136">index.js line 136</a>
     </li></ul></dd>
     
     
@@ -832,6 +832,61 @@ that is used only when config option of sequilizeUrl is defined.
             <li><a href="config.html">config</a></li>
         </ul>
     </dd>
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="sessionStorage"><span class="type-signature"></span>sessionStorage<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        Connect-compatible <a href="https://www.npmjs.org/package/connect-redis "> redis sessions` storage </a> used by
+<a href="Hunt.html#express"><code>Express application </code></a> and <a href="Hunt.html#io"><code> Socket.io server </code></a>
+    </div>
+    
+    
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L64">lib/appGenerator.js line 64</a>
+    </li></ul></dd>
+    
+    
+    
+    
     
     
     
@@ -1228,7 +1283,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L740">index.js line 740</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L742">index.js line 742</a>
     </li></ul></dd>
     
     
@@ -1569,7 +1624,7 @@ can be something like 'development', ['development','staging'] or null</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L236">index.js line 236</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L238">index.js line 238</a>
     </li></ul></dd>
     
     
@@ -1766,7 +1821,7 @@ else `value` injected is AS IS.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L78">index.js line 78</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L79">index.js line 79</a>
     </li></ul></dd>
     
     
@@ -2038,7 +2093,7 @@ can be something like 'development', ['development','staging'] or null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L309">index.js line 309</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L311">index.js line 311</a>
     </li></ul></dd>
     
     
@@ -2279,7 +2334,7 @@ can be something like 'development', ['development','staging'] or null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L145">index.js line 145</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L146">index.js line 146</a>
     </li></ul></dd>
     
     
@@ -2458,7 +2513,7 @@ The <a href="https://github.com/visionmedia/express-resource "> REST api helper<
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L470">index.js line 470</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L472">index.js line 472</a>
     </li></ul></dd>
     
     
@@ -2613,7 +2668,7 @@ All strategies have to redirect to `/auth/success` on success or `/auth/failure`
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L200">index.js line 200</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L201">index.js line 201</a>
     </li></ul></dd>
     
     
@@ -2806,7 +2861,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L699">index.js line 699</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L701">index.js line 701</a>
     </li></ul></dd>
     
     
@@ -2975,7 +3030,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L716">index.js line 716</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L718">index.js line 718</a>
     </li></ul></dd>
     
     
@@ -3212,7 +3267,7 @@ Calls can be chained.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L728">index.js line 728</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L730">index.js line 730</a>
     </li></ul></dd>
     
     
@@ -3420,7 +3475,7 @@ Calls can be chained.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/nodemailerListener.js#L53">lib/nodemailerListener.js line 53</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/transports/nodemailer.listener.js#L53">lib/transports/nodemailer.listener.js line 53</a>
     </li></ul></dd>
     
     
@@ -3563,7 +3618,7 @@ and <a href="https://github.com/andris9/Nodemailer#alternative-fields "> alterna
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/nodemailerListener.js#L37">lib/nodemailerListener.js line 37</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/transports/nodemailer.listener.js#L37">lib/transports/nodemailer.listener.js line 37</a>
     </li></ul></dd>
     
     
@@ -3772,7 +3827,7 @@ and <a href="https://github.com/andris9/Nodemailer#alternative-fields "> alterna
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/nodemailerListener.js#L73">lib/nodemailerListener.js line 73</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/transports/nodemailer.listener.js#L73">lib/transports/nodemailer.listener.js line 73</a>
     </li></ul></dd>
     
     
@@ -3843,7 +3898,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L538">index.js line 538</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L540">index.js line 540</a>
     </li></ul></dd>
     
     
@@ -3972,7 +4027,7 @@ By default it spawns 1 process per CPU core.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L651">index.js line 651</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L653">index.js line 653</a>
     </li></ul></dd>
     
     
@@ -4145,7 +4200,7 @@ in web server processes.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L598">index.js line 598</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L600">index.js line 600</a>
     </li></ul></dd>
     
     
@@ -4296,7 +4351,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L565">index.js line 565</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L567">index.js line 567</a>
     </li></ul></dd>
     
     
@@ -4372,7 +4427,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L751">index.js line 751</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L753">index.js line 753</a>
     </li></ul></dd>
     
     
@@ -4416,7 +4471,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     
     <div class="description">
-        Broadcast message by socket.io to all site visitors, even the non authorized ones.
+        Broadcast message by socket.io to all socket.io clients both authorized and non authorized site visitors
     </div>
     
 
@@ -4459,7 +4514,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L145">lib/appGenerator.js line 145</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/transports/socket.io.listener.js#L83">lib/transports/socket.io.listener.js line 83</a>
     </li></ul></dd>
     
     
@@ -4849,7 +4904,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L429">lib/appGenerator.js line 429</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L322">lib/appGenerator.js line 322</a>
     </li></ul></dd>
     
     
@@ -5203,7 +5258,7 @@ for logging.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L328">lib/appGenerator.js line 328</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L221">lib/appGenerator.js line 221</a>
     </li></ul></dd>
     
     
@@ -5425,143 +5480,6 @@ for logging.
     
     
     <div class="description">
-        Emitted when Hunt is started as background process
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">object</span>
-
-
-            </li>
-        </ul>
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-        <h5 class="subsection-title">Properties:</h5>
-        
-        <dl>
-
-<table class="props">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">with a value of string of 'background'</td>
-        </tr>
-	
-	
-	</tbody>
-</table></dl>
-        
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L552">index.js line 552</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
-        </ul>
-    </dd>
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="event:start">start</h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
         Emitted when Hunt is started as webserver process
     </div>
     
@@ -5679,7 +5597,7 @@ for logging.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L583">index.js line 583</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L585">index.js line 585</a>
     </li></ul></dd>
     
     
@@ -5708,6 +5626,314 @@ for logging.
     
     
     
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="event:start">start</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Emitted when Hunt is started as background process
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">object</span>
+
+
+            </li>
+        </ul>
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">with a value of string of 'background'</td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L554">index.js line 554</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="event:message:sio">message:sio</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Event is emitted each time the socket.io client sends the message by this client side javascript code
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">object</span>
+
+
+            </li>
+        </ul>
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="User.html">User</a></span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">user, associated with this socket.io socket, or null if user is not authorized</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/transports/socket.io.listener.js#L106">lib/transports/socket.io.listener.js line 106</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+
+    var socket = io.connect();
+    socket.send('Hello!', function(error){...});
+
+```
+
+ </code></pre>
+
     
 </dd>
 
@@ -6473,7 +6699,7 @@ with payload of user being saved.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L29">lib/appGenerator.js line 29</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L30">lib/appGenerator.js line 30</a>
     </li></ul></dd>
     
     
@@ -6593,7 +6819,7 @@ css, client side javascripts, images.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L21">lib/appGenerator.js line 21</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L22">lib/appGenerator.js line 22</a>
     </li></ul></dd>
     
     
@@ -6712,7 +6938,7 @@ that is used by socket.io and http server.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L36">lib/appGenerator.js line 36</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L37">lib/appGenerator.js line 37</a>
     </li></ul></dd>
     
     
@@ -6775,7 +7001,7 @@ that is used by socket.io and http server.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L72">lib/appGenerator.js line 72</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/transports/socket.io.listener.js#L10">lib/transports/socket.io.listener.js line 10</a>
     </li></ul></dd>
     
     
@@ -6840,7 +7066,7 @@ they are injected into request object of controller.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L135">index.js line 135</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L136">index.js line 136</a>
     </li></ul></dd>
     
     
@@ -7089,6 +7315,61 @@ that is used only when config option of sequilizeUrl is defined.
             <li><a href="config.html">config</a></li>
         </ul>
     </dd>
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="sessionStorage"><span class="type-signature"></span>sessionStorage<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        Connect-compatible <a href="https://www.npmjs.org/package/connect-redis "> redis sessions` storage </a> used by
+<a href="Hunt.html#express"><code>Express application </code></a> and <a href="Hunt.html#io"><code> Socket.io server </code></a>
+    </div>
+    
+    
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L64">lib/appGenerator.js line 64</a>
+    </li></ul></dd>
+    
+    
+    
+    
     
     
     
@@ -7485,7 +7766,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L740">index.js line 740</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L742">index.js line 742</a>
     </li></ul></dd>
     
     
@@ -7826,7 +8107,7 @@ can be something like 'development', ['development','staging'] or null</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L236">index.js line 236</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L238">index.js line 238</a>
     </li></ul></dd>
     
     
@@ -8023,7 +8304,7 @@ else `value` injected is AS IS.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L78">index.js line 78</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L79">index.js line 79</a>
     </li></ul></dd>
     
     
@@ -8295,7 +8576,7 @@ can be something like 'development', ['development','staging'] or null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L309">index.js line 309</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L311">index.js line 311</a>
     </li></ul></dd>
     
     
@@ -8536,7 +8817,7 @@ can be something like 'development', ['development','staging'] or null
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L145">index.js line 145</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L146">index.js line 146</a>
     </li></ul></dd>
     
     
@@ -8715,7 +8996,7 @@ The <a href="https://github.com/visionmedia/express-resource "> REST api helper<
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L470">index.js line 470</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L472">index.js line 472</a>
     </li></ul></dd>
     
     
@@ -8870,7 +9151,7 @@ All strategies have to redirect to `/auth/success` on success or `/auth/failure`
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L200">index.js line 200</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L201">index.js line 201</a>
     </li></ul></dd>
     
     
@@ -9063,7 +9344,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L699">index.js line 699</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L701">index.js line 701</a>
     </li></ul></dd>
     
     
@@ -9232,7 +9513,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L716">index.js line 716</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L718">index.js line 718</a>
     </li></ul></dd>
     
     
@@ -9469,7 +9750,7 @@ Calls can be chained.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L728">index.js line 728</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L730">index.js line 730</a>
     </li></ul></dd>
     
     
@@ -9677,7 +9958,7 @@ Calls can be chained.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/nodemailerListener.js#L53">lib/nodemailerListener.js line 53</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/transports/nodemailer.listener.js#L53">lib/transports/nodemailer.listener.js line 53</a>
     </li></ul></dd>
     
     
@@ -9820,7 +10101,7 @@ and <a href="https://github.com/andris9/Nodemailer#alternative-fields "> alterna
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/nodemailerListener.js#L37">lib/nodemailerListener.js line 37</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/transports/nodemailer.listener.js#L37">lib/transports/nodemailer.listener.js line 37</a>
     </li></ul></dd>
     
     
@@ -10029,7 +10310,7 @@ and <a href="https://github.com/andris9/Nodemailer#alternative-fields "> alterna
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/nodemailerListener.js#L73">lib/nodemailerListener.js line 73</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/transports/nodemailer.listener.js#L73">lib/transports/nodemailer.listener.js line 73</a>
     </li></ul></dd>
     
     
@@ -10100,7 +10381,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L538">index.js line 538</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L540">index.js line 540</a>
     </li></ul></dd>
     
     
@@ -10229,7 +10510,7 @@ By default it spawns 1 process per CPU core.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L651">index.js line 651</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L653">index.js line 653</a>
     </li></ul></dd>
     
     
@@ -10402,7 +10683,7 @@ in web server processes.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L598">index.js line 598</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L600">index.js line 600</a>
     </li></ul></dd>
     
     
@@ -10553,7 +10834,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L565">index.js line 565</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L567">index.js line 567</a>
     </li></ul></dd>
     
     
@@ -10629,7 +10910,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L751">index.js line 751</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L753">index.js line 753</a>
     </li></ul></dd>
     
     
@@ -10673,7 +10954,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     
     <div class="description">
-        Broadcast message by socket.io to all site visitors, even the non authorized ones.
+        Broadcast message by socket.io to all socket.io clients both authorized and non authorized site visitors
     </div>
     
 
@@ -10716,7 +10997,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L145">lib/appGenerator.js line 145</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/transports/socket.io.listener.js#L83">lib/transports/socket.io.listener.js line 83</a>
     </li></ul></dd>
     
     
@@ -11106,7 +11387,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L429">lib/appGenerator.js line 429</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L322">lib/appGenerator.js line 322</a>
     </li></ul></dd>
     
     
@@ -11460,7 +11741,7 @@ for logging.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L328">lib/appGenerator.js line 328</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/appGenerator.js#L221">lib/appGenerator.js line 221</a>
     </li></ul></dd>
     
     
@@ -11682,143 +11963,6 @@ for logging.
     
     
     <div class="description">
-        Emitted when Hunt is started as background process
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">object</span>
-
-
-            </li>
-        </ul>
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-        <h5 class="subsection-title">Properties:</h5>
-        
-        <dl>
-
-<table class="props">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">with a value of string of 'background'</td>
-        </tr>
-	
-	
-	</tbody>
-</table></dl>
-        
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L552">index.js line 552</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
-        </ul>
-    </dd>
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="event:start">start</h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
         Emitted when Hunt is started as webserver process
     </div>
     
@@ -11936,7 +12080,7 @@ for logging.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L583">index.js line 583</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L585">index.js line 585</a>
     </li></ul></dd>
     
     
@@ -11965,6 +12109,314 @@ for logging.
     
     
     
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="event:start">start</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Emitted when Hunt is started as background process
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">object</span>
+
+
+            </li>
+        </ul>
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">with a value of string of 'background'</td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L554">index.js line 554</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="event:message:sio">message:sio</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Event is emitted each time the socket.io client sends the message by this client side javascript code
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">object</span>
+
+
+            </li>
+        </ul>
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="User.html">User</a></span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">user, associated with this socket.io socket, or null if user is not authorized</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/transports/socket.io.listener.js#L106">lib/transports/socket.io.listener.js line 106</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+
+    var socket = io.connect();
+    socket.send('Hello!', function(error){...});
+
+```
+
+ </code></pre>
+
     
 </dd>
 
@@ -12547,5 +12999,5 @@ with payload of user being saved.
 
 
 
-  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha4</a> on Sun Apr 06 2014 22:49:06 GMT+0400 (MSK)</p>
+  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha4</a> on Wed Apr 09 2014 02:12:54 GMT+0400 (MSK)</p>
 </div>

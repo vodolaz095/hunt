@@ -213,7 +213,12 @@ Hunt.once('start', function (startParameters) {
   }, 500);
 });
 
-
+/*
+ * Listening to socket.io events, emitted by client
+ */
+Hunt.on('message:sio', function(event){
+  console.log('We recieved socket.io event!', event);
+});
 
 /*
  * Starting cluster of webserveres

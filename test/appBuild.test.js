@@ -20,7 +20,9 @@ describe('Hunt resists when we want to extend it\' core in strange way', functio
       'mongoose', 'mongoConnection',
       'sequelize',
       'io',
-      'on', 'once', 'emit',
+      'encrypt','decrypt',
+      'sessionStorage',
+      'on', 'once', 'emit'
     ].map(function (name) {
         (function () {
           Hunt.extendCore(('' + name), 'someStupidValueToIrritateCoreExtender');
