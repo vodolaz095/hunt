@@ -25,19 +25,37 @@
 
 
     <section>
-        <article><h1 id="hunt">Hunt</h1>
-<p><a href="https://drone.io/bitbucket.org/vodolaz095/hunt/latest"><img src="https://drone.io/bitbucket.org/vodolaz095/hunt/status.png" alt="Build Status"></a>
+        <article><h1 id="huntjs">HuntJS</h1>
+<p><a href="http://badge.fury.io/js/hunt"><img src="https://badge.fury.io/js/hunt.svg" alt="NPM version"></a>
+<a href="https://drone.io/bitbucket.org/vodolaz095/hunt/latest"><img src="https://drone.io/bitbucket.org/vodolaz095/hunt/status.png" alt="Build Status"></a>
 <a href="https://travis-ci.org/vodolaz095/hunt"><img src="https://travis-ci.org/vodolaz095/hunt.png?branch=master" alt="Build Status"></a></p>
-<p><strong>Documentation and live example</strong>
-<a href="https://huntjs.herokuapp.com/">https://huntjs.herokuapp.com/</a></p>
-<p><strong>Shameless advertisement</strong>
-You can hire the author of this package by Odesk - <a href="https://www.odesk.com/users/~0120ba573d09c66c51s">https://www.odesk.com/users/~0120ba573d09c66c51</a></p>
+<p><strong>&quot;Hello, world!&quot; Example</strong></p>
+<p>This is short, basic, &quot;hello, world!&quot; example, to start http server on 3000 port.</p>
+<pre><code class="lang-javascript">
+    var hunt = require('./../index.js'),
+      Hunt = hunt({
+        'port':3000
+      });
+
+    Hunt.extendRoutes(function(core){
+      core.app.get('/', function(req,res){
+        res.send('Hello, world!');
+      });
+    });
+
+    Hunt.startWebServer();</code></pre>
+<p><strong>Documentation and live example</strong></p>
+<p><a href="https://huntjs.herokuapp.com/">https://huntjs.herokuapp.com/</a></p>
+<p><strong>More examples</strong></p>
+<p><a href="https://github.com/vodolaz095/hunt/tree/master/examples/">https://github.com/vodolaz095/hunt/tree/master/examples/</a></p>
+<p><strong>Shameless advertisement</strong></p>
+<p>You can hire the author of this package by Odesk - <a href="https://www.odesk.com/users/~0120ba573d09c66c51s">https://www.odesk.com/users/~0120ba573d09c66c51</a></p>
 <p><strong>What do you get from the box?</strong></p>
 <p>Just run <code>npm install hunt</code> and you get ready to use high level nodejs framework,
 that links together many preconfigured and working perfectly together modules.
 This is it. <em>Hunt</em>...</p>
 <ul>
-<li><p>works on latest versions of <a href="http://nodejs.org">NodeJS</a> &gt;=0.10.22</p>
+<li><p>works on latest versions of <a href="http://nodejs.org">NodeJS</a> &gt;=0.10.26</p>
 </li>
 <li><p>is a real event driven (by pattern <a href="https://en.wikipedia.org/wiki/Observer_pattern">Observer</a>)
 framework build on top of <a href="http://expressjs.com">ExpressJS</a>,
@@ -97,16 +115,16 @@ converted to Hunt application.</p>
           'message':'Everybody hunts Somebody at example dot org!'
         })
       });</code></pre>
-<h1 id="system-requirements">System requirements</h1>
+<p><strong>System requirements</strong></p>
 <ul>
 <li><a href="http://distrowatch.com/dwres.php?resource=major">Linux</a> (this is your problem, if you want to build this package on other operating systems)</li>
-<li><a href="http://nodejs.org/download/">NodeJS</a> &gt;= 0.10.24 (version build from source is preferable, because hunt builds some dependencies from source)</li>
+<li><a href="http://nodejs.org/download/">NodeJS</a> &gt;= 0.10.26 (version build from source is preferable, because hunt builds some dependencies from source)</li>
 <li><a href="http://redis.io/download">Redis</a> &gt;= 2.6.16</li>
 <li><a href="http://www.mongodb.org/downloads">Mongo</a> &gt;= 2.4.6 (optional)</li>
 <li><a href="https://dev.mysql.com/downloads/mysql/">MySQL</a> &gt;= 5.6.16 (optional)</li>
 <li><a href="http://www.postgresql.org/download/">PostgreSQL</a> &gt;= 9.2 (optional)</li>
 </ul>
-<h1 id="important">Important</h1>
+<p><strong>Important!</strong></p>
 <p>Without understanding how <a href="http://expressjs.com/">express.js framework</a> operates, including</p>
 <ul>
 <li>concept of <a href="http://expressjs.com/api.html#express">app</a>,</li>
@@ -115,27 +133,12 @@ converted to Hunt application.</p>
 <li>concept <a href="http://expressjs.com/api.html#app.VERB">route</a></li>
 </ul>
 <p>this module is hard to understand. Please, read this information above before processing with this framework.</p>
-<h1 id="example">Example</h1>
-<p>This is short, basic, &quot;hello, world!&quot; example, to start http server on 3000 port.</p>
-<pre><code class="lang-javascript">
-    var hunt = require('./../index.js'),
-      Hunt = hunt({
-        'port':3000
-      });
-
-    Hunt.extendRoutes(function(core){
-      core.app.get('/', function(req,res){
-        res.send('Hello, world!');
-      });
-    });
-
-    Hunt.startWebServer();</code></pre>
-<p>Other <a href="https://github.com/vodolaz095/hunt/tree/master/examples">examples</a> are published in <code>examples</code> directory of this repository
-The full example with full online documentation is running here:
-<a href="https://huntjs.herokuapp.com/">https://huntjs.herokuapp.com/</a></p>
+<p><strong>Deploying the HuntJS application for production</strong></p>
+<p>We will post some advices on server configuration here:
+<a href="https://github.com/vodolaz095/hunt/tree/master/examples/serverConfigsExamples">https://github.com/vodolaz095/hunt/tree/master/examples/serverConfigsExamples</a></p>
 <h1 id="license">License</h1>
 <p>The MIT License (MIT)</p>
-<p>Copyright (c) 2013 Ostroumov Anatolij <ostroumov095 at gmail dot com></p>
+<p>Copyright (c) 2013 Ostroumov Anatolij <ostroumov095 at gmail dot com> et al.</p>
 <p>Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the &quot;Software&quot;), to deal in
 the Software without restriction, including without limitation the rights to
@@ -157,5 +160,5 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p></
 
 
 
-  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha4</a> on Mon Mar 17 2014 04:34:35 GMT+0400 (MSK)</p>
+  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha4</a> on Sun Apr 06 2014 22:49:05 GMT+0400 (MSK)</p>
 </div>

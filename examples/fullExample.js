@@ -121,7 +121,7 @@ Hunt.extendRoutes(profileHelperApi);
 Hunt.extendRoutes(function(core){
 
   core.app.get('/', function(req, res){
-    res.render('index',{
+    res.render('fullExampleIndex',{
       'title':'Hunt - high level nodejs backend framework',
       'description': 'build on top of expressjs, mongoose, sequilize, socketio and passportjs'
     });
@@ -179,13 +179,14 @@ Hunt.on('httpSuccess', function(httpSuccess){
 //but the message will likely be marked as spam
 Hunt.on('httpError', function(err){
   console.error(err);
-  Hunt.sendEmail('support@example.com',
+  Hunt.sendEmail(
+    process.env.ADMIN_EMAIL || 'support@example.com',
     'Our application did a bad bad thing!',
     JSON.stringify(err.stack),
     console.error);
 });
 
-Hunt.once('start', function () {
+Hunt.once('start', function (startParameters) {
 //we populate mongoose model of Trophies with test data
   require('./lib/populateDatabase')(Hunt);
 
@@ -193,15 +194,18 @@ Hunt.once('start', function () {
 //note, that Hunt.io is generated only after
 //application is started
 
-  Hunt.io.sockets.on('connection', function(socket){
-    socket.on('sioNumber', function(payload){
-      if(payload && parseInt(payload)){
-        socket.emit('sioAnswer', (2*parseInt(payload)));
-      } else {
-        socket.emit('sioAnswer','Error! Not a number!');
-      }
+  if(startParameters.type === 'webserver'){
+//if application is started as background service, it do not have socket.io support
+    Hunt.io.sockets.on('connection', function(socket){
+      socket.on('sioNumber', function(payload){
+        if(payload && parseInt(payload)){
+          socket.emit('sioAnswer', (2*parseInt(payload)));
+        } else {
+          socket.emit('sioAnswer','Error! Not a number!');
+        }
+      });
     });
-  });
+  }
 
   setInterval(function () {
     var now = new Date().toLocaleTimeString();
@@ -219,14 +223,15 @@ Hunt.once('start', function () {
 
 //Hunt.startWebCluster(3,3000);
 /*
- *But let us Hunt to decide
+ *But let us let Hunt to decide
  *how many worker process is spawned (1 for every CPU core present)
- *and what port to use (from config or process.env.port or default - 3000)
+ *and what port to use (from config or process.env.PORT or default - 3000)
+ *we recommend 1 process per CPU core
  */
 
 
 if (Hunt.config.env === 'production') {
-  Hunt.startWebCluster();//i recommend 1 process per CPU core - Anatolij
+  Hunt.startWebCluster();
 } else {
   Hunt.startWebServer();
 }
