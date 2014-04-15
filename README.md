@@ -86,7 +86,7 @@ This is it. *Hunt*...
     from the box, even with websockets working on [nginx](http://nginx.org/en/docs/http/websocket.html)
     and [heroku](https://devcenter.heroku.com/articles/node-websockets#deploy)
 
--  [socket.io](http://socket.io) is perfectly linked with user
+-  [socket.io](http://socket.io/) is perfectly linked with user
     model and passportjs authorization system, so you can send realtime
     notifications to users online just like this
 
@@ -107,6 +107,10 @@ This is it. *Hunt*...
       });
 
 ```
+
+-  Possibility to run HuntJs as [Telnet](https://en.wikipedia.org/wiki/Telnet) - server with TLS support,
+  authentication and expendable commands' list, created with help of [RAI server](https://www.npmjs.org/package/rai)
+
 
 **System requirements**
 

@@ -1,7 +1,6 @@
 <section>
     <article><h1 id="huntjs">HuntJS</h1>
-        <p>
-            <a href="https://www.npmjs.org/package/hunt"><img src="https://badge.fury.io/js/hunt.svg" alt="NPM version"></a>
+        <p><a href="http://badge.fury.io/js/hunt"><img src="https://badge.fury.io/js/hunt.svg" alt="NPM version"></a>
             <a href="https://drone.io/bitbucket.org/vodolaz095/hunt/latest"><img src="https://drone.io/bitbucket.org/vodolaz095/hunt/status.png" alt="Build Status"></a>
             <a href="https://travis-ci.org/vodolaz095/hunt"><img src="https://travis-ci.org/vodolaz095/hunt.png?branch=master" alt="Build Status"></a></p>
         <p><strong>&quot;Hello, world!&quot; Example</strong></p>
@@ -80,15 +79,15 @@
     Hunt.model.User.findOne({'email':'somebody@example.org'},
     function(err, userFound){
     //notify on user
-    userFound.notifyBySocketIo({
-    'priority':'high',
-    'message':'You are being hunted!'
-    });
+      userFound.notifyBySocketIo({
+        'priority':'high',
+        'message':'You are being hunted!'
+      });
     //notify all online users by means of socket.io broadcast
-    Hunt.emit('broadcast', {
-    'priority':'high',
-    'message':'Everybody hunts Somebody at example dot org!'
-    })
+      Hunt.emit('broadcast', {
+        'priority':'high',
+        'message':'Everybody hunts Somebody at example dot org!'
+      });
     });</code></pre>
         <p><strong>System requirements</strong></p>
         <ul>
@@ -113,7 +112,7 @@
             <a href="https://github.com/vodolaz095/hunt/tree/master/examples/serverConfigsExamples">https://github.com/vodolaz095/hunt/tree/master/examples/serverConfigsExamples</a></p>
         <h1 id="license">License</h1>
         <p>The MIT License (MIT)</p>
-        <p>Copyright (c) 2013 Ostroumov Anatolij &lt; ostroumov095 at gmail dot com &gt; et al.</p>
+        <p>Copyright (c) 2013 Ostroumov Anatolij <ostroumov095 at gmail dot com> et al.</p>
         <p>Permission is hereby granted, free of charge, to any person obtaining a copy of
             this software and associated documentation files (the &quot;Software&quot;), to deal in
             the Software without restriction, including without limitation the rights to
