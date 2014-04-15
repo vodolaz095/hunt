@@ -7,7 +7,10 @@
       "README.md",
       "index.js",
       "lib/api/",
-      "lib/generators/",
+      "lib/generators/datastore",
+      "lib/generators/http",
+      "lib/generators/misc",
+      "lib/generators/telnet",
       "lib/models/",
       "lib/passportStrategies/",
       "lib/templateEngines/"

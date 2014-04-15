@@ -1,18 +1,18 @@
 'use strict';
+
 var EventEmitter = require('events').EventEmitter,
   async = require('async'),
   util = require('util'),
 
-  configGenerator = require('./lib/generators/config.js'),
-  redisGenerator = require('./lib/generators/redisClient.js'),
-  mongooseGenerator = require('./lib/generators/mongooseModels.js'),
-  sequelizeGenerator = require('./lib/generators/sequilizeModels.js'),
-  passportGenerator = require('./lib/generators/passport.js'),
-  appGenerator = require('./lib/generators/expressApp.js'),
-  crypt = require('./lib/generators/crypt.js'),
+  configGenerator = require('./lib/generators/misc/config.js'),
+  redisGenerator = require('./lib/generators/datastore/redisClient.js'),
+  mongooseGenerator = require('./lib/generators/datastore/mongooseModels.js'),
+  sequelizeGenerator = require('./lib/generators/datastore/sequilizeModels.js'),
+  passportGenerator = require('./lib/generators/http/passport.js'),
+  appGenerator = require('./lib/generators/http/expressApp.js'),
+  crypt = require('./lib/generators/misc/crypt.js'),
 
-  nodemailerListener = require('./lib/generators/nodemailer.js'),
-  raiListener = require('./lib/generators/rai.js');
+  nodemailerListener = require('./lib/generators/nodemailer.js');
 
 
 require('colors');
@@ -29,7 +29,8 @@ function Hunt(config) {
     extendPassportStrategiesFunctions = [],
     extendAppFunctions = [],
     extendMiddlewareFunctions = [],
-    extendRoutesFunctions = [];
+    extendRoutesFunctions = [],
+    extendTelnetFunctions = {};
   /**
    * @method Hunt#extendCore
    * @param {string} field - property name to assign to hunt.[fieldName]
@@ -106,8 +107,6 @@ function Hunt(config) {
   this.extendCore('async', function(){
     return require('async');
   });
-
-  this.app = 'app';
 /**
  * @name Hunt#http
  * @type {Object}
@@ -116,15 +115,25 @@ function Hunt(config) {
  * that is used by socket.io and http server.
  */
   this.http = require('http');
-
-  this.rack = require('./lib/generators/rack.js');
-  this.httpServer = true;
   this.passport = require('passport');
-  this.model = {};
+  this.rack = require('./lib/generators/misc/rack.js');
+
+/**
+ * @name Hunt#version
+ * @type {string}
+ * @description
+ * Current Hunt version
+ */
+  this.version = require('./package.json').version;
+
+//placeholders, so we cannot break something by Hunt#extendCore
+  this.app = 'app';
+  this.httpServer = true;
   this.sequelize = {};
   this.mongoConnection = {};
   this.mongoose = {};
   this.io = {};
+  this.sessionStorage = true;
 
   this.encrypt = function(text, secret){
     secret = secret || this.config.secret;
@@ -146,7 +155,6 @@ function Hunt(config) {
     sequelizeGenerator(this);
   }
 
-
   /**
    * @name Hunt#model
    * @type {model}
@@ -156,6 +164,7 @@ function Hunt(config) {
    * @see model
    * @see request
    */
+  this.model = {};
 
   /**
    * @method Hunt#extendModel
@@ -516,7 +525,40 @@ function Hunt(config) {
     }
   };
 
-  function prepareHunt(h, buildApp) {
+
+  /**
+   * @method Hunt#extendTelnet
+   * @param {string} command - command name
+   * @param {function} callback - function(core, client, payload){}
+   * @description
+   * Adds new behavior to telnet server. The callback has 2
+   * arguments, first one is core object, and second one is
+   * {@link https://github.com/andris9/rai | RAI client object }
+   * @example
+   * ```javascript
+   *
+   *     hunt.extendTelnet('version', function(core, client){
+   *      client.send('HuntJS version is '+core.version);
+   *     });
+   *     hunt.extendTelnet('echo', function(core, client, payload){
+   *      client.send(payload);
+   *     });
+   *
+   * ```
+   * @since 0.0.18
+   * @returns {Hunt} hunt object
+   */
+
+  this.extendTelnet = function(command, callback){
+    command = command.toLowerCase();
+    if(extendTelnetFunctions[command] === undefined){
+      extendTelnetFunctions[command] = callback;
+    } else {
+      throw new Error('Telnet server behavior for command of "'+command+'" is already defined!');
+    }
+  };
+
+  function prepareHunt(h, buildApp, buildTelnet) {
     if (h.config.enableMongoose && h.config.enableMongooseUsers) {
       var mongooseUsers = require('./lib/models/user.mongoose.js'),
         mongooseMessages = require('./lib/models/message.mongoose.js'),
@@ -546,6 +588,9 @@ function Hunt(config) {
     if(buildApp){
       passportGenerator(h, extendPassportStrategiesFunctions, extendRoutesFunctions);
       appGenerator(h, extendAppFunctions, extendMiddlewareFunctions, extendRoutesFunctions);
+    }
+    if(buildTelnet){
+      h.extendedCommands = extendTelnetFunctions;
     }
     nodemailerListener(h);
     prepared = true;
@@ -668,7 +713,7 @@ function Hunt(config) {
    * @method Hunt#startBackGroundCluster
    * @param {(Number|null)} maxProcesses maximal number of web server processes to spawn, default - 1 process per CPU core
    * @description
-   * Starts hunt application as single threaded background application, that controls, by the means of
+   * Starts Hunt application as single threaded background application, that controls, by the means of
    * [cluster](http://nodejs.org/docs/latest/api/cluster.html), other background applications.
    * By default it spawns 1 process per CPU core.
    * @returns {Boolean} true if this is master process, false if this is worked process.
@@ -707,9 +752,61 @@ function Hunt(config) {
     }
   };
 
+  /**
+   * @method Hunt#startCluster
+   * @todo implement this in not very ugly way
+   * @description
+   * Start Hunt as cluster. Under construction...
+   * @returns {Boolean} true if this is master process, false if this is worked process.
+   */
   this.startCluster = function (numberOfWebServers, numberOfBackGround) {
     throw new Error('Not implemented yet!');
   };
+
+  /**
+    * @method Hunt#startTelnetServer
+    * @param {(number|null)} port what port to use, if null - use port value from config
+    * @since 0.0.18
+    * @description
+    * Start Hunt as single process telnet server
+    * @example
+    * ```javascript
+    *     Hunt.startCluster(3003);
+    * ```
+    */
+  this.startTelnetServer = function(port){
+    var p = port || this.config.port;
+    console.log(('Trying to start Hunt as telnet server on port ' + p + '...').magenta);
+    this.extendCore('telnetHandler', require('./lib/generators/telnet/telnet.js'));
+    prepareHunt(this, false, true);
+    var RAIServer = require("rai").RAIServer,
+      telnetServer = new RAIServer(this.config.telnetServer);
+
+    telnetServer.on('connect', this.telnetHandler);
+
+    telnetServer.on('error', function(error){
+      throw error;
+    });
+    var thishunt = this;
+    telnetServer.listen(p, function(error){
+      if(error){
+        throw error;
+      } else {
+        /**
+         * Emitted when Hunt is started as telnet process
+         *
+         * @see Hunt#startTelnetServer
+         * @event Hunt#start
+         * @type {object}
+         * @property {string} type - with a value of string of 'telnet'
+         * @property {string} type - with a value of string of port number
+         */
+        thishunt.emit('start', {'type': 'telnet','port':p});
+        console.log(('Started Hunt as telnet server on port '+p+'!').green);
+      }
+    });
+    return this;
+  }
 }
 
 /**

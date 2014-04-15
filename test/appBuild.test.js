@@ -19,6 +19,7 @@ describe('Hunt resists when we want to extend it\' core in strange way', functio
       'redisClient', 'createRedisClient',
       'mongoose', 'mongoConnection',
       'sequelize',
+      'version',
       'io',
       'encrypt','decrypt',
       'sessionStorage',
@@ -148,14 +149,20 @@ describe('Hunt builds single threaded background application', function () {
 
   describe('Hunt.rack', function () {
     var hash1 = Hunt.rack(),
-      hash2 = Hunt.rack();
+      hash2 = Hunt.rack(),
+      hash3 = Hunt.rack();
+
     it('returns random hash', function () {
       hash1.should.be.a.String;
       hash2.should.be.a.String;
+      hash3.should.be.a.String;
     });
 
     it('returns different hashes', function () {
       hash1.should.not.be.eql(hash2);
+    });
+    it('returns more different hashes', function () {
+      hash1.should.not.be.eql(hash3);
     });
   });
 
@@ -170,8 +177,8 @@ describe('Hunt builds single threaded background application', function () {
       Hunt.decrypt(Hunt.encrypt('daiMne3Ryblya')).should.be.equal('daiMne3Ryblya');
     });
   });
-
 });
+
 describe('Hunt builds single threaded webserver application', function () {
   var Hunt = hunt(),
     startedType,
@@ -308,6 +315,7 @@ describe('Hunt builds single threaded webserver application', function () {
       response1.body.should.be.equal('OK');
       response1.headers.globmiddleware.should.be.eql(42);
       response1.headers.devmiddleware.should.be.eql(42);
+      response1.headers['x-powered-by'].should.be.equal('Hunt v'+Hunt.version);
       should.not.exist(response1.headers.prodMiddleware);
       should.not.exist(response1.headers.devMiddleware1);
     });
@@ -316,9 +324,14 @@ describe('Hunt builds single threaded webserver application', function () {
       response2.headers.globmiddleware.should.be.eql(42);
       response2.headers.devmiddleware.should.be.eql(42);
       response2.headers.devmiddleware1.should.be.eql(42);
+      response2.headers['x-powered-by'].should.be.equal('Hunt v'+Hunt.version);
       should.not.exist(response1.headers.prodMiddleware);
     });
   });
+});
+
+describe('Hunt builds telnet server application', function () {
+  it('will be tested... somehow');
 });
 
 describe('Hunt builds clustered background application', function () {
