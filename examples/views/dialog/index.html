@@ -1,22 +1,28 @@
-<div class="row">
-<h3>Welcome to our site!</h3>
-
-{{^myself}}
-<p><a href="/auth/login">Sign Up or Sign In please!</a></p>
-{{/myself}}
-
-{{#myself}}
-<p>Your id is </p>
-<p><a href="{{hostUrl}}dialog/{{myself.id}}">{{hostUrl}}dialog/{{myself.id}}</a></p>
-<p>You can use this link to allow others to chat to you!</p>
-</div>
-<div class="row">
-  <h3>Talk to person</h3>
-  <form method="post" action="/dialog">
-      <input type="hidden" name="_csrf" value="{{csrf}}"/>
-      <p>Enter user's id here and you can talk to this user:</p>
-      <p><input type="text" name="id" value="{{id}}" placeholder="DEADBEAF1111"/><input type="submit" value="Talk">
-  </form>
-{{/myself}}
-</div>
-<div class="separator"></div>
+<table class="table table-striped">
+<thead>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Status</th>
+  </tr>
+</thead>
+<tbody>
+{{#users}}
+  <tr>
+    <td>
+      <a href="/dialog/{{id}}">{{id}}</a>
+    </td>
+    <td>
+      <a href="/dialog/{{id}}">
+        <img src="{{gravatar80}}"/></a>
+        {{displayName}}
+      </a>
+    </td>
+    <td>
+      {{#online}}<span class="label label-success">Online</span>{{/online}}
+      {{^online}}<span class="label label-default">Offline</span>{{/online}}
+    </td>
+  </tr>
+{{/users}}
+</tbody>
+</table>

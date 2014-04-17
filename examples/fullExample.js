@@ -30,7 +30,7 @@ var config = {
     'resetPasswordPageTemplate': 'cabinet/resetPasswordStage2',
     'resetPassword': true, //allow user to reset password for account
 
-//authorization by gmail account, GET /auth/google
+//authorization by gmail openid account, GET /auth/google
     'google': true
 
 // Github oAuth strategy, GET /auth/github
