@@ -1,59 +1,110 @@
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{title}}</title>
-{{#css}}
-    <link rel="stylesheet" href="{{href}}" type="text/css" media="{{media}}" />
-{{/css}}
+    {{#css}}
+    <link rel="stylesheet" href="{{href}}" type="text/css" media="{{media}}"/>
+    {{/css}}
     <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 </head>
 <body>
-<section>
     <a href="https://github.com/vodolaz095/hunt">
-      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github-camo.global.ssl.fastly.net/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="//s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+        <img style="position: absolute; top: 0; right: 0; border: 0;"
+             src="https://github-camo.global.ssl.fastly.net/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67"
+             alt="Fork me on GitHub" data-canonical-src="//s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
     </a>
 
-    <header>
+    <div class="jumbotron">
         <h1>{{title}}</h1>
         <h2>{{description}}</h2>
-    </header>
+    </div>
 
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-{{#menu}}
-            <li><a href="{{url}}">{{name}}</a></li>
-{{/menu}}
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li><a class="navbar-brand" href="/">HuntJS</a></li>
+                {{#menu}}
+                <li><a href="{{url}}">{{name}}</a></li>
+                {{/menu}}
 {{^myself}}
-            <li><a href="/auth/login">Sign up or sign in</a></li>
+                <li><a href="/auth/login">Sign up or sign in</a></li>
 {{/myself}}
 {{#myself}}
-            <li><a href="/profile"><img width="10" height="10" src="{{gravatar}}"/>{{displayName}}</a></li>
-            <li><a href="/auth/logout">LogOut</a></li>
+                <li><a href="/profile"><img width="10" height="10" src="{{gravatar}}"/>{{displayName}}</a></li>
+                <li><a href="/auth/logout">LogOut</a></li>
 {{/myself}}
-
-            <li><a href="/online#clock" id="clock" data-bind="text: clock" title="This is clock, we have websockets support!">00:00:00</a>
-            </li>
-        </ul>
+                <li><a href="/online#clock" id="clock" data-bind="text: clock" title="This is clock, we have websockets support!">00:00:00</a></li>
+            </ul>
+        </div>
     </nav>
-  <div id="notify">
-      {{#flash}}
-      <div class="error">{{#error}}<p>{{error}}</p>{{/error}}</div>
-      <div class="success">{{#success}}<p>{{success}}</p>{{/success}}</div>
-      <div class="info">{{#info}}<p>{{info}}</p>{{/info}}</div>
-      {{/flash}}
-  </div>
-    <article>
-        {{{ yield }}}
+
+    {{#flash}}
+    {{#error}}
+    <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        {{error}}
+    </div>
+    {{/error}}
+    {{#success}}
+    <div class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        {{success}}
+    </div>
+    {{/success}}
+    {{#info}}
+    <div class="alert alert-info alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        {{info}}
+    </div>
+    {{/info}}
+    {{/flash}}
+
+    <article class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {{{ yield }}}
+            </div>
+        </div>
     </article>
-</section>
-<footer>
-    &copy; 2013 <a href="//github.com/vodolaz095">vodolaz095</a>. - Design by <a href="http://darkfate.info/">darkfate</a>
+
+<footer id="footer">
+    <div class="container">
+        <p>&copy; 2013 <a href="//github.com/vodolaz095">vodolaz095</a></p>
+    </div>
 </footer>
 {{#javascripts}}
 <script type="text/javascript" src="{{url}}"></script>
 {{/javascripts}}
-<!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter24127096 = new Ya.Metrika({id:24127096, webvisor:true, clickmap:true, trackLinks:true, accurateTrackBounce:true}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/24127096" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+<!--[if lt IE 9]>
+<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">(function (d, w, c) {
+    (w[c] = w[c] || []).push(function () {
+        try {
+            w.yaCounter24127096 = new Ya.Metrika({id: 24127096, webvisor: true, clickmap: true, trackLinks: true, accurateTrackBounce: true});
+        } catch (e) {
+        }
+    });
+    var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () {
+        n.parentNode.insertBefore(s, n);
+    };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else {
+        f();
+    }
+})(document, window, "yandex_metrika_callbacks");</script>
+<noscript>
+    <div><img src="//mc.yandex.ru/watch/24127096" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
+<!-- /Yandex.Metrika counter -->
 </body>
 </html>

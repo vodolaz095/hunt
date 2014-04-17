@@ -19,7 +19,10 @@ var hunt = require('./../index.js'),
  */
 Hunt.extendApp(function(core){
   core.app.locals.menu=[{'url':'/boom','name':'Make boom'}];
-  core.app.locals.css.push({'href': '/css/style.css', 'media': 'screen'});
+
+  core.app.locals.css.push({'href': '//yandex.st/bootstrap/3.1.1/css/bootstrap.min.css', 'media': 'screen'});
+  core.app.locals.javascripts.push({'url': '//yandex.st/jquery/2.0.3/jquery.min.js'});
+  core.app.locals.javascripts.push({'url':'//yandex.st/bootstrap/3.1.1/js/bootstrap.min.js'});
   core.app.locals.javascripts.push({'url': '/javascripts/hunt.js'});
 });
 
@@ -50,6 +53,11 @@ Hunt.extendRoutes(function(core){
   core.app.get('/error', function(req,res){
     throw new Error('Something is wrong... Please, wipe your spectackles with alchohol or spirit and carefully kick PC with hammer 3 times.');
   });
+  core.app.get('/baderror', function(req,res){
+    (function(){
+      throw new Error('Catch this!');
+    })();
+  });
 
 });
 
@@ -59,7 +67,7 @@ Hunt.extendRoutes(function(core){
 Hunt.once('start', function () {
   setInterval(function () {
     var now = new Date().toLocaleTimeString();
-    Hunt.emit('broadcast', now); //to be broadcasted by socket.io
+    Hunt.emit('broadcast', {'time':now}); //to be broadcasted by socket.io
   }, 500);
 });
 

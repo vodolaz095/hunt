@@ -48,8 +48,8 @@ exports.show = function(req, res){
     } else {
       if(trophy){
         res.render('trophy/show', {
-          'title': trophy.name,
-          'description': 'Edit trophy',
+          'title': 'Trophy called "' +trophy.name +'"',
+          'description': trophy.scored ? 'Scored!' : 'Not scored.',
           'trophy': trophy
         });
       } else {
@@ -70,7 +70,11 @@ exports.edit = function(req, res){
       }
     } else {
       if(trophy){
-        res.render('trophy/edit', {'title': trophy.name, 'trophy': trophy});
+        res.render('trophy/edit', {
+          'title': 'Trophy called "' +trophy.name +'"',
+          'description': 'Edit trophy information',
+          'trophy': trophy
+        });
       } else {
         res.send(404);
       }

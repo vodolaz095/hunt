@@ -50,6 +50,6 @@ Simple rest api example
 **telnet.js**
 Simple [telnet](https://en.wikipedia.org/wiki/Telnet) server, user can login, send some commands via the `telnet` command
 
-**usersOnline.js**
+**longpoling.js**
 Example, that streams, by means of [socket.io](http://socket.io/), information on recent http requests, processed
 by HuntJS application

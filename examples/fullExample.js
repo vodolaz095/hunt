@@ -85,9 +85,9 @@ Hunt.extendApp(function (core) {
     {'url':'/trophies','name':'REST-api'}
   ];
 
-  core.app.locals.css.push({'href': '/css/style.css', 'media': 'screen'});
-
+  core.app.locals.css.push({'href': '//yandex.st/bootstrap/3.1.1/css/bootstrap.min.css', 'media': 'screen'});
   core.app.locals.javascripts.push({'url': '//yandex.st/jquery/2.0.3/jquery.min.js'});
+  core.app.locals.javascripts.push({'url':'//yandex.st/bootstrap/3.1.1/js/bootstrap.min.js'});
   core.app.locals.javascripts.push({'url': '/javascripts/hunt.js'});
 });
 
@@ -152,8 +152,8 @@ Hunt.extendRoutes(function(core){
  */
   core.app.get('/online', function (req, res) {
     res.render('online', {
-      'title': 'Hunt socket.io and users online example',
-      'description': 'This is a list of currently online clients'
+      'title': 'HuntJS socket.io examples',
+      'description': 'Various realtime examples - clock, recent requests, messages...'
     });
   });
 
