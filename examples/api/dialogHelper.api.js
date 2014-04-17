@@ -34,7 +34,8 @@ module.exports = exports = function(core){
                   throw err;
                 } else {
                   res.render('dialog/dialog', {
-                    'title':'Dialog with user "'+userFound.displayName+'"',
+                    'title': userFound.displayName,
+                    'description': 'Dialog with user mentioned',
                     'user': userFound,
                     'messages': messages
                   });
@@ -50,7 +51,7 @@ module.exports = exports = function(core){
       });
     } else {
       req.flash('error', 'Authorize or register please!');
-      res.redirect('/auth/login' + req.params.id);
+      res.redirect('/auth/login');
     }
   });
 };
