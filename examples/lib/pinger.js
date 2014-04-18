@@ -1,6 +1,9 @@
 var request = require('request'),
   url = require('url');
 
+//socket.io listener to issue ping requests
+
+
 function isUrl(payload){
   if(typeof payload === 'string'){
     var parameters = url.parse(payload);
