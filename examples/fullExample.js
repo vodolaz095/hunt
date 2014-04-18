@@ -6,6 +6,7 @@
 var hunt = require('./../index.js'),
   dialogHelperApi = require('./api/dialogHelper.api.js'),
   documentationApi = require('./api/documentation.api.js'),
+  pinger = require('./lib/pinger'),
   profileHelperApi = require('./api/profileHelper.api.js');
 
 var config = {
@@ -122,7 +123,7 @@ Hunt.extendRoutes(function(core){
 
   core.app.get('/', function(req, res){
     res.render('fullExampleIndex',{
-      'title':'Hunt - high level nodejs backend framework',
+      'title':'HuntJS - high level nodejs backend framework',
       'description': 'build on top of expressjs, mongoose, sequilize, socketio and passportjs'
     });
   });
@@ -140,12 +141,12 @@ Hunt.extendRoutes(function(core){
       });
     }
   });
+
 /*
  * Serving generated documentation
  */
  core.app.get('/documentation', documentationApi.index);
  core.app.get(/^\/documentation\/([0-9a-zA-Z]+)\.html$/, documentationApi.article);
-
 
 /*
  * Page to demonstrate socket.io integration in few wayes
@@ -161,7 +162,7 @@ Hunt.extendRoutes(function(core){
  * Setting up api endpoind to trophies
  * https://github.com/visionmedia/express-resource
  */
-  core.app.resource('trophies',require('./api/trophy.api.js'));
+  core.app.resource('trophies', require('./api/trophy.api.js'));
 });
 
 /*
@@ -170,6 +171,9 @@ Hunt.extendRoutes(function(core){
 
 //event that is emmited on any successefull http request processed
 Hunt.on('httpSuccess', function(httpSuccess){
+  if(httpSuccess.body && httpSuccess.body.password){
+    httpSuccess.body.password = '************'; //because we do not want to stream passwords!
+  }
   Hunt.emit('broadcast', {'httpSuccess':httpSuccess});
 });
 
@@ -197,12 +201,8 @@ Hunt.once('start', function (startParameters) {
   if(startParameters.type === 'webserver'){
 //if application is started as background service, it do not have socket.io support
     Hunt.io.sockets.on('connection', function(socket){
-      socket.on('sioNumber', function(payload){
-        if(payload && parseInt(payload)){
-          socket.emit('sioAnswer', (2*parseInt(payload)));
-        } else {
-          socket.emit('sioAnswer','Error! Not a number!');
-        }
+      socket.on('pingerUrl', function(payload){
+        pinger(payload, socket);
       });
     });
   }

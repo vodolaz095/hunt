@@ -8,9 +8,21 @@ var socket = io.connect('', {
 
 var model = {
   'clock': ko.observable(),
-  'recentVisits': ko.observableArray()
+  'recentVisits': ko.observableArray(),
+  'pingerUrl': ko.observable(),
+  'pingerAnswer': ko.observable('Enter URL')
 }
+
+model.pingerUrl.subscribe(function(newUrl){
+  if(newUrl){
+    socket.emit('pingerUrl', newUrl);
+  } else {
+    model.pingerAnswer('Enter URL');
+  }
+});
 ko.applyBindings(model);
+
+socket.on('pingerAnswer', model.pingerAnswer);
 
 socket.on('broadcast', function (data) {
 //  console.log(data);
@@ -25,26 +37,4 @@ socket.on('broadcast', function (data) {
   if(data.notification){
     console.log(data);
   }
-});
-
-if($('input #sioNumber')){
-
-  setInterval(function(){
-    socket.emit('sioNumber', $('#sioNumber').val());
-  }, 200);
-
-  socket.on('sioAnswer', function(value){
-   $('#sioAnswer').val(value);
-  });
-}
-
-$('#sioMessage button').click(function(){
-  var message = $('#sioMessage input').val();
-  socket.send(message,function(error){
-    if(error){
-      console.error(error);
-    } else {
-      $('#sioMessage input').val('');
-    }
-  });
 });

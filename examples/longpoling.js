@@ -3,6 +3,7 @@
  */
 
 var hunt = require('./../index.js'),
+  pinger = require('./lib/pinger'),
   Hunt = hunt({
     'enableMongoose': false, //we do not need mongoose database for this example
     'enableMongooseUsers': false, //we do not need mongoose users for this example

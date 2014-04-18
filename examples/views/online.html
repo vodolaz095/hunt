@@ -1,11 +1,11 @@
 <h1><a href="http://socket.io">Socket.io</a> events interaction</h1>
 <h2>Sending events to backend</h2>
-<p>You can send this number to hunt backend by socket.io,
-and recieve the answer back by socket.io too</p>
+<p>You can issue ping online by this form</p>
 <p>
-<input type="text" id="sioNumber" value="" placeholder="14"/>
-X 2 =
-<input type="text" id="sioAnswer" disabled="disabled" value="" placeholder="28"/>
+<input type="text" size="64" data-bind="valueUpdate: 'input', value: pingerUrl" placeholder="https://huntjs.herokuapp.com/"/>
+</p>
+<p>
+Status: <span data-bind="text: pingerAnswer"></span>
 </p>
 <a name="clock"></a>
 <h2>Clock</h2>
@@ -33,6 +33,8 @@ this table populated</p>
             <th>URI</th>
             <th>Status Code</th>
             <th>User</th>
+            <th>$_GET</th>
+            <th>$_POST</th>
         </tr>
     </thead>
     <tbody data-bind="foreach: recentVisits">
@@ -49,6 +51,8 @@ this table populated</p>
                 Anonymous
               </span>
             </td>
+            <td data-bind="text: JSON.stringify(query)"></td>
+            <td data-bind="text: JSON.stringify(body)"></td>
         </tr>
     </tbody>
 </table>
