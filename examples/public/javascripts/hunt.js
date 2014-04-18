@@ -12,7 +12,7 @@ var model = {
   'pingerUrl': ko.observable(),
   'pingerAnswer': ko.observable('Enter URL'),
   'sioMessage': ko.observable(),
-  'sendSioMessage':function(){
+  'sendSioMessage': function(){
     var that = this;
     socket.send(that.sioMessage(), function(error){
       if(error){

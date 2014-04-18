@@ -74,7 +74,6 @@ var Hunt = hunt(config);
  */
 Hunt.extendModel('Trophy', require('./models/trophy.model.js'));
 
-
 /*
  * Settig up menu
  */
@@ -82,6 +81,7 @@ Hunt.extendApp(function (core) {
   core.app.locals.menu = [
     {'url':'/documentation','name':'Documentation'},
     {'url':'/dialog','name':'Private messages'},
+    {'url':'/groups','name':'Chats'},
     {'url':'/online','name':'Socket.io and events'},
     {'url':'/trophies','name':'REST-api'}
   ];
@@ -163,6 +163,7 @@ Hunt.extendRoutes(function(core){
  * https://github.com/visionmedia/express-resource
  */
   core.app.resource('trophies', require('./api/trophy.api.js'));
+  core.app.resource('groups', require('./api/group.helper.api.js'));
 });
 
 /*
