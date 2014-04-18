@@ -13,7 +13,13 @@ var model = {
   'pingerAnswer': ko.observable('Enter URL'),
   'sioMessage': ko.observable(),
   'sendSioMessage':function(){
-    socket.send(this.sioMessage());
+    var that = this;
+    socket.send(that.sioMessage(), function(error){
+      if(error){
+        throw error;
+      }
+      that.sioMessage('');
+    });
   },
   'flash':{
     'error':ko.observableArray(),
