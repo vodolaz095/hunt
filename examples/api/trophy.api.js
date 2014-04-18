@@ -32,7 +32,7 @@ exports.create = function(req, res){
     } else {
       req.flash('success', 'Trophy #' + trophyCreated.name + ' created!');
     }
-    res.redirect('/');
+    res.redirect('/trophies');
   });
 };
 
