@@ -68,7 +68,8 @@
     "sequelize": "*",
     "colors": "*",
     "nodemailer": "*",
-    "rai":"<0.2.0"
+    "rai":"<0.2.0",
+    "request":"latest"
   },
   "optionalDependencies": {
     "hiredis": "*"
