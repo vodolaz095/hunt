@@ -14,7 +14,6 @@ module.exports = exports = function(core){
           'id': req.query.id,
           'users': usersFound
         });
-
       });
   });
 

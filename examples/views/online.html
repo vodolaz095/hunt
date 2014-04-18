@@ -35,7 +35,20 @@ this table populated</p>
             <th>User</th>
         </tr>
     </thead>
-    <tbody>
-
+    <tbody data-bind="foreach: recentVisits">
+        <tr>
+            <td><a data-bind="attr: { href: 'http://who.is/whois-ip/ip-address/'+ip }, text: ip"></a></td>
+            <td data-bind="text: method"></td>
+            <td><a data-bind="text: uri, attr: { href : uri }"></a></td>
+            <td data-bind="text: statusCode"></td>
+            <td>
+              <span data-bind="if: user">
+                <a data-bind="attr: { href: '/dialog/'+user.id }, text: user.displayName"></a>
+              </span>
+              <span data-bind="ifnot: user">
+                Anonymous
+              </span>
+            </td>
+        </tr>
     </tbody>
 </table>

@@ -75,7 +75,7 @@ Hunt.extendModel('Trophy', require('./models/trophy.model.js'));
 
 
 /*
- * Settig up static assets - css and javascripts
+ * Settig up menu
  */
 Hunt.extendApp(function (core) {
   core.app.locals.menu = [
@@ -84,12 +84,12 @@ Hunt.extendApp(function (core) {
     {'url':'/online','name':'Socket.io and events'},
     {'url':'/trophies','name':'REST-api'}
   ];
-
-  core.app.locals.css.push({'href': '//yandex.st/bootstrap/3.1.1/css/bootstrap.min.css', 'media': 'screen'});
-  core.app.locals.javascripts.push({'url': '//yandex.st/jquery/2.0.3/jquery.min.js'});
-  core.app.locals.javascripts.push({'url':'//yandex.st/bootstrap/3.1.1/js/bootstrap.min.js'});
-  core.app.locals.javascripts.push({'url': '/javascripts/hunt.js'});
 });
+
+/*
+ * Settig up static assets - css and javascripts
+ */
+Hunt.extendApp(require('./lib/assetsLoader.js'));
 
 /*
  * Setting middleware to irritate user who have not verified his account

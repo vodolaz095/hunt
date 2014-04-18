@@ -17,14 +17,7 @@ var hunt = require('./../index.js'),
 /**
  * Settig up static assets - css and javascripts
  */
-Hunt.extendApp(function(core){
-  core.app.locals.menu=[{'url':'/boom','name':'Make boom'}];
-
-  core.app.locals.css.push({'href': '//yandex.st/bootstrap/3.1.1/css/bootstrap.min.css', 'media': 'screen'});
-  core.app.locals.javascripts.push({'url': '//yandex.st/jquery/2.0.3/jquery.min.js'});
-  core.app.locals.javascripts.push({'url':'//yandex.st/bootstrap/3.1.1/js/bootstrap.min.js'});
-  core.app.locals.javascripts.push({'url': '/javascripts/hunt.js'});
-});
+Hunt.extendApp(require('./lib/assetsLoader.js'));
 
 /**
  * Setting expressJS application routes
