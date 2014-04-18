@@ -10,20 +10,32 @@ var model = {
   'clock': ko.observable(),
   'recentVisits': ko.observableArray(),
   'pingerUrl': ko.observable(),
-  'pingerAnswer': ko.observable('Enter URL')
+  'pingerAnswer': ko.observable('Enter URL'),
+  'sioMessage': ko.observable(),
+  'sendSioMessage':function(){
+    socket.send(this.sioMessage());
+  },
+  'flash':{
+    'error':ko.observableArray(),
+    'info':ko.observableArray(),
+    'success':ko.observableArray(),
+  }
 }
 
 model.pingerUrl.subscribe(function(newUrl){
   if(newUrl){
     socket.emit('pingerUrl', newUrl);
   } else {
-    model.pingerAnswer('Enter URL');
+    model.pingerAnswer('Enter URL...');
   }
 });
+
 ko.applyBindings(model);
 
+//socket.io event for pinger
 socket.on('pingerAnswer', model.pingerAnswer);
 
+//socket.io events, delivered to all users online
 socket.on('broadcast', function (data) {
 //  console.log(data);
   if (data.time) {

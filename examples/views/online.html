@@ -1,5 +1,6 @@
 <h1><a href="http://socket.io">Socket.io</a> events interaction</h1>
-<h2>Sending events to backend</h2>
+
+<h2>1. Sending events to backend</h2>
 <p>You can issue ping online by this form</p>
 <p>
 <input type="text" size="64" data-bind="valueUpdate: 'input', value: pingerUrl" placeholder="https://huntjs.herokuapp.com/"/>
@@ -7,20 +8,21 @@
 <p>
 Status: <span data-bind="text: pingerAnswer"></span>
 </p>
+
 <a name="clock"></a>
-<h2>Clock</h2>
+<h2>2. Clock</h2>
 <p>The clock in the right corner of menu shows
 current time of the day for server.</p>
-<h2>Send message by socket.io directly</h2>
-<div id="sioMessage">
-    <p>
-        <input type="text" placeholder="Your message, please!">
-        <button>Send</button>
-    </p>
-    <p>This message will be shown on console of application's server.</p>
-</div>
 
-<h2>Recent visits streaming</h2>
+<h2>3. Send message by socket.io directly</h2>
+<p>
+    <input data-bind="value: sioMessage" type="text" placeholder="Your message, please!">
+    <button class="btn btn-success" data-bind="click: sendSioMessage">Send</button>
+</p>
+<p>This message will be shown on console of application's server.</p>
+
+
+<h2>4. Recent visits streaming</h2>
 <p>We use socket.io and event of <a href="/documentation/Hunt.html#event:httpSuccess">httpSuccess</a>
 to broadcast the information about recent user activity on the site.
 You can open some site links as background tabs in browser and see

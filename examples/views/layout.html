@@ -34,31 +34,56 @@
                 <li><a href="/profile"><img width="10" height="10" src="{{gravatar}}"/>{{displayName}}</a></li>
                 <li><a href="/auth/logout">LogOut</a></li>
 {{/myself}}
-                <li><a href="/online#clock" id="clock" data-bind="text: clock" title="This is clock, we have websockets support!">00:00:00</a></li>
+                <li><a href="/online#clock" data-bind="text: clock" title="This is clock, we have websockets support!">00:00:00</a></li>
             </ul>
         </div>
     </nav>
     </div>
     {{#flash}}
+
     {{#error}}
     <div class="alert alert-danger alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         {{error}}
     </div>
     {{/error}}
+
     {{#success}}
     <div class="alert alert-success alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         {{success}}
     </div>
     {{/success}}
+
     {{#info}}
     <div class="alert alert-info alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         {{info}}
     </div>
     {{/info}}
+
     {{/flash}}
+
+    <div data-bind="foreach: flash.error">
+      <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <span data-bind="text: $data"></span>
+      </div>
+    </div>
+
+    <div data-bind="foreach: flash.success">
+      <div class="alert alert-success alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <span data-bind="text: $data"></span>
+      </div>
+    </div>
+
+    <div data-bind="foreach: flash.info">
+      <div class="alert alert-info alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <span data-bind="text: $data"></span>
+      </div>
+    </div>
 
     <article class="container">
         <div class="row">
