@@ -12,21 +12,21 @@ var model = {
   'pingerUrl': ko.observable(),
   'pingerAnswer': ko.observable('Enter URL'),
   'sioMessage': ko.observable(),
-  'sendSioMessage': function(){
+  'sendSioMessage': function () {
     var that = this;
-    socket.send(that.sioMessage(), function(error){
-      if(error){
+    socket.send(that.sioMessage(), function (error) {
+      if (error) {
         throw error;
       }
       that.sioMessage('');
     });
   },
-  'flash':{
-    'error':ko.observableArray(),
-    'info':ko.observableArray(),
-    'success':ko.observableArray(),
+  'flash': {
+    'error': ko.observableArray(),
+    'info': ko.observableArray(),
+    'success': ko.observableArray()
   }
-}
+};
 
 model.pingerUrl.subscribe(function(newUrl){
   if(newUrl){

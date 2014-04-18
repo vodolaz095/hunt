@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+  <loc>http://huntjs.herokuapp.com/</loc>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://huntjs.herokuapp.com/documentation/index.html</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://huntjs.herokuapp.com/dialog</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://huntjs.herokuapp.com/online</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://huntjs.herokuapp.com/trophies</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://huntjs.herokuapp.com/auth/login</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://huntjs.herokuapp.com/documentation/config.html</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://huntjs.herokuapp.com/documentation/Group.html</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://huntjs.herokuapp.com/documentation/GroupMessage.html</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://huntjs.herokuapp.com/documentation/HTTPAuthorizationAPI.html</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://huntjs.herokuapp.com/documentation/Hunt.html</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://huntjs.herokuapp.com/documentation/Message.html</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://huntjs.herokuapp.com/documentation/model.html</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://huntjs.herokuapp.com/documentation/passport.html</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://huntjs.herokuapp.com/documentation/request.html</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://huntjs.herokuapp.com/documentation/response.html</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://huntjs.herokuapp.com/documentation/User.html</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://huntjs.herokuapp.com/trophies/new</loc>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://huntjs.herokuapp.com/trophies/</loc>
+  <priority>0.51</priority>
+</url>
+</urlset>
