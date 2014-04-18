@@ -78,7 +78,6 @@
     "mocha": "*",
     "istanbul": "*",
     "should": "*",
-    "request": "*",
     "jsdoc": "*",
     "sqlite3":"*"
   }
