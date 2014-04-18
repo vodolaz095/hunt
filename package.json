@@ -68,8 +68,7 @@
     "sequelize": "*",
     "colors": "*",
     "nodemailer": "*",
-    "rai":"<0.2.0",
-    "request":"latest"
+    "rai":"<0.2.0"
   },
   "optionalDependencies": {
     "hiredis": "*"
@@ -79,6 +78,7 @@
     "istanbul": "*",
     "should": "*",
     "jsdoc": "*",
+    "request":"latest",
     "sqlite3":"*"
   }
 }
