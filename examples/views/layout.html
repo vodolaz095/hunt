@@ -63,7 +63,7 @@
     {{/info}}
 
     {{/flash}}
-
+    <div data-bind="visible: flash" style="display:none">
     <div data-bind="foreach: flash.error">
       <div class="alert alert-danger alert-dismissable">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -83,6 +83,7 @@
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
           <span data-bind="text: $data"></span>
       </div>
+    </div>
     </div>
 
     <article class="container">
