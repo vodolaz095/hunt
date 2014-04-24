@@ -771,7 +771,7 @@ function Hunt(config) {
     * Start Hunt as single process telnet server
     * @example
     * ```javascript
-    *     Hunt.startCluster(3003);
+    *     Hunt.startTelnetServer(3003);
     * ```
     */
   this.startTelnetServer = function(port){
