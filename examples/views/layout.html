@@ -63,25 +63,26 @@
     {{/info}}
 
     {{/flash}}
-
-    <div data-bind="foreach: flash.error">
-      <div class="alert alert-danger alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <span data-bind="text: $data"></span>
+    <div data-bind="visible: flash" style="display:none">
+      <div data-bind="foreach: flash.error">
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <span data-bind="text: $data"></span>
+        </div>
       </div>
-    </div>
 
-    <div data-bind="foreach: flash.success">
-      <div class="alert alert-success alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <span data-bind="text: $data"></span>
+      <div data-bind="foreach: flash.success">
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <span data-bind="text: $data"></span>
+        </div>
       </div>
-    </div>
 
-    <div data-bind="foreach: flash.info">
-      <div class="alert alert-info alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <span data-bind="text: $data"></span>
+      <div data-bind="foreach: flash.info">
+        <div class="alert alert-info alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <span data-bind="text: $data"></span>
+        </div>
       </div>
     </div>
 
