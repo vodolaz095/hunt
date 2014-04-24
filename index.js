@@ -558,7 +558,7 @@ function Hunt(config) {
     }
   };
 
-  function prepareHunt(h, buildApp, buildTelnet) {
+  function injectModels(h){
     if (h.config.enableMongoose && h.config.enableMongooseUsers) {
       var mongooseUsers = require('./lib/models/user.mongoose.js'),
         mongooseMessages = require('./lib/models/message.mongoose.js'),
@@ -585,22 +585,23 @@ function Hunt(config) {
 //group message model
       h.extendModel('GroupMessage', mongooseGroupMessages);
     }
-    if(buildApp){
-      passportGenerator(h, extendPassportStrategiesFunctions, extendRoutesFunctions);
-      appGenerator(h, extendAppFunctions, extendMiddlewareFunctions, extendRoutesFunctions);
-    }
-    if(buildTelnet){
-      h.extendedCommands = extendTelnetFunctions;
-    }
-    nodemailerListener(h);
-    prepared = true;
   }
+
+  function buildExpressApp(h){
+    passportGenerator(h, extendPassportStrategiesFunctions, extendRoutesFunctions);
+    appGenerator(h, extendAppFunctions, extendMiddlewareFunctions, extendRoutesFunctions);
+  }
+
+  function buildTelnet(h){
+    h.extendedCommands = extendTelnetFunctions;
+  }
+
 
   /**
    * @method Hunt#startBackGround
    * @description
    * Starts Hunt application as single threaded background application
-   * It have redis client/models, event emitting system exposed.
+   * It have redis client and data models, event emitting system exposed.
    * It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
    * @example
    * ```javascript
@@ -609,7 +610,8 @@ function Hunt(config) {
    */
   this.startBackGround = function () {
     console.log('Trying to start Hunt as background service...'.magenta);
-    prepareHunt(this, false);
+    injectModels(this);
+    prepared = true;
     /**
      * Emitted when Hunt is started as background process
      *
@@ -638,7 +640,9 @@ function Hunt(config) {
   this.startWebServer = function (port) {
     var p = port || this.config.port;
     console.log(('Trying to start Hunt as web server on port ' + p + '...').magenta);
-    prepareHunt(this, true);
+    injectModels(this);
+    buildExpressApp(this);
+    prepared = true;
     var h = this;
     this.httpServer.listen(p, function () {
     /**
@@ -744,10 +748,10 @@ function Hunt(config) {
         console.log(('Cluster : Worker #' + worker.process.pid + ' died (' + exitCode + ')! Trying to respaw...').red);
         cluster.fork();
       });
-      this.startBackGround(); // the master process is ran as background application and do not listens to port
+      this.startBackGround(); // the master process is ran as background application
       return true;
     } else {
-      this.startBackGround();
+      this.startBackGround(); // the child process is ran as background application
       return false;
     }
   };
@@ -778,7 +782,9 @@ function Hunt(config) {
     var p = port || this.config.port;
     console.log(('Trying to start Hunt as telnet server on port ' + p + '...').magenta);
     this.extendCore('telnetHandler', require('./lib/generators/telnet/telnet.js'));
-    prepareHunt(this, false, true);
+    injectModels(this);
+    buildTelnet(this);
+    prepared = true;
     var RAIServer = require("rai").RAIServer,
       telnetServer = new RAIServer(this.config.telnetServer);
 
