@@ -82,8 +82,8 @@ Hunt.extendApp(function (core) {
     {'url':'/documentation','name':'Documentation'},
     {'url':'/dialog','name':'Private messages'},
     {'url':'/groups','name':'Chats'},
-    {'url':'/map','name':'Events 1'},
-    {'url':'/online','name':'Events 2'},
+    {'url':'/map','name':'Map'},
+    {'url':'/events','name':'Events'},
     {'url':'/trophies','name':'REST-api'}
   ];
 });
@@ -152,10 +152,10 @@ Hunt.extendRoutes(function(core){
 /*
  * Page to demonstrate socket.io integration in few wayes
  */
-  core.app.get('/online', function (req, res) {
+  core.app.get('/events', function (req, res) {
     res.render('online', {
-      'title': 'HuntJS socket.io examples',
-      'description': 'Various realtime examples - clock, recent requests, messages...'
+      'title': '\"Events\" - HuntJS socket.io examples with various events',
+      'description': 'Various realtime examples - clock, recent requests, tasks, messages...'
     });
   });
 
@@ -165,8 +165,8 @@ Hunt.extendRoutes(function(core){
   core.app.get('/map', function(req, res){
     if(req.user){
       res.render('map', {
-        'title': 'HuntJS socket.io example with authorised users',
-        'description': 'Move the mouse cursor over the map'
+        'title': '\"Map\" - HuntJS socket.io example with authorised users',
+        'description': 'Move the mouse cursor over the map, and other users will see your position'
       });
     } else {
       req.flash('error','Please, authorize for accessing the map example!');
@@ -174,6 +174,9 @@ Hunt.extendRoutes(function(core){
     }
   });
 
+/*
+ * Helper for "Map" example
+ */
   core.app.get('/api/map.json', function(req,res){
     if(req.user){
       req.model.User

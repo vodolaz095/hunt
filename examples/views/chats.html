@@ -1,0 +1,47 @@
+{{#myself}}
+<form class="form-inline" role="form" action="/groups" method="post">
+
+    <input type="hidden" name="_csrf" value="{{csrf}}"/>
+
+    <div class="form-group">
+        <label for="newGroup">Group name: </label>
+         <input type="text" name="groupName" class="form-control" id="newGroup" value="" placeholder="MyChat"/>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-success" value="Create group!"/>
+    </div>
+</form>
+{{/myself}}
+
+{{^myself}}
+<p><a href="/auth/login">Authorize to create a group.</a></p>
+{{/myself}}
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Owner</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#groups}}
+    <tr>
+        <td>
+            <a href="/groups/{{id}}">{{id}}</a>
+        </td>
+        <td>
+            <a href="/groups/{{id}}">{{name}}</a>
+        </td>
+        <td>
+            <a href="/dialog/{{owner.id}}">
+                <img src="{{owner.gravatar30}}" alt="Gravatar of {{owner.displayName}}"/>
+                {{owner.displayName}}
+            </a>
+
+        </td>
+    </tr>
+    {{/groups}}
+    </tbody>
+</table>
