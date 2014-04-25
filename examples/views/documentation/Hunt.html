@@ -1383,7 +1383,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L944">index.js line 944</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L954">index.js line 954</a>
     </li></ul></dd>
     
     
@@ -3142,7 +3142,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L903">index.js line 903</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L913">index.js line 913</a>
     </li></ul></dd>
     
     
@@ -3311,7 +3311,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L920">index.js line 920</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L930">index.js line 930</a>
     </li></ul></dd>
     
     
@@ -3548,7 +3548,7 @@ Calls can be chained.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L932">index.js line 932</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L942">index.js line 942</a>
     </li></ul></dd>
     
     
@@ -3641,7 +3641,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L620">index.js line 620</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L621">index.js line 621</a>
     </li></ul></dd>
     
     
@@ -3770,7 +3770,7 @@ By default it spawns 1 process per CPU core.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L737">index.js line 737</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L732">index.js line 732</a>
     </li></ul></dd>
     
     
@@ -3795,7 +3795,7 @@ By default it spawns 1 process per CPU core.
     
             
 <div class="param-desc">
-    true if this is master process, false if this is worked process.
+    true if this is master process, false if this is worker process.
 </div>
 
 
@@ -3838,8 +3838,11 @@ By default it spawns 1 process per CPU core.
     
     
     <div class="description">
-        Start Hunt as cluster. `Parameters` is object with 3 field -
-- `web`, `background`, `telnet`. Important - telnet server listens on `Hunt.config.port+1` port.
+        Start Hunt as cluster. `Parameters` is object with 4 field -
+- `web`, `background`, `telnet`, 'port'.
+The values of `web`,`background`, `telnet` are number of child processes to spawn.
+The value of `port` is port number for web server processes to listen to.
+It is worth notice, that in this case telnet server listens on `Hunt.config.port+1` port!
     </div>
     
 
@@ -3920,7 +3923,7 @@ By default it spawns 1 process per CPU core.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L758">index.js line 758</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L753">index.js line 753</a>
     </li></ul></dd>
     
     
@@ -3945,7 +3948,7 @@ By default it spawns 1 process per CPU core.
     
             
 <div class="param-desc">
-    true if this is master process, false if this is worked process.
+    true if this is master process, false if this is worker process.
 </div>
 
 
@@ -3970,11 +3973,191 @@ By default it spawns 1 process per CPU core.
     <pre class="prettyprint"><code>```javascript
 
     Hunt.startCluster({ 'web':1, 'background':1, 'telnet': 1 });
-    Hunt.startCluster({ 'web':max });
+    Hunt.startCluster({ 'web':max, 'port':80 });
     Hunt.startCluster({ 'background':max });
-    Hunt.startCluster({ 'telnet':max });
+    Hunt.startCluster({ 'telnet':max, 'port':25 });
     Hunt.startCluster({ 'web':max, 'telnet':max }); //i strongly do not reccomend doing this!
 
+```</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="startTelnetCluster"><span class="type-signature"></span>startTelnetCluster<span class="signature">(port, maxProcesses)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Starts hunt application as single threaded background application,
+that controls, by the means of <a href="http://nodejs.org/docs/latest/api/cluster.html "> nodejs embedded cluster</a>,
+telnet server processes. By default it spawns 1 process per CPU core.
+It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
+in master process, and events of "start" with payload of `{'type':'telnet',  'port':25}`
+in each of telnet server processes.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>port</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">what port to use, if null - use port value from config</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>maxProcesses</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">maximal number of web server processes to spawn, default - 1 process per CPU core</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L708">index.js line 708</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    true if this is master process, false if this is worker process.
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Boolean</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+    Hunt.startTelnetCluster(25, 10000);
 ```</code></pre>
 
     
@@ -4078,7 +4261,7 @@ By default it spawns 1 process per CPU core.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L855">index.js line 855</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L865">index.js line 865</a>
     </li></ul></dd>
     
     
@@ -4224,8 +4407,6 @@ in web server processes.
     
     
     
-        <dt class="important tag-deprecated">Deprecated:</dt><dd><ul class="dummy"><li>since 0.1.1</li><ul></dd>
-    
     
     
     
@@ -4238,7 +4419,7 @@ in web server processes.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L683">index.js line 683</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L684">index.js line 684</a>
     </li></ul></dd>
     
     
@@ -4263,7 +4444,7 @@ in web server processes.
     
             
 <div class="param-desc">
-    true if this is master process, false if this is worked process.
+    true if this is master process, false if this is worker process.
 </div>
 
 
@@ -4389,7 +4570,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L648">index.js line 648</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L649">index.js line 649</a>
     </li></ul></dd>
     
     
@@ -4465,7 +4646,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L955">index.js line 955</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L965">index.js line 965</a>
     </li></ul></dd>
     
     
@@ -5518,6 +5699,143 @@ for logging.
     
     
     <div class="description">
+        Emitted when Hunt is started as background process
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">object</span>
+
+
+            </li>
+        </ul>
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">with a value of string of 'background'</td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L636">index.js line 636</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="event:start">start</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
         Emitted when Hunt is started as webserver process
     </div>
     
@@ -5635,7 +5953,7 @@ for logging.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L667">index.js line 667</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L668">index.js line 668</a>
     </li></ul></dd>
     
     
@@ -5646,143 +5964,6 @@ for logging.
     <dd class="tag-see">
         <ul>
             <li><a href="Hunt.html#startWebServer">Hunt#startWebServer</a></li>
-        </ul>
-    </dd>
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="event:start">start</h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        Emitted when Hunt is started as background process
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">object</span>
-
-
-            </li>
-        </ul>
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-        <h5 class="subsection-title">Properties:</h5>
-        
-        <dl>
-
-<table class="props">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">with a value of string of 'background'</td>
-        </tr>
-	
-	
-	</tbody>
-</table></dl>
-        
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L635">index.js line 635</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
         </ul>
     </dd>
     
@@ -5932,7 +6113,7 @@ for logging.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L886">index.js line 886</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L896">index.js line 896</a>
     </li></ul></dd>
     
     
@@ -6817,7 +6998,7 @@ with payload of user being saved.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L974">index.js line 974</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L984">index.js line 984</a>
     </li></ul></dd>
     
     
@@ -8120,7 +8301,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L944">index.js line 944</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L954">index.js line 954</a>
     </li></ul></dd>
     
     
@@ -9879,7 +10060,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L903">index.js line 903</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L913">index.js line 913</a>
     </li></ul></dd>
     
     
@@ -10048,7 +10229,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L920">index.js line 920</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L930">index.js line 930</a>
     </li></ul></dd>
     
     
@@ -10285,7 +10466,7 @@ Calls can be chained.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L932">index.js line 932</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L942">index.js line 942</a>
     </li></ul></dd>
     
     
@@ -10378,7 +10559,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L620">index.js line 620</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L621">index.js line 621</a>
     </li></ul></dd>
     
     
@@ -10507,7 +10688,7 @@ By default it spawns 1 process per CPU core.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L737">index.js line 737</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L732">index.js line 732</a>
     </li></ul></dd>
     
     
@@ -10532,7 +10713,7 @@ By default it spawns 1 process per CPU core.
     
             
 <div class="param-desc">
-    true if this is master process, false if this is worked process.
+    true if this is master process, false if this is worker process.
 </div>
 
 
@@ -10575,8 +10756,11 @@ By default it spawns 1 process per CPU core.
     
     
     <div class="description">
-        Start Hunt as cluster. `Parameters` is object with 3 field -
-- `web`, `background`, `telnet`. Important - telnet server listens on `Hunt.config.port+1` port.
+        Start Hunt as cluster. `Parameters` is object with 4 field -
+- `web`, `background`, `telnet`, 'port'.
+The values of `web`,`background`, `telnet` are number of child processes to spawn.
+The value of `port` is port number for web server processes to listen to.
+It is worth notice, that in this case telnet server listens on `Hunt.config.port+1` port!
     </div>
     
 
@@ -10657,7 +10841,7 @@ By default it spawns 1 process per CPU core.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L758">index.js line 758</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L753">index.js line 753</a>
     </li></ul></dd>
     
     
@@ -10682,7 +10866,7 @@ By default it spawns 1 process per CPU core.
     
             
 <div class="param-desc">
-    true if this is master process, false if this is worked process.
+    true if this is master process, false if this is worker process.
 </div>
 
 
@@ -10707,11 +10891,191 @@ By default it spawns 1 process per CPU core.
     <pre class="prettyprint"><code>```javascript
 
     Hunt.startCluster({ 'web':1, 'background':1, 'telnet': 1 });
-    Hunt.startCluster({ 'web':max });
+    Hunt.startCluster({ 'web':max, 'port':80 });
     Hunt.startCluster({ 'background':max });
-    Hunt.startCluster({ 'telnet':max });
+    Hunt.startCluster({ 'telnet':max, 'port':25 });
     Hunt.startCluster({ 'web':max, 'telnet':max }); //i strongly do not reccomend doing this!
 
+```</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="startTelnetCluster"><span class="type-signature"></span>startTelnetCluster<span class="signature">(port, maxProcesses)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Starts hunt application as single threaded background application,
+that controls, by the means of <a href="http://nodejs.org/docs/latest/api/cluster.html "> nodejs embedded cluster</a>,
+telnet server processes. By default it spawns 1 process per CPU core.
+It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
+in master process, and events of "start" with payload of `{'type':'telnet',  'port':25}`
+in each of telnet server processes.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>port</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">what port to use, if null - use port value from config</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>maxProcesses</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">maximal number of web server processes to spawn, default - 1 process per CPU core</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L708">index.js line 708</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    true if this is master process, false if this is worker process.
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Boolean</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+    Hunt.startTelnetCluster(25, 10000);
 ```</code></pre>
 
     
@@ -10815,7 +11179,7 @@ By default it spawns 1 process per CPU core.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L855">index.js line 855</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L865">index.js line 865</a>
     </li></ul></dd>
     
     
@@ -10961,8 +11325,6 @@ in web server processes.
     
     
     
-        <dt class="important tag-deprecated">Deprecated:</dt><dd><ul class="dummy"><li>since 0.1.1</li><ul></dd>
-    
     
     
     
@@ -10975,7 +11337,7 @@ in web server processes.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L683">index.js line 683</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L684">index.js line 684</a>
     </li></ul></dd>
     
     
@@ -11000,7 +11362,7 @@ in web server processes.
     
             
 <div class="param-desc">
-    true if this is master process, false if this is worked process.
+    true if this is master process, false if this is worker process.
 </div>
 
 
@@ -11126,7 +11488,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L648">index.js line 648</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L649">index.js line 649</a>
     </li></ul></dd>
     
     
@@ -11202,7 +11564,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L955">index.js line 955</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L965">index.js line 965</a>
     </li></ul></dd>
     
     
@@ -12255,6 +12617,143 @@ for logging.
     
     
     <div class="description">
+        Emitted when Hunt is started as background process
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">object</span>
+
+
+            </li>
+        </ul>
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+        <h5 class="subsection-title">Properties:</h5>
+        
+        <dl>
+
+<table class="props">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">with a value of string of 'background'</td>
+        </tr>
+	
+	
+	</tbody>
+</table></dl>
+        
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L636">index.js line 636</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="event:start">start</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
         Emitted when Hunt is started as webserver process
     </div>
     
@@ -12372,7 +12871,7 @@ for logging.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L667">index.js line 667</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L668">index.js line 668</a>
     </li></ul></dd>
     
     
@@ -12383,143 +12882,6 @@ for logging.
     <dd class="tag-see">
         <ul>
             <li><a href="Hunt.html#startWebServer">Hunt#startWebServer</a></li>
-        </ul>
-    </dd>
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="event:start">start</h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        Emitted when Hunt is started as background process
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">object</span>
-
-
-            </li>
-        </ul>
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-        <h5 class="subsection-title">Properties:</h5>
-        
-        <dl>
-
-<table class="props">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">with a value of string of 'background'</td>
-        </tr>
-	
-	
-	</tbody>
-</table></dl>
-        
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L635">index.js line 635</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
         </ul>
     </dd>
     
@@ -12669,7 +13031,7 @@ for logging.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L886">index.js line 886</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L896">index.js line 896</a>
     </li></ul></dd>
     
     
@@ -13451,5 +13813,5 @@ with payload of user being saved.
 
 
 
-  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha4</a> on Fri Apr 25 2014 00:06:40 GMT+0400 (MSK)</p>
+  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha4</a> on Sat Apr 26 2014 02:04:04 GMT+0400 (MSK)</p>
 </div>
