@@ -58,32 +58,22 @@ socket.on('broadcast', function (data) {
   }
 
   if(data.positionUpdate){
-    var pointsArray = ko.toJS(model.points),
-      isNew = true,
-      newPointsArray;
-
-      newPointsArray = pointsArray.map(function(point){
-        if(point.id == data.positionUpdate.id){
-          isNew = false;
-          return data.positionUpdate;
-        } else {
-          return point;
-        }
-      });
-      if(isNew){
-        newPointsArray.push(data.positionUpdate);
+    var removed = false;
+    model.points.remove(function(item) {
+      if(item.id == data.positionUpdate.id){
+        removed = true;
+        return true;
+      } else {
+        return false;
       }
-      console.log(newPointsArray);
-      model.points.removeAll();
-//*/
-      newPointsArray.map(function(point){
-        model.points.push(point);
-      });
-//*/
+    });
+
+    model.points.push(data.positionUpdate);
+
   }
 });
 
-var doTrack = false, x, y;
+var doTrack = true, x, y;
 
 setInterval(function(){
   if(doTrack){
@@ -91,9 +81,6 @@ setInterval(function(){
       'x':x,
       'y':y
     });
-    return;
-  } else {
-    return;
   }
 }, 800);
 
@@ -101,8 +88,23 @@ function getPosition(event){
   x=event.clientX;
   y=event.clientY;
   doTrack = true;
-};
+}
 
 function stopTracking(){
   doTrack = false;
-};
+}
+
+function toggleTracking(){
+  //doTrack = ! doTrack;
+}
+
+function loadPoints(){
+  $.get('/api/map.json', function(data){
+//    console.log(data);
+//    var dataProcessed = JSON.parse(data);
+//    console.log(dataProcessed);
+    data.map(function(point){
+      model.points.push(point);
+    });
+  });
+}

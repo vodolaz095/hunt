@@ -173,6 +173,32 @@ Hunt.extendRoutes(function(core){
       res.redirect('/auth/login');
     }
   });
+
+  core.app.get('/api/map.json', function(req,res){
+    if(req.user){
+      req.model.User
+        .find({})
+        .limit(100)
+        .exec(function(error, usersFound){
+          if(error) throw error;
+          var usersProcessed = [];
+          usersFound.map(function(u){
+            if(u.profile && u.profile.positionX && u.profile.positionY){
+              usersProcessed.push({
+                'gravatar30': u.gravatar30,
+                'displayName': u.displayName,
+                'id': u.id,
+                'left': u.profile.positionX,
+                'top': u.profile.positionY
+              });
+            }
+          });
+          res.json(200, usersProcessed);
+        });
+    } else {
+      res.send(403);
+    }
+  });
 /*
  * Setting up api endpoind to trophies
  * https://github.com/visionmedia/express-resource
@@ -239,7 +265,7 @@ Hunt.once('start', function (startParameters) {
                   'displayName': userToBePlaced.displayName,
                   'id': userToBePlaced.id,
                   'left': userToBePlaced.profile.positionX,
-                  'top': userToBePlaced.profile.positionY,
+                  'top': userToBePlaced.profile.positionY
                 }
               });
             }
