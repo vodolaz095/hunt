@@ -10,7 +10,7 @@ var hunt = require('./../index.js'),
     'io': {'loglevel': 2},
     'public': __dirname + '/public', //directory for assets - css, images, client side javascripts
     'views': __dirname + '/views', //directory for templates,
-    'maxWorkers':2 //how many workers for clustering is spawned, default is 1 worker process per CPU core
+    'maxWorkers':3 //how many workers for clustering is spawned, default is 1 worker process per CPU core
   });
 
 
@@ -84,4 +84,8 @@ Hunt.on('httpError', function(err){
  *how many worker process is spawned (1 for every CPU core present)
  *and what port to use (from config or process.env.port or default - 3000)
  */
-Hunt.startWebCluster();
+//Hunt.startWebCluster(); //before 0.0.18
+
+
+//after 0.0.18
+Hunt.startCluster({'web':2});

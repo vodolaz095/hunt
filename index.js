@@ -558,7 +558,27 @@ function Hunt(config) {
     }
   };
 
-  function prepareHunt(h, buildApp, buildTelnet) {
+  /**
+   * @class model
+   * @classdesc
+   * Class to hold data models of Hunt application, they are injected into
+   * request object. This models can be loaded by
+   * {@link Hunt#extendModel} function as mongoose or sequilize
+   * active record objects
+   * @property {Group} Group - {@link Group} of users
+   * @property {Group} Groups - synonim for {@link Group}
+   * @property {Group} group - synonim for {@link Group}
+   * @property {Group} groups - synonim for {@link Group}
+
+   * @property {User} Users - class, that represents site/application user
+   * @property {User} User - synonim for {@link User}
+   * @property {User} user - synonim for {@link User}
+   * @property {User} users - synonim for {@link User}
+   * @property {GroupMessage} GroupMessage - Class for messages send by users to groups
+   * @property {Message} Message - Class for messages send by users to groups
+   * @see Hunt#extendModel
+   */
+  function injectModels(h){
     if (h.config.enableMongoose && h.config.enableMongooseUsers) {
       var mongooseUsers = require('./lib/models/user.mongoose.js'),
         mongooseMessages = require('./lib/models/message.mongoose.js'),
@@ -585,22 +605,23 @@ function Hunt(config) {
 //group message model
       h.extendModel('GroupMessage', mongooseGroupMessages);
     }
-    if(buildApp){
-      passportGenerator(h, extendPassportStrategiesFunctions, extendRoutesFunctions);
-      appGenerator(h, extendAppFunctions, extendMiddlewareFunctions, extendRoutesFunctions);
-    }
-    if(buildTelnet){
-      h.extendedCommands = extendTelnetFunctions;
-    }
-    nodemailerListener(h);
-    prepared = true;
   }
+
+  function buildExpressApp(h){
+    passportGenerator(h, extendPassportStrategiesFunctions, extendRoutesFunctions);
+    appGenerator(h, extendAppFunctions, extendMiddlewareFunctions, extendRoutesFunctions);
+  }
+
+  function buildTelnet(h){
+    h.extendedCommands = extendTelnetFunctions;
+  }
+
 
   /**
    * @method Hunt#startBackGround
    * @description
    * Starts Hunt application as single threaded background application
-   * It have redis client/models, event emitting system exposed.
+   * It have redis client and data models, event emitting system exposed.
    * It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
    * @example
    * ```javascript
@@ -609,7 +630,8 @@ function Hunt(config) {
    */
   this.startBackGround = function () {
     console.log('Trying to start Hunt as background service...'.magenta);
-    prepareHunt(this, false);
+    injectModels(this);
+    prepared = true;
     /**
      * Emitted when Hunt is started as background process
      *
@@ -619,7 +641,7 @@ function Hunt(config) {
      * @property {string} type - with a value of string of 'background'
      */
     this.emit('start', {'type': 'background'});
-    console.log('Started Hunt as background service!'.green);
+    console.log(('Started Hunt as background service with PID#'+process.pid+'!').green);
   };
 
 
@@ -638,7 +660,8 @@ function Hunt(config) {
   this.startWebServer = function (port) {
     var p = port || this.config.port;
     console.log(('Trying to start Hunt as web server on port ' + p + '...').magenta);
-    prepareHunt(this, true);
+    injectModels(this);
+    buildExpressApp(this);
     var h = this;
     this.httpServer.listen(p, function () {
     /**
@@ -652,7 +675,8 @@ function Hunt(config) {
      * @property {number} port - with a value of port this application listens to
      */
         h.emit('start', {'type': 'webserver', 'port': p});
-        console.log(('Started Hunt as web server on port ' + p + '!').green);
+        console.log(('Started Hunt as web server on port ' + p +' with PID#'+process.pid+'!').green);
+        prepared = true;
     });
   };
 
@@ -667,7 +691,7 @@ function Hunt(config) {
    * It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
    * in master process, and events of "start" with payload of `{'type':'webserver',  'port':80}`
    * in web server processes.
-   *
+   * @deprecated since 0.1.1
    * @returns {Boolean} true if this is master process, false if this is worked process.
    * @example
    * ```javascript
@@ -676,6 +700,7 @@ function Hunt(config) {
    */
   this.startWebCluster = function (port, maxProcesses) {
     var p = port || this.config.port;
+    console.error('The function `Hunt.startWebCluster` will be deprecated in 0.1.x! use Hunt.startCluster({"web":numberOfProcessToSpawn}) instead!'.red);
     console.log(('Trying to start Hunt as webcluster service on port ' + p + '...').magenta);
 
     var cluster = require('cluster'),
@@ -698,7 +723,7 @@ function Hunt(config) {
 
       cluster.on('exit', function (worker, code, signal) {
         var exitCode = worker.process.exitCode;
-        console.log(('Cluster : Worker #' + worker.process.pid + ' died (' + exitCode + '). Respawning...').yellow);
+        console.log(('Cluster : Worker PID#' + worker.process.pid + ' died (' + exitCode + '). Respawning...').yellow);
         cluster.fork();
       });
       this.startBackGround(); // the master process is ran as background application and do not listens to port
@@ -717,50 +742,114 @@ function Hunt(config) {
    * [cluster](http://nodejs.org/docs/latest/api/cluster.html), other background applications.
    * By default it spawns 1 process per CPU core.
    * @returns {Boolean} true if this is master process, false if this is worked process.
+   * @example
+   * ```javascript
+   *
+   *    var numberOfProcessesToSpawn = 10;
+   *    Hunt.startBackGroundCluster(numberOfProcessesToSpawn);
+   *
+   * ```
    */
   this.startBackGroundCluster = function (maxProcesses) {
     console.log(('Trying to start Hunt as background cluster service...').magenta);
-
-    var cluster = require('cluster'),
-      numCPUs = require('os').cpus().length,
-      maxWorkers = Math.min(this.config.maxWorkers, maxProcesses),
-      i;
-
-    if (cluster.isMaster) {
-      console.log(('Cluster : We have ' + numCPUs + ' CPU cores present. We can use ' + maxWorkers + ' of them.').bold.green);
-      console.log(('Cluster : Master PID#' + process.pid + ' is online').green);
-      // Fork workers.
-      for (i = 0; i <= maxWorkers; i = i + 1) {
-        var worker = cluster.fork();
-        console.log(('Cluster : Spawning worker with PID#' + worker.process.pid).green);
-      }
-
-      cluster.on('online', function (worker) {
-        console.log(('Cluster : Worker PID#' + worker.process.pid + ' is online').green);
-      });
-
-      cluster.on('exit', function (worker, code, signal) {
-        var exitCode = worker.process.exitCode;
-        console.log(('Cluster : Worker #' + worker.process.pid + ' died (' + exitCode + ')! Trying to respaw...').red);
-        cluster.fork();
-      });
-      this.startBackGround(); // the master process is ran as background application and do not listens to port
-      return true;
-    } else {
-      this.startBackGround();
-      return false;
-    }
+    this.startCluster({'background':maxProcesses})
   };
 
   /**
    * @method Hunt#startCluster
-   * @todo implement this in not very ugly way
+   * @param {object} parameters - configuration parameters
    * @description
-   * Start Hunt as cluster. Under construction...
+   * Start Hunt as cluster. `Parameters` is object with 3 field -
+   * - `web`, `background`, `telnet`. Important - telnet server listens on `Hunt.config.port+1` port.
    * @returns {Boolean} true if this is master process, false if this is worked process.
+   * @example
+   * ```javascript
+   *
+   *     Hunt.startCluster({ 'web':1, 'background':1, 'telnet': 1 });
+   *     Hunt.startCluster({ 'web':max });
+   *     Hunt.startCluster({ 'background':max });
+   *     Hunt.startCluster({ 'telnet':max });
+   *     Hunt.startCluster({ 'web':max, 'telnet':max }); //i strongly do not reccomend doing this!
+   *
+   * ```
    */
-  this.startCluster = function (numberOfWebServers, numberOfBackGround) {
-    throw new Error('Not implemented yet!');
+  this.startCluster = function (parameters) {
+
+    var cluster = require('cluster'),
+      numCPUs = require('os').cpus().length,
+      maxWorkers = Math.min(this.config.maxWorkers, numCPUs),
+      runtimeConfig = {},
+      i = 0;
+
+      ['web','background','telnet'].map(function(a){
+        if(parameters[a] === 'max'){
+          runtimeConfig[a] = maxWorkers;
+        }
+        if(parseInt(parameters[a])){
+          runtimeConfig[a] = parameters[a];
+        }
+        if(!parameters[a]){
+          runtimeConfig[a] = 0;
+        }
+      });
+
+    if((runtimeConfig.web + runtimeConfig.background + runtimeConfig.telnet +1) <= maxWorkers ){
+
+      if (cluster.isMaster) {
+        console.log(('Cluster : We have ' + numCPUs + ' CPU cores present. We can use ' + maxWorkers + ' of them.').bold.green);
+        console.log(('Cluster : Master PID#' + process.pid + ' is online!').green);
+// Fork workers.
+        for (i = 0; i < runtimeConfig.web; i = i + 1) {
+          var worker = cluster.fork();
+          worker.send('be_webserver');
+          console.log(('Cluster : Spawning web server worker #'+i+' with PID#' + worker.process.pid+'...').yellow);
+        }
+
+        for (i = 0; i < runtimeConfig.background; i = i + 1) {
+          var worker = cluster.fork();
+          worker.send('be_background');
+          console.log(('Cluster : Spawning background worker #'+i+' with PID#' + worker.process.pid + '...').yellow);
+        }
+        for (i = 0; i < runtimeConfig.telnet; i = i + 1) {
+          var worker = cluster.fork();
+          worker.send('be_telnet');
+          console.log(('Cluster : Spawning telnet server worker #'+i+' with PID#' + worker.process.pid + '...').yellow);
+        }
+
+
+        cluster.on('online', function (worker) {
+          console.log(('Cluster : Worker PID#' + worker.process.pid + ' is online!').green);
+        });
+
+        cluster.on('exit', function (worker, code, signal) {
+          var exitCode = worker.process.exitCode;
+          console.log(('Cluster : Worker #' + worker.process.pid + ' died (' + exitCode + ')! Trying to spawn one more time...').red);
+          cluster.fork();
+        });
+        this.startBackGround(); // the master process is ran as background application
+        return true;
+      } else {
+        var h = this;
+        process.on('message', function(msg){
+          switch(msg) {
+            case 'be_background':
+              h.startBackGround(); // the child process is ran as background application
+              break;
+            case 'be_webserver':
+              h.startWebServer();
+              break;
+            case 'be_telnet':
+              h.startTelnetServer();
+              break;
+            default:
+              throw new Error('Unknown command of `'+msg+'` from master process!');
+          }
+        });
+        return false;
+      }
+    } else {
+      throw new Error('This configuration requires more workers, than allowed by `config.maxWorkers`! ');
+    }
   };
 
   /**
@@ -771,14 +860,16 @@ function Hunt(config) {
     * Start Hunt as single process telnet server
     * @example
     * ```javascript
-    *     Hunt.startCluster(3003);
+    *     Hunt.startTelnetServer(3003);
     * ```
     */
   this.startTelnetServer = function(port){
     var p = port || this.config.port;
     console.log(('Trying to start Hunt as telnet server on port ' + p + '...').magenta);
     this.extendCore('telnetHandler', require('./lib/generators/telnet/telnet.js'));
-    prepareHunt(this, false, true);
+    injectModels(this);
+    buildTelnet(this);
+    prepared = true;
     var RAIServer = require("rai").RAIServer,
       telnetServer = new RAIServer(this.config.telnetServer);
 
@@ -901,25 +992,3 @@ Hunt.prototype.stop = function () {
 module.exports = exports = function (config) {
   return new Hunt(config);
 };
-
-
-/**
- * @class model
- * @classdesc
- * Class to hold data models of Hunt application, they are injected into
- * request object. This models can be loaded by
- * {@link Hunt#extendModel} function as mongoose or sequilize
- * active record objects
- * @property {Group} Group - {@link Group} of users
- * @property {Group} Groups - synonim for {@link Group}
- * @property {Group} group - synonim for {@link Group}
- * @property {Group} groups - synonim for {@link Group}
-
- * @property {User} Users - class, that represents site/application user
- * @property {User} User - synonim for {@link User}
- * @property {User} user - synonim for {@link User}
- * @property {User} users - synonim for {@link User}
- * @property {GroupMessage} GroupMessage - Class for messages send by users to groups
- * @property {Message} Message - Class for messages send by users to groups
- * @see Hunt#extentModel
- */

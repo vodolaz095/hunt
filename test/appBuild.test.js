@@ -330,10 +330,6 @@ describe('Hunt builds single threaded webserver application', function () {
   });
 });
 
-describe('Hunt builds telnet server application', function () {
-  it('will be tested... somehow');
-});
-
 describe('Hunt builds clustered background application', function () {
   it('will be tested... somehow');
 });
