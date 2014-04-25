@@ -692,47 +692,41 @@ function Hunt(config) {
    * It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
    * in master process, and events of "start" with payload of `{'type':'webserver',  'port':80}`
    * in web server processes.
-   * @deprecated since 0.1.1
-   * @returns {Boolean} true if this is master process, false if this is worked process.
+   * @returns {Boolean} true if this is master process, false if this is worker process.
    * @example
    * ```javascript
    *     Hunt.startWebCluster(80, 10000);
    * ```
    */
   this.startWebCluster = function (port, maxProcesses) {
-    var p = port || this.config.port;
-    console.error('The function `Hunt.startWebCluster` will be deprecated in 0.1.x! use Hunt.startCluster({"web":numberOfProcessToSpawn}) instead!'.red);
-    console.log(('Trying to start Hunt as webcluster service on port ' + p + '...').magenta);
+    var p = port || this.config.port,
+      m = maxProcesses || 'max';
 
-    var cluster = require('cluster'),
-      numCPUs = require('os').cpus().length,
-      maxWorkers = Math.min(this.config.maxWorkers, maxProcesses || 16),
-      i;
+    return this.startCluster({'port':p,'web':m, 'telnet':0, 'background':0});
+  };
 
-    if (cluster.isMaster) {
-      console.log(('Cluster : We have ' + numCPUs + ' CPU cores present. We can use ' + maxWorkers + ' of them.').bold.green);
-      console.log(('Cluster : Master PID#' + process.pid + ' is online').green);
-      // Fork workers.
-      for (i = 0; i < maxWorkers; i = i + 1) {
-        var worker = cluster.fork();
-        console.log(('Cluster : Spawning worker with PID#' + worker.process.pid).green);
-      }
+  /**
+   * @method Hunt#startTelnetCluster
+   * @param {(number|null)} port what port to use, if null - use port value from config
+   * @param {(number|null)} maxProcesses maximal number of web server processes to spawn, default - 1 process per CPU core
+   * @description
+   * Starts hunt application as single threaded background application,
+   * that controls, by the means of {@link http://nodejs.org/docs/latest/api/cluster.html | nodejs embedded cluster},
+   * telnet server processes. By default it spawns 1 process per CPU core.
+   * It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
+   * in master process, and events of "start" with payload of `{'type':'telnet',  'port':25}`
+   * in each of telnet server processes.
+   * @returns {Boolean} true if this is master process, false if this is worker process.
+   * @example
+   * ```javascript
+   *     Hunt.startTelnetCluster(25, 10000);
+   * ```
+   */
+  this.startTelnetCluster = function(port, maxProcesses) {
+    var p = port || this.config.port,
+      m = maxProcesses || 'max';
 
-      cluster.on('online', function (worker) {
-        console.log(('Cluster : Worker PID#' + worker.process.pid + ' is online').green);
-      });
-
-      cluster.on('exit', function (worker, code, signal) {
-        var exitCode = worker.process.exitCode;
-        console.log(('Cluster : Worker PID#' + worker.process.pid + ' died (' + exitCode + '). Respawning...').yellow);
-        cluster.fork();
-      });
-      this.startBackGround(); // the master process is ran as background application and do not listens to port
-      return true;
-    } else {
-      this.startWebServer(p);
-      return false;
-    }
+    return this.startCluster({'port':p,'web':0, 'telnet':m, 'background':0});
   };
 
   /**
@@ -742,7 +736,7 @@ function Hunt(config) {
    * Starts Hunt application as single threaded background application, that controls, by the means of
    * [cluster](http://nodejs.org/docs/latest/api/cluster.html), other background applications.
    * By default it spawns 1 process per CPU core.
-   * @returns {Boolean} true if this is master process, false if this is worked process.
+   * @returns {Boolean} true if this is master process, false if this is worker process.
    * @example
    * ```javascript
    *
@@ -753,23 +747,26 @@ function Hunt(config) {
    */
   this.startBackGroundCluster = function (maxProcesses) {
     console.log(('Trying to start Hunt as background cluster service...').magenta);
-    this.startCluster({'background':maxProcesses})
+    this.startCluster({'web':0, 'telnet':0,'background':maxProcesses})
   };
 
   /**
    * @method Hunt#startCluster
    * @param {object} parameters - configuration parameters
    * @description
-   * Start Hunt as cluster. `Parameters` is object with 3 field -
-   * - `web`, `background`, `telnet`. Important - telnet server listens on `Hunt.config.port+1` port.
-   * @returns {Boolean} true if this is master process, false if this is worked process.
+   * Start Hunt as cluster. `Parameters` is object with 4 field -
+   * - `web`, `background`, `telnet`, 'port'.
+   * The values of `web`,`background`, `telnet` are number of child processes to spawn.
+   * The value of `port` is port number for web server processes to listen to.
+   * It is worth notice, that in this case telnet server listens on `Hunt.config.port+1` port!
+   * @returns {Boolean} true if this is master process, false if this is worker process.
    * @example
    * ```javascript
    *
    *     Hunt.startCluster({ 'web':1, 'background':1, 'telnet': 1 });
-   *     Hunt.startCluster({ 'web':max });
+   *     Hunt.startCluster({ 'web':max, 'port':80 });
    *     Hunt.startCluster({ 'background':max });
-   *     Hunt.startCluster({ 'telnet':max });
+   *     Hunt.startCluster({ 'telnet':max, 'port':25 });
    *     Hunt.startCluster({ 'web':max, 'telnet':max }); //i strongly do not reccomend doing this!
    *
    * ```
@@ -778,7 +775,7 @@ function Hunt(config) {
 
     var cluster = require('cluster'),
       numCPUs = require('os').cpus().length,
-      maxWorkers = Math.min(this.config.maxWorkers, numCPUs),
+      maxWorkers = Math.min(this.config.maxWorkers, numCPUs) - 1, //do not forget about MASTER process
       runtimeConfig = {},
       i = 0;
 
@@ -794,10 +791,18 @@ function Hunt(config) {
         }
       });
 
-    if((runtimeConfig.web + runtimeConfig.background + runtimeConfig.telnet +1) <= maxWorkers ){
+    runtimeConfig.port = parseInt(parameters.port) || config.port || 3000;
+
+    if((runtimeConfig.web + runtimeConfig.background + runtimeConfig.telnet ) <= maxWorkers ){
 
       if (cluster.isMaster) {
         console.log(('Cluster : We have ' + numCPUs + ' CPU cores present. We can use ' + maxWorkers + ' of them.').bold.green);
+        console.log(('Cluster : We need to spawn '+runtimeConfig.web+' web server processes!').magenta);
+        console.log(('Cluster : We need to spawn '+runtimeConfig.background+' background processes!').magenta);
+        console.log(('Cluster : We need to spawn '+runtimeConfig.telnet+' telnet server processes!').magenta);
+        console.log(('Cluster : Also we need to spawn 1 background processes to rule them all!').magenta);
+        console.log(('Cluster : Starting spawning processes...').magenta);
+
         console.log(('Cluster : Master PID#' + process.pid + ' is online!').green);
 // Fork workers.
         for (i = 0; i < runtimeConfig.web; i = i + 1) {
@@ -837,10 +842,14 @@ function Hunt(config) {
               h.startBackGround(); // the child process is ran as background application
               break;
             case 'be_webserver':
-              h.startWebServer();
+              h.startWebServer(runtimeConfig.port);
               break;
             case 'be_telnet':
-              h.startTelnetServer();
+              if(runtimeConfig.web>1){
+                h.startTelnetServer((runtimeConfig.port+1));
+              } else {
+                h.startTelnetServer(runtimeConfig.port);
+              }
               break;
             default:
               throw new Error('Unknown command of `'+msg+'` from master process!');

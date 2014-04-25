@@ -84,8 +84,4 @@ Hunt.on('httpError', function(err){
  *how many worker process is spawned (1 for every CPU core present)
  *and what port to use (from config or process.env.port or default - 3000)
  */
-//Hunt.startWebCluster(); //before 0.0.18
-
-
-//after 0.0.18
-Hunt.startCluster({'web':2});
+Hunt.startWebCluster();
