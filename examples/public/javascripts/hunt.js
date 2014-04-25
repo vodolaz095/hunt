@@ -25,7 +25,8 @@ var model = {
     'error': ko.observableArray(),
     'info': ko.observableArray(),
     'success': ko.observableArray()
-  }
+  },
+  'points': ko.observableArray()
 };
 
 model.pingerUrl.subscribe(function(newUrl){
@@ -55,4 +56,53 @@ socket.on('broadcast', function (data) {
   if(data.notification){
     console.log(data);
   }
+
+  if(data.positionUpdate){
+    var pointsArray = ko.toJS(model.points),
+      isNew = true,
+      newPointsArray;
+
+      newPointsArray = pointsArray.map(function(point){
+        if(point.id == data.positionUpdate.id){
+          isNew = false;
+          return data.positionUpdate;
+        } else {
+          return point;
+        }
+      });
+      if(isNew){
+        newPointsArray.push(data.positionUpdate);
+      }
+      console.log(newPointsArray);
+      model.points.removeAll();
+//*/
+      newPointsArray.map(function(point){
+        model.points.push(point);
+      });
+//*/
+  }
 });
+
+var doTrack = false, x, y;
+
+setInterval(function(){
+  if(doTrack){
+    socket.emit('position', {
+      'x':x,
+      'y':y
+    });
+    return;
+  } else {
+    return;
+  }
+}, 800);
+
+function getPosition(event){
+  x=event.clientX;
+  y=event.clientY;
+  doTrack = true;
+};
+
+function stopTracking(){
+  doTrack = false;
+};

@@ -82,7 +82,8 @@ Hunt.extendApp(function (core) {
     {'url':'/documentation','name':'Documentation'},
     {'url':'/dialog','name':'Private messages'},
     {'url':'/groups','name':'Chats'},
-    {'url':'/online','name':'Socket.io and events'},
+    {'url':'/map','name':'Events 1'},
+    {'url':'/online','name':'Events 2'},
     {'url':'/trophies','name':'REST-api'}
   ];
 });
@@ -159,6 +160,20 @@ Hunt.extendRoutes(function(core){
   });
 
 /*
+ * Setting route for realtime example with map
+ */
+  core.app.get('/map', function(req, res){
+    if(req.user){
+      res.render('map', {
+        'title': 'HuntJS socket.io example with authorised users',
+        'description': 'Move the mouse cursor over the map'
+      });
+    } else {
+      req.flash('error','Please, authorize for accessing the map example!');
+      res.redirect('/auth/login');
+    }
+  });
+/*
  * Setting up api endpoind to trophies
  * https://github.com/visionmedia/express-resource
  */
@@ -205,6 +220,34 @@ Hunt.once('start', function (startParameters) {
       socket.on('pingerUrl', function(payload){
         pinger(payload, socket);
       });
+//Listenint to socket.io event, emmited when user hovers mouse above the map
+      socket.on('position', function(payload){
+
+//authorized user that uses this socket.io socket
+        if(socket.handshake.user){
+          var userToBePlaced = socket.handshake.user;
+          userToBePlaced.profile = userToBePlaced.profile || {};
+          userToBePlaced.profile.positionX = payload.x;
+          userToBePlaced.profile.positionY = payload.y;
+          userToBePlaced.save(function(error){
+            if(error){
+              throw error;
+            } else {
+              Hunt.emit('broadcast', {
+                'positionUpdate': {
+                  'gravatar30': userToBePlaced.gravatar30,
+                  'displayName': userToBePlaced.displayName,
+                  'id': userToBePlaced.id,
+                  'left': userToBePlaced.profile.positionX,
+                  'top': userToBePlaced.profile.positionY,
+                }
+              });
+            }
+          });
+        } else {
+          return;
+        }
+      });
     });
   }
 
@@ -237,7 +280,7 @@ Hunt.on('message:sio', function(event){
 
 
 if (Hunt.config.env === 'production') {
-  Hunt.startWebCluster();
+  Hunt.startCluster({'web':'max'});
 } else {
   Hunt.startWebServer();
 }

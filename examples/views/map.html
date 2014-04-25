@@ -1,0 +1,27 @@
+<div id="map"
+  style="position: relative; left: 0; top: 0;"
+  onclick="getPosition(event)"
+  onmousemove="getPosition(event)"
+  onmouseout="stopTracking()"
+>
+
+  <img src="http://static-maps.yandex.ru/1.x/?ll=37.62007,55.75363&l=sat&lang=en-US&size=650,450&z=13&pt=37.62007,55.75363,pmwtm1~37.64,55.76363,pmwtm99"
+    style="position: relative; top: 0; left: 0; z-index: 1"
+  />
+
+  <div data-bind="foreach: points">
+    <a
+      data-bind="attr: { 'href': '/dialog/'+id, 'title' : displayName }, style : { 'left': left, 'top': top }"
+      target="_blank"
+      style="position: fixed; z-index: 3;">
+      <img class="img-circle"
+        data-bind="attr : { 'src' : gravatar30 }"
+      />
+    </a>
+  </div>
+</div>
+
+
+<ul data-bind="foreach: points">
+  <li data-bind="text: displayName +':'+left+':'+top "></li>
+</ul>
