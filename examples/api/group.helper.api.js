@@ -14,7 +14,9 @@ exports.index = function(request, response){
 };
 
 //GET /groups/new
-exports.new = function(request, response){};
+exports.new = function(request, response){
+  response.redirect('/groups');
+};
 
 //POST /groups
 exports.create = function(request, response){
@@ -43,10 +45,16 @@ exports.show = function(request, response){
 };
 
 //GET /groups/:group/edit
-exports.edit = function(request, response){};
+exports.edit = function(request, response){
+  response.send('ok!');
+};
 
 //PUT /groups/:group/
-exports.update = function(request, response){};
+exports.update = function(request, response){
+  response.send('ok!');
+};
 
 //DELETE /groups/:group/
-exports.destroy = function(request, response){};
+exports.destroy = function(request, response){
+  response.send('ok!');
+};
