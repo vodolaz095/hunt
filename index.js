@@ -605,6 +605,7 @@ function Hunt(config) {
 //group message model
       h.extendModel('GroupMessage', mongooseGroupMessages);
     }
+    nodemailerListener(h);
   }
 
   function buildExpressApp(h){

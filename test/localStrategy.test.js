@@ -133,7 +133,7 @@ describe('Local strategy test', function () {
       evnt.message.template.should.be.equal('verifyEmail');
       evnt.message.subject.should.be.equal('Email address verification');
       evnt.message.verifyUrl.should.be.equal('http://localhost:' + port + '/auth/confirm/' + apiKey);
-      should.not.exist(evnt.message.layout);
+      evnt.message.layout.should.be.false;
     });
 
     after(function (done) {
@@ -198,7 +198,7 @@ describe('Local strategy test', function () {
       evnt.message.subject.should.be.equal('Reset password');
       evnt.message.template.should.be.equal('resetEmail');
       evnt.message.resetUrl.should.be.equal('http://localhost:' + port + '/auth/reset/'+evnt.user.apiKey),
-      should.not.exist(evnt.message.layout);
+      evnt.message.layout.should.be.false;
     });
 
     after(function(done){
