@@ -231,7 +231,7 @@ Hunt.on('httpError', function(err){
   Hunt.sendEmail(
     process.env.ADMIN_EMAIL || 'support@example.com',
     'Our application did a bad bad thing!',
-    JSON.stringify(err.stack),
+    JSON.stringify(err.stack, ['stack', 'message'], 2),
     console.error);
 });
 
