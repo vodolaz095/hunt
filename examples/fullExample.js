@@ -223,16 +223,12 @@ Hunt.on('httpSuccess', function(httpSuccess){
 });
 
 //event that is emmited on any error throwed in any of controllers
-//also we notify admin that there is some sort of error
+//also we notify admin by email - (see http://huntjs.herokuapp.com/documentation/config.html - adminEmail)
+//that there is some sort of error
 //by default it is done by direct mail transport, so it will work alwayes,
 //but the message will likely be marked as spam
 Hunt.on('httpError', function(err){
   console.error(err);
-  Hunt.sendEmail(
-    process.env.ADMIN_EMAIL || 'support@example.com',
-    'Our application did a bad bad thing!',
-    JSON.stringify(err.stack, ['stack', 'message'], 2),
-    console.error);
 });
 
 Hunt.once('start', function (startParameters) {

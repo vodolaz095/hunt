@@ -64,14 +64,14 @@ Hunt.once('start', function () {
   }, 500);
 });
 
-Hunt.on('httpError', function(err){
-  console.error(err);
-//also we notify admin that there is some sort of error
+//event that is emmited on any error throwed in any of controllers
+//also we notify admin by email - (see http://huntjs.herokuapp.com/documentation/config.html - adminEmail)
+//that there is some sort of error
 //by default it is done by direct mail transport, so it will work alwayes,
 //but the message will likely be marked as spam
-  Hunt.sendEmail('support@example.com', 'Our application did a bad bad thing!', JSON.stringify(err), console.error);
+Hunt.on('httpError', function(err){
+  console.error(err);
 });
-
 
 /*
  * Starting cluster of webserveres
