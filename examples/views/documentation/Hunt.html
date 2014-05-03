@@ -4690,7 +4690,9 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     
     <div class="description">
-        Broadcast message by socket.io to all socket.io clients both authorized and non authorized site visitors
+        Broadcast message from core
+via socket.io to all webserver clients - both authorized users
+and non authorized site visitors
     </div>
     
 
@@ -4733,7 +4735,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/socket.io.js#L84">lib/generators/http/socket.io.js line 84</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/socket.io.js#L83">lib/generators/http/socket.io.js line 83</a>
     </li></ul></dd>
     
     
@@ -6156,7 +6158,9 @@ for logging.
     
     
     <div class="description">
-        Event is emitted each time the socket.io client sends the message by this client side javascript code
+        Event is emitted each time the socket.io client sends
+the message by this client side javascript code.
+See <a href="https://github.com/LearnBoost/socket.io/wiki/Exposed-events#server "> official socket.io wiki </a> for details
     </div>
     
 
@@ -6225,7 +6229,7 @@ for logging.
             
             
             
-            <td class="description last">user, associated with this socket.io socket, or null if user is not authorized</td>
+            <td class="description last">user, associated with this socket, or null if user is not authenticated</td>
         </tr>
 	
 	
@@ -6251,7 +6255,7 @@ for logging.
             
             
             
-            <td class="description last"></td>
+            <td class="description last">message, issued by this socket.io client</td>
         </tr>
 	
 	
@@ -6746,7 +6750,30 @@ the user have email address, of course
             
             
             
-            <td class="description last"></td>
+            <td class="description last">message object</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">type of socket.io event to emit, default is `notify`</td>
         </tr>
 	
 	
@@ -11608,7 +11635,9 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     
     <div class="description">
-        Broadcast message by socket.io to all socket.io clients both authorized and non authorized site visitors
+        Broadcast message from core
+via socket.io to all webserver clients - both authorized users
+and non authorized site visitors
     </div>
     
 
@@ -11651,7 +11680,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/socket.io.js#L84">lib/generators/http/socket.io.js line 84</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/socket.io.js#L83">lib/generators/http/socket.io.js line 83</a>
     </li></ul></dd>
     
     
@@ -13074,7 +13103,9 @@ for logging.
     
     
     <div class="description">
-        Event is emitted each time the socket.io client sends the message by this client side javascript code
+        Event is emitted each time the socket.io client sends
+the message by this client side javascript code.
+See <a href="https://github.com/LearnBoost/socket.io/wiki/Exposed-events#server "> official socket.io wiki </a> for details
     </div>
     
 
@@ -13143,7 +13174,7 @@ for logging.
             
             
             
-            <td class="description last">user, associated with this socket.io socket, or null if user is not authorized</td>
+            <td class="description last">user, associated with this socket, or null if user is not authenticated</td>
         </tr>
 	
 	
@@ -13169,7 +13200,7 @@ for logging.
             
             
             
-            <td class="description last"></td>
+            <td class="description last">message, issued by this socket.io client</td>
         </tr>
 	
 	
@@ -13664,7 +13695,30 @@ the user have email address, of course
             
             
             
-            <td class="description last"></td>
+            <td class="description last">message object</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">type of socket.io event to emit, default is `notify`</td>
         </tr>
 	
 	
@@ -13813,5 +13867,5 @@ with payload of user being saved.
 
 
 
-  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Wed Apr 30 2014 04:11:08 GMT+0400 (MSK)</p>
+  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Sun May 04 2014 01:16:26 GMT+0400 (MSK)</p>
 </div>
