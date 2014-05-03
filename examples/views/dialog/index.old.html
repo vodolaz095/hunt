@@ -1,0 +1,28 @@
+<table class="table table-striped">
+<thead>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Status</th>
+  </tr>
+</thead>
+<tbody>
+{{#users}}
+  <tr>
+    <td>
+      <a href="/dialog/{{id}}">{{id}}</a>
+    </td>
+    <td>
+      <a href="/dialog/{{id}}">
+        <img src="{{gravatar80}}"/></a>
+        {{displayName}}
+      </a>
+    </td>
+    <td>
+      {{#online}}<span class="label label-success">Online</span>{{/online}}
+      {{^online}}<span class="label label-default">Offline</span>{{/online}}
+    </td>
+  </tr>
+{{/users}}
+</tbody>
+</table>

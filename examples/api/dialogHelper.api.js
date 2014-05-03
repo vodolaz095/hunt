@@ -1,6 +1,13 @@
 module.exports = exports = function(core){
 
   core.app.get('/dialog', function (req, res) {
+    res.render('dialog/index', {
+      'title': 'Hunt dialog system example',
+      'description': 'Choose somebody to talk to.'
+    });
+  });
+
+  core.app.get('/api/allUsers', function(req, res){
     var skip = 50*parseInt(req.query.page);
     req.model.User
       .find()
@@ -8,12 +15,11 @@ module.exports = exports = function(core){
       .limit(50)
       .sort('-_id')
       .exec(function(error, usersFound){
-        res.render('dialog/index', {
-          'title': 'Hunt dialog system example',
-          'description': 'Choose somebody to talk to.',
-          'id': req.query.id,
-          'users': usersFound
-        });
+        if(error) {
+          throw error;
+        } else {
+          res.jsonp(usersFound);
+        }
       });
   });
 
