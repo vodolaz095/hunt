@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/vodolaz095/hunt.png?label=ready&title=Ready)](https://waffle.io/vodolaz095/hunt)
 HuntJS
 ====================
 
