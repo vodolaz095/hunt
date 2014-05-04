@@ -35,9 +35,12 @@ var config = {
     'google': true,
 //authorization by Steam openid account, GET /auth/steam
     'steam': true,
-//authorization by Paypal openid account, GET /auth/steam
+//authorization by Paypal openid account, GET /auth/paypal
     'paypal': true,
-
+//authorization by Intuit openid account, GET /auth/intuit
+    'intuit': true,
+//authorization by Yahoo openid account, GET /auth/yahoo
+    'yahoo': true,
 
 // Github oAuth strategy, GET /auth/github
 //populated from enviroment values

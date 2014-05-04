@@ -303,7 +303,7 @@ This route can be redefined by <a href="Hunt.html#extendRoutes"><code>Hunt#exten
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L90">lib/generators/http/passport.js line 90</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L94">lib/generators/http/passport.js line 94</a>
     </li></ul></dd>
     
     
@@ -461,7 +461,7 @@ has fields of `google` set to true
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/intuit.js#L29">lib/passportStrategies/intuit.js line 29</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/google.openid.js#L29">lib/passportStrategies/google.openid.js line 29</a>
     </li></ul></dd>
     
     
@@ -489,7 +489,7 @@ has fields of `google` set to true
         
             
 <dt>
-    <h4 class="name" id="GET /auth/google"><span class="type-signature"></span>GET /auth/google<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="GET /auth/intuit"><span class="type-signature"></span>GET /auth/intuit<span class="signature">()</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -507,7 +507,7 @@ After authorization user is redirected to
 or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
 endpoints.
 This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
-has fields of `google` set to true
+has fields of `intuit` set to true
     </div>
     
 
@@ -540,165 +540,7 @@ has fields of `google` set to true
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/stream.js#L29">lib/passportStrategies/stream.js line 29</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="GET /auth/google"><span class="type-signature"></span>GET /auth/google<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        Start openId authorization with google as provider.
-If user was authorized before the authorization request is done,
-the oauth profile is attached to <code>User#keychain</code> of current user.
-If user was present in database, he/she is authorized.
-If user was not present in database, his/her account is created as verified.
-After authorization user is redirected to
-<a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
-or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
-endpoints.
-This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
-has fields of `google` set to true
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/google.js#L29">lib/passportStrategies/google.js line 29</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="GET /auth/google"><span class="type-signature"></span>GET /auth/google<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        Start openId authorization with google as provider.
-If user was authorized before the authorization request is done,
-the oauth profile is attached to <code>User#keychain</code> of current user.
-If user was present in database, he/she is authorized.
-If user was not present in database, his/her account is created as verified.
-After authorization user is redirected to
-<a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
-or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
-endpoints.
-This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
-has fields of `google` set to true
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/paypal.js#L29">lib/passportStrategies/paypal.js line 29</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/intuit.openid.js#L27">lib/passportStrategies/intuit.openid.js line 27</a>
     </li></ul></dd>
     
     
@@ -768,7 +610,165 @@ to /
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L106">lib/generators/http/passport.js line 106</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L110">lib/generators/http/passport.js line 110</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="GET /auth/paypal"><span class="type-signature"></span>GET /auth/paypal<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Start openId authorization with google as provider.
+If user was authorized before the authorization request is done,
+the oauth profile is attached to <code>User#keychain</code> of current user.
+If user was present in database, he/she is authorized.
+If user was not present in database, his/her account is created as verified.
+After authorization user is redirected to
+<a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
+or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
+endpoints.
+This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
+has fields of `paypal` set to true
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/paypal.openid.js#L39">lib/passportStrategies/paypal.openid.js line 39</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="GET /auth/steam"><span class="type-signature"></span>GET /auth/steam<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Start openId authorization with steam as provider.
+If user was authorized before the authorization request is done,
+the oauth profile is attached to <code>User#keychain</code> of current user.
+If user was present in database, he/she is authorized.
+If user was not present in database, his/her account is created as verified.
+After authorization user is redirected to
+<a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
+or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
+endpoints.
+This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
+has fields of `google` set to true
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/steam.openid.js#L33">lib/passportStrategies/steam.openid.js line 33</a>
     </li></ul></dd>
     
     
@@ -841,7 +841,7 @@ This route can be redefined by <a href="Hunt.html#extendRoutes"><code>Hunt#exten
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L73">lib/generators/http/passport.js line 73</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L77">lib/generators/http/passport.js line 77</a>
     </li></ul></dd>
     
     
@@ -1036,7 +1036,7 @@ VK_SCOPE property is also used for setting access rules for vk.com application
     
     
     <div class="description">
-        Start openId authorization with google as provider.
+        Start openId authorization with Yahoo as provider.
 If user was authorized before the authorization request is done,
 the oauth profile is attached to <code>User#keychain</code> of current user.
 If user was present in database, he/she is authorized.
@@ -1079,7 +1079,7 @@ has fields of `yahoo` set to true
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/yahoo.js#L29">lib/passportStrategies/yahoo.js line 29</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/yahoo.openid.js#L26">lib/passportStrategies/yahoo.openid.js line 26</a>
     </li></ul></dd>
     
     
@@ -1197,7 +1197,7 @@ to /
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L113">lib/generators/http/passport.js line 113</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L117">lib/generators/http/passport.js line 117</a>
     </li></ul></dd>
     
     
@@ -1242,5 +1242,5 @@ to /
 
 
 
-  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Sun May 04 2014 18:12:59 GMT+0400 (MSK)</p>
+  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Sun May 04 2014 19:15:59 GMT+0400 (MSK)</p>
 </div>
