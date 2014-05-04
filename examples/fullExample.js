@@ -32,7 +32,12 @@ var config = {
     'resetPassword': true, //allow user to reset password for account
 
 //authorization by gmail openid account, GET /auth/google
-    'google': true
+    'google': true,
+//authorization by Steam openid account, GET /auth/steam
+    'steam': true,
+//authorization by Paypal openid account, GET /auth/steam
+    'paypal': true,
+
 
 // Github oAuth strategy, GET /auth/github
 //populated from enviroment values
