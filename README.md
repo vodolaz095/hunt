@@ -41,6 +41,11 @@ This is short, basic, "hello, world!" example, to start http server on 3000 port
 
 You can hire the author of this package by Odesk - [https://www.odesk.com/users/~0120ba573d09c66c51](https://www.odesk.com/users/~0120ba573d09c66c51s)
 
+**Use cases**
+
+[http://pageshooter.herokuapp.com/](http://pageshooter.herokuapp.com/) - application to make site screenshots as PNG images. Some income from Google Adsense.
+
+
 **What do you get from the box?**
 
 Just run `npm install hunt` and you get ready to use high level nodejs framework,
