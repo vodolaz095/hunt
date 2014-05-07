@@ -265,7 +265,7 @@ describe('Hunt builds single threaded webserver application', function () {
     });
 
     it('emits proper `start` event', function () {
-      startedType.should.be.eql({'type': 'webserver', 'port': Hunt.config.port});
+      startedType.should.be.eql({'type': 'webserver', 'port': Hunt.config.port, 'address': Hunt.config.address});
     });
 
     it('emits proper `httpSuccess` event for route /', function () {

@@ -108,7 +108,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L984">index.js line 984</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L991">index.js line 991</a>
     </li></ul></dd>
     
     
@@ -1411,7 +1411,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L954">index.js line 954</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L961">index.js line 961</a>
     </li></ul></dd>
     
     
@@ -3170,7 +3170,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L913">index.js line 913</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L920">index.js line 920</a>
     </li></ul></dd>
     
     
@@ -3339,7 +3339,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L930">index.js line 930</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L937">index.js line 937</a>
     </li></ul></dd>
     
     
@@ -3576,7 +3576,7 @@ Calls can be chained.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L942">index.js line 942</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L949">index.js line 949</a>
     </li></ul></dd>
     
     
@@ -3798,7 +3798,7 @@ By default it spawns 1 process per CPU core.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L732">index.js line 732</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L787">index.js line 787</a>
     </li></ul></dd>
     
     
@@ -3951,7 +3951,7 @@ It is worth notice, that in this case telnet server listens on `Hunt.config.port
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L753">index.js line 753</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L808">index.js line 808</a>
     </li></ul></dd>
     
     
@@ -4137,7 +4137,7 @@ in each of telnet server processes.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L708">index.js line 708</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L763">index.js line 763</a>
     </li></ul></dd>
     
     
@@ -4289,7 +4289,7 @@ in each of telnet server processes.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L865">index.js line 865</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L688">index.js line 688</a>
     </li></ul></dd>
     
     
@@ -4447,7 +4447,7 @@ in web server processes.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L684">index.js line 684</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L739">index.js line 739</a>
     </li></ul></dd>
     
     
@@ -4504,7 +4504,7 @@ in web server processes.
         
             
 <dt>
-    <h4 class="name" id="startWebServer"><span class="type-signature"></span>startWebServer<span class="signature">(port)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="startWebServer"><span class="type-signature"></span>startWebServer<span class="signature">(port, address)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -4571,6 +4571,32 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
         </tr>
 	
 	
+	
+        <tr>
+            
+                <td class="name"><code>address</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">what address to bind to. Default is '0.0.0.0' - all IPv4 addresses. The address is populated from environment address of HUNTJS_ADDR</td>
+        </tr>
+	
+	
 	</tbody>
 </table>
     
@@ -4625,6 +4651,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
         
     <pre class="prettyprint"><code>```javascript
     Hunt.startWebServer(80);
+    Hunt.startWebServer(80, '0.0.0.0');
 ```</code></pre>
 
     
@@ -4674,7 +4701,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L965">index.js line 965</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L972">index.js line 972</a>
     </li></ul></dd>
     
     
@@ -5959,6 +5986,29 @@ for logging.
         </tr>
 	
 	
+	
+        <tr>
+            
+                <td class="name"><code>address</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">with a value of address application is bound to</td>
+        </tr>
+	
+	
 	</tbody>
 </table></dl>
         
@@ -5983,7 +6033,7 @@ for logging.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L668">index.js line 668</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L671">index.js line 671</a>
     </li></ul></dd>
     
     
@@ -6099,7 +6149,7 @@ for logging.
 	
         <tr>
             
-                <td class="name"><code>type</code></td>
+                <td class="name"><code>port</code></td>
             
             
             <td class="type">
@@ -6116,6 +6166,29 @@ for logging.
             
             
             <td class="description last">with a value of string of port number</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>address</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">with a value of address application is bound to</td>
         </tr>
 	
 	
@@ -6143,7 +6216,7 @@ for logging.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L896">index.js line 896</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L721">index.js line 721</a>
     </li></ul></dd>
     
     
@@ -8328,7 +8401,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L954">index.js line 954</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L961">index.js line 961</a>
     </li></ul></dd>
     
     
@@ -10087,7 +10160,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L913">index.js line 913</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L920">index.js line 920</a>
     </li></ul></dd>
     
     
@@ -10256,7 +10329,7 @@ Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> stand
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L930">index.js line 930</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L937">index.js line 937</a>
     </li></ul></dd>
     
     
@@ -10493,7 +10566,7 @@ Calls can be chained.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L942">index.js line 942</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L949">index.js line 949</a>
     </li></ul></dd>
     
     
@@ -10715,7 +10788,7 @@ By default it spawns 1 process per CPU core.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L732">index.js line 732</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L787">index.js line 787</a>
     </li></ul></dd>
     
     
@@ -10868,7 +10941,7 @@ It is worth notice, that in this case telnet server listens on `Hunt.config.port
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L753">index.js line 753</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L808">index.js line 808</a>
     </li></ul></dd>
     
     
@@ -11054,7 +11127,7 @@ in each of telnet server processes.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L708">index.js line 708</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L763">index.js line 763</a>
     </li></ul></dd>
     
     
@@ -11206,7 +11279,7 @@ in each of telnet server processes.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L865">index.js line 865</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L688">index.js line 688</a>
     </li></ul></dd>
     
     
@@ -11364,7 +11437,7 @@ in web server processes.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L684">index.js line 684</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L739">index.js line 739</a>
     </li></ul></dd>
     
     
@@ -11421,7 +11494,7 @@ in web server processes.
         
             
 <dt>
-    <h4 class="name" id="startWebServer"><span class="type-signature"></span>startWebServer<span class="signature">(port)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="startWebServer"><span class="type-signature"></span>startWebServer<span class="signature">(port, address)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -11488,6 +11561,32 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
         </tr>
 	
 	
+	
+        <tr>
+            
+                <td class="name"><code>address</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">what address to bind to. Default is '0.0.0.0' - all IPv4 addresses. The address is populated from environment address of HUNTJS_ADDR</td>
+        </tr>
+	
+	
 	</tbody>
 </table>
     
@@ -11542,6 +11641,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
         
     <pre class="prettyprint"><code>```javascript
     Hunt.startWebServer(80);
+    Hunt.startWebServer(80, '0.0.0.0');
 ```</code></pre>
 
     
@@ -11591,7 +11691,7 @@ It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L965">index.js line 965</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L972">index.js line 972</a>
     </li></ul></dd>
     
     
@@ -12876,6 +12976,29 @@ for logging.
         </tr>
 	
 	
+	
+        <tr>
+            
+                <td class="name"><code>address</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">with a value of address application is bound to</td>
+        </tr>
+	
+	
 	</tbody>
 </table></dl>
         
@@ -12900,7 +13023,7 @@ for logging.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L668">index.js line 668</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L671">index.js line 671</a>
     </li></ul></dd>
     
     
@@ -13016,7 +13139,7 @@ for logging.
 	
         <tr>
             
-                <td class="name"><code>type</code></td>
+                <td class="name"><code>port</code></td>
             
             
             <td class="type">
@@ -13033,6 +13156,29 @@ for logging.
             
             
             <td class="description last">with a value of string of port number</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>address</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">with a value of address application is bound to</td>
         </tr>
 	
 	
@@ -13060,7 +13206,7 @@ for logging.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L896">index.js line 896</a>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L721">index.js line 721</a>
     </li></ul></dd>
     
     
@@ -13867,5 +14013,5 @@ with payload of user being saved.
 
 
 
-  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Sun May 04 2014 19:29:02 GMT+0400 (MSK)</p>
+  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Wed May 07 2014 04:26:45 GMT+0400 (MSK)</p>
 </div>

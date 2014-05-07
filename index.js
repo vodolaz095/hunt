@@ -652,19 +652,22 @@ function Hunt(config) {
    * Starts Hunt application as single threaded web server
    * It have redis client/models, expressJS application and event emitting system exposed.
    * It makes Hunt to emit event of "start" with payload of `{'type':'webserver',  'port':80}`
-   * @param {(number|null)} port what port to use, if null - use port value from config
+   * @param {(number|null)} port - what port to use, if null - use port value from config
+   * @param {(string|null)} address - what address to bind to. Default is '0.0.0.0' - all IPv4 addresses. The address is populated from environment address of HUNTJS_ADDR
    * @example
    * ```javascript
    *     Hunt.startWebServer(80);
+   *     Hunt.startWebServer(80, '0.0.0.0');
    * ```
    */
-  this.startWebServer = function (port) {
-    var p = port || this.config.port;
-    console.log(('Trying to start Hunt as web server on port ' + p + '...').magenta);
+  this.startWebServer = function (port, address) {
+    var p = port || this.config.port,
+      address = address || this.config.address || '0.0.0.0';
+    console.log(('Trying to start Hunt as web server on '+address+':'+ p + '...').magenta);
     injectModels(this);
     buildExpressApp(this);
     var h = this;
-    this.httpServer.listen(p, function () {
+    this.httpServer.listen(p, address, function () {
     /**
      * Emitted when Hunt is started as webserver process
      *
@@ -674,12 +677,64 @@ function Hunt(config) {
      * @type {object}
      * @property {string} type - with a value of string of 'webserver'
      * @property {number} port - with a value of port this application listens to
+     * @property {string} address - with a value of address application is bound to
      */
-        h.emit('start', {'type': 'webserver', 'port': p});
+        h.emit('start', {'type': 'webserver', 'port': p, 'address':address});
         console.log(('Started Hunt as web server on port ' + p +' with PID#'+process.pid+'!').green);
         prepared = true;
     });
   };
+
+  /**
+    * @method Hunt#startTelnetServer
+    * @param {(number|null)} port what port to use, if null - use port value from config
+    *
+    * @since 0.0.18
+    * @description
+    * Start Hunt as single process telnet server
+    * @example
+    * ```javascript
+    *     Hunt.startTelnetServer(3003);
+    * ```
+    */
+  this.startTelnetServer = function(port){
+    var p = port || this.config.port,
+      address = address || this.config.address || '0.0.0.0';
+    console.log(('Trying to start Hunt as telnet server on port ' + p + '...').magenta);
+    this.extendCore('telnetHandler', require('./lib/generators/telnet/telnet.js'));
+    injectModels(this);
+    buildTelnet(this);
+    prepared = true;
+    var RAIServer = require("rai").RAIServer,
+      telnetServer = new RAIServer(this.config.telnetServer);
+
+    telnetServer.on('connect', this.telnetHandler);
+
+    telnetServer.on('error', function(error){
+      throw error;
+    });
+    var thishunt = this;
+    telnetServer.listen(p, address, function(error){
+      if(error){
+        throw error;
+      } else {
+        /**
+         * Emitted when Hunt is started as telnet process
+         *
+         * @see Hunt#startTelnetServer
+         * @event Hunt#start
+         * @type {object}
+         * @property {string} type - with a value of string of 'telnet'
+         * @property {string} port - with a value of string of port number
+         * @property {string} address - with a value of address application is bound to
+         */
+        thishunt.emit('start', {'type': 'telnet','port':p, 'address':address});
+        console.log(('Started Hunt as telnet server on '+address+':'+p+'!').green);
+      }
+    });
+    return this;
+  };
+
 
   /**
    * @method Hunt#startWebCluster
@@ -861,55 +916,7 @@ function Hunt(config) {
       throw new Error('This configuration requires more workers, than allowed by `config.maxWorkers`! ');
     }
   };
-
-  /**
-    * @method Hunt#startTelnetServer
-    * @param {(number|null)} port what port to use, if null - use port value from config
-    * @since 0.0.18
-    * @description
-    * Start Hunt as single process telnet server
-    * @example
-    * ```javascript
-    *     Hunt.startTelnetServer(3003);
-    * ```
-    */
-  this.startTelnetServer = function(port){
-    var p = port || this.config.port;
-    console.log(('Trying to start Hunt as telnet server on port ' + p + '...').magenta);
-    this.extendCore('telnetHandler', require('./lib/generators/telnet/telnet.js'));
-    injectModels(this);
-    buildTelnet(this);
-    prepared = true;
-    var RAIServer = require("rai").RAIServer,
-      telnetServer = new RAIServer(this.config.telnetServer);
-
-    telnetServer.on('connect', this.telnetHandler);
-
-    telnetServer.on('error', function(error){
-      throw error;
-    });
-    var thishunt = this;
-    telnetServer.listen(p, function(error){
-      if(error){
-        throw error;
-      } else {
-        /**
-         * Emitted when Hunt is started as telnet process
-         *
-         * @see Hunt#startTelnetServer
-         * @event Hunt#start
-         * @type {object}
-         * @property {string} type - with a value of string of 'telnet'
-         * @property {string} type - with a value of string of port number
-         */
-        thishunt.emit('start', {'type': 'telnet','port':p});
-        console.log(('Started Hunt as telnet server on port '+p+'!').green);
-      }
-    });
-    return this;
-  }
-}
-
+};
 /**
  * @method Hunt#on
  * @param {string} eventName
