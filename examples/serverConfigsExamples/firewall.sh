@@ -13,6 +13,9 @@ iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP
 iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP
 iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP
 
+#accept established connections
+iptables -A INPUT -p ALL -m state --state ESTABLISHED,RELATED  -j ACCEPT
+
 #to access localhost
 iptables -A INPUT -i lo -j ACCEPT
 
