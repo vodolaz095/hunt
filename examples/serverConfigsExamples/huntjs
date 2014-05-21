@@ -1,0 +1,33 @@
+#! /bin/sh
+# HuntJS Application
+###
+# chkconfig: 235 98 55
+# description: Manages the HuntJS application via the chkconfig command
+###
+
+case "$1" in
+  start)
+        echo -n "Starting HuntJS application"
+        #To run it as root:
+        #/path/to/command/to/start/new-service
+        #Or to run it as some other user:
+        /bin/su -l nodejs -c 'node /home/huntjs/huntjsApp/index.js'
+        echo "."
+        ;;
+  stop)
+        echo -n "Stopping HuntJS application"
+        #To run it as root:
+        #/path/to/command/to/stop/new-service
+        #Or to run it as some other user:
+        #/bin/su - username -c /path/to/command/to/stop/new-service
+        killall node
+        echo "."
+        ;;
+
+  *)
+        echo "Usage: /sbin/service huntjs {start|stop}"
+        exit 1
+esac
+
+exit 0
+
