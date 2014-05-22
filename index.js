@@ -353,12 +353,14 @@ function Hunt(config) {
    *     hunt.extendMiddleware(function(core){
    *       return function(req, res, next){
    *         res.setHeader('X-hunt','YES!');
+   *         next();
    *       };
    *     };
    *
    *     hunt.extendMiddleware('production',function(core){
    *       return function(req, res, next){
    *         res.setHeader('X-production','YES!');
+   *         next();
    *       };
    *     };
    *
