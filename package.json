@@ -78,7 +78,7 @@
     "passport-intuit": "*",
     "passport-paypal": "*",
     "passport-steam": "*",
-    "mongoose": "*",
+    "mongoose": "3.8.12",
     "sequelize": "*",
     "colors": "*",
     "nodemailer": "*",
@@ -88,9 +88,9 @@
     "hiredis": "*"
   },
   "devDependencies": {
-    "mocha": "*",
+    "mocha": ">=1.20.0",
     "istanbul": "*",
-    "should": "*",
+    "should": "3.x",
     "jsdoc": "*",
     "request":"latest",
     "sqlite3":"*"
