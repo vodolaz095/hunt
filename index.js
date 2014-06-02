@@ -832,7 +832,7 @@ function Hunt(config) {
 
     var cluster = require('cluster'),
       numCPUs = require('os').cpus().length,
-      maxWorkers = Math.min(this.config.maxWorkers, numCPUs) - 1, //do not forget about MASTER process
+      maxWorkers = Math.min(this.config.maxWorkers, numCPUs),
       runtimeConfig = {},
       i = 0;
 
@@ -886,7 +886,7 @@ function Hunt(config) {
 
         cluster.on('exit', function (worker, code, signal) {
           var exitCode = worker.process.exitCode;
-          console.log(('Cluster : Worker #' + worker.process.pid + ' died (' + exitCode + ')! Trying to spawn one more time...').red);
+          console.log(('Cluster : Worker #' + worker.process.pid + ' died (' + exitCode + ')! Trying to spawn spare one...').red);
           cluster.fork();
         });
         this.startBackGround(); // the master process is ran as background application
