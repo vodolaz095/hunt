@@ -1,6 +1,6 @@
 /*
  * This scripts shows how we can work with socket.io
- * notifications sendby Hunt framework.
+ * notifications send by Hunt framework.
  */
 var socket = io.connect('', {
   'connect timeout': 1000
