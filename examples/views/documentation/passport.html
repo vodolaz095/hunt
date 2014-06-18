@@ -1,656 +1,531 @@
 <div id="docNav">
-    <h2><a href="/documentation/index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="Group.html">Group</a></li><li><a href="GroupMessage.html">GroupMessage</a></li><li><a href="HTTPAuthorizationAPI.html">HTTPAuthorizationAPI</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:httpError">httpError</a></li><li><a href="Hunt.html#event:httpSuccess">httpSuccess</a></li><li><a href="Hunt.html#event:notify">notify</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:message:sio">message:sio</a></li><li><a href="Hunt.html#event:notify:all">notify:all</a></li><li><a href="Hunt.html#event:notify:email">notify:email</a></li><li><a href="Hunt.html#event:notify:sio">notify:sio</a></li><li><a href="Hunt.html#event:user:save">user:save</a></li></ul>
+    <h2><a href="/documentation/index.html">Index</a></h2>
+
+    <h3>Classes</h3>
+    <ul>
+        <li><a href="config.html">config</a></li>
+        <li><a href="Group.html">Group</a></li>
+        <li><a href="GroupMessage.html">GroupMessage</a></li>
+        <li><a href="HTTPAuthorizationAPI.html">HTTPAuthorizationAPI</a></li>
+        <li><a href="Hunt.html">Hunt</a></li>
+        <li><a href="Message.html">Message</a></li>
+        <li><a href="model.html">model</a></li>
+        <li><a href="passport.html">passport</a></li>
+        <li><a href="request.html">request</a></li>
+        <li><a href="response.html">response</a></li>
+        <li><a href="User.html">User</a></li>
+    </ul>
+    <h3>Events</h3>
+    <ul>
+        <li><a href="Hunt.html#event:broadcast">broadcast</a></li>
+        <li><a href="Hunt.html#event:httpError">httpError</a></li>
+        <li><a href="Hunt.html#event:httpSuccess">httpSuccess</a></li>
+        <li><a href="Hunt.html#event:notify">notify</a></li>
+        <li><a href="Hunt.html#event:start">start</a></li>
+        <li><a href="Hunt.html#event:message:sio">message:sio</a></li>
+        <li><a href="Hunt.html#event:notify:all">notify:all</a></li>
+        <li><a href="Hunt.html#event:notify:email">notify:email</a></li>
+        <li><a href="Hunt.html#event:notify:sio">notify:sio</a></li>
+        <li><a href="Hunt.html#event:user:save">user:save</a></li>
+    </ul>
 </div>
 <div id="documentation">
-    <h1 class="page-title">Class: passport</h1>
-    
-
+<h1 class="page-title">Class: passport</h1>
 
 
 <section>
 
-    <h2>
+<h2>
     passport
-    </h2>
-    
-        <div class="class-description">Object that hold the passport.js configuration parameters</div>
-    
+</h2>
+
+<div class="class-description">Object that hold the passport.js configuration parameters</div>
+
 
 <article>
-    <div class="container-overview">
-    
+<div class="container-overview">
 
-    
-        
+
 <dt>
-    <h4 class="name" id="passport"><span class="type-signature"></span>new passport<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-    
+<h4 class="name" id="passport"><span class="type-signature"></span>new passport<span class="signature">()</span><span
+        class="type-signature"></span></h4>
+
+
 </dt>
 <dd>
-    
-    
 
-    
-    
-    
-    
-    
-    
-    
+
 <dl class="details">
-    
-        
-        <h5 class="subsection-title">Properties:</h5>
-        
-        <dl>
+
+
+<h5 class="subsection-title">Properties:</h5>
+
+<dl>
 
 <table class="props">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>local</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
+<thead>
+<tr>
+
+    <th>Name</th>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">enable local strategy</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>signUpByEmail</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
+    <th>Type</th>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">user can signup by making POST /auth/signup with email and password, default is true, requires local strategy</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>verifyEmail</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
+    <th class="last">Description</th>
+</tr>
+</thead>
+
+<tbody>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">user have to follow link in email address to verify his account, default is true</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>verifyEmailTemplate</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+<tr>
+
+    <td class="name"><code>local</code></td>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">path to template for verifying email template</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>resetPassword</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
+    <td class="type">
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">allow user to reset password for account, default is true</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>resetPasswordEmailTemplate</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+        <span class="param-type">boolean</span>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">template for email used for reseting password</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>resetPasswordPageTemplate</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+    </td>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">template for page used for reseting password</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>google</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
+    <td class="description last">enable local strategy</td>
+</tr>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">authorization by Google openId - default is false - disabled.</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>yahoo</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
+<tr>
+
+    <td class="name"><code>signUpByEmail</code></td>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">authorization by Yahoo.com openId - default is false - disabled.</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>steam</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
+    <td class="type">
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">authorization by Steam openId - default is false - disabled.</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>paypal</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
+        <span class="param-type">boolean</span>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">authorization by Paypal.com openId - default is false - disabled.</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>intuit</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
+    </td>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">authorization by Intuit.com openId - default is false - disabled.</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>sessionExpireAfterSeconds</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
+    <td class="description last">user can signup by making POST /auth/signup with email and password, default is true,
+        requires local strategy
+    </td>
+</tr>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">time to live of cookie based http sessions, default is 180 seconds.</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>GITHUB_CLIENT_ID</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+<tr>
+
+    <td class="name"><code>verifyEmail</code></td>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">used for github oauth, is populated automatically from enviroment value of the same name, obtainable here <a href="https://github.com/settings/applications">https://github.com/settings/applications</a></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>GITHUB_CLIENT_SECRET</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+    <td class="type">
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">used for github oauth, is populated automatically from enviroment value of the same name, obtainable here <a href="https://github.com/settings/applications">https://github.com/settings/applications</a></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>TWITTER_CONSUMER_KEY</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+        <span class="param-type">boolean</span>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">used for twitter oauth, is populated automatically from enviroment value of the same name, obtainable here <a href="https://dev.twitter.com/">https://dev.twitter.com/</a></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>TWITTER_CONSUMER_SECRET</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+    </td>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">used for twitter oauth, is populated automatically from enviroment value of the same name, obtainable here <a href="https://dev.twitter.com/">https://dev.twitter.com/</a></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>VK_APP_ID</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+    <td class="description last">user have to follow link in email address to verify his account, default is true</td>
+</tr>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">used for vk.com oauth, is populated automatically from enviroment value of the same name, obtainable here <a href="https://vk.com/dev">https://vk.com/dev</a></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>VK_APP_SECRET</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+<tr>
+
+    <td class="name"><code>verifyEmailTemplate</code></td>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">used for vk.com oauth, is populated automatically from enviroment value of the same name, obtainable here <a href="https://vk.com/dev">https://vk.com/dev</a></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>VK_SCOPE</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;string></span>
+    <td class="type">
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">array of scopes, that are required from user to share with application - used in vk.com authorization strategy</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>FACEBOOK_CLIENT_ID</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+        <span class="param-type">string</span>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">used for facebook.com oauth, is populated automatically from enviroment value of the same name, obtainable here <a href="https://developers.facebook.com/">https://developers.facebook.com/</a></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>FACEBOOK_CLIENT_SECRET</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+    </td>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">used for facebook.com oauth, is populated automatically from enviroment value of the same name, obtainable here <a href="https://developers.facebook.com/">https://developers.facebook.com/</a></td>
-        </tr>
-	
-	
-	</tbody>
-</table></dl>
-        
-    
-        
-    
-    
-    
+    <td class="description last">path to template for verifying email template</td>
+</tr>
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L133">lib/generators/http/passport.js line 133</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
+
+<tr>
+
+    <td class="name"><code>resetPassword</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">boolean</span>
+
+
+    </td>
+
+
+    <td class="description last">allow user to reset password for account, default is true</td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>resetPasswordEmailTemplate</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">template for email used for reseting password</td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>resetPasswordPageTemplate</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">template for page used for reseting password</td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>google</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">boolean</span>
+
+
+    </td>
+
+
+    <td class="description last">authorization by Google openId - default is false - disabled.</td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>yahoo</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">boolean</span>
+
+
+    </td>
+
+
+    <td class="description last">authorization by Yahoo.com openId - default is false - disabled.</td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>steam</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">boolean</span>
+
+
+    </td>
+
+
+    <td class="description last">authorization by Steam openId - default is false - disabled.</td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>paypal</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">boolean</span>
+
+
+    </td>
+
+
+    <td class="description last">authorization by Paypal.com openId - default is false - disabled.</td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>intuit</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">boolean</span>
+
+
+    </td>
+
+
+    <td class="description last">authorization by Intuit.com openId - default is false - disabled.</td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>sessionExpireAfterSeconds</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">number</span>
+
+
+    </td>
+
+
+    <td class="description last">time to live of cookie based http sessions, default is 180 seconds.</td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>GITHUB_CLIENT_ID</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">used for github oauth, is populated automatically from enviroment value of the same
+        name, obtainable here <a href="https://github.com/settings/applications">https://github.com/settings/applications</a>
+    </td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>GITHUB_CLIENT_SECRET</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">used for github oauth, is populated automatically from enviroment value of the same
+        name, obtainable here <a href="https://github.com/settings/applications">https://github.com/settings/applications</a>
+    </td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>TWITTER_CONSUMER_KEY</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">used for twitter oauth, is populated automatically from enviroment value of the same
+        name, obtainable here <a href="https://dev.twitter.com/">https://dev.twitter.com/</a></td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>TWITTER_CONSUMER_SECRET</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">used for twitter oauth, is populated automatically from enviroment value of the same
+        name, obtainable here <a href="https://dev.twitter.com/">https://dev.twitter.com/</a></td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>VK_APP_ID</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">used for vk.com oauth, is populated automatically from enviroment value of the same
+        name, obtainable here <a href="https://vk.com/dev">https://vk.com/dev</a></td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>VK_APP_SECRET</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">used for vk.com oauth, is populated automatically from enviroment value of the same
+        name, obtainable here <a href="https://vk.com/dev">https://vk.com/dev</a></td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>VK_SCOPE</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">Array.&lt;string></span>
+
+
+    </td>
+
+
+    <td class="description last">array of scopes, that are required from user to share with application - used in vk.com
+        authorization strategy
+    </td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>FACEBOOK_CLIENT_ID</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">used for facebook.com oauth, is populated automatically from enviroment value of the
+        same name, obtainable here <a href="https://developers.facebook.com/">https://developers.facebook.com/</a></td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>FACEBOOK_CLIENT_SECRET</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">used for facebook.com oauth, is populated automatically from enviroment value of the
+        same name, obtainable here <a href="https://developers.facebook.com/">https://developers.facebook.com/</a></td>
+</tr>
+
+
+</tbody>
+</table>
 </dl>
 
-    
-    
 
-    
-
-    
-    
-    
-    
-    
-    
-    
+<dt class="tag-source">Source:</dt>
+<dd class="tag-source">
+    <ul class="dummy">
+        <li>
+            <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L133">lib/generators/http/passport.js
+                line 133</a>
+        </li>
+    </ul>
 </dd>
 
-    
-    </div>
 
-    
-        <h3 class="subsection-title">Extends</h3>
+</dl>
 
-        <ul>
-            <li><a href="config.html">config</a></li>
-        </ul>
-    
 
-    
+</dd>
 
-    
 
-    
+</div>
 
-    
 
-    
+<h3 class="subsection-title">Extends</h3>
 
-    
+<ul>
+    <li><a href="config.html">config</a></li>
+</ul>
 
-    
 
-    
 </article>
 
 </section>
 
 
-
-
-  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Thu Jun 05 2014 02:46:08 GMT+0400 (MSK)</p>
+<p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a> on Sat Jun 14 2014
+    02:57:16 GMT+0400 (MSK)</p>
 </div>

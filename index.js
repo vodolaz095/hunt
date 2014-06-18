@@ -611,8 +611,8 @@ function Hunt(config) {
   }
 
   function buildExpressApp(h){
-    passportGenerator(h, extendPassportStrategiesFunctions, extendRoutesFunctions);
-    appGenerator(h, extendAppFunctions, extendMiddlewareFunctions, extendRoutesFunctions);
+    passportGenerator.call(h, extendPassportStrategiesFunctions, extendRoutesFunctions);
+    appGenerator.call(h, extendAppFunctions, extendMiddlewareFunctions, extendRoutesFunctions);
   }
 
   function buildTelnet(h){
