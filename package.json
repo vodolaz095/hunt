@@ -7,7 +7,7 @@
     "node": ">=0.10.26",
     "npm": ">=1.4.3"
   },
-  "os" : [ "linux" ],
+  "os" : [ "linux", "darwin" ],
   "scripts": {
     "start": "node examples/fullExample.js",
     "test": "./node_modules/.bin/mocha --reporter spec; ./generateDocs.sh",
