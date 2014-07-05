@@ -10,7 +10,8 @@ describe('Authorization by huntkey', function () {
   before(function (done) {
     Hunt = hunt({
       'disableCsrf': true,
-      'huntKey': true
+      'huntKey': true,
+      'huntKeyHeader': true,
     });
 
     Hunt.extendRoutes(function (core) {
