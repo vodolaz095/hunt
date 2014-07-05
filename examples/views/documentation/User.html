@@ -192,7 +192,7 @@
 
 <tr>
 
-    <td class="name"><code>User#apiKey</code></td>
+    <td class="name"><code>User#huntKey</code></td>
 
 
     <td class="type">
@@ -212,7 +212,7 @@
 
 <tr>
 
-    <td class="name"><code>User#apiKeyCreatedAt</code></td>
+    <td class="name"><code>User#huntKeyCreatedAt</code></td>
 
 
     <td class="type">
@@ -564,296 +564,6 @@
 <dl>
 
 <dt>
-<h4 class="name" id="findOneByApiKey"><span class="type-signature">&lt;static> </span>findOneByApiKey<span
-        class="signature">(apiKey, callback)</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>apiKey</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>callback</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">function</span>
-
-
-            </td>
-
-
-            <td class="description last">function(err,userFound)</td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L367">lib/models/user.mongoose.js
-                        line 367</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="findOneByApiKeyAndResetPassword"><span class="type-signature">&lt;static> </span>findOneByApiKeyAndResetPassword<span
-        class="signature">(apiKey, password, callback)</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        This function is used for reseting users password by link in email with submitting form later
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>apiKey</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="description last">apiKey to use</td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>password</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="description last">new password to set</td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>callback</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">function</span>
-
-
-            </td>
-
-
-            <td class="description last">function(error, userFoundAndUpdated) is fired when user is saved</td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L483">lib/models/user.mongoose.js
-                        line 483</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="findOneByApiKeyAndVerifyEmail"><span class="type-signature">&lt;static> </span>findOneByApiKeyAndVerifyEmail<span
-        class="signature">(apiKey, callback)</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>apiKey</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>callback</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">function</span>
-
-
-            </td>
-
-
-            <td class="description last">function(error, userSigned){}</td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L462">lib/models/user.mongoose.js
-                        line 462</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
 <h4 class="name" id="findOneByEmail"><span class="type-signature">&lt;static> </span>findOneByEmail<span
         class="signature">(email, callback)</span><span class="type-signature"></span></h4>
 
@@ -931,6 +641,296 @@
                 <li>
                     <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L359">lib/models/user.mongoose.js
                         line 359</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="findOneByHuntKey"><span class="type-signature">&lt;static> </span>findOneByHuntKey<span
+        class="signature">(huntKey, callback)</span><span class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>huntKey</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">string</span>
+
+
+            </td>
+
+
+            <td class="description last"></td>
+        </tr>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">function(err,userFound)</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L367">lib/models/user.mongoose.js
+                        line 367</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="findOneByHuntKeyAndResetPassword"><span class="type-signature">&lt;static> </span>findOneByHuntKeyAndResetPassword<span
+        class="signature">(huntKey, password, callback)</span><span class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        This function is used for reseting users password by link in email with submitting form later
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>huntKey</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">string</span>
+
+
+            </td>
+
+
+            <td class="description last">huntKey to use</td>
+        </tr>
+
+
+        <tr>
+
+            <td class="name"><code>password</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">string</span>
+
+
+            </td>
+
+
+            <td class="description last">new password to set</td>
+        </tr>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">function(error, userFoundAndUpdated) is fired when user is saved</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L483">lib/models/user.mongoose.js
+                        line 483</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="findOneByHuntKeyAndVerifyEmail"><span class="type-signature">&lt;static> </span>findOneByHuntKeyAndVerifyEmail<span
+        class="signature">(huntKey, callback)</span><span class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>huntKey</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">string</span>
+
+
+            </td>
+
+
+            <td class="description last"></td>
+        </tr>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">function(error, userSigned){}</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L462">lib/models/user.mongoose.js
+                        line 462</a>
                 </li>
             </ul>
         </dd>
@@ -1059,7 +1059,7 @@
 
 
     <div class="description">
-        Find one user by _id, username,email, apiKey
+        Find one user by _id, username,email, huntKey
     </div>
 
 
@@ -2226,7 +2226,7 @@
             </td>
 
 
-            <td class="description last">function(err, newApiKey)</td>
+            <td class="description last">function(err, newhuntKey)</td>
         </tr>
 
 
@@ -3702,6 +3702,6 @@
 </section>
 
 
-<p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha8</a> on Thu Jun 26 2014
-    23:26:42 GMT+0400 (MSK)</p>
+<p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha8</a> on Sun Jul 06 2014
+    03:42:45 GMT+0400 (MSK)</p>
 </div>

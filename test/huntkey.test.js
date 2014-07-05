@@ -3,7 +3,7 @@ var hunt = require('./../index.js'),
 
 require('should');
 
-describe('Authorization by huntkey',function(){
+describe('Authorization by huntkey', function () {
   var Hunt,
     user;
 
@@ -32,30 +32,10 @@ describe('Authorization by huntkey',function(){
   });
 
 
-  describe('works for GET request with valid apiKey', function () {
+  describe('works for GET request with valid huntKey', function () {
     var r, b;
     before(function (done) {
-      request.get('http://localhost:3004/?huntKey=' + user.apiKey, function (err, response, body) {
-        r = response;
-        b = body;
-        done(err);
-      });
-    });
-
-    it('and authorize user needed', function () {
-      r.statusCode.should.be.equal(200);
-      b.should.be.eql(user.id);
-    });
-    
-    it('sets the cache-control:private header', function(){
-      r.headers['cache-control'].should.be.equal('private');
-    });
-  });
-
-  describe('works for POST request with valid apiKey', function () {
-    var r, b;
-    before(function (done) {
-      request.post('http://localhost:3004/', {form: {'huntKey': user.apiKey}}, function (err, response, body) {
+      request.get('http://localhost:3004/?huntKey=' + user.huntKey, function (err, response, body) {
         r = response;
         b = body;
         done(err);
@@ -67,20 +47,40 @@ describe('Authorization by huntkey',function(){
       b.should.be.eql(user.id);
     });
 
-    it('sets the cache-control:private header', function(){
+    it('sets the cache-control:private header', function () {
+      r.headers['cache-control'].should.be.equal('private');
+    });
+  });
+
+  describe('works for POST request with valid huntKey', function () {
+    var r, b;
+    before(function (done) {
+      request.post('http://localhost:3004/', {form: {'huntKey': user.huntKey}}, function (err, response, body) {
+        r = response;
+        b = body;
+        done(err);
+      });
+    });
+
+    it('and authorize user needed', function () {
+      r.statusCode.should.be.equal(200);
+      b.should.be.eql(user.id);
+    });
+
+    it('sets the cache-control:private header', function () {
       r.headers['cache-control'].should.be.equal('private');
     });
   });
 
 
-  describe('works for custom header with valid apiKey', function () {
+  describe('works for custom header with valid huntKey', function () {
     var r, b;
     before(function (done) {
       request({
         method: 'GET',
         url: 'http://localhost:3004/',
         headers: {
-          'huntKey': user.apiKey
+          'huntKey': user.huntKey
         }
       }, function (err, response, body) {
         r = response;
@@ -94,12 +94,12 @@ describe('Authorization by huntkey',function(){
       b.should.be.eql(user.id);
     });
 
-    it('sets the cache-control:private header', function(){
+    it('sets the cache-control:private header', function () {
       r.headers['cache-control'].should.be.equal('private');
     });
   });
 
-  describe('NOT works for GET request with invalid apiKey', function () {
+  describe('NOT works for GET request with invalid huntKey', function () {
     var r, b;
     before(function (done) {
       request.get('http://localhost:3004/?huntkey=iWannaEatMeat', function (err, response, body) {
@@ -115,7 +115,7 @@ describe('Authorization by huntkey',function(){
     });
   });
 
-  describe('NOT works for POST request with invalid apiKey', function () {
+  describe('NOT works for POST request with invalid huntKey', function () {
     var r, b;
     before(function (done) {
       request.post('http://localhost:3004/', {form: {'huntkey': 'iWannaEatMeat'}}, function (err, response, body) {
@@ -132,7 +132,7 @@ describe('Authorization by huntkey',function(){
   });
 
 
-  describe('NOT works for custom header with invalid apiKey', function () {
+  describe('NOT works for custom header with invalid huntKey', function () {
     var r, b;
     before(function (done) {
       request({

@@ -21,7 +21,7 @@ describe('Hunt resists when we want to extend it\' core in strange way', functio
       'sequelize',
       'version',
       'io',
-      'encrypt','decrypt',
+      'encrypt', 'decrypt',
       'sessionStorage',
       'on', 'once', 'emit'
     ].map(function (name) {
@@ -104,7 +104,7 @@ describe('Hunt builds single threaded background application', function () {
         Hunt.model[name].remove.should.be.a.Function;
         Hunt.model[name].findOneAndRemove.should.be.a.Function;
         Hunt.model[name].findOneAndUpdate.should.be.a.Function;
-        Hunt.model[name].findOneByApiKey.should.be.a.Function;
+        Hunt.model[name].findOneByHuntKey.should.be.a.Function;
         Hunt.model[name].findById.should.be.a.Function;
       });
     });
@@ -166,14 +166,14 @@ describe('Hunt builds single threaded background application', function () {
     });
   });
 
-  describe('Hunt.encrypt and Hunt.decrypt', function(){
-    it('Hunt.encrypt works for defined secret', function(){
-      Hunt.encrypt('daiMne3Ryblya','lalala').should.be.equal('936129d16f1c66a5116e4df797c1eba8');
+  describe('Hunt.encrypt and Hunt.decrypt', function () {
+    it('Hunt.encrypt works for defined secret', function () {
+      Hunt.encrypt('daiMne3Ryblya', 'lalala').should.be.equal('936129d16f1c66a5116e4df797c1eba8');
     });
-    it('Hunt.decrypt works for defined secret', function(){
-      Hunt.decrypt('936129d16f1c66a5116e4df797c1eba8','lalala').should.be.equal('daiMne3Ryblya');
+    it('Hunt.decrypt works for defined secret', function () {
+      Hunt.decrypt('936129d16f1c66a5116e4df797c1eba8', 'lalala').should.be.equal('daiMne3Ryblya');
     });
-    it('works somehow for secret value from config', function(){
+    it('works somehow for secret value from config', function () {
       Hunt.decrypt(Hunt.encrypt('daiMne3Ryblya')).should.be.equal('daiMne3Ryblya');
     });
   });
@@ -303,7 +303,7 @@ describe('Hunt builds single threaded webserver application', function () {
         Hunt.model[name].findOneAndRemove.should.be.a.Function;
         Hunt.model[name].findOneAndUpdate.should.be.a.Function;
         if (['User', 'Users', 'users', 'user'].indexOf(name) !== -1) {
-          Hunt.model[name].findOneByApiKey.should.be.a.Function;
+          Hunt.model[name].findOneByHuntKey.should.be.a.Function;
         }
         Hunt.model[name].findById.should.be.a.Function;
       });
@@ -315,7 +315,7 @@ describe('Hunt builds single threaded webserver application', function () {
       response1.body.should.be.equal('OK');
       response1.headers.globmiddleware.should.be.eql(42);
       response1.headers.devmiddleware.should.be.eql(42);
-      response1.headers['x-powered-by'].should.be.equal('Hunt v'+Hunt.version);
+      response1.headers['x-powered-by'].should.be.equal('Hunt v' + Hunt.version);
       should.not.exist(response1.headers.prodMiddleware);
       should.not.exist(response1.headers.devMiddleware1);
     });
@@ -324,7 +324,7 @@ describe('Hunt builds single threaded webserver application', function () {
       response2.headers.globmiddleware.should.be.eql(42);
       response2.headers.devmiddleware.should.be.eql(42);
       response2.headers.devmiddleware1.should.be.eql(42);
-      response2.headers['x-powered-by'].should.be.equal('Hunt v'+Hunt.version);
+      response2.headers['x-powered-by'].should.be.equal('Hunt v' + Hunt.version);
       should.not.exist(response1.headers.prodMiddleware);
     });
   });

@@ -88,42 +88,42 @@ function Hunt(config) {
     }
   };
 
-/**
- * @name Hunt#config
- * @type {config}
- * @description
- * Object that represents current config object of HuntJS application
- */
-  this.extendCore('config', function(){
+  /**
+   * @name Hunt#config
+   * @type {config}
+   * @description
+   * Object that represents current config object of HuntJS application
+   */
+  this.extendCore('config', function () {
     return configGenerator(config);
   });
 
-/**
-  * @name Hunt#async
-  * @type {Object}
-  * @description
-  * Embedded {@link https://www.npmjs.org/package/async | npm module of async} for better workflow
-  */
-  this.extendCore('async', function(){
+  /**
+   * @name Hunt#async
+   * @type {Object}
+   * @description
+   * Embedded {@link https://www.npmjs.org/package/async | npm module of async} for better workflow
+   */
+  this.extendCore('async', function () {
     return require('async');
   });
-/**
- * @name Hunt#http
- * @type {Object}
- * @description
- * Embedded {@link http://nodejs.org/docs/latest/api/http.html | nodejs http module},
- * that is used by socket.io and http server.
- */
+  /**
+   * @name Hunt#http
+   * @type {Object}
+   * @description
+   * Embedded {@link http://nodejs.org/docs/latest/api/http.html | nodejs http module},
+   * that is used by socket.io and http server.
+   */
   this.http = require('http');
   this.passport = require('passport');
   this.rack = require('./lib/generators/misc/rack.js');
 
-/**
- * @name Hunt#version
- * @type {string}
- * @description
- * Current Hunt version
- */
+  /**
+   * @name Hunt#version
+   * @type {string}
+   * @description
+   * Current Hunt version
+   */
   this.version = require('./package.json').version;
 
 //placeholders, so we cannot break something by Hunt#extendCore
@@ -135,12 +135,12 @@ function Hunt(config) {
   this.io = {};
   this.sessionStorage = true;
 
-  this.encrypt = function(text, secret){
+  this.encrypt = function (text, secret) {
     secret = secret || this.config.secret;
     return crypt.encrypt(text, secret);
   };
 
-  this.decrypt = function(text, secret){
+  this.decrypt = function (text, secret) {
     secret = secret || this.config.secret;
     return crypt.decrypt(text, secret);
   };
@@ -234,7 +234,7 @@ function Hunt(config) {
    *    //used for verify account by email
    *    exports.strategy = function (core) {
    *      return new HashStrategy(function (hash, done) {
-   *        core.model.User.findOneByApiKeyAndVerifyEmail(hash, function (err, userFound) {
+   *        core.model.User.findOneByHuntKeyAndVerifyEmail(hash, function (err, userFound) {
    *          done(err, userFound);
    *        });
    *      });
@@ -551,12 +551,12 @@ function Hunt(config) {
    * @returns {Hunt} hunt object
    */
 
-  this.extendTelnet = function(command, callback){
+  this.extendTelnet = function (command, callback) {
     command = command.toLowerCase();
-    if(extendTelnetFunctions[command] === undefined){
+    if (extendTelnetFunctions[command] === undefined) {
       extendTelnetFunctions[command] = callback;
     } else {
-      throw new Error('Telnet server behavior for command of "'+command+'" is already defined!');
+      throw new Error('Telnet server behavior for command of "' + command + '" is already defined!');
     }
   };
 
@@ -580,7 +580,7 @@ function Hunt(config) {
    * @property {Message} Message - Class for messages send by users to groups
    * @see Hunt#extendModel
    */
-  function injectModels(h){
+  function injectModels(h) {
     if (h.config.enableMongoose && h.config.enableMongooseUsers) {
       var mongooseUsers = require('./lib/models/user.mongoose.js'),
         mongooseMessages = require('./lib/models/message.mongoose.js'),
@@ -610,12 +610,12 @@ function Hunt(config) {
     nodemailerListener(h);
   }
 
-  function buildExpressApp(h){
+  function buildExpressApp(h) {
     passportGenerator.call(h, extendPassportStrategiesFunctions, extendRoutesFunctions);
     appGenerator.call(h, extendAppFunctions, extendMiddlewareFunctions, extendRoutesFunctions);
   }
 
-  function buildTelnet(h){
+  function buildTelnet(h) {
     h.extendedCommands = extendTelnetFunctions;
   }
 
@@ -644,7 +644,7 @@ function Hunt(config) {
      * @property {string} type - with a value of string of 'background'
      */
     this.emit('start', {'type': 'background'});
-    console.log(('Started Hunt as background service with PID#'+process.pid+'!').green);
+    console.log(('Started Hunt as background service with PID#' + process.pid + '!').green);
   };
 
 
@@ -665,41 +665,41 @@ function Hunt(config) {
   this.startWebServer = function (port, address) {
     var p = port || this.config.port,
       address = address || this.config.address || '0.0.0.0';
-    console.log(('Trying to start Hunt as web server on '+address+':'+ p + '...').magenta);
+    console.log(('Trying to start Hunt as web server on ' + address + ':' + p + '...').magenta);
     injectModels(this);
     buildExpressApp(this);
     var h = this;
     this.httpServer.listen(p, address, function () {
-    /**
-     * Emitted when Hunt is started as webserver process
-     *
-     * @see Hunt#startWebServer
-     *
-     * @event Hunt#start
-     * @type {object}
-     * @property {string} type - with a value of string of 'webserver'
-     * @property {number} port - with a value of port this application listens to
-     * @property {string} address - with a value of address application is bound to
-     */
-        h.emit('start', {'type': 'webserver', 'port': p, 'address':address});
-        console.log(('Started Hunt as web server on port ' + p +' with PID#'+process.pid+'!').green);
-        prepared = true;
+      /**
+       * Emitted when Hunt is started as webserver process
+       *
+       * @see Hunt#startWebServer
+       *
+       * @event Hunt#start
+       * @type {object}
+       * @property {string} type - with a value of string of 'webserver'
+       * @property {number} port - with a value of port this application listens to
+       * @property {string} address - with a value of address application is bound to
+       */
+      h.emit('start', {'type': 'webserver', 'port': p, 'address': address});
+      console.log(('Started Hunt as web server on port ' + p + ' with PID#' + process.pid + '!').green);
+      prepared = true;
     });
   };
 
   /**
-    * @method Hunt#startTelnetServer
-    * @param {(number|null)} port what port to use, if null - use port value from config
-    *
-    * @since 0.0.18
-    * @description
-    * Start Hunt as single process telnet server
-    * @example
-    * ```javascript
-    *     Hunt.startTelnetServer(3003);
-    * ```
-    */
-  this.startTelnetServer = function(port){
+   * @method Hunt#startTelnetServer
+   * @param {(number|null)} port what port to use, if null - use port value from config
+   *
+   * @since 0.0.18
+   * @description
+   * Start Hunt as single process telnet server
+   * @example
+   * ```javascript
+   *     Hunt.startTelnetServer(3003);
+   * ```
+   */
+  this.startTelnetServer = function (port) {
     var p = port || this.config.port,
       address = address || this.config.address || '0.0.0.0';
     console.log(('Trying to start Hunt as telnet server on port ' + p + '...').magenta);
@@ -712,12 +712,12 @@ function Hunt(config) {
 
     telnetServer.on('connect', this.telnetHandler);
 
-    telnetServer.on('error', function(error){
+    telnetServer.on('error', function (error) {
       throw error;
     });
     var thishunt = this;
-    telnetServer.listen(p, address, function(error){
-      if(error){
+    telnetServer.listen(p, address, function (error) {
+      if (error) {
         throw error;
       } else {
         /**
@@ -730,8 +730,8 @@ function Hunt(config) {
          * @property {string} port - with a value of string of port number
          * @property {string} address - with a value of address application is bound to
          */
-        thishunt.emit('start', {'type': 'telnet','port':p, 'address':address});
-        console.log(('Started Hunt as telnet server on '+address+':'+p+'!').green);
+        thishunt.emit('start', {'type': 'telnet', 'port': p, 'address': address});
+        console.log(('Started Hunt as telnet server on ' + address + ':' + p + '!').green);
       }
     });
     return this;
@@ -759,7 +759,7 @@ function Hunt(config) {
     var p = port || this.config.port,
       m = maxProcesses || 'max';
 
-    return this.startCluster({'port':p,'web':m, 'telnet':0, 'background':0});
+    return this.startCluster({'port': p, 'web': m, 'telnet': 0, 'background': 0});
   };
 
   /**
@@ -779,11 +779,11 @@ function Hunt(config) {
    *     Hunt.startTelnetCluster(25, 10000);
    * ```
    */
-  this.startTelnetCluster = function(port, maxProcesses) {
+  this.startTelnetCluster = function (port, maxProcesses) {
     var p = port || this.config.port,
       m = maxProcesses || 'max';
 
-    return this.startCluster({'port':p,'web':0, 'telnet':m, 'background':0});
+    return this.startCluster({'port': p, 'web': 0, 'telnet': m, 'background': 0});
   };
 
   /**
@@ -804,7 +804,7 @@ function Hunt(config) {
    */
   this.startBackGroundCluster = function (maxProcesses) {
     console.log(('Trying to start Hunt as background cluster service...').magenta);
-    this.startCluster({'web':0, 'telnet':0,'background':maxProcesses})
+    this.startCluster({'web': 0, 'telnet': 0, 'background': maxProcesses})
   };
 
   /**
@@ -836,27 +836,27 @@ function Hunt(config) {
       runtimeConfig = {},
       i = 0;
 
-      ['web','background','telnet'].map(function(a){
-        if(parameters[a] === 'max'){
-          runtimeConfig[a] = maxWorkers;
-        }
-        if(parseInt(parameters[a])){
-          runtimeConfig[a] = parameters[a];
-        }
-        if(!parameters[a]){
-          runtimeConfig[a] = 0;
-        }
-      });
+    ['web', 'background', 'telnet'].map(function (a) {
+      if (parameters[a] === 'max') {
+        runtimeConfig[a] = maxWorkers;
+      }
+      if (parseInt(parameters[a])) {
+        runtimeConfig[a] = parameters[a];
+      }
+      if (!parameters[a]) {
+        runtimeConfig[a] = 0;
+      }
+    });
 
     runtimeConfig.port = parseInt(parameters.port) || config.port || 3000;
 
-    if((runtimeConfig.web + runtimeConfig.background + runtimeConfig.telnet ) <= maxWorkers ){
+    if ((runtimeConfig.web + runtimeConfig.background + runtimeConfig.telnet ) <= maxWorkers) {
 
       if (cluster.isMaster) {
         console.log(('Cluster : We have ' + numCPUs + ' CPU cores present. We can use ' + maxWorkers + ' of them.').bold.green);
-        console.log(('Cluster : We need to spawn '+runtimeConfig.web+' web server processes!').magenta);
-        console.log(('Cluster : We need to spawn '+runtimeConfig.background+' background processes!').magenta);
-        console.log(('Cluster : We need to spawn '+runtimeConfig.telnet+' telnet server processes!').magenta);
+        console.log(('Cluster : We need to spawn ' + runtimeConfig.web + ' web server processes!').magenta);
+        console.log(('Cluster : We need to spawn ' + runtimeConfig.background + ' background processes!').magenta);
+        console.log(('Cluster : We need to spawn ' + runtimeConfig.telnet + ' telnet server processes!').magenta);
         console.log(('Cluster : Also we need to spawn 1 background processes to rule them all!').magenta);
         console.log(('Cluster : Starting spawning processes...').magenta);
 
@@ -865,18 +865,18 @@ function Hunt(config) {
         for (i = 0; i < runtimeConfig.web; i = i + 1) {
           var worker = cluster.fork();
           worker.send('be_webserver');
-          console.log(('Cluster : Spawning web server worker #'+i+' with PID#' + worker.process.pid+'...').yellow);
+          console.log(('Cluster : Spawning web server worker #' + i + ' with PID#' + worker.process.pid + '...').yellow);
         }
 
         for (i = 0; i < runtimeConfig.background; i = i + 1) {
           var worker = cluster.fork();
           worker.send('be_background');
-          console.log(('Cluster : Spawning background worker #'+i+' with PID#' + worker.process.pid + '...').yellow);
+          console.log(('Cluster : Spawning background worker #' + i + ' with PID#' + worker.process.pid + '...').yellow);
         }
         for (i = 0; i < runtimeConfig.telnet; i = i + 1) {
           var worker = cluster.fork();
           worker.send('be_telnet');
-          console.log(('Cluster : Spawning telnet server worker #'+i+' with PID#' + worker.process.pid + '...').yellow);
+          console.log(('Cluster : Spawning telnet server worker #' + i + ' with PID#' + worker.process.pid + '...').yellow);
         }
 
 
@@ -893,8 +893,8 @@ function Hunt(config) {
         return true;
       } else {
         var h = this;
-        process.on('message', function(msg){
-          switch(msg) {
+        process.on('message', function (msg) {
+          switch (msg) {
             case 'be_background':
               h.startBackGround(); // the child process is ran as background application
               break;
@@ -902,14 +902,14 @@ function Hunt(config) {
               h.startWebServer(runtimeConfig.port);
               break;
             case 'be_telnet':
-              if(runtimeConfig.web>1){
-                h.startTelnetServer((runtimeConfig.port+1));
+              if (runtimeConfig.web > 1) {
+                h.startTelnetServer((runtimeConfig.port + 1));
               } else {
                 h.startTelnetServer(runtimeConfig.port);
               }
               break;
             default:
-              throw new Error('Unknown command of `'+msg+'` from master process!');
+              throw new Error('Unknown command of `' + msg + '` from master process!');
           }
         });
         return false;
@@ -991,23 +991,23 @@ Hunt.prototype.stop = function () {
 };
 
 /**
-  * @module Hunt
-  * @class Hunt
-  * @classdesc
-  * Main object, that have everything that we need in it.
-  * @constructs Hunt
-  * @param {config} config - key-value object with settings
-  * @see config
-  * @fires Hunt#start
-  * @fires Hunt#httpError
-  * @fires Hunt#httpSuccess
-  * @fires Hunt#notify
-  * @fires Hunt#notify:all
-  * @fires Hunt#notify:email
-  * @fires Hunt#notify:sio
-  * @fires Hunt#user:save
-  * @fires Hunt#broadcast
-  */
+ * @module Hunt
+ * @class Hunt
+ * @classdesc
+ * Main object, that have everything that we need in it.
+ * @constructs Hunt
+ * @param {config} config - key-value object with settings
+ * @see config
+ * @fires Hunt#start
+ * @fires Hunt#httpError
+ * @fires Hunt#httpSuccess
+ * @fires Hunt#notify
+ * @fires Hunt#notify:all
+ * @fires Hunt#notify:email
+ * @fires Hunt#notify:sio
+ * @fires Hunt#user:save
+ * @fires Hunt#broadcast
+ */
 module.exports = exports = function (config) {
   return new Hunt(config);
 };

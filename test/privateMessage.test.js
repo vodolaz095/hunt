@@ -12,7 +12,7 @@ describe('Private messages', function () {
       'port': port,
       'huntKey': true,
       'dialog': true,
-      'hostUrl': 'http://localhost:'+port,
+      'hostUrl': 'http://localhost:' + port,
       'disableCsrf': true // NEVER DO IT!
     });
     Hunt.on('start', function () {
@@ -144,10 +144,10 @@ describe('Private messages', function () {
         });
       });
 
-      describe('getDialog for string of apiKey', function () {
+      describe('getDialog for string of huntKey', function () {
         var recentMessages, errF;
         before(function (done) {
-          User2.getDialog(User1.apiKey, 100, 0, function (err, messages) {
+          User2.getDialog(User1.huntKey, 100, 0, function (err, messages) {
             errF = err;
             recentMessages = messages;
             done();
@@ -203,7 +203,7 @@ describe('Private messages', function () {
       });
     });
 
-    describe('creating messages by http api', function(){
+    describe('creating messages by http api', function () {
       describe('User1 sends message to User2 by post request', function () {
         var response, body, event;
         before(function (done) {
@@ -213,10 +213,10 @@ describe('Private messages', function () {
           });
 
           request({
-              'url': 'http://localhost:'+port+'/api/dialog/'+User2.id,
+              'url': 'http://localhost:' + port + '/api/dialog/' + User2.id,
               'method': 'POST',
               'json': {
-                'huntKey': User1.apiKey, //authorize as User1
+                'huntKey': User1.huntKey, //authorize as User1
                 'message': 'test3'
               }
             },
@@ -252,7 +252,7 @@ describe('Private messages', function () {
         var response, body;
         before(function (done) {
           request({
-              'url': 'http://localhost:'+port+'/api/dialog?huntKey=' + User2.apiKey,
+              'url': 'http://localhost:' + port + '/api/dialog?huntKey=' + User2.huntKey,
               'method': 'GET'
             },
             function (err, r, b) {
@@ -289,7 +289,7 @@ describe('Private messages', function () {
         var response, body;
         before(function (done) {
           request({
-              'url': 'http://localhost:'+port+'/api/dialog/' + User1.id + '?huntKey=' + User2.apiKey,
+              'url': 'http://localhost:' + port + '/api/dialog/' + User1.id + '?huntKey=' + User2.huntKey,
               'method': 'GET'
             },
             function (err, r, b) {

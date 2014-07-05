@@ -25,8 +25,8 @@ describe('Users model', function () {
         it('exposes function findOneByEmail', function () {
           Hunt.model.User.findOneByEmail.should.be.a.Function;
         });
-        it('exposes function findOneByApiKey', function () {
-          Hunt.model.User.findOneByApiKey.should.be.a.Function;
+        it('exposes function findOneByHuntKey', function () {
+          Hunt.model.User.findOneByHuntKey.should.be.a.Function;
         });
         it('exposes function count', function () {
           Hunt.model.User.count.should.be.a.Function;
@@ -40,11 +40,11 @@ describe('Users model', function () {
         it('exposes function signUp', function () {
           Hunt.model.User.signUp.should.be.a.Function;
         });
-        it('exposes function findOneByApiKeyAndVerifyEmail', function () {
-          Hunt.model.User.findOneByApiKeyAndVerifyEmail.should.be.a.Function;
+        it('exposes function findOneByHuntKeyAndVerifyEmail', function () {
+          Hunt.model.User.findOneByHuntKeyAndVerifyEmail.should.be.a.Function;
         });
-        it('exposes function findOneByApiKeyAndResetPassword', function () {
-          Hunt.model.User.findOneByApiKeyAndResetPassword.should.be.a.Function;
+        it('exposes function findOneByHuntKeyAndResetPassword', function () {
+          Hunt.model.User.findOneByHuntKeyAndResetPassword.should.be.a.Function;
         });
 
       });
@@ -54,7 +54,7 @@ describe('Users model', function () {
         before(function (done) {
           Hunt.model.User.create({
             'email': 'ostroumov4@teksi.ru',
-            'apiKey': 'vseBydetHorosho'
+            'huntKey': 'vseBydetHorosho'
           }, function (err, userCreated) {
             if (err) {
               throw err;
@@ -63,8 +63,8 @@ describe('Users model', function () {
               'byEmail': function (cb) {
                 Hunt.model.User.findOneByEmail('ostroumov4@teksi.ru', cb);
               },
-              'byApiKey': function (cb) {
-                Hunt.model.User.findOneByApiKey('vseBydetHorosho', cb);
+              'byHuntKey': function (cb) {
+                Hunt.model.User.findOneByHuntKey('vseBydetHorosho', cb);
               },
               'created': function (cb) {
                 cb(null, userCreated);
@@ -81,11 +81,11 @@ describe('Users model', function () {
 
         it('we created correct user to be sure', function () {
           usersFound.created.email.should.be.equal('ostroumov4@teksi.ru');
-          usersFound.created.apiKey.should.be.equal('vseBydetHorosho');
+          usersFound.created.huntKey.should.be.equal('vseBydetHorosho');
         });
 
-        it('findOneByApiKey works', function () {
-          usersFound.created._id.should.eql(usersFound.byApiKey._id);
+        it('findOneByHuntKey works', function () {
+          usersFound.created._id.should.eql(usersFound.byHuntKey._id);
         });
 
         it('findOneByEmail works for Email', function () {
@@ -124,12 +124,12 @@ describe('Users model', function () {
           user.verifyPassword('fiflesAndFuffles').should.be.false;
         });
 
-        it('creates user with apiKey present', function () {
-          user.apiKey.length.should.be.above(63);
+        it('creates user with huntKey present', function () {
+          user.huntKey.length.should.be.above(63);
         });
 
-        it('creates user with actual apiKey', function () {
-          var ago = new Date().getTime() - user.apiKeyCreatedAt.getTime();
+        it('creates user with actual huntKey', function () {
+          var ago = new Date().getTime() - user.huntKeyCreatedAt.getTime();
           ago.should.be.below(10 * 1000); //10 seconds
         });
 
@@ -146,19 +146,19 @@ describe('Users model', function () {
         });
       });
 
-      describe('findOneByApiKeyAndVerifyEmail for correct apiKey', function () {
+      describe('findOneByHuntKeyAndVerifyEmail for correct huntKey', function () {
         var user, userBeingActivated;
         before(function (done) {
           Hunt.model.User.create({
-            'email': 'oneByApiKey@teksi.ru',
-            'apiKey': 'vseBydetHoroshooneByApiKey',
+            'email': 'oneByhuntKey@teksi.ru',
+            'huntKey': 'vseBydetHoroshooneByhuntKey',
             'accountVerified': false
           }, function (err, userCreated) {
             if (err) {
               throw err;
             }
             user = userCreated;
-            Hunt.model.User.findOneByApiKeyAndVerifyEmail('vseBydetHoroshooneByApiKey', function (err, userActivated) {
+            Hunt.model.User.findOneByHuntKeyAndVerifyEmail('vseBydetHoroshooneByhuntKey', function (err, userActivated) {
               userBeingActivated = userActivated;
               done();
             });
@@ -177,19 +177,19 @@ describe('Users model', function () {
           user.remove(done);
         });
       });
-      describe('findOneByApiKeyAndVerifyEmail for wrong apiKey', function () {
+      describe('findOneByHuntKeyAndVerifyEmail for wrong huntKey', function () {
         var user, userBeingActivated, errorThrown;
         before(function (done) {
           Hunt.model.User.create({
-            'email': 'oneByApiKey@teksi.ru',
-            'apiKey': 'vseBydetHoroshooneByApiKey',
+            'email': 'oneByhuntKey@teksi.ru',
+            'huntKey': 'vseBydetHoroshooneByhuntKey',
             'accountVerified': false
           }, function (err, userCreated) {
             if (err) {
               throw err;
             }
             user = userCreated;
-            Hunt.model.User.findOneByApiKeyAndVerifyEmail('vseIdetPoPlanu', function (err, userActivated) {
+            Hunt.model.User.findOneByHuntKeyAndVerifyEmail('vseIdetPoPlanu', function (err, userActivated) {
               errorThrown = err;
               userBeingActivated = userActivated;
               done();
@@ -210,22 +210,22 @@ describe('Users model', function () {
           user.remove(done);
         });
       });
-      describe('findOneByApiKeyAndVerifyEmail for outdated apiKey', function () {
+      describe('findOneByHuntKeyAndVerifyEmail for outdated huntKey', function () {
         var user,
           userBeingActivated,
           errorThrown;
         before(function (done) {
           Hunt.model.User.create({
-            'email': 'oneByApiKey@teksi.ru',
-            'apiKey': 'vseBydetHoroshooneByApiKey',
+            'email': 'oneByhuntKey@teksi.ru',
+            'huntKey': 'vseBydetHoroshooneByhuntKey',
             'accountVerified': false,
-            'apiKeyCreatedAt': new Date(1986, 1, 12, 11, 45, 36, 21)
+            'huntKeyCreatedAt': new Date(1986, 1, 12, 11, 45, 36, 21)
           }, function (err, userCreated) {
             if (err) {
               throw err;
             }
             user = userCreated;
-            Hunt.model.User.findOneByApiKeyAndVerifyEmail('vseBydetHoroshooneByApiKey', function (err, userActivated) {
+            Hunt.model.User.findOneByHuntKeyAndVerifyEmail('vseBydetHoroshooneByhuntKey', function (err, userActivated) {
               errorThrown = err;
               userBeingActivated = userActivated;
               done();
@@ -246,37 +246,37 @@ describe('Users model', function () {
           user.remove(done);
         });
       });
-      describe('findOneByApiKeyAndResetPassword for good api key', function () {
+      describe('findOneByHuntKeyAndResetPassword for good api key', function () {
         var user, userWithPasswordReseted;
         before(function (done) {
           async.waterfall([
 
-            function (cb) {
-              Hunt.model.User.create({
-                'email': 'iForgotMyPassWordIamStupid@teksi.ru',
-                'apiKey': 'iForgotMyPassWordIamStupid1111',
-                'accountVerified': true,
-                'apiKeyCreatedAt': new Date()
-              }, function (err, userCreated) {
-                if (err) {
-                  throw err;
-                }
-                user = userCreated;
-                userCreated.setPassword('lalala', function (err) {
-                  cb(err, userCreated);
+              function (cb) {
+                Hunt.model.User.create({
+                  'email': 'iForgotMyPassWordIamStupid@teksi.ru',
+                  'huntKey': 'iForgotMyPassWordIamStupid1111',
+                  'accountVerified': true,
+                  'huntKeyCreatedAt': new Date()
+                }, function (err, userCreated) {
+                  if (err) {
+                    throw err;
+                  }
+                  user = userCreated;
+                  userCreated.setPassword('lalala', function (err) {
+                    cb(err, userCreated);
+                  });
                 });
-              });
-            },
-            function (user1, cb) {
-              Hunt.model.User.findOneByApiKeyAndResetPassword('iForgotMyPassWordIamStupid1111', 'lalala2', function (err1, userChanged) {
-                if (err1) {
-                  cb(err1);
-                } else {
-                  cb(null, userChanged);
-                }
-              });
-            }
-          ],
+              },
+              function (user1, cb) {
+                Hunt.model.User.findOneByHuntKeyAndResetPassword('iForgotMyPassWordIamStupid1111', 'lalala2', function (err1, userChanged) {
+                  if (err1) {
+                    cb(err1);
+                  } else {
+                    cb(null, userChanged);
+                  }
+                });
+              }
+            ],
             function (err, userChanged2) {
               if (err) {
                 throw err;
@@ -299,21 +299,21 @@ describe('Users model', function () {
           user.remove(done);
         });
       });
-      describe('findOneByApiKeyAndResetPassword for bad api key', function () {
+      describe('findOneByHuntKeyAndResetPassword for bad api key', function () {
         var user, userNotFound, errorThrown;
         before(function (done) {
           Hunt.model.User.create({
             'username': 'iForgotMyPassWordIamStupid',
             'email': 'iForgotMyPassWordIamStupid@teksi.ru',
-            'apiKey': 'iForgotMyPassWordIamStupid1111',
+            'huntKey': 'iForgotMyPassWordIamStupid1111',
             'accountVerified': true,
-            'apiKeyCreatedAt': new Date()
+            'huntKeyCreatedAt': new Date()
           }, function (err, userCreated) {
             if (err) {
               throw err;
             }
             user = userCreated;
-            Hunt.model.User.findOneByApiKeyAndResetPassword('thisIsNotCorrectApiKey', 'lalala2', function (err1, userChanged) {
+            Hunt.model.User.findOneByHuntKeyAndResetPassword('thisIsNotCorrecthuntKey', 'lalala2', function (err1, userChanged) {
               errorThrown = err1;
               userNotFound = userChanged
               done();
@@ -334,21 +334,21 @@ describe('Users model', function () {
           user.remove(done);
         });
       });
-      describe('findOneByApiKeyAndResetPassword for outdated api key', function () {
+      describe('findOneByHuntKeyAndResetPassword for outdated api key', function () {
         var user, userNotFound, errorThrown;
         before(function (done) {
           Hunt.model.User.create({
             'username': 'iForgotMyPassWordIamStupid',
             'email': 'iForgotMyPassWordIamStupid@teksi.ru',
-            'apiKey': 'iForgotMyPassWordIamStupid1111',
+            'huntKey': 'iForgotMyPassWordIamStupid1111',
             'accountVerified': true,
-            'apiKeyCreatedAt': new Date(1986, 1, 12, 11, 45, 36, 21)
+            'huntKeyCreatedAt': new Date(1986, 1, 12, 11, 45, 36, 21)
           }, function (err, userCreated) {
             if (err) {
               throw err;
             }
             user = userCreated;
-            Hunt.model.User.findOneByApiKeyAndResetPassword('iForgotMyPassWordIamStupid1111', 'lalala2', function (err1, userChanged) {
+            Hunt.model.User.findOneByHuntKeyAndResetPassword('iForgotMyPassWordIamStupid1111', 'lalala2', function (err1, userChanged) {
               errorThrown = err1;
               userNotFound = userChanged
               done();
@@ -567,20 +567,20 @@ describe('Users model', function () {
       });
 
       describe('function invalidateSession', function () {
-        var user, newApiKey;
+        var user, newhuntKey;
         before(function (done) {
           Hunt.model.User.create({
             'email': 'ostroumov_3@teksi.ru',
-            'apiKey': 'lalalaDaiMne3Ryblya'
+            'huntKey': 'lalalaDaiMne3Ryblya'
           }, function (err, userCreated) {
             if (err) {
               throw err;
             }
-            userCreated.invalidateSession(function (err2, apiKeySet) {
+            userCreated.invalidateSession(function (err2, huntKeySet) {
               if (err2) {
                 throw err2;
               }
-              newApiKey = apiKeySet;
+              newhuntKey = huntKeySet;
               Hunt.model.User.findOneByEmail('ostroumov_3@teksi.ru', function (err3, userFound) {
                 if (err3) {
                   throw err3;
@@ -592,13 +592,13 @@ describe('Users model', function () {
           });
         });
 
-        it('changes the apiKey', function () {
-          var test = (user.apiKey === 'lalalaDaiMne3Ryblya');
+        it('changes the huntKey', function () {
+          var test = (user.huntKey === 'lalalaDaiMne3Ryblya');
           test.should.equal(false);
         });
 
         it('fires callback with new api key', function () {
-          newApiKey.should.be.equal(user.apiKey);
+          newhuntKey.should.be.equal(user.huntKey);
         });
 
         after(function (done) {
@@ -647,26 +647,26 @@ describe('Users model', function () {
     });
   });
 
-  describe('user profile test', function(){
+  describe('user profile test', function () {
     var userId,
       user;
 
     before(function (done) {
-      Hunt.model.User.create({'displayName':'userWithProfile'},
-        function(err, userCreated){
-          if(err){
+      Hunt.model.User.create({'displayName': 'userWithProfile'},
+        function (err, userCreated) {
+          if (err) {
             done(err);
           } else {
-            userCreated.profile = {'iHaveProfile':true};
+            userCreated.profile = {'iHaveProfile': true};
             userId = userCreated._id;
             userCreated.save(done);
           }
         });
     });
 
-    it('user have profile properly populated', function(done){
-      Hunt.model.User.findOne({'_id':userId}, function(err, userFound){
-        if(err) throw err;
+    it('user have profile properly populated', function (done) {
+      Hunt.model.User.findOne({'_id': userId}, function (err, userFound) {
+        if (err) throw err;
         user = userFound;
         userFound.profile.should.be.an.Object;
         userFound.profile.iHaveProfile.should.be.true;

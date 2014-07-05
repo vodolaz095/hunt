@@ -4,12 +4,12 @@ var should = require('should'),
   async = require('async'),
   hunt = require('./../index.js'),
   Hunt,
-  apiKey,
+  huntKey,
   port = 3373;
 
 
 describe('Local strategy test', function () {
-  afterEach(function(done){
+  afterEach(function (done) {
     setTimeout(done, 1500);
   });
 
@@ -33,7 +33,7 @@ describe('Local strategy test', function () {
     });
     Hunt.startWebServer();
   });
-
+//*/
   describe('trying to signup user by POST /auth/signup', function () {
     var r1, r2, r3, b1, b2, b3, evnt;
     before(function (done) {
@@ -118,8 +118,8 @@ describe('Local strategy test', function () {
     });
 
     it('makes Hunt core emit event of notify:email with proper structure', function () {
-      apiKey = evnt.user.apiKey;
-      evnt.user.apiKey.should.be.a.String;
+      huntKey = evnt.user.huntKey;
+      evnt.user.huntKey.should.be.a.String;
       evnt.user.displayName.should.be.equal('spam2me');
       evnt.user.keychain.email.should.be.equal('spam2me@example.org');
       evnt.user.accountVerified.should.be.false;
@@ -132,16 +132,16 @@ describe('Local strategy test', function () {
       evnt.message.subject.should.be.equal('Email address verification');
       evnt.message.template.should.be.equal('verifyEmail');
       evnt.message.subject.should.be.equal('Email address verification');
-      evnt.message.verifyUrl.should.be.equal('http://localhost:' + port + '/auth/confirm/' + apiKey);
+      evnt.message.verifyUrl.should.be.equal('http://localhost:' + port + '/auth/confirm/' + huntKey);
       evnt.message.layout.should.be.false;
     });
 
     after(function (done) {
-      request('http://localhost:' + port + '/auth/confirm/' + apiKey, function (err, response, body) {
+      request('http://localhost:' + port + '/auth/confirm/' + huntKey, function (err, response, body) {
         if (err) {
           done(err);
         } else {
-          Hunt.model.User.findOneByApiKey(apiKey, function (err1, userFound) {
+          Hunt.model.User.findOneByHuntKey(huntKey, function (err1, userFound) {
             if (err1) {
               done(err1);
             } else {
@@ -154,38 +154,38 @@ describe('Local strategy test', function () {
     });
 
   });
-
+//*/
   describe('trying to ask email for password reset by POST /auth/restoreAccount', function () {
     var evnt,
       user;
 
-    before(function(done){
+    before(function (done) {
       Hunt.on('notify:email', function (emailOrdered) {
         evnt = emailOrdered;
         done();
       });
 
       async.waterfall([
-        function(cb){
-          Hunt.model.User.signUp('donotspam2me@example.org','iamcrocodile',cb);
+        function (cb) {
+          Hunt.model.User.signUp('donotspam2me@example.org', 'iamcrocodile', cb);
         },
-        function(userCreated,cb){
+        function (userCreated, cb) {
           user = userCreated;
           request({
-            'method':'POST',
-            'url':'http://localhost:' + port + '/auth/restoreAccount',
+            'method': 'POST',
+            'url': 'http://localhost:' + port + '/auth/restoreAccount',
             'form': { 'email': 'donotspam2me@example.org' }
           }, cb);
         }
-      ], function(err){
-        if(err) throw err;
+      ], function (err) {
+        if (err) throw err;
       });
 
     });
 
     it('makes Hunt core emit event of notify:email with proper structure', function () {
 
-      evnt.user.apiKey.should.be.a.String;
+      evnt.user.huntKey.should.be.a.String;
       evnt.user.displayName.should.be.equal('donotspam2me');
       evnt.user.keychain.email.should.be.equal('donotspam2me@example.org');
       evnt.user.accountVerified.should.be.false;
@@ -197,11 +197,11 @@ describe('Local strategy test', function () {
 
       evnt.message.subject.should.be.equal('Reset password');
       evnt.message.template.should.be.equal('resetEmail');
-      evnt.message.resetUrl.should.be.equal('http://localhost:' + port + '/auth/reset/'+evnt.user.apiKey),
-      evnt.message.layout.should.be.false;
+      evnt.message.resetUrl.should.be.equal('http://localhost:' + port + '/auth/reset/' + evnt.user.huntKey),
+        evnt.message.layout.should.be.false;
     });
 
-    after(function(done){
+    after(function (done) {
       user.remove(done);
     });
 
@@ -211,15 +211,15 @@ describe('Local strategy test', function () {
     it('will be done');
   });
 
-/*/
-  after(function (done) {
-    Hunt.model.User.findOneByEmail('spam2me@example.org', function (err, userFound) {
-      if (err) {
-        done(err);
-      } else {
-        userFound.remove(done);
-      }
-    });
-  });
-//*/
+  /*/
+   after(function (done) {
+   Hunt.model.User.findOneByEmail('spam2me@example.org', function (err, userFound) {
+   if (err) {
+   done(err);
+   } else {
+   userFound.remove(done);
+   }
+   });
+   });
+   //*/
 });
