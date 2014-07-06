@@ -65,7 +65,7 @@
     "redis": ">=0.10.0",
     "connect-redis": ">=2.0.0",
     "connect-flash": "*",
-    "socket.io": "0.9.16",
+    "socket.io": "0.9.17",
     "passport.socketio": ">=3.0.0",
     "passport": "*",
     "passport-local": "*",
