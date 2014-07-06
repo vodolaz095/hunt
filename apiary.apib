@@ -3,10 +3,16 @@ HOST: http://huntjs.herokuapp.com/
 --- huntjs Api V1 ---
 
 
-Hello!
-GET /
-< 200
-< Content-Type: application/json; charset=utf-8
-{
-    "Hello":"World!"
-}
+
+-- User authorization API via various Passport.js strategies --
+
+--- Facebook ---
+
+Authorization
+GET /auth/facebook
+< 302
+
+
+Callback for authorization
+GET /auth/facebook/callback
+< 302
