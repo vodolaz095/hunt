@@ -88,6 +88,7 @@ Hunt.extendModel('Trophy', require('./models/trophy.model.js'));
 Hunt.extendApp(function (core) {
   core.app.locals.menu = [
     {'url':'/documentation','name':'Documentation'},
+    {'url':'http://docs.huntjs.apiary.io/', 'name': 'API Blueprint'},
     {'url':'/dialog','name':'Private messages'},
     {'url':'/groups','name':'Chats'},
     {'url':'/map','name':'Map'},
