@@ -5,7 +5,7 @@ var should = require('should'),
   whatWeNeed = '<!DOCTYPE html><html><head><title>Jade Example</title></head><body><h1>Users</h1><div id=\"users\"><div class=\"user\"><h2>Anatolij Ostroumov</h2><div class=\"email\">ostroumov095@gmail.com</div></div></div></body></html>';
 
 
-describe('Rendering with hogan', function () {
+describe('Rendering with jade', function () {
   var Hunt,
     users = [{'name':'Anatolij Ostroumov', 'email':'ostroumov095@gmail.com'}];
 
