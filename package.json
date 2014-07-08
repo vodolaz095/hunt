@@ -4,7 +4,7 @@
   "description": "High level nodejs framework build on top of expressjs, mongoose, sequilize, socketio and passportjs",
   "main": "index.js",
   "engines": {
-    "node": ">=0.10.26",
+    "node": ">=0.10.29",
     "npm": ">=1.4.3"
   },
   "os" : [ "linux", "darwin" ],
@@ -65,7 +65,7 @@
     "redis": ">=0.10.0",
     "connect-redis": ">=2.0.0",
     "connect-flash": "*",
-    "socket.io": "0.9.16",
+    "socket.io": "0.9.17",
     "passport.socketio": ">=3.0.0",
     "passport": "*",
     "passport-local": "*",
