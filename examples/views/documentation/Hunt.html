@@ -6,7 +6,6 @@
         <li><a href="config.html">config</a></li>
         <li><a href="Group.html">Group</a></li>
         <li><a href="GroupMessage.html">GroupMessage</a></li>
-        <li><a href="HTTPAuthorizationAPI.html">HTTPAuthorizationAPI</a></li>
         <li><a href="Hunt.html">Hunt</a></li>
         <li><a href="Message.html">Message</a></li>
         <li><a href="model.html">model</a></li>
@@ -32,5136 +31,6 @@
 </div>
 <div id="documentation">
 <h1 class="page-title">Class: Hunt</h1>
-
-
-<section>
-
-<h2>
-    Hunt
-</h2>
-
-<div class="class-description">Hunt</div>
-
-
-<article>
-<div class="container-overview">
-
-
-    <dt>
-    <h4 class="name" id="Hunt"><span class="type-signature"></span>new Hunt<span class="signature">(config)</span><span
-            class="type-signature"></span></h4>
-
-
-    </dt>
-    <dd>
-
-
-        <h5>Parameters:</h5>
-
-
-        <table class="params">
-            <thead>
-            <tr>
-
-                <th>Name</th>
-
-
-                <th>Type</th>
-
-
-                <th class="last">Description</th>
-            </tr>
-            </thead>
-
-            <tbody>
-
-
-            <tr>
-
-                <td class="name"><code>config</code></td>
-
-
-                <td class="type">
-
-
-                    <span class="param-type"><a href="config.html">config</a></span>
-
-
-                </td>
-
-
-                <td class="description last"></td>
-            </tr>
-
-
-            </tbody>
-        </table>
-
-
-        <dl class="details">
-
-
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source">
-                <ul class="dummy">
-                    <li>
-                        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L23">index.js line 23</a>
-                    </li>
-                </ul>
-            </dd>
-
-
-        </dl>
-
-
-    </dd>
-
-
-</div>
-
-
-<h3 class="subsection-title">Members</h3>
-
-<dl>
-
-<dt>
-<h4 class="name" id="app"><span class="type-signature"></span>app<span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-    <div class="description">
-        <a href="http://expressjs.com/ "> ExpressJS</a> application instance
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L37">lib/http/expressApp.js
-                        line 37</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="async"><span class="type-signature"></span>async<span class="type-signature"> :Object</span></h4>
-
-
-</dt>
-<dd>
-
-    <div class="description">
-        Embedded <a href="https://www.npmjs.org/package/async "> npm module of async</a> for better workflow
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type">Object</span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L100">index.js line 100</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="config"><span class="type-signature"></span>config<span class="type-signature"> :<a
-        href="config.html">config</a></span></h4>
-
-
-</dt>
-<dd>
-
-    <div class="description">
-        Object that represents current config object of HuntJS application
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type"><a href="config.html">config</a></span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L90">index.js line 90</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="express"><span class="type-signature"></span>express<span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-    <div class="description">
-        <a href="http://expressjs.com/ "> ExpressJS</a> framework constructor with static methods
-        exposed, for example core.express.static is middleware used for serving
-        css, client side javascripts, images.
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L29">lib/http/expressApp.js
-                        line 29</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="http"><span class="type-signature"></span>http<span class="type-signature"> :Object</span></h4>
-
-
-</dt>
-<dd>
-
-    <div class="description">
-        Embedded <a href="http://nodejs.org/docs/latest/api/http.html "> nodejs http module</a>,
-        that is used by socket.io and http server.
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type">Object</span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L109">index.js line 109</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="httpServer"><span class="type-signature"></span>httpServer<span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-    <div class="description">
-        <a href="http://nodejs.org/api/http.html "> http</a> server class, used by socket.io and expressJS objects
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L44">lib/http/expressApp.js
-                        line 44</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="Hunt.html#express">Hunt#express</a></li>
-
-                <li><a href="Hunt.html#io">Hunt#io</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="io"><span class="type-signature"></span>io<span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-    <div class="description">
-        Ready to use <a href="http://socket.io">http://socket.io</a> object with passport.js integration
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/socket.io.js#L11">lib/http/socket.io.js
-                        line 11</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="model"><span class="type-signature"></span>model<span class="type-signature"> :<a
-        href="model.html">model</a></span></h4>
-
-
-</dt>
-<dd>
-
-    <div class="description">
-        Class to hold <code> data models</code> of Hunt application,
-        they are injected into request object of controller.
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type"><a href="model.html">model</a></span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L157">index.js line 157</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="model.html">model</a></li>
-
-                <li><a href="request.html">request</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="mongoConnection"><span class="type-signature"></span>mongoConnection<span
-        class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-    <div class="description">
-        Mongoose connection object
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/datastore/mongooseModels.js#L21">lib/datastore/mongooseModels.js
-                        line 21</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="Hunt.html#mongoose">Hunt#mongoose</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="mongoose"><span class="type-signature"></span>mongoose<span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-    <div class="description">
-        Mongoose object, used for object relation maping to mongo database
-        <a href="http://mongoosejs.com/ "> Official Mongoose Documentation </a>
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/datastore/mongooseModels.js#L14">lib/datastore/mongooseModels.js
-                        line 14</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="redisClient"><span class="type-signature"></span>redisClient<span class="type-signature"></span>
-</h4>
-
-
-</dt>
-<dd>
-
-    <div class="description">
-        Ready to use redis client with connection parameters
-        taken from config object.
-        <a href="http://npmjs.org/package/redis "> Additional info on redis client</a>
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/datastore/redisClient.js#L26">lib/datastore/redisClient.js
-                        line 26</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="sessionStorage"><span class="type-signature"></span>sessionStorage<span
-        class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-    <div class="description">
-        Connect-compatible <a href="https://www.npmjs.org/package/connect-redis "> redis sessions` storage </a> used by
-        <a href="Hunt.html#express"><code>Express application </code></a> and <a href="Hunt.html#io"><code> Socket.io
-        server </code></a>
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L71">lib/http/expressApp.js
-                        line 71</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="version"><span class="type-signature"></span>version<span class="type-signature"> :string</span>
-</h4>
-
-
-</dt>
-<dd>
-
-    <div class="description">
-        Current Hunt version
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type">string</span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L120">index.js line 120</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-</dl>
-
-
-<h3 class="subsection-title">Methods</h3>
-
-<dl>
-
-<dt>
-<h4 class="name" id="cachingMiddleware"><span class="type-signature"></span>cachingMiddleware<span
-        class="signature">(<span class="optional">ttl</span>)</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Generate caching middleware for this route
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th>Argument</th>
-
-
-            <th>Default</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>ttl</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">number</span>
-                |
-
-                <span class="param-type">null</span>
-
-
-            </td>
-
-
-            <td class="attributes">
-
-                &lt;optional><br>
-
-
-            </td>
-
-
-            <td class="default">
-
-                60
-
-            </td>
-
-
-            <td class="description last">cache invalidation time, default is 60 seconds</td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/redisCache.js#L9">lib/http/redisCache.js
-                        line 9</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```
-
-        Hunt.extendRoutes(core){
-        core.app.use('/cacheForTenSeconds', Hunt.cachingMiddleware(10000));
-        core.app.use('/cacheForSixtySeconds', Hunt.cachingMiddleware(60000));
-        core.app.get('*', function(request, response){
-        response.send('Current time is '+new Date());
-        });
-        }
-
-        ```</code></pre>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="createRedisCliet"><span class="type-signature"></span>createRedisCliet<span
-        class="signature">()</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Creates redis client
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/datastore/redisClient.js#L36">lib/datastore/redisClient.js
-                        line 36</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="Hunt.html#redisClient">Hunt#redisClient</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="decrypt"><span class="type-signature"></span>decrypt<span class="signature">(text, <span
-        class="optional">secret</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Decrypt the given text using config.SECRET by default or using the custom given secret
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th>Argument</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>text</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="attributes">
-
-
-            </td>
-
-
-            <td class="description last">text to decrypt</td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>secret</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="attributes">
-
-                &lt;optional><br>
-
-
-            </td>
-
-
-            <td class="description last">secret to use for decryption, if absent, the value of
-                <code>config.secret</code> is used
-            </td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/misc/crypt.js#L21">lib/misc/crypt.js
-                        line 21</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="config.html">config</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Returns:</h5>
-
-
-    <div class="param-desc">
-        - decrypted string
-    </div>
-
-
-    <dl>
-        <dt>
-            Type
-        </dt>
-        <dd>
-
-            <span class="param-type">string</span>
-
-
-        </dd>
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="emit"><span class="type-signature"></span>emit<span
-        class="signature">(eventName, payload)</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Makes Hunt emit an event. Returns true if event had listeners, false otherwise.
-        Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> standard nodejs event emitter
-        object </a>, so it supports all event emitter methods.
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>eventName</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>payload</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">object</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L962">index.js line 962</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="encrypt"><span class="type-signature"></span>encrypt<span class="signature">(text, <span
-        class="optional">secret</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Encrypt the given text by default or using the custom given secret
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th>Argument</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>text</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="attributes">
-
-
-            </td>
-
-
-            <td class="description last">text to encrypt</td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>secret</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="attributes">
-
-                &lt;optional><br>
-
-
-            </td>
-
-
-            <td class="description last">secret to use for encryption, if absent, the value of
-                <code>config#secret</code> is used
-            </td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/misc/crypt.js#L4">lib/misc/crypt.js line
-                        4</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="config.html">config</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Returns:</h5>
-
-
-    <div class="param-desc">
-        - encrypted string
-    </div>
-
-
-    <dl>
-        <dt>
-            Type
-        </dt>
-        <dd>
-
-            <span class="param-type">string</span>
-
-
-        </dd>
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="extendApp"><span class="type-signature"></span>extendApp<span class="signature">(environment, settingsFunction)</span><span
-        class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Set expressJS application parameters - template engine, variables, locals
-        <a href="http://expressjs.com/api.html#app.engine"> template engines</a>,
-        <a href="http://expressjs.com/api.html#app.locals "> locals</a> and
-        <a href="http://expressjs.com/api.html#app-settings "> other</a>
-        settings.
-        In code it is called after setting logging middleware and port.
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>environment</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-                |
-
-                <span class="param-type">Array</span>
-                |
-
-                <span class="param-type">null</span>
-
-
-            </td>
-
-
-            <td class="description last">application environment to use,
-                can be something like 'development', ['development','staging'] or null
-            </td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>settingsFunction</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">function</span>
-
-
-            </td>
-
-
-            <td class="description last">function(core){....}</td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L260">index.js line 260</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="Hunt.html#app">Hunt#app</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Returns:</h5>
-
-
-    <div class="param-desc">
-        hunt object
-    </div>
-
-
-    <dl>
-        <dt>
-            Type
-        </dt>
-        <dd>
-
-            <span class="param-type"><a href="Hunt.html">Hunt</a></span>
-
-
-        </dd>
-    </dl>
-
-
-    <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        //example of setting template engine
-        hunt.extendApp = function (core) {
-        core.app.set('views', __dirname + '/views');
-        core.app.set('view engine', 'ejs');
-        core.app.set('layout', 'layout');
-        core.app.enable('view cache');
-        core.app.engine('html', require('ejs'));
-        };
-        ```</code></pre>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="extendCore"><span class="type-signature"></span>extendCore<span
-        class="signature">(field, value)</span><span class="type-signature"> &rarr; {<a
-        href="Hunt.html">Hunt</a>}</span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Inject public property to hunt core.
-        If `value` is function, the `value` injected is result of value(hunt),
-        else `value` injected is AS IS.
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>field</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="description last">property name to assign to hunt.[fieldName]</td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>value</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-                |
-
-                <span class="param-type">object</span>
-                |
-
-                <span class="param-type">Date</span>
-                |
-
-                <span class="param-type">Array</span>
-                |
-
-                <span class="param-type">function</span>
-
-
-            </td>
-
-
-            <td class="description last">value to assign</td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L33">index.js line 33</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Returns:</h5>
-
-
-    <div class="param-desc">
-        hunt object for functions chaining
-    </div>
-
-
-    <dl>
-        <dt>
-            Type
-        </dt>
-        <dd>
-
-            <span class="param-type"><a href="Hunt.html">Hunt</a></span>
-
-
-        </dd>
-    </dl>
-
-
-    <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-
-        var Hunt = require('hunt')(configObj);
-
-        //extending application core
-
-        //assign value to field
-        Hunt.extendCore('someVar', 42);
-
-        //assign factory function to field and this field value
-        //is result of this function
-        Hunt.extendCore('someFuncToGetSomeVar', function (core) {
-        return core.someVar;
-        });
-
-        //assign function to a core
-        Hunt.extendCore('getSumWithSomeVar', function (core) {
-        return function (a, b) {
-        return a + b + core.someFuncToGetSomeVar;
-        };
-        });
-
-        //Hunt core works after extending
-        console.log('Sum of 2, 2 and 42 is ' + Hunt.getSumWithSomeVar(2, 2));
-        ```</code></pre>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="extendMiddleware"><span class="type-signature"></span>extendMiddleware<span class="signature">(environment, <span
-        class="optional">path</span>, settingsFunction)</span><span class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span>
-</h4>
-
-
-</dt>
-<dd>
-
-
-<div class="description">
-    Adds new middleware to expressJS application
-    This function can be executed multiple times, the middlewares applied
-    are used in application in *order* they were issued by this function.
-    First argument (array of enviroments), and the second one
-    (the path where to use middleware, the default is "/") are OPTIONAL
-    They are applied after setting default exposed internals middleware and before
-    setting router middleware.
-</div>
-
-
-<h5>Parameters:</h5>
-
-
-<table class="params">
-    <thead>
-    <tr>
-
-        <th>Name</th>
-
-
-        <th>Type</th>
-
-
-        <th>Argument</th>
-
-
-        <th>Default</th>
-
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-
-
-    <tr>
-
-        <td class="name"><code>environment</code></td>
-
-
-        <td class="type">
-
-
-            <span class="param-type">String</span>
-            |
-
-            <span class="param-type">Array</span>
-            |
-
-            <span class="param-type">undefined</span>
-
-
-        </td>
-
-
-        <td class="attributes">
-
-
-        </td>
-
-
-        <td class="default">
-
-        </td>
-
-
-        <td class="description last">application enviroment to use,
-            can be something like 'development', ['development','staging'] or null
-            (for ALL enviroments)
-        </td>
-    </tr>
-
-
-    <tr>
-
-        <td class="name"><code>path</code></td>
-
-
-        <td class="type">
-
-
-            <span class="param-type">String/undefined</span>
-
-
-        </td>
-
-
-        <td class="attributes">
-
-            &lt;optional><br>
-
-
-        </td>
-
-
-        <td class="default">
-
-            /
-
-        </td>
-
-
-        <td class="description last">path to mount middleware - default is /</td>
-    </tr>
-
-
-    <tr>
-
-        <td class="name"><code>settingsFunction</code></td>
-
-
-        <td class="type">
-
-
-            <span class="param-type">function</span>
-
-
-        </td>
-
-
-        <td class="attributes">
-
-
-        </td>
-
-
-        <td class="default">
-
-        </td>
-
-
-        <td class="description last">function(core){ return function(req,res,next){.....}}</td>
-    </tr>
-
-
-    </tbody>
-</table>
-
-
-<dl class="details">
-
-
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source">
-        <ul class="dummy">
-            <li>
-                <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L333">index.js line 333</a>
-            </li>
-        </ul>
-    </dd>
-
-
-</dl>
-
-
-<h5>Returns:</h5>
-
-
-<div class="param-desc">
-    hunt object
-</div>
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-
-        <span class="param-type"><a href="Hunt.html">Hunt</a></span>
-
-
-    </dd>
-</dl>
-
-
-<h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-
-        hunt.extendMiddleware(function(core){
-        return function(req, res, next){
-        res.setHeader('X-hunt','YES!');
-        next();
-        };
-        };
-
-        hunt.extendMiddleware('production',function(core){
-        return function(req, res, next){
-        res.setHeader('X-production','YES!');
-        next();
-        };
-        };
-
-        hunt.extendMiddleware(['production','staging'],'/somepath',function(core){
-        return function(req, res, next){
-        if(!request.user){
-        response.send(403);
-        } else {
-        next();
-        }
-        };
-        };
-
-        Hunt.extendMiddleware(function (core) {
-        return function (req, res, next) {
-        res.setHeader('globMiddleware', core.someVar);
-        next();
-        };
-        });
-
-        //setting middleware for production environment only
-        Hunt.extendMiddleware('production', function (core) {
-        return function (req, res, next) {
-        res.setHeader('prodMiddleware', core.someVar);
-        next();
-        };
-        });
-        //setting middleware for development environment only
-        Hunt.extendMiddleware('development', function (core) {
-        return function (req, res, next) {
-        res.setHeader('devMiddleware', core.someVar);
-        next();
-        };
-        });
-        //setting middleware for specified path and development environment only
-        Hunt.extendMiddleware('development', '/somePath', function (core) {
-        return function (req, res, next) {
-        res.setHeader('devMiddleware1', core.someVar);
-        next();
-        };
-        });
-        //setting middleware for specified path and production/staging environments only
-        Hunt.extendMiddleware(['production','staging'], '/somePath', function (core) {
-        return function (req, res, next) {
-        res.setHeader('devMiddleware2', core.someVar);
-        next();
-        };
-        });
-        //setting middleware, that asks user to verify his/her email address
-        Hunt.extendMiddleware(function (core) {
-        return function(req,res,next){
-        if(req.user){
-        if (req.user.accountVerified) {
-        next();
-        } else {
-        req.flash('error','Verify your email address please!');
-        next();
-        }
-        } else {
-        next();
-        }
-        };
-        });
-        ```</code></pre>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="extendModel"><span class="type-signature"></span>extendModel<span class="signature">(modelName, modelConstructor)</span><span
-        class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Inject public property with model object to hunt.model.
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>modelName</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="description last">property name to assign to hunt.model[modelName]</td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>modelConstructor</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">function</span>
-
-
-            </td>
-
-
-            <td class="description last">factory function to generate model using Hunt kernel</td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L168">index.js line 168</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="model.html">model</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Returns:</h5>
-
-
-    <div class="param-desc">
-        hunt object
-    </div>
-
-
-    <dl>
-        <dt>
-            Type
-        </dt>
-        <dd>
-
-            <span class="param-type"><a href="Hunt.html">Hunt</a></span>
-
-
-        </dd>
-    </dl>
-
-
-    <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        //for mongoose model
-        if (Hunt.config.enableMongoose) { //verify that we enabled mongoose
-        Hunt.extendModel('Trophy', function (core) {
-        var TrophySchema = new core.mongoose.Schema({
-        'name': {type: String, unique: true},
-        'scored': Boolean
-        });
-
-        TrophySchema.index({
-        name: 1
-        });
-        //this step is very important - bind mongoose model to current mongo database connection
-        // and assign it to collection in mongo database
-        return core.mongoConnection.model('Trophy', TrophySchema);
-        });
-        // So, this model is accessible by
-        // Hunt.model.Trophy
-        };
-
-        //sequilize model
-        Hunt.extendModel('Planet', function (core) {
-        var Planet = core.sequelize.define('Planet', {
-        name: core.Sequelize.STRING //note that core.Sequilize != core.sequilize
-        });
-        return Planet;
-        });
-        ```</code></pre>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="extendRoutes"><span class="type-signature"></span>extendRoutes<span class="signature">(settingsFunction)</span><span
-        class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Adds <a href="http://expressjs.com/api.html#app.VERB "> application routes and verbs</a> for them.
-        The <a href="https://github.com/visionmedia/express-resource "> REST api helper</a> npm module is already
-        provided
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>settingsFunction</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">function</span>
-
-
-            </td>
-
-
-            <td class="description last">Settings Function</td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L496">index.js line 496</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Returns:</h5>
-
-
-    <div class="param-desc">
-        hunt object
-    </div>
-
-
-    <dl>
-        <dt>
-            Type
-        </dt>
-        <dd>
-
-            <span class="param-type"><a href="Hunt.html">Hunt</a></span>
-
-
-        </dd>
-    </dl>
-
-
-    <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        hunt.extendRoutes(function(core){
-        core.app.get('/', function(req,res){
-        res.send('Hello!');
-        });
-        core.app.resource('forum', require('./forum.js'));
-        core.app.all('*',function(req,res){
-        res.send(404);
-        });
-        }
-        ```</code></pre>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="extendStrategy"><span class="type-signature"></span>extendStrategy<span class="signature">(Strategy)</span><span
-        class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Add new passportJS strategy to application by adding them to Hunt.passport object
-        All strategies have to redirect to `/auth/success` on success or `/auth/failure`
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>Strategy</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">object</span>
-
-
-            </td>
-
-
-            <td class="description last">object</td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L223">index.js line 223</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="passport.html">passport</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Returns:</h5>
-
-
-    <div class="param-desc">
-        hunt object
-    </div>
-
-
-    <dl>
-        <dt>
-            Type
-        </dt>
-        <dd>
-
-            <span class="param-type"><a href="Hunt.html">Hunt</a></span>
-
-
-        </dd>
-    </dl>
-
-
-    <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        var HashStrategy = require('passport-hash').Strategy;
-        //used for verify account by email
-        exports.strategy = function (core) {
-        return new HashStrategy(function (hash, done) {
-        core.model.User.findOneByHuntKeyAndVerifyEmail(hash, function (err, userFound) {
-        done(err, userFound);
-        });
-        });
-        };
-
-        exports.routes = function (core) {
-        core.app.get('/auth/confirm/:hash', core.passport.authenticate('hash', {
-        successRedirect: '/auth/success',
-        failureRedirect: '/auth/failure'
-        }));
-        };
-        ```</code></pre>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="extendTelnet"><span class="type-signature"></span>extendTelnet<span class="signature">(command, callback)</span><span
-        class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Adds new behavior to telnet server. The callback has 2
-        arguments, first one is core object, and second one is
-        <a href="https://github.com/andris9/rai "> RAI client object </a>
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>command</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="description last">command name</td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>callback</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">function</span>
-
-
-            </td>
-
-
-            <td class="description last">function(core, client, payload){}</td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-since">Since:</dt>
-        <dd class="tag-since">
-            <ul class="dummy">
-                <li>0.0.18
-        </dd>
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L530">index.js line 530</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Returns:</h5>
-
-
-    <div class="param-desc">
-        hunt object
-    </div>
-
-
-    <dl>
-        <dt>
-            Type
-        </dt>
-        <dd>
-
-            <span class="param-type"><a href="Hunt.html">Hunt</a></span>
-
-
-        </dd>
-    </dl>
-
-
-    <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-
-        hunt.extendTelnet('version', function(core, client){
-        client.send('HuntJS version is '+core.version);
-        });
-        hunt.extendTelnet('echo', function(core, client, payload){
-        client.send(payload);
-        });
-
-        ```</code></pre>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="on"><span class="type-signature"></span>on<span class="signature">(eventName, listener)</span><span
-        class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Adds a listener to the end of the listeners array for the specified event.
-        Calls can be chained.
-        Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> standard nodejs event emitter
-        object </a>, so it supports all event emitter methods.
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>eventName</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>listener</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">function</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L921">index.js line 921</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Returns:</h5>
-
-
-    <dl>
-        <dt>
-            Type
-        </dt>
-        <dd>
-
-            <span class="param-type"><a href="Hunt.html">Hunt</a></span>
-
-
-        </dd>
-    </dl>
-
-
-    <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        Hunt.on('start', function (params) {
-        console.log('Hunt is started as '+params.type+' on port '+params.port);
-        }).on('httpError', console.error);
-        ```</code></pre>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="once"><span class="type-signature"></span>once<span
-        class="signature">(eventName, listener)</span><span class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span>
-</h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Adds a one time listener for the event. This listener is invoked only the next time the event is fired, after
-        which it is removed.
-        Calls can be chained.
-        Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> standard nodejs event emitter
-        object </a>, so it supports all event emitter methods.
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>eventName</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>listener</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">function</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L938">index.js line 938</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="Hunt.html#on">Hunt#on</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Returns:</h5>
-
-
-    <dl>
-        <dt>
-            Type
-        </dt>
-        <dd>
-
-            <span class="param-type"><a href="Hunt.html">Hunt</a></span>
-
-
-        </dd>
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="rack"><span class="type-signature"></span>rack<span class="signature">()</span><span
-        class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Generate realy long random strings
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/misc/rack.js#L10">lib/misc/rack.js line
-                        10</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="removeListener"><span class="type-signature"></span>removeListener<span class="signature">(eventName, listener)</span><span
-        class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> standard nodejs event emitter
-        object </a>, so it supports all event emitter methods.
-        Remove a listener from the listener array for the specified event.
-        Caution: changes array indices in the listener array behind the listener.
-        Calls can be chained.
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>eventName</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>listener</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">function</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L950">index.js line 950</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Returns:</h5>
-
-
-    <div class="param-desc">
-        Hunt
-    </div>
-
-
-    <dl>
-        <dt>
-            Type
-        </dt>
-        <dd>
-
-            <span class="param-type"><a href="Hunt.html">Hunt</a></span>
-
-
-        </dd>
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="startBackGround"><span class="type-signature"></span>startBackGround<span
-        class="signature">()</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Starts Hunt application as single threaded background application
-        It have redis client and data models, event emitting system exposed.
-        It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L622">index.js line 622</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        Hunt.startBackGround();
-        ```</code></pre>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="startBackGroundCluster"><span class="type-signature"></span>startBackGroundCluster<span
-        class="signature">(maxProcesses)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Starts Hunt application as single threaded background application, that controls, by the means of
-        [cluster](http://nodejs.org/docs/latest/api/cluster.html), other background applications.
-        By default it spawns 1 process per CPU core.
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>maxProcesses</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">Number</span>
-                |
-
-                <span class="param-type">null</span>
-
-
-            </td>
-
-
-            <td class="description last">maximal number of web server processes to spawn, default - 1 process per CPU
-                core
-            </td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L788">index.js line 788</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Returns:</h5>
-
-
-    <div class="param-desc">
-        true if this is master process, false if this is worker process.
-    </div>
-
-
-    <dl>
-        <dt>
-            Type
-        </dt>
-        <dd>
-
-            <span class="param-type">Boolean</span>
-
-
-        </dd>
-    </dl>
-
-
-    <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-
-        var numberOfProcessesToSpawn = 10;
-        Hunt.startBackGroundCluster(numberOfProcessesToSpawn);
-
-        ```</code></pre>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="startCluster"><span class="type-signature"></span>startCluster<span
-        class="signature">(parameters)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Start Hunt as cluster. `Parameters` is object with 4 field -
-        - `web`, `background`, `telnet`, 'port'.
-        The values of `web`,`background`, `telnet` are number of child processes to spawn.
-        The value of `port` is port number for web server processes to listen to.
-        It is worth notice, that in this case telnet server listens on `Hunt.config.port+1` port!
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>parameters</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">object</span>
-
-
-            </td>
-
-
-            <td class="description last">configuration parameters</td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L809">index.js line 809</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Returns:</h5>
-
-
-    <div class="param-desc">
-        true if this is master process, false if this is worker process.
-    </div>
-
-
-    <dl>
-        <dt>
-            Type
-        </dt>
-        <dd>
-
-            <span class="param-type">Boolean</span>
-
-
-        </dd>
-    </dl>
-
-
-    <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-
-        Hunt.startCluster({ 'web':1, 'background':1, 'telnet': 1 });
-        Hunt.startCluster({ 'web':max, 'port':80 });
-        Hunt.startCluster({ 'background':max });
-        Hunt.startCluster({ 'telnet':max, 'port':25 });
-        Hunt.startCluster({ 'web':max, 'telnet':max }); //i strongly do not reccomend doing this!
-
-        ```</code></pre>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="startTelnetCluster"><span class="type-signature"></span>startTelnetCluster<span class="signature">(port, maxProcesses)</span><span
-        class="type-signature"> &rarr; {Boolean}</span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Starts hunt application as single threaded background application,
-        that controls, by the means of <a href="http://nodejs.org/docs/latest/api/cluster.html "> nodejs embedded
-        cluster</a>,
-        telnet server processes. By default it spawns 1 process per CPU core.
-        It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
-        in master process, and events of "start" with payload of `{'type':'telnet', 'port':25}`
-        in each of telnet server processes.
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>port</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">number</span>
-                |
-
-                <span class="param-type">null</span>
-
-
-            </td>
-
-
-            <td class="description last">what port to use, if null - use port value from config</td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>maxProcesses</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">number</span>
-                |
-
-                <span class="param-type">null</span>
-
-
-            </td>
-
-
-            <td class="description last">maximal number of web server processes to spawn, default - 1 process per CPU
-                core
-            </td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L764">index.js line 764</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Returns:</h5>
-
-
-    <div class="param-desc">
-        true if this is master process, false if this is worker process.
-    </div>
-
-
-    <dl>
-        <dt>
-            Type
-        </dt>
-        <dd>
-
-            <span class="param-type">Boolean</span>
-
-
-        </dd>
-    </dl>
-
-
-    <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        Hunt.startTelnetCluster(25, 10000);
-        ```</code></pre>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="startTelnetServer"><span class="type-signature"></span>startTelnetServer<span class="signature">(port)</span><span
-        class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Start Hunt as single process telnet server
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>port</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">number</span>
-                |
-
-                <span class="param-type">null</span>
-
-
-            </td>
-
-
-            <td class="description last">what port to use, if null - use port value from config</td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-since">Since:</dt>
-        <dd class="tag-since">
-            <ul class="dummy">
-                <li>0.0.18
-        </dd>
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L689">index.js line 689</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        Hunt.startTelnetServer(3003);
-        ```</code></pre>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="startWebCluster"><span class="type-signature"></span>startWebCluster<span class="signature">(port, maxProcesses)</span><span
-        class="type-signature"> &rarr; {Boolean}</span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Starts hunt application as single threaded background application,
-        that controls, by the means of <a href="http://nodejs.org/docs/latest/api/cluster.html "> nodejs embedded
-        cluster</a>,
-        web server processes. By default it spawns 1 process per CPU core.
-        It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
-        in master process, and events of "start" with payload of `{'type':'webserver', 'port':80}`
-        in web server processes.
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>port</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">number</span>
-                |
-
-                <span class="param-type">null</span>
-
-
-            </td>
-
-
-            <td class="description last">what port to use, if null - use port value from config</td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>maxProcesses</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">number</span>
-                |
-
-                <span class="param-type">null</span>
-
-
-            </td>
-
-
-            <td class="description last">maximal number of web server processes to spawn, default - 1 process per CPU
-                core
-            </td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L740">index.js line 740</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Returns:</h5>
-
-
-    <div class="param-desc">
-        true if this is master process, false if this is worker process.
-    </div>
-
-
-    <dl>
-        <dt>
-            Type
-        </dt>
-        <dd>
-
-            <span class="param-type">Boolean</span>
-
-
-        </dd>
-    </dl>
-
-
-    <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        Hunt.startWebCluster(80, 10000);
-        ```</code></pre>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="startWebServer"><span class="type-signature"></span>startWebServer<span class="signature">(port, address)</span><span
-        class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Starts Hunt application as single threaded web server
-        It have redis client/models, expressJS application and event emitting system exposed.
-        It makes Hunt to emit event of "start" with payload of `{'type':'webserver', 'port':80}`
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>port</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">number</span>
-                |
-
-                <span class="param-type">null</span>
-
-
-            </td>
-
-
-            <td class="description last">what port to use, if null - use port value from config</td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>address</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-                |
-
-                <span class="param-type">null</span>
-
-
-            </td>
-
-
-            <td class="description last">what address to bind to. Default is '0.0.0.0' - all IPv4 addresses. The address
-                is populated from environment address of HUNTJS_ADDR
-            </td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L650">index.js line 650</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        Hunt.startWebServer(80);
-        Hunt.startWebServer(80, '0.0.0.0');
-        ```</code></pre>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="stop"><span class="type-signature"></span>stop<span class="signature">()</span><span
-        class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Stops the current application - close database connections, etc.
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L973">index.js line 973</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-</dl>
-
-
-<h3 class="subsection-title">Events</h3>
-
-<dl>
-
-<dt>
-<h4 class="name" id="event:broadcast">broadcast</h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Broadcast message from core
-        via socket.io to all webserver clients - both authorized users
-        and non authorized site visitors
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type">object</span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/socket.io.js#L83">lib/http/socket.io.js
-                        line 83</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="Hunt.html#event:notify:sio">Hunt#notify:sio</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="event:httpError">httpError</h4>
-
-
-</dt>
-<dd>
-
-
-<div class="description">
-    Event is emmited when error occurs while performing http response
-</div>
-
-
-<h5>Type:</h5>
-<ul>
-    <li>
-
-        <span class="param-type">Object</span>
-
-
-    </li>
-</ul>
-
-
-<dl class="details">
-
-
-<h5 class="subsection-title">Properties:</h5>
-
-<dl>
-
-<table class="props">
-<thead>
-<tr>
-
-    <th>Name</th>
-
-
-    <th>Type</th>
-
-
-    <th class="last">Description</th>
-</tr>
-</thead>
-
-<tbody>
-
-
-<tr>
-
-    <td class="name"><code>error</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">Error</span>
-
-
-    </td>
-
-
-    <td class="description last"></td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>errorStack</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">object</span>
-
-
-    </td>
-
-
-    <td class="description last"></td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>startTime</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">Date</span>
-
-
-    </td>
-
-
-    <td class="description last">start time of request</td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>duration</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">number</span>
-
-
-    </td>
-
-
-    <td class="description last">duration of request processing in milliseconds</td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>statusCode</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">number</span>
-
-
-    </td>
-
-
-    <td class="description last"></td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>method</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">string</span>
-
-
-    </td>
-
-
-    <td class="description last">request method - GET, POST, PUT, DELETE</td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>ip</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">string</span>
-
-
-    </td>
-
-
-    <td class="description last">ip address of remote host</td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>ips</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">string</span>
-
-
-    </td>
-
-
-    <td class="description last">proxy chain if present - <a href="http://expressjs.com/3x/api.html#req.ips">http://expressjs.com/3x/api.html#req.ips</a>
-    </td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>uri</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">string</span>
-
-
-    </td>
-
-
-    <td class="description last"></td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>body</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">string</span>
-
-
-    </td>
-
-
-    <td class="description last">This property is an object containing the parsed request body. This feature is provided
-        by the bodyParser() middleware, though other body parsing middleware may follow this convention as well. This
-        property defaults to {} when bodyParser() is used. <a href="http://expressjs.com/3x/api.html#req.body">http://expressjs.com/3x/api.html#req.body</a>
-    </td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>query</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">string</span>
-
-
-    </td>
-
-
-    <td class="description last">object containing the parsed query-string, defaulting to empty object - <a
-            href="http://expressjs.com/3x/api.html#req.query">http://expressjs.com/3x/api.html#req.query</a></td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>user</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type"><a href="User.html">User</a></span>
-
-
-    </td>
-
-
-    <td class="description last">user who did the request</td>
-</tr>
-
-
-</tbody>
-</table>
-</dl>
-
-
-<dt class="tag-source">Source:</dt>
-<dd class="tag-source">
-    <ul class="dummy">
-        <li>
-            <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L374">lib/http/expressApp.js
-                line 374</a>
-        </li>
-    </ul>
-</dd>
-
-
-</dl>
-
-
-<h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        Hunt.extendCore(function(core){
-        core.app.get('/error', function(request,response){
-        throw new Error('Shit happens!');
-        });
-        });
-
-        Hunt.on('httpError', function(httpError){
-        console.log(httpError.error.toString());
-        });
-        //=> Shit happens!
-        ```</code></pre>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="event:httpSuccess">httpSuccess</h4>
-
-
-</dt>
-<dd>
-
-
-<div class="description">
-    Event emmited every time HTTP request is processed, usefull
-    for logging.
-</div>
-
-
-<h5>Type:</h5>
-<ul>
-    <li>
-
-        <span class="param-type">Object</span>
-
-
-    </li>
-</ul>
-
-
-<dl class="details">
-
-
-<h5 class="subsection-title">Properties:</h5>
-
-<dl>
-
-<table class="props">
-<thead>
-<tr>
-
-    <th>Name</th>
-
-
-    <th>Type</th>
-
-
-    <th class="last">Description</th>
-</tr>
-</thead>
-
-<tbody>
-
-
-<tr>
-
-    <td class="name"><code>startTime</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">Date</span>
-
-
-    </td>
-
-
-    <td class="description last">start time of request</td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>duration</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">number</span>
-
-
-    </td>
-
-
-    <td class="description last">duration of request processing in milliseconds</td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>statusCode</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">number</span>
-
-
-    </td>
-
-
-    <td class="description last"></td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>method</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">string</span>
-
-
-    </td>
-
-
-    <td class="description last">request method - GET, POST, PUT, DELETE</td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>ip</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">string</span>
-
-
-    </td>
-
-
-    <td class="description last">ip address of remote host</td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>ips</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">string</span>
-
-
-    </td>
-
-
-    <td class="description last">proxy chain if present - <a href="http://expressjs.com/3x/api.html#req.ips">http://expressjs.com/3x/api.html#req.ips</a>
-    </td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>uri</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">string</span>
-
-
-    </td>
-
-
-    <td class="description last"></td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>body</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">string</span>
-
-
-    </td>
-
-
-    <td class="description last">This property is an object containing the parsed request body. This feature is provided
-        by the bodyParser() middleware, though other body parsing middleware may follow this convention as well. This
-        property defaults to {} when bodyParser() is used. <a href="http://expressjs.com/3x/api.html#req.body">http://expressjs.com/3x/api.html#req.body</a>
-    </td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>query</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">string</span>
-
-
-    </td>
-
-
-    <td class="description last">object containing the parsed query-string, defaulting to empty object - <a
-            href="http://expressjs.com/3x/api.html#req.query">http://expressjs.com/3x/api.html#req.query</a></td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>user</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type"><a href="User.html">User</a></span>
-
-
-    </td>
-
-
-    <td class="description last">user who did the request</td>
-</tr>
-
-
-</tbody>
-</table>
-</dl>
-
-
-<dt class="tag-source">Source:</dt>
-<dd class="tag-source">
-    <ul class="dummy">
-        <li>
-            <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L261">lib/http/expressApp.js
-                line 261</a>
-        </li>
-    </ul>
-</dd>
-
-
-</dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="event:notify">notify</h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Emitted when any of users is notified by any channel
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type">object</span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-        <h5 class="subsection-title">Properties:</h5>
-
-        <dl>
-
-            <table class="props">
-                <thead>
-                <tr>
-
-                    <th>Name</th>
-
-
-                    <th>Type</th>
-
-
-                    <th class="last">Description</th>
-                </tr>
-                </thead>
-
-                <tbody>
-
-
-                <tr>
-
-                    <td class="name"><code>user</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type"><a href="User.html">User</a></span>
-
-
-                    </td>
-
-
-                    <td class="description last">user being notified</td>
-                </tr>
-
-
-                <tr>
-
-                    <td class="name"><code>channel</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">string</span>
-
-
-                    </td>
-
-
-                    <td class="description last">name of notify channel used</td>
-                </tr>
-
-
-                <tr>
-
-                    <td class="name"><code>message</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">string</span>
-                        |
-
-                        <span class="param-type">object</span>
-
-
-                    </td>
-
-
-                    <td class="description last"></td>
-                </tr>
-
-
-                </tbody>
-            </table>
-        </dl>
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L284">lib/models/user.mongoose.js
-                        line 284</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="User.html#notify">User#notify</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="event:start">start</h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Emitted when Hunt is started as webserver process
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type">object</span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-        <h5 class="subsection-title">Properties:</h5>
-
-        <dl>
-
-            <table class="props">
-                <thead>
-                <tr>
-
-                    <th>Name</th>
-
-
-                    <th>Type</th>
-
-
-                    <th class="last">Description</th>
-                </tr>
-                </thead>
-
-                <tbody>
-
-
-                <tr>
-
-                    <td class="name"><code>type</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">string</span>
-
-
-                    </td>
-
-
-                    <td class="description last">with a value of string of 'webserver'</td>
-                </tr>
-
-
-                <tr>
-
-                    <td class="name"><code>port</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">number</span>
-
-
-                    </td>
-
-
-                    <td class="description last">with a value of port this application listens to</td>
-                </tr>
-
-
-                <tr>
-
-                    <td class="name"><code>address</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">string</span>
-
-
-                    </td>
-
-
-                    <td class="description last">with a value of address application is bound to</td>
-                </tr>
-
-
-                </tbody>
-            </table>
-        </dl>
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L672">index.js line 672</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="Hunt.html#startWebServer">Hunt#startWebServer</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="event:start">start</h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Emitted when Hunt is started as background process
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type">object</span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-        <h5 class="subsection-title">Properties:</h5>
-
-        <dl>
-
-            <table class="props">
-                <thead>
-                <tr>
-
-                    <th>Name</th>
-
-
-                    <th>Type</th>
-
-
-                    <th class="last">Description</th>
-                </tr>
-                </thead>
-
-                <tbody>
-
-
-                <tr>
-
-                    <td class="name"><code>type</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">string</span>
-
-
-                    </td>
-
-
-                    <td class="description last">with a value of string of 'background'</td>
-                </tr>
-
-
-                </tbody>
-            </table>
-        </dl>
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L637">index.js line 637</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="event:start">start</h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Emitted when Hunt is started as telnet process
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type">object</span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-        <h5 class="subsection-title">Properties:</h5>
-
-        <dl>
-
-            <table class="props">
-                <thead>
-                <tr>
-
-                    <th>Name</th>
-
-
-                    <th>Type</th>
-
-
-                    <th class="last">Description</th>
-                </tr>
-                </thead>
-
-                <tbody>
-
-
-                <tr>
-
-                    <td class="name"><code>type</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">string</span>
-
-
-                    </td>
-
-
-                    <td class="description last">with a value of string of 'telnet'</td>
-                </tr>
-
-
-                <tr>
-
-                    <td class="name"><code>port</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">string</span>
-
-
-                    </td>
-
-
-                    <td class="description last">with a value of string of port number</td>
-                </tr>
-
-
-                <tr>
-
-                    <td class="name"><code>address</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">string</span>
-
-
-                    </td>
-
-
-                    <td class="description last">with a value of address application is bound to</td>
-                </tr>
-
-
-                </tbody>
-            </table>
-        </dl>
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L722">index.js line 722</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="Hunt.html#startTelnetServer">Hunt#startTelnetServer</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="event:message:sio">message:sio</h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Event is emitted each time the socket.io client sends
-        the message by this client side javascript code.
-        See <a href="https://github.com/LearnBoost/socket.io/wiki/Exposed-events#server "> official socket.io wiki </a>
-        for details
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type">object</span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-        <h5 class="subsection-title">Properties:</h5>
-
-        <dl>
-
-            <table class="props">
-                <thead>
-                <tr>
-
-                    <th>Name</th>
-
-
-                    <th>Type</th>
-
-
-                    <th class="last">Description</th>
-                </tr>
-                </thead>
-
-                <tbody>
-
-
-                <tr>
-
-                    <td class="name"><code>user</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type"><a href="User.html">User</a></span>
-                        |
-
-                        <span class="param-type">null</span>
-
-
-                    </td>
-
-
-                    <td class="description last">user, associated with this socket, or null if user is not
-                        authenticated
-                    </td>
-                </tr>
-
-
-                <tr>
-
-                    <td class="name"><code>message</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">string</span>
-                        |
-
-                        <span class="param-type">object</span>
-
-
-                    </td>
-
-
-                    <td class="description last">message, issued by this socket.io client</td>
-                </tr>
-
-
-                </tbody>
-            </table>
-        </dl>
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/socket.io.js#L107">lib/http/socket.io.js
-                        line 107</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-    <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-
-        var socket = io.connect();
-        socket.send('Hello!', function(error){...});
-
-        ```
-
-    </code></pre>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="event:notify:all">notify:all</h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Emitted when any of users is notified by all channels
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type">object</span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-        <h5 class="subsection-title">Properties:</h5>
-
-        <dl>
-
-            <table class="props">
-                <thead>
-                <tr>
-
-                    <th>Name</th>
-
-
-                    <th>Type</th>
-
-
-                    <th class="last">Description</th>
-                </tr>
-                </thead>
-
-                <tbody>
-
-
-                <tr>
-
-                    <td class="name"><code>user</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type"><a href="User.html">User</a></span>
-
-
-                    </td>
-
-
-                    <td class="description last">user being notified</td>
-                </tr>
-
-
-                <tr>
-
-                    <td class="name"><code>message</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">string</span>
-                        |
-
-                        <span class="param-type">object</span>
-
-
-                    </td>
-
-
-                    <td class="description last"></td>
-                </tr>
-
-
-                </tbody>
-            </table>
-        </dl>
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L297">lib/models/user.mongoose.js
-                        line 297</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="User.html#notify">User#notify</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="event:notify:email">notify:email</h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Emitted when any of users is notified by email, and when
-        the user have email address, of course
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type">object</span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-        <h5 class="subsection-title">Properties:</h5>
-
-        <dl>
-
-            <table class="props">
-                <thead>
-                <tr>
-
-                    <th>Name</th>
-
-
-                    <th>Type</th>
-
-
-                    <th class="last">Description</th>
-                </tr>
-                </thead>
-
-                <tbody>
-
-
-                <tr>
-
-                    <td class="name"><code>user</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type"><a href="User.html">User</a></span>
-
-
-                    </td>
-
-
-                    <td class="description last">user being notified</td>
-                </tr>
-
-
-                <tr>
-
-                    <td class="name"><code>message</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">string</span>
-                        |
-
-                        <span class="param-type">object</span>
-
-
-                    </td>
-
-
-                    <td class="description last"></td>
-                </tr>
-
-
-                </tbody>
-            </table>
-        </dl>
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L320">lib/models/user.mongoose.js
-                        line 320</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="User.html#notifyByEmail">User#notifyByEmail</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="event:notify:sio">notify:sio</h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Emitted to notify any of users by socket.io
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type">object</span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-        <h5 class="subsection-title">Properties:</h5>
-
-        <dl>
-
-            <table class="props">
-                <thead>
-                <tr>
-
-                    <th>Name</th>
-
-
-                    <th>Type</th>
-
-
-                    <th class="last">Description</th>
-                </tr>
-                </thead>
-
-                <tbody>
-
-
-                <tr>
-
-                    <td class="name"><code>user</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type"><a href="User.html">User</a></span>
-
-
-                    </td>
-
-
-                    <td class="description last">user being notified</td>
-                </tr>
-
-
-                <tr>
-
-                    <td class="name"><code>message</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">string</span>
-                        |
-
-                        <span class="param-type">object</span>
-
-
-                    </td>
-
-
-                    <td class="description last">message object</td>
-                </tr>
-
-
-                <tr>
-
-                    <td class="name"><code>type</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">string</span>
-
-
-                    </td>
-
-
-                    <td class="description last">type of socket.io event to emit, default is `notify`</td>
-                </tr>
-
-
-                </tbody>
-            </table>
-        </dl>
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L343">lib/models/user.mongoose.js
-                        line 343</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="User.html#notifyBySocketIo">User#notifyBySocketIo</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="event:user:auth">user:auth</h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Event is emitted each time the user is authorized in system
-        with payload of user authorized.
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type"><a href="User.html">User</a></span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L583">lib/models/user.mongoose.js
-                        line 583</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="event:user:save">user:save</h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Event is emitted each time the user profile is updated and saved
-        with payload of user being saved.
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type"><a href="User.html">User</a></span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L106">lib/models/user.mongoose.js
-                        line 106</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-</dl>
-
-</article>
-
-</section>
 
 
 <section>
@@ -9514,6 +4383,137 @@
 
 
     <div class="description">
+        Emitted when Hunt is started as telnet process
+    </div>
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+            <span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+    <dl class="details">
+
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+            <table class="props">
+                <thead>
+                <tr>
+
+                    <th>Name</th>
+
+
+                    <th>Type</th>
+
+
+                    <th class="last">Description</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+
+                <tr>
+
+                    <td class="name"><code>type</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">string</span>
+
+
+                    </td>
+
+
+                    <td class="description last">with a value of string of 'telnet'</td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="name"><code>port</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">string</span>
+
+
+                    </td>
+
+
+                    <td class="description last">with a value of string of port number</td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="name"><code>address</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">string</span>
+
+
+                    </td>
+
+
+                    <td class="description last">with a value of address application is bound to</td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </dl>
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L722">index.js line 722</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="Hunt.html#startTelnetServer">Hunt#startTelnetServer</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="event:start">start</h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
         Emitted when Hunt is started as background process
     </div>
 
@@ -9590,6 +4590,4910 @@
         <dd class="tag-see">
             <ul>
                 <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="event:message:sio">message:sio</h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Event is emitted each time the socket.io client sends
+        the message by this client side javascript code.
+        See <a href="https://github.com/LearnBoost/socket.io/wiki/Exposed-events#server "> official socket.io wiki </a>
+        for details
+    </div>
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+            <span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+    <dl class="details">
+
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+            <table class="props">
+                <thead>
+                <tr>
+
+                    <th>Name</th>
+
+
+                    <th>Type</th>
+
+
+                    <th class="last">Description</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+
+                <tr>
+
+                    <td class="name"><code>user</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type"><a href="User.html">User</a></span>
+                        |
+
+                        <span class="param-type">null</span>
+
+
+                    </td>
+
+
+                    <td class="description last">user, associated with this socket, or null if user is not
+                        authenticated
+                    </td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="name"><code>message</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">string</span>
+                        |
+
+                        <span class="param-type">object</span>
+
+
+                    </td>
+
+
+                    <td class="description last">message, issued by this socket.io client</td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </dl>
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/socket.io.js#L107">lib/http/socket.io.js
+                        line 107</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+
+        var socket = io.connect();
+        socket.send('Hello!', function(error){...});
+
+        ```
+
+    </code></pre>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="event:notify:all">notify:all</h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Emitted when any of users is notified by all channels
+    </div>
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+            <span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+    <dl class="details">
+
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+            <table class="props">
+                <thead>
+                <tr>
+
+                    <th>Name</th>
+
+
+                    <th>Type</th>
+
+
+                    <th class="last">Description</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+
+                <tr>
+
+                    <td class="name"><code>user</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type"><a href="User.html">User</a></span>
+
+
+                    </td>
+
+
+                    <td class="description last">user being notified</td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="name"><code>message</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">string</span>
+                        |
+
+                        <span class="param-type">object</span>
+
+
+                    </td>
+
+
+                    <td class="description last"></td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </dl>
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L297">lib/models/user.mongoose.js
+                        line 297</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="User.html#notify">User#notify</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="event:notify:email">notify:email</h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Emitted when any of users is notified by email, and when
+        the user have email address, of course
+    </div>
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+            <span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+    <dl class="details">
+
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+            <table class="props">
+                <thead>
+                <tr>
+
+                    <th>Name</th>
+
+
+                    <th>Type</th>
+
+
+                    <th class="last">Description</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+
+                <tr>
+
+                    <td class="name"><code>user</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type"><a href="User.html">User</a></span>
+
+
+                    </td>
+
+
+                    <td class="description last">user being notified</td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="name"><code>message</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">string</span>
+                        |
+
+                        <span class="param-type">object</span>
+
+
+                    </td>
+
+
+                    <td class="description last"></td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </dl>
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L320">lib/models/user.mongoose.js
+                        line 320</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="User.html#notifyByEmail">User#notifyByEmail</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="event:notify:sio">notify:sio</h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Emitted to notify any of users by socket.io
+    </div>
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+            <span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+    <dl class="details">
+
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+            <table class="props">
+                <thead>
+                <tr>
+
+                    <th>Name</th>
+
+
+                    <th>Type</th>
+
+
+                    <th class="last">Description</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+
+                <tr>
+
+                    <td class="name"><code>user</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type"><a href="User.html">User</a></span>
+
+
+                    </td>
+
+
+                    <td class="description last">user being notified</td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="name"><code>message</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">string</span>
+                        |
+
+                        <span class="param-type">object</span>
+
+
+                    </td>
+
+
+                    <td class="description last">message object</td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="name"><code>type</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">string</span>
+
+
+                    </td>
+
+
+                    <td class="description last">type of socket.io event to emit, default is `notify`</td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </dl>
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L343">lib/models/user.mongoose.js
+                        line 343</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="User.html#notifyBySocketIo">User#notifyBySocketIo</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="event:user:auth">user:auth</h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Event is emitted each time the user is authorized in system
+        with payload of user authorized.
+    </div>
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+            <span class="param-type"><a href="User.html">User</a></span>
+
+
+        </li>
+    </ul>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L583">lib/models/user.mongoose.js
+                        line 583</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="event:user:save">user:save</h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Event is emitted each time the user profile is updated and saved
+        with payload of user being saved.
+    </div>
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+            <span class="param-type"><a href="User.html">User</a></span>
+
+
+        </li>
+    </ul>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L106">lib/models/user.mongoose.js
+                        line 106</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+</dl>
+
+</article>
+
+</section>
+
+
+<section>
+
+<h2>
+    Hunt
+</h2>
+
+<div class="class-description">Hunt</div>
+
+
+<article>
+<div class="container-overview">
+
+
+    <dt>
+    <h4 class="name" id="Hunt"><span class="type-signature"></span>new Hunt<span class="signature">(config)</span><span
+            class="type-signature"></span></h4>
+
+
+    </dt>
+    <dd>
+
+
+        <h5>Parameters:</h5>
+
+
+        <table class="params">
+            <thead>
+            <tr>
+
+                <th>Name</th>
+
+
+                <th>Type</th>
+
+
+                <th class="last">Description</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+
+            <tr>
+
+                <td class="name"><code>config</code></td>
+
+
+                <td class="type">
+
+
+                    <span class="param-type"><a href="config.html">config</a></span>
+
+
+                </td>
+
+
+                <td class="description last"></td>
+            </tr>
+
+
+            </tbody>
+        </table>
+
+
+        <dl class="details">
+
+
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source">
+                <ul class="dummy">
+                    <li>
+                        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L23">index.js line 23</a>
+                    </li>
+                </ul>
+            </dd>
+
+
+        </dl>
+
+
+    </dd>
+
+
+</div>
+
+
+<h3 class="subsection-title">Members</h3>
+
+<dl>
+
+<dt>
+<h4 class="name" id="app"><span class="type-signature"></span>app<span class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+    <div class="description">
+        <a href="http://expressjs.com/ "> ExpressJS</a> application instance
+    </div>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L37">lib/http/expressApp.js
+                        line 37</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="async"><span class="type-signature"></span>async<span class="type-signature"> :Object</span></h4>
+
+
+</dt>
+<dd>
+
+    <div class="description">
+        Embedded <a href="https://www.npmjs.org/package/async "> npm module of async</a> for better workflow
+    </div>
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+            <span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L100">index.js line 100</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="config"><span class="type-signature"></span>config<span class="type-signature"> :<a
+        href="config.html">config</a></span></h4>
+
+
+</dt>
+<dd>
+
+    <div class="description">
+        Object that represents current config object of HuntJS application
+    </div>
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+            <span class="param-type"><a href="config.html">config</a></span>
+
+
+        </li>
+    </ul>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L90">index.js line 90</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="express"><span class="type-signature"></span>express<span class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+    <div class="description">
+        <a href="http://expressjs.com/ "> ExpressJS</a> framework constructor with static methods
+        exposed, for example core.express.static is middleware used for serving
+        css, client side javascripts, images.
+    </div>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L29">lib/http/expressApp.js
+                        line 29</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="http"><span class="type-signature"></span>http<span class="type-signature"> :Object</span></h4>
+
+
+</dt>
+<dd>
+
+    <div class="description">
+        Embedded <a href="http://nodejs.org/docs/latest/api/http.html "> nodejs http module</a>,
+        that is used by socket.io and http server.
+    </div>
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+            <span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L109">index.js line 109</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="httpServer"><span class="type-signature"></span>httpServer<span class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+    <div class="description">
+        <a href="http://nodejs.org/api/http.html "> http</a> server class, used by socket.io and expressJS objects
+    </div>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L44">lib/http/expressApp.js
+                        line 44</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="Hunt.html#express">Hunt#express</a></li>
+
+                <li><a href="Hunt.html#io">Hunt#io</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="io"><span class="type-signature"></span>io<span class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+    <div class="description">
+        Ready to use <a href="http://socket.io">http://socket.io</a> object with passport.js integration
+    </div>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/socket.io.js#L11">lib/http/socket.io.js
+                        line 11</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="model"><span class="type-signature"></span>model<span class="type-signature"> :<a
+        href="model.html">model</a></span></h4>
+
+
+</dt>
+<dd>
+
+    <div class="description">
+        Class to hold <code> data models</code> of Hunt application,
+        they are injected into request object of controller.
+    </div>
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+            <span class="param-type"><a href="model.html">model</a></span>
+
+
+        </li>
+    </ul>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L157">index.js line 157</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="model.html">model</a></li>
+
+                <li><a href="request.html">request</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="mongoConnection"><span class="type-signature"></span>mongoConnection<span
+        class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+    <div class="description">
+        Mongoose connection object
+    </div>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/datastore/mongooseModels.js#L21">lib/datastore/mongooseModels.js
+                        line 21</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="Hunt.html#mongoose">Hunt#mongoose</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="mongoose"><span class="type-signature"></span>mongoose<span class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+    <div class="description">
+        Mongoose object, used for object relation maping to mongo database
+        <a href="http://mongoosejs.com/ "> Official Mongoose Documentation </a>
+    </div>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/datastore/mongooseModels.js#L14">lib/datastore/mongooseModels.js
+                        line 14</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="redisClient"><span class="type-signature"></span>redisClient<span class="type-signature"></span>
+</h4>
+
+
+</dt>
+<dd>
+
+    <div class="description">
+        Ready to use redis client with connection parameters
+        taken from config object.
+        <a href="http://npmjs.org/package/redis "> Additional info on redis client</a>
+    </div>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/datastore/redisClient.js#L26">lib/datastore/redisClient.js
+                        line 26</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="sessionStorage"><span class="type-signature"></span>sessionStorage<span
+        class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+    <div class="description">
+        Connect-compatible <a href="https://www.npmjs.org/package/connect-redis "> redis sessions` storage </a> used by
+        <a href="Hunt.html#express"><code>Express application </code></a> and <a href="Hunt.html#io"><code> Socket.io
+        server </code></a>
+    </div>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L71">lib/http/expressApp.js
+                        line 71</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="version"><span class="type-signature"></span>version<span class="type-signature"> :string</span>
+</h4>
+
+
+</dt>
+<dd>
+
+    <div class="description">
+        Current Hunt version
+    </div>
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+            <span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L120">index.js line 120</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+</dl>
+
+
+<h3 class="subsection-title">Methods</h3>
+
+<dl>
+
+<dt>
+<h4 class="name" id="cachingMiddleware"><span class="type-signature"></span>cachingMiddleware<span
+        class="signature">(<span class="optional">ttl</span>)</span><span class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Generate caching middleware for this route
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th>Argument</th>
+
+
+            <th>Default</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>ttl</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">number</span>
+                |
+
+                <span class="param-type">null</span>
+
+
+            </td>
+
+
+            <td class="attributes">
+
+                &lt;optional><br>
+
+
+            </td>
+
+
+            <td class="default">
+
+                60
+
+            </td>
+
+
+            <td class="description last">cache invalidation time, default is 60 seconds</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/redisCache.js#L9">lib/http/redisCache.js
+                        line 9</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```
+
+        Hunt.extendRoutes(core){
+        core.app.use('/cacheForTenSeconds', Hunt.cachingMiddleware(10000));
+        core.app.use('/cacheForSixtySeconds', Hunt.cachingMiddleware(60000));
+        core.app.get('*', function(request, response){
+        response.send('Current time is '+new Date());
+        });
+        }
+
+        ```</code></pre>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="createRedisCliet"><span class="type-signature"></span>createRedisCliet<span
+        class="signature">()</span><span class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Creates redis client
+    </div>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/datastore/redisClient.js#L36">lib/datastore/redisClient.js
+                        line 36</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="Hunt.html#redisClient">Hunt#redisClient</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="decrypt"><span class="type-signature"></span>decrypt<span class="signature">(text, <span
+        class="optional">secret</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Decrypt the given text using config.SECRET by default or using the custom given secret
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th>Argument</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>text</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">string</span>
+
+
+            </td>
+
+
+            <td class="attributes">
+
+
+            </td>
+
+
+            <td class="description last">text to decrypt</td>
+        </tr>
+
+
+        <tr>
+
+            <td class="name"><code>secret</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">string</span>
+
+
+            </td>
+
+
+            <td class="attributes">
+
+                &lt;optional><br>
+
+
+            </td>
+
+
+            <td class="description last">secret to use for decryption, if absent, the value of
+                <code>config.secret</code> is used
+            </td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/misc/crypt.js#L21">lib/misc/crypt.js
+                        line 21</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="config.html">config</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Returns:</h5>
+
+
+    <div class="param-desc">
+        - decrypted string
+    </div>
+
+
+    <dl>
+        <dt>
+            Type
+        </dt>
+        <dd>
+
+            <span class="param-type">string</span>
+
+
+        </dd>
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="emit"><span class="type-signature"></span>emit<span
+        class="signature">(eventName, payload)</span><span class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Makes Hunt emit an event. Returns true if event had listeners, false otherwise.
+        Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> standard nodejs event emitter
+        object </a>, so it supports all event emitter methods.
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>eventName</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">string</span>
+
+
+            </td>
+
+
+            <td class="description last"></td>
+        </tr>
+
+
+        <tr>
+
+            <td class="name"><code>payload</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">object</span>
+
+
+            </td>
+
+
+            <td class="description last"></td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L962">index.js line 962</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="encrypt"><span class="type-signature"></span>encrypt<span class="signature">(text, <span
+        class="optional">secret</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Encrypt the given text by default or using the custom given secret
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th>Argument</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>text</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">string</span>
+
+
+            </td>
+
+
+            <td class="attributes">
+
+
+            </td>
+
+
+            <td class="description last">text to encrypt</td>
+        </tr>
+
+
+        <tr>
+
+            <td class="name"><code>secret</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">string</span>
+
+
+            </td>
+
+
+            <td class="attributes">
+
+                &lt;optional><br>
+
+
+            </td>
+
+
+            <td class="description last">secret to use for encryption, if absent, the value of
+                <code>config#secret</code> is used
+            </td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/misc/crypt.js#L4">lib/misc/crypt.js line
+                        4</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="config.html">config</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Returns:</h5>
+
+
+    <div class="param-desc">
+        - encrypted string
+    </div>
+
+
+    <dl>
+        <dt>
+            Type
+        </dt>
+        <dd>
+
+            <span class="param-type">string</span>
+
+
+        </dd>
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="extendApp"><span class="type-signature"></span>extendApp<span class="signature">(environment, settingsFunction)</span><span
+        class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Set expressJS application parameters - template engine, variables, locals
+        <a href="http://expressjs.com/api.html#app.engine"> template engines</a>,
+        <a href="http://expressjs.com/api.html#app.locals "> locals</a> and
+        <a href="http://expressjs.com/api.html#app-settings "> other</a>
+        settings.
+        In code it is called after setting logging middleware and port.
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>environment</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">string</span>
+                |
+
+                <span class="param-type">Array</span>
+                |
+
+                <span class="param-type">null</span>
+
+
+            </td>
+
+
+            <td class="description last">application environment to use,
+                can be something like 'development', ['development','staging'] or null
+            </td>
+        </tr>
+
+
+        <tr>
+
+            <td class="name"><code>settingsFunction</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">function(core){....}</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L260">index.js line 260</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="Hunt.html#app">Hunt#app</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Returns:</h5>
+
+
+    <div class="param-desc">
+        hunt object
+    </div>
+
+
+    <dl>
+        <dt>
+            Type
+        </dt>
+        <dd>
+
+            <span class="param-type"><a href="Hunt.html">Hunt</a></span>
+
+
+        </dd>
+    </dl>
+
+
+    <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+        //example of setting template engine
+        hunt.extendApp = function (core) {
+        core.app.set('views', __dirname + '/views');
+        core.app.set('view engine', 'ejs');
+        core.app.set('layout', 'layout');
+        core.app.enable('view cache');
+        core.app.engine('html', require('ejs'));
+        };
+        ```</code></pre>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="extendCore"><span class="type-signature"></span>extendCore<span
+        class="signature">(field, value)</span><span class="type-signature"> &rarr; {<a
+        href="Hunt.html">Hunt</a>}</span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Inject public property to hunt core.
+        If `value` is function, the `value` injected is result of value(hunt),
+        else `value` injected is AS IS.
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>field</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">string</span>
+
+
+            </td>
+
+
+            <td class="description last">property name to assign to hunt.[fieldName]</td>
+        </tr>
+
+
+        <tr>
+
+            <td class="name"><code>value</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">string</span>
+                |
+
+                <span class="param-type">object</span>
+                |
+
+                <span class="param-type">Date</span>
+                |
+
+                <span class="param-type">Array</span>
+                |
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">value to assign</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L33">index.js line 33</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Returns:</h5>
+
+
+    <div class="param-desc">
+        hunt object for functions chaining
+    </div>
+
+
+    <dl>
+        <dt>
+            Type
+        </dt>
+        <dd>
+
+            <span class="param-type"><a href="Hunt.html">Hunt</a></span>
+
+
+        </dd>
+    </dl>
+
+
+    <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+
+        var Hunt = require('hunt')(configObj);
+
+        //extending application core
+
+        //assign value to field
+        Hunt.extendCore('someVar', 42);
+
+        //assign factory function to field and this field value
+        //is result of this function
+        Hunt.extendCore('someFuncToGetSomeVar', function (core) {
+        return core.someVar;
+        });
+
+        //assign function to a core
+        Hunt.extendCore('getSumWithSomeVar', function (core) {
+        return function (a, b) {
+        return a + b + core.someFuncToGetSomeVar;
+        };
+        });
+
+        //Hunt core works after extending
+        console.log('Sum of 2, 2 and 42 is ' + Hunt.getSumWithSomeVar(2, 2));
+        ```</code></pre>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="extendMiddleware"><span class="type-signature"></span>extendMiddleware<span class="signature">(environment, <span
+        class="optional">path</span>, settingsFunction)</span><span class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span>
+</h4>
+
+
+</dt>
+<dd>
+
+
+<div class="description">
+    Adds new middleware to expressJS application
+    This function can be executed multiple times, the middlewares applied
+    are used in application in *order* they were issued by this function.
+    First argument (array of enviroments), and the second one
+    (the path where to use middleware, the default is "/") are OPTIONAL
+    They are applied after setting default exposed internals middleware and before
+    setting router middleware.
+</div>
+
+
+<h5>Parameters:</h5>
+
+
+<table class="params">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+
+
+        <th>Type</th>
+
+
+        <th>Argument</th>
+
+
+        <th>Default</th>
+
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+    <tr>
+
+        <td class="name"><code>environment</code></td>
+
+
+        <td class="type">
+
+
+            <span class="param-type">String</span>
+            |
+
+            <span class="param-type">Array</span>
+            |
+
+            <span class="param-type">undefined</span>
+
+
+        </td>
+
+
+        <td class="attributes">
+
+
+        </td>
+
+
+        <td class="default">
+
+        </td>
+
+
+        <td class="description last">application enviroment to use,
+            can be something like 'development', ['development','staging'] or null
+            (for ALL enviroments)
+        </td>
+    </tr>
+
+
+    <tr>
+
+        <td class="name"><code>path</code></td>
+
+
+        <td class="type">
+
+
+            <span class="param-type">String/undefined</span>
+
+
+        </td>
+
+
+        <td class="attributes">
+
+            &lt;optional><br>
+
+
+        </td>
+
+
+        <td class="default">
+
+            /
+
+        </td>
+
+
+        <td class="description last">path to mount middleware - default is /</td>
+    </tr>
+
+
+    <tr>
+
+        <td class="name"><code>settingsFunction</code></td>
+
+
+        <td class="type">
+
+
+            <span class="param-type">function</span>
+
+
+        </td>
+
+
+        <td class="attributes">
+
+
+        </td>
+
+
+        <td class="default">
+
+        </td>
+
+
+        <td class="description last">function(core){ return function(req,res,next){.....}}</td>
+    </tr>
+
+
+    </tbody>
+</table>
+
+
+<dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+        <ul class="dummy">
+            <li>
+                <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L333">index.js line 333</a>
+            </li>
+        </ul>
+    </dd>
+
+
+</dl>
+
+
+<h5>Returns:</h5>
+
+
+<div class="param-desc">
+    hunt object
+</div>
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+
+        <span class="param-type"><a href="Hunt.html">Hunt</a></span>
+
+
+    </dd>
+</dl>
+
+
+<h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+
+        hunt.extendMiddleware(function(core){
+        return function(req, res, next){
+        res.setHeader('X-hunt','YES!');
+        next();
+        };
+        };
+
+        hunt.extendMiddleware('production',function(core){
+        return function(req, res, next){
+        res.setHeader('X-production','YES!');
+        next();
+        };
+        };
+
+        hunt.extendMiddleware(['production','staging'],'/somepath',function(core){
+        return function(req, res, next){
+        if(!request.user){
+        response.send(403);
+        } else {
+        next();
+        }
+        };
+        };
+
+        Hunt.extendMiddleware(function (core) {
+        return function (req, res, next) {
+        res.setHeader('globMiddleware', core.someVar);
+        next();
+        };
+        });
+
+        //setting middleware for production environment only
+        Hunt.extendMiddleware('production', function (core) {
+        return function (req, res, next) {
+        res.setHeader('prodMiddleware', core.someVar);
+        next();
+        };
+        });
+        //setting middleware for development environment only
+        Hunt.extendMiddleware('development', function (core) {
+        return function (req, res, next) {
+        res.setHeader('devMiddleware', core.someVar);
+        next();
+        };
+        });
+        //setting middleware for specified path and development environment only
+        Hunt.extendMiddleware('development', '/somePath', function (core) {
+        return function (req, res, next) {
+        res.setHeader('devMiddleware1', core.someVar);
+        next();
+        };
+        });
+        //setting middleware for specified path and production/staging environments only
+        Hunt.extendMiddleware(['production','staging'], '/somePath', function (core) {
+        return function (req, res, next) {
+        res.setHeader('devMiddleware2', core.someVar);
+        next();
+        };
+        });
+        //setting middleware, that asks user to verify his/her email address
+        Hunt.extendMiddleware(function (core) {
+        return function(req,res,next){
+        if(req.user){
+        if (req.user.accountVerified) {
+        next();
+        } else {
+        req.flash('error','Verify your email address please!');
+        next();
+        }
+        } else {
+        next();
+        }
+        };
+        });
+        ```</code></pre>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="extendModel"><span class="type-signature"></span>extendModel<span class="signature">(modelName, modelConstructor)</span><span
+        class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Inject public property with model object to hunt.model.
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>modelName</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">string</span>
+
+
+            </td>
+
+
+            <td class="description last">property name to assign to hunt.model[modelName]</td>
+        </tr>
+
+
+        <tr>
+
+            <td class="name"><code>modelConstructor</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">factory function to generate model using Hunt kernel</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L168">index.js line 168</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="model.html">model</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Returns:</h5>
+
+
+    <div class="param-desc">
+        hunt object
+    </div>
+
+
+    <dl>
+        <dt>
+            Type
+        </dt>
+        <dd>
+
+            <span class="param-type"><a href="Hunt.html">Hunt</a></span>
+
+
+        </dd>
+    </dl>
+
+
+    <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+        //for mongoose model
+        if (Hunt.config.enableMongoose) { //verify that we enabled mongoose
+        Hunt.extendModel('Trophy', function (core) {
+        var TrophySchema = new core.mongoose.Schema({
+        'name': {type: String, unique: true},
+        'scored': Boolean
+        });
+
+        TrophySchema.index({
+        name: 1
+        });
+        //this step is very important - bind mongoose model to current mongo database connection
+        // and assign it to collection in mongo database
+        return core.mongoConnection.model('Trophy', TrophySchema);
+        });
+        // So, this model is accessible by
+        // Hunt.model.Trophy
+        };
+
+        //sequilize model
+        Hunt.extendModel('Planet', function (core) {
+        var Planet = core.sequelize.define('Planet', {
+        name: core.Sequelize.STRING //note that core.Sequilize != core.sequilize
+        });
+        return Planet;
+        });
+        ```</code></pre>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="extendRoutes"><span class="type-signature"></span>extendRoutes<span class="signature">(settingsFunction)</span><span
+        class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Adds <a href="http://expressjs.com/api.html#app.VERB "> application routes and verbs</a> for them.
+        The <a href="https://github.com/visionmedia/express-resource "> REST api helper</a> npm module is already
+        provided
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>settingsFunction</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">Settings Function</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L496">index.js line 496</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Returns:</h5>
+
+
+    <div class="param-desc">
+        hunt object
+    </div>
+
+
+    <dl>
+        <dt>
+            Type
+        </dt>
+        <dd>
+
+            <span class="param-type"><a href="Hunt.html">Hunt</a></span>
+
+
+        </dd>
+    </dl>
+
+
+    <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+        hunt.extendRoutes(function(core){
+        core.app.get('/', function(req,res){
+        res.send('Hello!');
+        });
+        core.app.resource('forum', require('./forum.js'));
+        core.app.all('*',function(req,res){
+        res.send(404);
+        });
+        }
+        ```</code></pre>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="extendStrategy"><span class="type-signature"></span>extendStrategy<span class="signature">(Strategy)</span><span
+        class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Add new passportJS strategy to application by adding them to Hunt.passport object
+        All strategies have to redirect to `/auth/success` on success or `/auth/failure`
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>Strategy</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">object</span>
+
+
+            </td>
+
+
+            <td class="description last">object</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L223">index.js line 223</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="passport.html">passport</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Returns:</h5>
+
+
+    <div class="param-desc">
+        hunt object
+    </div>
+
+
+    <dl>
+        <dt>
+            Type
+        </dt>
+        <dd>
+
+            <span class="param-type"><a href="Hunt.html">Hunt</a></span>
+
+
+        </dd>
+    </dl>
+
+
+    <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+        var HashStrategy = require('passport-hash').Strategy;
+        //used for verify account by email
+        exports.strategy = function (core) {
+        return new HashStrategy(function (hash, done) {
+        core.model.User.findOneByHuntKeyAndVerifyEmail(hash, function (err, userFound) {
+        done(err, userFound);
+        });
+        });
+        };
+
+        exports.routes = function (core) {
+        core.app.get('/auth/confirm/:hash', core.passport.authenticate('hash', {
+        successRedirect: '/auth/success',
+        failureRedirect: '/auth/failure'
+        }));
+        };
+        ```</code></pre>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="extendTelnet"><span class="type-signature"></span>extendTelnet<span class="signature">(command, callback)</span><span
+        class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Adds new behavior to telnet server. The callback has 2
+        arguments, first one is core object, and second one is
+        <a href="https://github.com/andris9/rai "> RAI client object </a>
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>command</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">string</span>
+
+
+            </td>
+
+
+            <td class="description last">command name</td>
+        </tr>
+
+
+        <tr>
+
+            <td class="name"><code>callback</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last">function(core, client, payload){}</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-since">Since:</dt>
+        <dd class="tag-since">
+            <ul class="dummy">
+                <li>0.0.18
+        </dd>
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L530">index.js line 530</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Returns:</h5>
+
+
+    <div class="param-desc">
+        hunt object
+    </div>
+
+
+    <dl>
+        <dt>
+            Type
+        </dt>
+        <dd>
+
+            <span class="param-type"><a href="Hunt.html">Hunt</a></span>
+
+
+        </dd>
+    </dl>
+
+
+    <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+
+        hunt.extendTelnet('version', function(core, client){
+        client.send('HuntJS version is '+core.version);
+        });
+        hunt.extendTelnet('echo', function(core, client, payload){
+        client.send(payload);
+        });
+
+        ```</code></pre>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="on"><span class="type-signature"></span>on<span class="signature">(eventName, listener)</span><span
+        class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Adds a listener to the end of the listeners array for the specified event.
+        Calls can be chained.
+        Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> standard nodejs event emitter
+        object </a>, so it supports all event emitter methods.
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>eventName</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">string</span>
+
+
+            </td>
+
+
+            <td class="description last"></td>
+        </tr>
+
+
+        <tr>
+
+            <td class="name"><code>listener</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last"></td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L921">index.js line 921</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Returns:</h5>
+
+
+    <dl>
+        <dt>
+            Type
+        </dt>
+        <dd>
+
+            <span class="param-type"><a href="Hunt.html">Hunt</a></span>
+
+
+        </dd>
+    </dl>
+
+
+    <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+        Hunt.on('start', function (params) {
+        console.log('Hunt is started as '+params.type+' on port '+params.port);
+        }).on('httpError', console.error);
+        ```</code></pre>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="once"><span class="type-signature"></span>once<span
+        class="signature">(eventName, listener)</span><span class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span>
+</h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Adds a one time listener for the event. This listener is invoked only the next time the event is fired, after
+        which it is removed.
+        Calls can be chained.
+        Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> standard nodejs event emitter
+        object </a>, so it supports all event emitter methods.
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>eventName</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">string</span>
+
+
+            </td>
+
+
+            <td class="description last"></td>
+        </tr>
+
+
+        <tr>
+
+            <td class="name"><code>listener</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last"></td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L938">index.js line 938</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="Hunt.html#on">Hunt#on</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Returns:</h5>
+
+
+    <dl>
+        <dt>
+            Type
+        </dt>
+        <dd>
+
+            <span class="param-type"><a href="Hunt.html">Hunt</a></span>
+
+
+        </dd>
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="rack"><span class="type-signature"></span>rack<span class="signature">()</span><span
+        class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Generate realy long random strings
+    </div>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/misc/rack.js#L10">lib/misc/rack.js line
+                        10</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="removeListener"><span class="type-signature"></span>removeListener<span class="signature">(eventName, listener)</span><span
+        class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Hunt object is a <a href="http://nodejs.org/docs/latest/api/events.html "> standard nodejs event emitter
+        object </a>, so it supports all event emitter methods.
+        Remove a listener from the listener array for the specified event.
+        Caution: changes array indices in the listener array behind the listener.
+        Calls can be chained.
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>eventName</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">string</span>
+
+
+            </td>
+
+
+            <td class="description last"></td>
+        </tr>
+
+
+        <tr>
+
+            <td class="name"><code>listener</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">function</span>
+
+
+            </td>
+
+
+            <td class="description last"></td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L950">index.js line 950</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Returns:</h5>
+
+
+    <div class="param-desc">
+        Hunt
+    </div>
+
+
+    <dl>
+        <dt>
+            Type
+        </dt>
+        <dd>
+
+            <span class="param-type"><a href="Hunt.html">Hunt</a></span>
+
+
+        </dd>
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="startBackGround"><span class="type-signature"></span>startBackGround<span
+        class="signature">()</span><span class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Starts Hunt application as single threaded background application
+        It have redis client and data models, event emitting system exposed.
+        It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
+    </div>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L622">index.js line 622</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+        Hunt.startBackGround();
+        ```</code></pre>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="startBackGroundCluster"><span class="type-signature"></span>startBackGroundCluster<span
+        class="signature">(maxProcesses)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Starts Hunt application as single threaded background application, that controls, by the means of
+        [cluster](http://nodejs.org/docs/latest/api/cluster.html), other background applications.
+        By default it spawns 1 process per CPU core.
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>maxProcesses</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">Number</span>
+                |
+
+                <span class="param-type">null</span>
+
+
+            </td>
+
+
+            <td class="description last">maximal number of web server processes to spawn, default - 1 process per CPU
+                core
+            </td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L788">index.js line 788</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Returns:</h5>
+
+
+    <div class="param-desc">
+        true if this is master process, false if this is worker process.
+    </div>
+
+
+    <dl>
+        <dt>
+            Type
+        </dt>
+        <dd>
+
+            <span class="param-type">Boolean</span>
+
+
+        </dd>
+    </dl>
+
+
+    <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+
+        var numberOfProcessesToSpawn = 10;
+        Hunt.startBackGroundCluster(numberOfProcessesToSpawn);
+
+        ```</code></pre>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="startCluster"><span class="type-signature"></span>startCluster<span
+        class="signature">(parameters)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Start Hunt as cluster. `Parameters` is object with 4 field -
+        - `web`, `background`, `telnet`, 'port'.
+        The values of `web`,`background`, `telnet` are number of child processes to spawn.
+        The value of `port` is port number for web server processes to listen to.
+        It is worth notice, that in this case telnet server listens on `Hunt.config.port+1` port!
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>parameters</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">object</span>
+
+
+            </td>
+
+
+            <td class="description last">configuration parameters</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L809">index.js line 809</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Returns:</h5>
+
+
+    <div class="param-desc">
+        true if this is master process, false if this is worker process.
+    </div>
+
+
+    <dl>
+        <dt>
+            Type
+        </dt>
+        <dd>
+
+            <span class="param-type">Boolean</span>
+
+
+        </dd>
+    </dl>
+
+
+    <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+
+        Hunt.startCluster({ 'web':1, 'background':1, 'telnet': 1 });
+        Hunt.startCluster({ 'web':max, 'port':80 });
+        Hunt.startCluster({ 'background':max });
+        Hunt.startCluster({ 'telnet':max, 'port':25 });
+        Hunt.startCluster({ 'web':max, 'telnet':max }); //i strongly do not reccomend doing this!
+
+        ```</code></pre>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="startTelnetCluster"><span class="type-signature"></span>startTelnetCluster<span class="signature">(port, maxProcesses)</span><span
+        class="type-signature"> &rarr; {Boolean}</span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Starts hunt application as single threaded background application,
+        that controls, by the means of <a href="http://nodejs.org/docs/latest/api/cluster.html "> nodejs embedded
+        cluster</a>,
+        telnet server processes. By default it spawns 1 process per CPU core.
+        It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
+        in master process, and events of "start" with payload of `{'type':'telnet', 'port':25}`
+        in each of telnet server processes.
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>port</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">number</span>
+                |
+
+                <span class="param-type">null</span>
+
+
+            </td>
+
+
+            <td class="description last">what port to use, if null - use port value from config</td>
+        </tr>
+
+
+        <tr>
+
+            <td class="name"><code>maxProcesses</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">number</span>
+                |
+
+                <span class="param-type">null</span>
+
+
+            </td>
+
+
+            <td class="description last">maximal number of web server processes to spawn, default - 1 process per CPU
+                core
+            </td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L764">index.js line 764</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Returns:</h5>
+
+
+    <div class="param-desc">
+        true if this is master process, false if this is worker process.
+    </div>
+
+
+    <dl>
+        <dt>
+            Type
+        </dt>
+        <dd>
+
+            <span class="param-type">Boolean</span>
+
+
+        </dd>
+    </dl>
+
+
+    <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+        Hunt.startTelnetCluster(25, 10000);
+        ```</code></pre>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="startTelnetServer"><span class="type-signature"></span>startTelnetServer<span class="signature">(port)</span><span
+        class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Start Hunt as single process telnet server
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>port</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">number</span>
+                |
+
+                <span class="param-type">null</span>
+
+
+            </td>
+
+
+            <td class="description last">what port to use, if null - use port value from config</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-since">Since:</dt>
+        <dd class="tag-since">
+            <ul class="dummy">
+                <li>0.0.18
+        </dd>
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L689">index.js line 689</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+        Hunt.startTelnetServer(3003);
+        ```</code></pre>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="startWebCluster"><span class="type-signature"></span>startWebCluster<span class="signature">(port, maxProcesses)</span><span
+        class="type-signature"> &rarr; {Boolean}</span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Starts hunt application as single threaded background application,
+        that controls, by the means of <a href="http://nodejs.org/docs/latest/api/cluster.html "> nodejs embedded
+        cluster</a>,
+        web server processes. By default it spawns 1 process per CPU core.
+        It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
+        in master process, and events of "start" with payload of `{'type':'webserver', 'port':80}`
+        in web server processes.
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>port</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">number</span>
+                |
+
+                <span class="param-type">null</span>
+
+
+            </td>
+
+
+            <td class="description last">what port to use, if null - use port value from config</td>
+        </tr>
+
+
+        <tr>
+
+            <td class="name"><code>maxProcesses</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">number</span>
+                |
+
+                <span class="param-type">null</span>
+
+
+            </td>
+
+
+            <td class="description last">maximal number of web server processes to spawn, default - 1 process per CPU
+                core
+            </td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L740">index.js line 740</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Returns:</h5>
+
+
+    <div class="param-desc">
+        true if this is master process, false if this is worker process.
+    </div>
+
+
+    <dl>
+        <dt>
+            Type
+        </dt>
+        <dd>
+
+            <span class="param-type">Boolean</span>
+
+
+        </dd>
+    </dl>
+
+
+    <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+        Hunt.startWebCluster(80, 10000);
+        ```</code></pre>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="startWebServer"><span class="type-signature"></span>startWebServer<span class="signature">(port, address)</span><span
+        class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Starts Hunt application as single threaded web server
+        It have redis client/models, expressJS application and event emitting system exposed.
+        It makes Hunt to emit event of "start" with payload of `{'type':'webserver', 'port':80}`
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>port</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">number</span>
+                |
+
+                <span class="param-type">null</span>
+
+
+            </td>
+
+
+            <td class="description last">what port to use, if null - use port value from config</td>
+        </tr>
+
+
+        <tr>
+
+            <td class="name"><code>address</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type">string</span>
+                |
+
+                <span class="param-type">null</span>
+
+
+            </td>
+
+
+            <td class="description last">what address to bind to. Default is '0.0.0.0' - all IPv4 addresses. The address
+                is populated from environment address of HUNTJS_ADDR
+            </td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L650">index.js line 650</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+    <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+        Hunt.startWebServer(80);
+        Hunt.startWebServer(80, '0.0.0.0');
+        ```</code></pre>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="stop"><span class="type-signature"></span>stop<span class="signature">()</span><span
+        class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Stops the current application - close database connections, etc.
+    </div>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L973">index.js line 973</a>
+                </li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+</dl>
+
+
+<h3 class="subsection-title">Events</h3>
+
+<dl>
+
+<dt>
+<h4 class="name" id="event:broadcast">broadcast</h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Broadcast message from core
+        via socket.io to all webserver clients - both authorized users
+        and non authorized site visitors
+    </div>
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+            <span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+    <dl class="details">
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/socket.io.js#L83">lib/http/socket.io.js
+                        line 83</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="Hunt.html#event:notify:sio">Hunt#notify:sio</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="event:httpError">httpError</h4>
+
+
+</dt>
+<dd>
+
+
+<div class="description">
+    Event is emmited when error occurs while performing http response
+</div>
+
+
+<h5>Type:</h5>
+<ul>
+    <li>
+
+        <span class="param-type">Object</span>
+
+
+    </li>
+</ul>
+
+
+<dl class="details">
+
+
+<h5 class="subsection-title">Properties:</h5>
+
+<dl>
+
+<table class="props">
+<thead>
+<tr>
+
+    <th>Name</th>
+
+
+    <th>Type</th>
+
+
+    <th class="last">Description</th>
+</tr>
+</thead>
+
+<tbody>
+
+
+<tr>
+
+    <td class="name"><code>error</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">Error</span>
+
+
+    </td>
+
+
+    <td class="description last"></td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>errorStack</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">object</span>
+
+
+    </td>
+
+
+    <td class="description last"></td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>startTime</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">Date</span>
+
+
+    </td>
+
+
+    <td class="description last">start time of request</td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>duration</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">number</span>
+
+
+    </td>
+
+
+    <td class="description last">duration of request processing in milliseconds</td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>statusCode</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">number</span>
+
+
+    </td>
+
+
+    <td class="description last"></td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>method</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">request method - GET, POST, PUT, DELETE</td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>ip</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">ip address of remote host</td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>ips</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">proxy chain if present - <a href="http://expressjs.com/3x/api.html#req.ips">http://expressjs.com/3x/api.html#req.ips</a>
+    </td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>uri</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last"></td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>body</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">This property is an object containing the parsed request body. This feature is provided
+        by the bodyParser() middleware, though other body parsing middleware may follow this convention as well. This
+        property defaults to {} when bodyParser() is used. <a href="http://expressjs.com/3x/api.html#req.body">http://expressjs.com/3x/api.html#req.body</a>
+    </td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>query</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">object containing the parsed query-string, defaulting to empty object - <a
+            href="http://expressjs.com/3x/api.html#req.query">http://expressjs.com/3x/api.html#req.query</a></td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>user</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type"><a href="User.html">User</a></span>
+
+
+    </td>
+
+
+    <td class="description last">user who did the request</td>
+</tr>
+
+
+</tbody>
+</table>
+</dl>
+
+
+<dt class="tag-source">Source:</dt>
+<dd class="tag-source">
+    <ul class="dummy">
+        <li>
+            <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L374">lib/http/expressApp.js
+                line 374</a>
+        </li>
+    </ul>
+</dd>
+
+
+</dl>
+
+
+<h5>Example</h5>
+        
+    <pre class="prettyprint"><code>```javascript
+        Hunt.extendCore(function(core){
+        core.app.get('/error', function(request,response){
+        throw new Error('Shit happens!');
+        });
+        });
+
+        Hunt.on('httpError', function(httpError){
+        console.log(httpError.error.toString());
+        });
+        //=> Shit happens!
+        ```</code></pre>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="event:httpSuccess">httpSuccess</h4>
+
+
+</dt>
+<dd>
+
+
+<div class="description">
+    Event emmited every time HTTP request is processed, usefull
+    for logging.
+</div>
+
+
+<h5>Type:</h5>
+<ul>
+    <li>
+
+        <span class="param-type">Object</span>
+
+
+    </li>
+</ul>
+
+
+<dl class="details">
+
+
+<h5 class="subsection-title">Properties:</h5>
+
+<dl>
+
+<table class="props">
+<thead>
+<tr>
+
+    <th>Name</th>
+
+
+    <th>Type</th>
+
+
+    <th class="last">Description</th>
+</tr>
+</thead>
+
+<tbody>
+
+
+<tr>
+
+    <td class="name"><code>startTime</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">Date</span>
+
+
+    </td>
+
+
+    <td class="description last">start time of request</td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>duration</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">number</span>
+
+
+    </td>
+
+
+    <td class="description last">duration of request processing in milliseconds</td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>statusCode</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">number</span>
+
+
+    </td>
+
+
+    <td class="description last"></td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>method</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">request method - GET, POST, PUT, DELETE</td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>ip</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">ip address of remote host</td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>ips</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">proxy chain if present - <a href="http://expressjs.com/3x/api.html#req.ips">http://expressjs.com/3x/api.html#req.ips</a>
+    </td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>uri</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last"></td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>body</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">This property is an object containing the parsed request body. This feature is provided
+        by the bodyParser() middleware, though other body parsing middleware may follow this convention as well. This
+        property defaults to {} when bodyParser() is used. <a href="http://expressjs.com/3x/api.html#req.body">http://expressjs.com/3x/api.html#req.body</a>
+    </td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>query</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type">string</span>
+
+
+    </td>
+
+
+    <td class="description last">object containing the parsed query-string, defaulting to empty object - <a
+            href="http://expressjs.com/3x/api.html#req.query">http://expressjs.com/3x/api.html#req.query</a></td>
+</tr>
+
+
+<tr>
+
+    <td class="name"><code>user</code></td>
+
+
+    <td class="type">
+
+
+        <span class="param-type"><a href="User.html">User</a></span>
+
+
+    </td>
+
+
+    <td class="description last">user who did the request</td>
+</tr>
+
+
+</tbody>
+</table>
+</dl>
+
+
+<dt class="tag-source">Source:</dt>
+<dd class="tag-source">
+    <ul class="dummy">
+        <li>
+            <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L261">lib/http/expressApp.js
+                line 261</a>
+        </li>
+    </ul>
+</dd>
+
+
+</dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="event:notify">notify</h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Emitted when any of users is notified by any channel
+    </div>
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+            <span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+    <dl class="details">
+
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+            <table class="props">
+                <thead>
+                <tr>
+
+                    <th>Name</th>
+
+
+                    <th>Type</th>
+
+
+                    <th class="last">Description</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+
+                <tr>
+
+                    <td class="name"><code>user</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type"><a href="User.html">User</a></span>
+
+
+                    </td>
+
+
+                    <td class="description last">user being notified</td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="name"><code>channel</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">string</span>
+
+
+                    </td>
+
+
+                    <td class="description last">name of notify channel used</td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="name"><code>message</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">string</span>
+                        |
+
+                        <span class="param-type">object</span>
+
+
+                    </td>
+
+
+                    <td class="description last"></td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </dl>
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L284">lib/models/user.mongoose.js
+                        line 284</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="User.html#notify">User#notify</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="event:start">start</h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Emitted when Hunt is started as webserver process
+    </div>
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+            <span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+    <dl class="details">
+
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+            <table class="props">
+                <thead>
+                <tr>
+
+                    <th>Name</th>
+
+
+                    <th>Type</th>
+
+
+                    <th class="last">Description</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+
+                <tr>
+
+                    <td class="name"><code>type</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">string</span>
+
+
+                    </td>
+
+
+                    <td class="description last">with a value of string of 'webserver'</td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="name"><code>port</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">number</span>
+
+
+                    </td>
+
+
+                    <td class="description last">with a value of port this application listens to</td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="name"><code>address</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">string</span>
+
+
+                    </td>
+
+
+                    <td class="description last">with a value of address application is bound to</td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </dl>
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L672">index.js line 672</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="Hunt.html#startWebServer">Hunt#startWebServer</a></li>
             </ul>
         </dd>
 
@@ -9721,6 +9625,101 @@
         <dd class="tag-see">
             <ul>
                 <li><a href="Hunt.html#startTelnetServer">Hunt#startTelnetServer</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="event:start">start</h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Emitted when Hunt is started as background process
+    </div>
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+            <span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+    <dl class="details">
+
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+            <table class="props">
+                <thead>
+                <tr>
+
+                    <th>Name</th>
+
+
+                    <th>Type</th>
+
+
+                    <th class="last">Description</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+
+                <tr>
+
+                    <td class="name"><code>type</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">string</span>
+
+
+                    </td>
+
+
+                    <td class="description last">with a value of string of 'background'</td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </dl>
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L637">index.js line 637</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
             </ul>
         </dd>
 
@@ -10327,5 +10326,5 @@
 
 
 <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Wed Jul 09 2014
-    01:45:51 GMT+0400 (MSK)</p>
+    01:53:50 GMT+0400 (MSK)</p>
 </div>
