@@ -71,7 +71,7 @@ This is it. *Hunt*...
    And this is done in clever way - expressjs application can be easily
    converted to Hunt application.
 
--  Popular templating engines are supported - [Mustache](http://mustache.github.io/mustache.5.html),
+-  Popular template engines are supported - [Mustache](http://mustache.github.io/mustache.5.html),
    [Swig](http://paularmstrong.github.io/swig/), [jade](https://github.com/visionmedia/jade).
 
 -  Powerful users model to use at your application, with customizable profile, groups,
