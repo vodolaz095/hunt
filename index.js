@@ -926,7 +926,7 @@ function Hunt(config) {
  * @description
  * Adds a listener to the end of the listeners array for the specified event.
  * Calls can be chained.
- * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standart nodejs event emmiter object }, so it supports all event emitter methods.
+ * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standard nodejs event emitter object }, so it supports all event emitter methods.
  * @example
  * ```javascript
  *    Hunt.on('start', function (params) {
@@ -943,7 +943,7 @@ function Hunt(config) {
  * @description
  * Adds a one time listener for the event. This listener is invoked only the next time the event is fired, after which it is removed.
  * Calls can be chained.
- * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standart nodejs event emmiter object }, so it supports all event emitter methods.
+ * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standard nodejs event emitter object }, so it supports all event emitter methods.
  * @see Hunt#on
  */
 
@@ -953,7 +953,7 @@ function Hunt(config) {
  * @param {function} listener
  * @returns {Hunt} Hunt
  * @description
- * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standart nodejs event emmiter object }, so it supports all event emitter methods.
+ * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standard nodejs event emitter object }, so it supports all event emitter methods.
  * Remove a listener from the listener array for the specified event.
  * Caution: changes array indices in the listener array behind the listener.
  * Calls can be chained.
@@ -965,7 +965,7 @@ function Hunt(config) {
  * @param {object} payload
  * @description
  * Makes Hunt emit an event. Returns true if event had listeners, false otherwise.
- * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standart nodejs event emmiter object }, so it supports all event emitter methods.
+ * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standard nodejs event emitter object }, so it supports all event emitter methods.
  */
 
 util.inherits(Hunt, EventEmitter);
