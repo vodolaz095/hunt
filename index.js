@@ -1005,6 +1005,7 @@ Hunt.prototype.stop = function () {
  * @fires Hunt#notify:email
  * @fires Hunt#notify:sio
  * @fires Hunt#user:save
+ * @fires Hunt#user:auth
  * @fires Hunt#broadcast
  */
 module.exports = exports = function (config) {
