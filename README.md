@@ -64,7 +64,7 @@ This is it. *Hunt*...
 
 -  [sequelizejs](http://sequelizejs.com/) ORM for [MySQL](https://www.mysql.com/),
    [PostgreSQL](http://www.postgresql.org/), [sqlite](https://www.sqlite.org/)
-   and [MariaDB](https://mariadb.org/) from the box.
+   and [MariaDB](https://mariadb.org/) via official plugin - [Hunt-Sequilize](https://www.npmjs.org/package/hunt-sequilize).
 
 -  The best sides of express.js framework are supported: routing,
    [middlewares](http://expressjs.com/api.html#middleware), controllers.
