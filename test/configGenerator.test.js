@@ -1,4 +1,4 @@
-var configGenerator = require('./../lib/generators/misc/config.js'),
+var configGenerator = require('./../lib/misc/config.js'),
   should = require('should'),
   url = require('url');
 

@@ -4,15 +4,15 @@ var EventEmitter = require('events').EventEmitter,
   async = require('async'),
   util = require('util'),
 
-  configGenerator = require('./lib/generators/misc/config.js'),
-  redisGenerator = require('./lib/generators/datastore/redisClient.js'),
-  mongooseGenerator = require('./lib/generators/datastore/mongooseModels.js'),
-  sequelizeGenerator = require('./lib/generators/datastore/sequilizeModels.js'),
-  passportGenerator = require('./lib/generators/http/passport.js'),
-  appGenerator = require('./lib/generators/http/expressApp.js'),
-  crypt = require('./lib/generators/misc/crypt.js'),
+  configGenerator = require('./lib/misc/config.js'),
+  redisGenerator = require('./lib/datastore/redisClient.js'),
+  mongooseGenerator = require('./lib/datastore/mongooseModels.js'),
+  sequelizeGenerator = require('./lib/datastore/sequilizeModels.js'),
+  passportGenerator = require('./lib/http/passport.js'),
+  appGenerator = require('./lib/http/expressApp.js'),
+  crypt = require('./lib/misc/crypt.js'),
 
-  nodemailerListener = require('./lib/generators/nodemailer.js');
+  nodemailerListener = require('./lib/nodemailer.js');
 
 
 require('colors');
@@ -116,7 +116,7 @@ function Hunt(config) {
    */
   this.http = require('http');
   this.passport = require('passport');
-  this.rack = require('./lib/generators/misc/rack.js');
+  this.rack = require('./lib/misc/rack.js');
 
   /**
    * @name Hunt#version
@@ -703,7 +703,7 @@ function Hunt(config) {
     var p = port || this.config.port,
       address = address || this.config.address || '0.0.0.0';
     console.log(('Trying to start Hunt as telnet server on port ' + p + '...').magenta);
-    this.extendCore('telnetHandler', require('./lib/generators/telnet/telnet.js'));
+    this.extendCore('telnetHandler', require('./lib/telnet/telnet.js'));
     injectModels(this);
     buildTelnet(this);
     prepared = true;
