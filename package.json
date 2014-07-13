@@ -92,7 +92,6 @@
     "mocha": ">=1.20.0",
     "istanbul": "*",
     "should": "3.x",
-    "jsdoc": "*",
-    "sqlite3": "*"
+    "jsdoc": "*"
   }
 }
