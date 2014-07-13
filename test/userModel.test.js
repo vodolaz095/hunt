@@ -115,13 +115,13 @@ describe('Users model', function () {
         });
 
         it('creates user with LOOOONG salt and password', function () {
-          user.salt.length.should.be.above(63);
-          user.password.length.should.be.above(63);
+          user._salt.length.should.be.above(63);
+          user._password.length.should.be.above(63);
         });
 
         it('creates user with desired password', function () {
-          user.verifyPassword('waterfall').should.be.true;
-          user.verifyPassword('fiflesAndFuffles').should.be.false;
+          user.password('waterfall').should.be.true;
+          user.password('fiflesAndFuffles').should.be.false;
         });
 
         it('creates user with huntKey present', function () {
@@ -246,131 +246,135 @@ describe('Users model', function () {
           user.remove(done);
         });
       });
-      describe('findOneByHuntKeyAndResetPassword for good api key', function () {
-        var user, userWithPasswordReseted;
-        before(function (done) {
-          async.waterfall([
 
-              function (cb) {
-                Hunt.model.User.create({
-                  'email': 'iForgotMyPassWordIamStupid@teksi.ru',
-                  'huntKey': 'iForgotMyPassWordIamStupid1111',
-                  'accountVerified': true,
-                  'huntKeyCreatedAt': new Date()
-                }, function (err, userCreated) {
-                  if (err) {
-                    throw err;
-                  }
-                  user = userCreated;
-                  userCreated.setPassword('lalala', function (err) {
-                    cb(err, userCreated);
+//*/
+      describe('findOneByHuntKeyAndResetPassword works for ', function () {
+        describe('good api key', function () {
+          var user, userWithPasswordReseted;
+          before(function (done) {
+            async.waterfall([
+
+                function (cb) {
+                  Hunt.model.User.create({
+                    'email': 'iForgotMyPassWordIamStupid@teksi.ru',
+                    'huntKey': 'iForgotMyPassWordIamStupid1111',
+                    'accountVerified': true,
+                    'huntKeyCreatedAt': new Date()
+                  }, function (err, userCreated) {
+                    if (err) {
+                      throw err;
+                    }
+                    user = userCreated;
+                    userCreated.password = 'lalala';
+                    userCreated.save(function (error, userSaved) {
+                      cb(error, userSaved);
+                    });
                   });
-                });
-              },
-              function (user1, cb) {
-                Hunt.model.User.findOneByHuntKeyAndResetPassword('iForgotMyPassWordIamStupid1111', 'lalala2', function (err1, userChanged) {
-                  if (err1) {
-                    cb(err1);
-                  } else {
-                    cb(null, userChanged);
-                  }
-                });
-              }
-            ],
-            function (err, userChanged2) {
+                },
+                function (user1, cb) {
+                  Hunt.model.User.findOneByHuntKeyAndResetPassword('iForgotMyPassWordIamStupid1111', 'lalala2', function (err1, userChanged) {
+                    if (err1) {
+                      cb(err1);
+                    } else {
+                      cb(null, userChanged);
+                    }
+                  });
+                }
+              ],
+              function (err, userChanged2) {
+                if (err) {
+                  throw err;
+                }
+                userWithPasswordReseted = userChanged2;
+                done();
+              });
+          });
+
+          it('it finds the user we created', function () {
+            userWithPasswordReseted._id.should.eql(user._id);
+          });
+
+          it('and the user have new password', function () {
+            userWithPasswordReseted.password('lalala1').should.be.false;
+            userWithPasswordReseted.password('lalala2').should.be.true;
+          });
+
+          after(function (done) {
+            user.remove(done);
+          });
+        });
+        describe('bad api key', function () {
+          var user, userNotFound, errorThrown;
+          before(function (done) {
+            Hunt.model.User.create({
+              'username': 'iForgotMyPassWordIamStupid',
+              'email': 'iForgotMyPassWordIamStupid@teksi.ru',
+              'huntKey': 'iForgotMyPassWordIamStupid1111',
+              'accountVerified': true,
+              'huntKeyCreatedAt': new Date()
+            }, function (err, userCreated) {
               if (err) {
                 throw err;
               }
-              userWithPasswordReseted = userChanged2;
-              done();
-            });
-        });
-
-        it('it finds the user we created', function () {
-          userWithPasswordReseted._id.should.eql(user._id);
-        });
-
-        it('and the user have new password', function () {
-          userWithPasswordReseted.verifyPassword('lalala1').should.be.false;
-          userWithPasswordReseted.verifyPassword('lalala2').should.be.true;
-        });
-
-        after(function (done) {
-          user.remove(done);
-        });
-      });
-      describe('findOneByHuntKeyAndResetPassword for bad api key', function () {
-        var user, userNotFound, errorThrown;
-        before(function (done) {
-          Hunt.model.User.create({
-            'username': 'iForgotMyPassWordIamStupid',
-            'email': 'iForgotMyPassWordIamStupid@teksi.ru',
-            'huntKey': 'iForgotMyPassWordIamStupid1111',
-            'accountVerified': true,
-            'huntKeyCreatedAt': new Date()
-          }, function (err, userCreated) {
-            if (err) {
-              throw err;
-            }
-            user = userCreated;
-            Hunt.model.User.findOneByHuntKeyAndResetPassword('thisIsNotCorrecthuntKey', 'lalala2', function (err1, userChanged) {
-              errorThrown = err1;
-              userNotFound = userChanged
-              done();
+              user = userCreated;
+              Hunt.model.User.findOneByHuntKeyAndResetPassword('thisIsNotCorrectHuntKey', 'lalala2', function (err1, userChanged) {
+                errorThrown = err1;
+                userNotFound = userChanged;
+                done();
+              });
             });
           });
-        });
 
-        it('throws proper error', function () {
-          errorThrown.should.be.an.instanceOf(Error);
-          errorThrown.message.should.be.equal('Activation key is wrong or outdated!');
-        });
+          it('throws proper error', function () {
+            errorThrown.should.be.an.instanceOf(Error);
+            errorThrown.message.should.be.equal('Activation key is wrong or outdated!');
+          });
 
-        it('do not returns user in callback', function () {
-          should.not.exists(userNotFound);
-        });
+          it('do not returns user in callback', function () {
+            should.not.exists(userNotFound);
+          });
 
-        after(function (done) {
-          user.remove(done);
-        });
-      });
-      describe('findOneByHuntKeyAndResetPassword for outdated api key', function () {
-        var user, userNotFound, errorThrown;
-        before(function (done) {
-          Hunt.model.User.create({
-            'username': 'iForgotMyPassWordIamStupid',
-            'email': 'iForgotMyPassWordIamStupid@teksi.ru',
-            'huntKey': 'iForgotMyPassWordIamStupid1111',
-            'accountVerified': true,
-            'huntKeyCreatedAt': new Date(1986, 1, 12, 11, 45, 36, 21)
-          }, function (err, userCreated) {
-            if (err) {
-              throw err;
-            }
-            user = userCreated;
-            Hunt.model.User.findOneByHuntKeyAndResetPassword('iForgotMyPassWordIamStupid1111', 'lalala2', function (err1, userChanged) {
-              errorThrown = err1;
-              userNotFound = userChanged
-              done();
-            });
+          after(function (done) {
+            user.remove(done);
           });
         });
+        describe('outdated api key', function () {
+          var user, userNotFound, errorThrown;
+          before(function (done) {
+            Hunt.model.User.create({
+              'username': 'iForgotMyPassWordIamStupid',
+              'email': 'iForgotMyPassWordIamStupid@teksi.ru',
+              'huntKey': 'iForgotMyPassWordIamStupid1111',
+              'accountVerified': true,
+              'huntKeyCreatedAt': new Date(1986, 1, 12, 11, 45, 36, 21)
+            }, function (err, userCreated) {
+              if (err) {
+                throw err;
+              }
+              user = userCreated;
+              Hunt.model.User.findOneByHuntKeyAndResetPassword('iForgotMyPassWordIamStupid1111', 'lalala2', function (err1, userChanged) {
+                errorThrown = err1;
+                userNotFound = userChanged;
+                done();
+              });
+            });
+          });
 
-        it('throws proper error', function () {
-          errorThrown.should.be.an.instanceOf(Error);
-          errorThrown.message.should.be.equal('Activation key is wrong or outdated!');
-        });
+          it('throws proper error', function () {
+            errorThrown.should.be.an.instanceOf(Error);
+            errorThrown.message.should.be.equal('Activation key is wrong or outdated!');
+          });
 
-        it('do not returns user in callback', function () {
-          should.not.exists(userNotFound);
-        });
+          it('do not returns user in callback', function () {
+            should.not.exists(userNotFound);
+          });
 
-        after(function (done) {
-          user.remove(done);
+          after(function (done) {
+            user.remove(done);
+          });
         });
       });
-
-
+//*/
       describe('keychain', function () {
 
         describe('findByKeychain', function () {
@@ -514,8 +518,7 @@ describe('Users model', function () {
         });
 
         it('user instance have functions needed', function () {
-          user.verifyPassword.should.be.a.Function;
-          user.setPassword.should.be.a.Function;
+          user.password.should.be.a.Function;
           user.invalidateSession.should.be.a.Function;
           user.notify.should.be.a.Function;
           user.getGravatar.should.be.a.Function;
@@ -543,22 +546,18 @@ describe('Users model', function () {
               throw err;
             }
             user = userCreated;
-            user.setPassword('lalalaDaiMne3Ryblya', function (err) {
-              if (err) {
-                throw err;
-              }
-              done();
-            });
+            user.password = 'lalalaDaiMne3Ryblya';
+            user.save(done);
           });
         });
 
 
-        it('function verifyPassword returns true on correct password', function () {
-          user.verifyPassword('lalalaDaiMne3Ryblya').should.equal(true);
+        it('function #password() returns true on correct password', function () {
+          user.password('lalalaDaiMne3Ryblya').should.be.true;
         });
 
-        it('function verifyPassword returns false on wrong password', function () {
-          user.verifyPassword('sukapadla_Rozovi#Rassvet_SukePadle_DaliMnogoLet').should.equal(false);
+        it('function #password() returns false on wrong password', function () {
+          user.password('sukapadla_Rozovi#Rassvet_SukePadle_DaliMnogoLet').should.be.false
         });
 
         after(function (done) {
@@ -566,7 +565,7 @@ describe('Users model', function () {
         });
       });
 
-      describe('function invalidateSession', function () {
+      describe('function #invalidateSession', function () {
         var user, newhuntKey;
         before(function (done) {
           Hunt.model.User.create({
