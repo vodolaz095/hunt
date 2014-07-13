@@ -566,25 +566,19 @@ function Hunt(config) {
    * request object. This models can be loaded by
    * {@link Hunt#extendModel} function as mongoose or sequilize
    * active record objects
-   * @property {Group} Group - {@link Group} of users
-   * @property {Group} Groups - synonim for {@link Group}
-   * @property {Group} group - synonim for {@link Group}
-   * @property {Group} groups - synonim for {@link Group}
-
    * @property {User} Users - class, that represents site/application user
    * @property {User} User - synonim for {@link User}
    * @property {User} user - synonim for {@link User}
    * @property {User} users - synonim for {@link User}
-   * @property {GroupMessage} GroupMessage - Class for messages send by users to groups
    * @property {Message} Message - Class for messages send by users to groups
+   * @property {Message} messages - synonim for {@link Message}
+   * @property {Message} message - synonim for {@link Message}
    * @see Hunt#extendModel
    */
   function injectModels(h) {
     if (h.config.enableMongoose && h.config.enableMongooseUsers) {
       var mongooseUsers = require('./lib/models/user.mongoose.js'),
-        mongooseMessages = require('./lib/models/message.mongoose.js'),
-        mongooseGroups = require('./lib/models/group.mongoose.js'),
-        mongooseGroupMessages = require('./lib/models/groupmessage.mongoose.js');
+        mongooseMessages = require('./lib/models/message.mongoose.js');
 //user model
       h.extendModel('User', mongooseUsers);
       h.model.Users = h.model.User;
@@ -596,15 +590,6 @@ function Hunt(config) {
       h.model.Messages = h.model.Message;
       h.model.messages = h.model.Message;
       h.model.message = h.model.Message;
-
-//groups model
-      h.extendModel('Group', mongooseGroups);
-      h.model.Groups = h.model.Group;
-      h.model.groups = h.model.Group;
-      h.model.group = h.model.Group;
-
-//group message model
-      h.extendModel('GroupMessage', mongooseGroupMessages);
     }
     nodemailerListener(h);
   }

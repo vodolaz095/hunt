@@ -122,20 +122,6 @@ describe('Hunt builds single threaded background application', function () {
         Hunt.model[name].findById.should.be.a.Function;
       });
     });
-
-    it('have Groups model that looks like mongoose orm model', function () {
-      ['Group', 'Groups', 'groups', 'group'].map(function (name) {
-        //maybe we need to extend this test in future
-        Hunt.model[name].should.be.a.Function;
-        Hunt.model[name].create.should.be.a.Function;
-        Hunt.model[name].find.should.be.a.Function;
-        Hunt.model[name].findOne.should.be.a.Function;
-        Hunt.model[name].remove.should.be.a.Function;
-        Hunt.model[name].findOneAndRemove.should.be.a.Function;
-        Hunt.model[name].findOneAndUpdate.should.be.a.Function;
-        Hunt.model[name].findById.should.be.a.Function;
-      });
-    });
   });
 
   describe('Hunt.extendCore', function () {
@@ -293,7 +279,7 @@ describe('Hunt builds single threaded webserver application', function () {
     });
 
     it('have User, Group,Message, GroupMessage model that looks like mongoose orm model', function () {
-      ['User', 'Users', 'users', 'user', 'Group', 'Groups', 'group', 'groups', 'GroupMessage', 'Message'].map(function (name) {
+      ['User', 'Users', 'users', 'user', 'message', 'messages', 'Message'].map(function (name) {
         //maybe we need to extend this test in future
         Hunt.model[name].should.be.a.Function;
         Hunt.model[name].create.should.be.a.Function;
