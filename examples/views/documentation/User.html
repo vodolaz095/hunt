@@ -1541,100 +1541,6 @@
 
 
 <dt>
-<h4 class="name" id="createMyGroup"><span class="type-signature"></span>createMyGroup<span class="signature">(groupName, callback)</span><span
-        class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Create group with user as owner
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>groupName</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>callback</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">function</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L813">lib/models/user.mongoose.js
-                        line 813</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
 <h4 class="name" id="getDialog"><span class="type-signature"></span>getDialog<span class="signature">(usernameOrUser, messageLimit, messageOffset, callback)</span><span
         class="type-signature"></span></h4>
 
@@ -1899,82 +1805,6 @@
 
 
 <dt>
-<h4 class="name" id="getGroups"><span class="type-signature"></span>getGroups<span
-        class="signature">(callback)</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Get all groups of user
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>callback</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">function</span>
-
-
-            </td>
-
-
-            <td class="description last">function(err, myGroups)</td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L953">lib/models/user.mongoose.js
-                        line 953</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
 <h4 class="name" id="getRecentMessages"><span class="type-signature"></span>getRecentMessages<span class="signature">(messageLimit, messageOffset, callback)</span><span
         class="type-signature"></span></h4>
 
@@ -2087,8 +1917,8 @@
 
 
 <dt>
-<h4 class="name" id="hasGroup"><span class="type-signature"></span>hasGroup<span
-        class="signature">(groupName, callback)</span><span class="type-signature"></span></h4>
+<h4 class="name" id="hasRole"><span class="type-signature"></span>hasRole<span class="signature">(roleName)</span><span
+        class="type-signature"> &rarr; {Boolean}</span></h4>
 
 
 </dt>
@@ -2096,8 +1926,8 @@
 
 
     <div class="description">
-        Verify, by callback, if user is a member of group.
-        Owner is member of group to.
+        Get recent messages for dialog with this and user with username in reverse chronological order - the most recent
+        on top
     </div>
 
 
@@ -2123,37 +1953,19 @@
 
         <tr>
 
-            <td class="name"><code>groupName</code></td>
+            <td class="name"><code>roleName</code></td>
 
 
             <td class="type">
 
 
-                <span class="param-type">string</span>
+                <span class="param-type">String</span>
 
 
             </td>
 
 
-            <td class="description last"></td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>callback</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">function</span>
-
-
-            </td>
-
-
-            <td class="description last">function(err, trueOrFalse)</td>
+            <td class="description last">name of the role</td>
         </tr>
 
 
@@ -2168,13 +1980,34 @@
         <dd class="tag-source">
             <ul class="dummy">
                 <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L856">lib/models/user.mongoose.js
-                        line 856</a>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L787">lib/models/user.mongoose.js
+                        line 787</a>
                 </li>
             </ul>
         </dd>
 
 
+    </dl>
+
+
+    <h5>Returns:</h5>
+
+
+    <div class="param-desc">
+        - true, if user has the Role required
+    </div>
+
+
+    <dl>
+        <dt>
+            Type
+        </dt>
+        <dd>
+
+            <span class="param-type">Boolean</span>
+
+
+        </dd>
     </dl>
 
 
@@ -2241,194 +2074,6 @@
                 <li>
                     <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L222">lib/models/user.mongoose.js
                         line 222</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="inviteToGroup"><span class="type-signature"></span>inviteToGroup<span class="signature">(groupName, callback)</span><span
-        class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Invite user to group.
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>groupName</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>callback</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">function</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L788">lib/models/user.mongoose.js
-                        line 788</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="isOwner"><span class="type-signature"></span>isOwner<span
-        class="signature">(groupName, callback)</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Verify, by callback, if user is a owner of group.
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>groupName</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>callback</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">function</span>
-
-
-            </td>
-
-
-            <td class="description last">function(err, trueOrFalse)</td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L889">lib/models/user.mongoose.js
-                        line 889</a>
                 </li>
             </ul>
         </dd>
@@ -2920,100 +2565,6 @@
 
 
 <dt>
-<h4 class="name" id="removeFromGroup"><span class="type-signature"></span>removeFromGroup<span class="signature">(groupName, callback)</span><span
-        class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Remove user from group
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>groupName</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>callback</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">function</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L839">lib/models/user.mongoose.js
-                        line 839</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
 <h4 class="name" id="revokeKeyChain"><span class="type-signature"></span>revokeKeyChain<span class="signature">(provider, callback)</span><span
         class="type-signature"></span></h4>
 
@@ -3223,118 +2774,6 @@
 
 
 <dt>
-<h4 class="name" id="sendMessageToGroup"><span class="type-signature"></span>sendMessageToGroup<span class="signature">(groupName, message, callback)</span><span
-        class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Makes this user to send message in group
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>groupName</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>message</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="description last"></td>
-        </tr>
-
-
-        <tr>
-
-            <td class="name"><code>callback</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">function</span>
-
-
-            </td>
-
-
-            <td class="description last">function(err, messageCreated)</td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L916">lib/models/user.mongoose.js
-                        line 916</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
 <h4 class="name" id="setKeyChain"><span class="type-signature"></span>setKeyChain<span class="signature">(provider, id, callback)</span><span
         class="type-signature"></span></h4>
 
@@ -3520,5 +2959,5 @@
 
 
 <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Mon Jul 14 2014
-    03:35:37 GMT+0400 (MSK)</p>
+    04:17:52 GMT+0400 (MSK)</p>
 </div>
