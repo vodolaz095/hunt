@@ -1,315 +1,249 @@
 <div id="docNav">
-    <h2><a href="/documentation/index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:httpError">httpError</a></li><li><a href="Hunt.html#event:httpSuccess">httpSuccess</a></li><li><a href="Hunt.html#event:notify">notify</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:message:sio">message:sio</a></li><li><a href="Hunt.html#event:notify:all">notify:all</a></li><li><a href="Hunt.html#event:notify:email">notify:email</a></li><li><a href="Hunt.html#event:notify:sio">notify:sio</a></li><li><a href="Hunt.html#event:user:auth">user:auth</a></li><li><a href="Hunt.html#event:user:save">user:save</a></li></ul>
+    <h2><a href="/documentation/index.html">Index</a></h2>
+
+    <h3>Classes</h3>
+    <ul>
+        <li><a href="config.html">config</a></li>
+        <li><a href="Hunt.html">Hunt</a></li>
+        <li><a href="Message.html">Message</a></li>
+        <li><a href="model.html">model</a></li>
+        <li><a href="passport.html">passport</a></li>
+        <li><a href="request.html">request</a></li>
+        <li><a href="response.html">response</a></li>
+        <li><a href="User.html">User</a></li>
+    </ul>
+    <h3>Events</h3>
+    <ul>
+        <li><a href="Hunt.html#event:broadcast">broadcast</a></li>
+        <li><a href="Hunt.html#event:httpError">httpError</a></li>
+        <li><a href="Hunt.html#event:httpSuccess">httpSuccess</a></li>
+        <li><a href="Hunt.html#event:notify">notify</a></li>
+        <li><a href="Hunt.html#event:start">start</a></li>
+        <li><a href="Hunt.html#event:message:sio">message:sio</a></li>
+        <li><a href="Hunt.html#event:notify:all">notify:all</a></li>
+        <li><a href="Hunt.html#event:notify:email">notify:email</a></li>
+        <li><a href="Hunt.html#event:notify:sio">notify:sio</a></li>
+        <li><a href="Hunt.html#event:user:auth">user:auth</a></li>
+        <li><a href="Hunt.html#event:user:save">user:save</a></li>
+    </ul>
 </div>
 <div id="documentation">
-    <h1 class="page-title">Class: model</h1>
-    
-
+<h1 class="page-title">Class: model</h1>
 
 
 <section>
 
-    <h2>
+<h2>
     model
-    </h2>
-    
-        <div class="class-description">Class to hold data models of Hunt application, they are injected into
-request object. This models can be loaded by
-<a href="Hunt.html#extendModel"><code>Hunt#extendModel</code></a> function as mongoose or sequilize
-active record objects</div>
-    
+</h2>
+
+<div class="class-description">Class to hold data models of Hunt application, they are injected into
+    request object. This models can be loaded by
+    <a href="Hunt.html#extendModel"><code>Hunt#extendModel</code></a> function as mongoose or sequilize
+    active record objects
+</div>
+
 
 <article>
-    <div class="container-overview">
-    
+<div class="container-overview">
 
-    
-        
+
 <dt>
-    <h4 class="name" id="model"><span class="type-signature"></span>new model<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-    
+<h4 class="name" id="model"><span class="type-signature"></span>new model<span class="signature">()</span><span
+        class="type-signature"></span></h4>
+
+
 </dt>
 <dd>
-    
-    
 
-    
-    
-    
-    
-    
-    
-    
+
 <dl class="details">
-    
-        
-        <h5 class="subsection-title">Properties:</h5>
-        
-        <dl>
 
-<table class="props">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
+
+<h5 class="subsection-title">Properties:</h5>
+
+<dl>
+
+    <table class="props">
+        <thead>
         <tr>
-            
-                <td class="name"><code>Users</code></td>
-            
-            
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>Users</code></td>
+
+
             <td class="type">
-            
-                
-<span class="param-type"><a href="User.html">User</a></span>
 
 
-            
+                <span class="param-type"><a href="User.html">User</a></span>
+
+
             </td>
-            
-            
-            
-            
-            
+
+
             <td class="description last">class, that represents site/application user</td>
         </tr>
-	
-	
-	
+
+
         <tr>
-            
-                <td class="name"><code>User</code></td>
-            
-            
+
+            <td class="name"><code>User</code></td>
+
+
             <td class="type">
-            
-                
-<span class="param-type"><a href="User.html">User</a></span>
 
 
-            
+                <span class="param-type"><a href="User.html">User</a></span>
+
+
             </td>
-            
-            
-            
-            
-            
+
+
             <td class="description last">synonim for <a href="User.html"><code>User</code></a></td>
         </tr>
-	
-	
-	
+
+
         <tr>
-            
-                <td class="name"><code>user</code></td>
-            
-            
+
+            <td class="name"><code>user</code></td>
+
+
             <td class="type">
-            
-                
-<span class="param-type"><a href="User.html">User</a></span>
 
 
-            
+                <span class="param-type"><a href="User.html">User</a></span>
+
+
             </td>
-            
-            
-            
-            
-            
+
+
             <td class="description last">synonim for <a href="User.html"><code>User</code></a></td>
         </tr>
-	
-	
-	
+
+
         <tr>
-            
-                <td class="name"><code>users</code></td>
-            
-            
+
+            <td class="name"><code>users</code></td>
+
+
             <td class="type">
-            
-                
-<span class="param-type"><a href="User.html">User</a></span>
 
 
-            
+                <span class="param-type"><a href="User.html">User</a></span>
+
+
             </td>
-            
-            
-            
-            
-            
+
+
             <td class="description last">synonim for <a href="User.html"><code>User</code></a></td>
         </tr>
-	
-	
-	
+
+
         <tr>
-            
-                <td class="name"><code>Message</code></td>
-            
-            
+
+            <td class="name"><code>Message</code></td>
+
+
             <td class="type">
-            
-                
-<span class="param-type"><a href="Message.html">Message</a></span>
 
 
-            
+                <span class="param-type"><a href="Message.html">Message</a></span>
+
+
             </td>
-            
-            
-            
-            
-            
+
+
             <td class="description last">Class for messages send by users to groups</td>
         </tr>
-	
-	
-	
+
+
         <tr>
-            
-                <td class="name"><code>messages</code></td>
-            
-            
+
+            <td class="name"><code>messages</code></td>
+
+
             <td class="type">
-            
-                
-<span class="param-type"><a href="Message.html">Message</a></span>
 
 
-            
+                <span class="param-type"><a href="Message.html">Message</a></span>
+
+
             </td>
-            
-            
-            
-            
-            
+
+
             <td class="description last">synonim for <a href="Message.html"><code>Message</code></a></td>
         </tr>
-	
-	
-	
+
+
         <tr>
-            
-                <td class="name"><code>message</code></td>
-            
-            
+
+            <td class="name"><code>message</code></td>
+
+
             <td class="type">
-            
-                
-<span class="param-type"><a href="Message.html">Message</a></span>
 
 
-            
+                <span class="param-type"><a href="Message.html">Message</a></span>
+
+
             </td>
-            
-            
-            
-            
-            
+
+
             <td class="description last">synonim for <a href="Message.html"><code>Message</code></a></td>
         </tr>
-	
-	
-	</tbody>
-</table></dl>
-        
-    
-        
-    
-    
-    
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L562">index.js line 562</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="Hunt.html#extendModel">Hunt#extendModel</a></li>
-        </ul>
-    </dd>
-    
-    
-    
+
+        </tbody>
+    </table>
 </dl>
 
-    
-    
 
-    
-
-    
-    
-    
-    
-    
-    
-    
+<dt class="tag-source">Source:</dt>
+<dd class="tag-source">
+    <ul class="dummy">
+        <li>
+            <a href="https://github.com/vodolaz095/hunt/blob/master/index.js#L562">index.js line 562</a>
+        </li>
+    </ul>
 </dd>
 
-    
-    </div>
 
-    
+<dt class="tag-see">See:</dt>
+<dd class="tag-see">
+    <ul>
+        <li><a href="Hunt.html#extendModel">Hunt#extendModel</a></li>
+    </ul>
+</dd>
 
-    
 
-    
+</dl>
 
-    
 
-    
+</dd>
 
-    
 
-    
+</div>
 
-    
 
-    
 </article>
 
 </section>
 
 
-
-
-  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Mon Jul 21 2014 22:38:23 GMT+0400 (MSK)</p>
+<p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Mon Jul 21 2014
+    23:04:51 GMT+0400 (MSK)</p>
 </div>

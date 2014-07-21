@@ -1,251 +1,202 @@
 <div id="docNav">
-    <h2><a href="/documentation/index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:httpError">httpError</a></li><li><a href="Hunt.html#event:httpSuccess">httpSuccess</a></li><li><a href="Hunt.html#event:notify">notify</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:message:sio">message:sio</a></li><li><a href="Hunt.html#event:notify:all">notify:all</a></li><li><a href="Hunt.html#event:notify:email">notify:email</a></li><li><a href="Hunt.html#event:notify:sio">notify:sio</a></li><li><a href="Hunt.html#event:user:auth">user:auth</a></li><li><a href="Hunt.html#event:user:save">user:save</a></li></ul>
+    <h2><a href="/documentation/index.html">Index</a></h2>
+
+    <h3>Classes</h3>
+    <ul>
+        <li><a href="config.html">config</a></li>
+        <li><a href="Hunt.html">Hunt</a></li>
+        <li><a href="Message.html">Message</a></li>
+        <li><a href="model.html">model</a></li>
+        <li><a href="passport.html">passport</a></li>
+        <li><a href="request.html">request</a></li>
+        <li><a href="response.html">response</a></li>
+        <li><a href="User.html">User</a></li>
+    </ul>
+    <h3>Events</h3>
+    <ul>
+        <li><a href="Hunt.html#event:broadcast">broadcast</a></li>
+        <li><a href="Hunt.html#event:httpError">httpError</a></li>
+        <li><a href="Hunt.html#event:httpSuccess">httpSuccess</a></li>
+        <li><a href="Hunt.html#event:notify">notify</a></li>
+        <li><a href="Hunt.html#event:start">start</a></li>
+        <li><a href="Hunt.html#event:message:sio">message:sio</a></li>
+        <li><a href="Hunt.html#event:notify:all">notify:all</a></li>
+        <li><a href="Hunt.html#event:notify:email">notify:email</a></li>
+        <li><a href="Hunt.html#event:notify:sio">notify:sio</a></li>
+        <li><a href="Hunt.html#event:user:auth">user:auth</a></li>
+        <li><a href="Hunt.html#event:user:save">user:save</a></li>
+    </ul>
 </div>
 <div id="documentation">
-    <h1 class="page-title">Class: request</h1>
-    
-
+<h1 class="page-title">Class: request</h1>
 
 
 <section>
 
-    <h2>
+<h2>
     request
-    </h2>
-    
-        <div class="class-description"><a href="http://nodejs.org/api/http.html#http_class_http_server "> Nodejs </a>
-request object,
-extended not only by <a href="http://expressjs.com/api.html#req.params "> ExpressJS </a>,
-but also by Hunt. It have some additional objects in it</div>
-    
+</h2>
+
+<div class="class-description"><a href="http://nodejs.org/api/http.html#http_class_http_server "> Nodejs </a>
+    request object,
+    extended not only by <a href="http://expressjs.com/api.html#req.params "> ExpressJS </a>,
+    but also by Hunt. It have some additional objects in it
+</div>
+
 
 <article>
-    <div class="container-overview">
-    
+<div class="container-overview">
 
-    
-        
+
 <dt>
-    <h4 class="name" id="request"><span class="type-signature"></span>new request<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-    
+<h4 class="name" id="request"><span class="type-signature"></span>new request<span class="signature">()</span><span
+        class="type-signature"></span></h4>
+
+
 </dt>
 <dd>
-    
-    
 
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
+
+    <dl class="details">
+
+
         <h5 class="subsection-title">Properties:</h5>
-        
+
         <dl>
 
-<table class="props">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>user</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type"><a href="User.html">User</a></span>
-|
+            <table class="props">
+                <thead>
+                <tr>
 
-<span class="param-type">null</span>
+                    <th>Name</th>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">currently authenticated user by means of <a href="http://passportjs.org">http://passportjs.org</a></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>model</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type"><a href="model.html">model</a></span>
+                    <th>Type</th>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">shortcut to all Hunt models</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>redisClient</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
+                    <th class="last">Description</th>
+                </tr>
+                </thead>
+
+                <tbody>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">ready to use redis client</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>huntEmit</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
+                <tr>
+
+                    <td class="name"><code>user</code></td>
 
 
-            
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">use Hunt event emmiter</td>
-        </tr>
-	
-	
-	</tbody>
-</table></dl>
-        
-    
-        
-    
-    
-    
+                    <td class="type">
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L440">lib/http/expressApp.js line 440</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="Hunt.html#redisClient">Hunt#redisClient</a></li>
-        
-            <li><a href="Hunt.html#emit">Hunt#emit</a></li>
-        </ul>
-    </dd>
-    
-    
-    
-</dl>
 
-    
-    
+                        <span class="param-type"><a href="User.html">User</a></span>
+                        |
 
-    
+                        <span class="param-type">null</span>
 
-    
-    
-    
-    
-    
-    
-    
+
+                    </td>
+
+
+                    <td class="description last">currently authenticated user by means of <a
+                            href="http://passportjs.org">http://passportjs.org</a></td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="name"><code>model</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type"><a href="model.html">model</a></span>
+
+
+                    </td>
+
+
+                    <td class="description last">shortcut to all Hunt models</td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="name"><code>redisClient</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">object</span>
+
+
+                    </td>
+
+
+                    <td class="description last">ready to use redis client</td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="name"><code>huntEmit</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">function</span>
+
+
+                    </td>
+
+
+                    <td class="description last">use Hunt event emmiter</td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </dl>
+
+
+        <dt class="tag-source">Source:</dt>
+        <dd class="tag-source">
+            <ul class="dummy">
+                <li>
+                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L442">lib/http/expressApp.js
+                        line 442</a>
+                </li>
+            </ul>
+        </dd>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="Hunt.html#redisClient">Hunt#redisClient</a></li>
+
+                <li><a href="Hunt.html#emit">Hunt#emit</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
 </dd>
 
-    
-    </div>
 
-    
+</div>
 
-    
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
 </article>
 
 </section>
 
 
-
-
-  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Mon Jul 21 2014 22:38:23 GMT+0400 (MSK)</p>
+<p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Mon Jul 21 2014
+    23:04:51 GMT+0400 (MSK)</p>
 </div>
