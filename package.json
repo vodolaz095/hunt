@@ -80,7 +80,6 @@
     "passport-paypal": "*",
     "passport-steam": "*",
     "mongoose": "3.8.12",
-    "sequelize": "*",
     "colors": "*",
     "nodemailer": "0.7.1",
     "rai": "<0.2.0",
