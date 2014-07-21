@@ -1,726 +1,1246 @@
 <div id="docNav">
-    <h2><a href="/documentation/index.html">Index</a></h2>
-
-    <h3>Classes</h3>
-    <ul>
-        <li><a href="config.html">config</a></li>
-        <li><a href="Group.html">Group</a></li>
-        <li><a href="GroupMessage.html">GroupMessage</a></li>
-        <li><a href="HTTPAuthorizationAPI.html">HTTPAuthorizationAPI</a></li>
-        <li><a href="Hunt.html">Hunt</a></li>
-        <li><a href="Message.html">Message</a></li>
-        <li><a href="model.html">model</a></li>
-        <li><a href="passport.html">passport</a></li>
-        <li><a href="request.html">request</a></li>
-        <li><a href="response.html">response</a></li>
-        <li><a href="User.html">User</a></li>
-    </ul>
-    <h3>Events</h3>
-    <ul>
-        <li><a href="Hunt.html#event:broadcast">broadcast</a></li>
-        <li><a href="Hunt.html#event:httpError">httpError</a></li>
-        <li><a href="Hunt.html#event:httpSuccess">httpSuccess</a></li>
-        <li><a href="Hunt.html#event:notify">notify</a></li>
-        <li><a href="Hunt.html#event:start">start</a></li>
-        <li><a href="Hunt.html#event:message:sio">message:sio</a></li>
-        <li><a href="Hunt.html#event:notify:all">notify:all</a></li>
-        <li><a href="Hunt.html#event:notify:email">notify:email</a></li>
-        <li><a href="Hunt.html#event:notify:sio">notify:sio</a></li>
-        <li><a href="Hunt.html#event:user:save">user:save</a></li>
-    </ul>
+    <h2><a href="/documentation/index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="Group.html">Group</a></li><li><a href="GroupMessage.html">GroupMessage</a></li><li><a href="HTTPAuthorizationAPI.html">HTTPAuthorizationAPI</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:httpError">httpError</a></li><li><a href="Hunt.html#event:httpSuccess">httpSuccess</a></li><li><a href="Hunt.html#event:notify">notify</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:message:sio">message:sio</a></li><li><a href="Hunt.html#event:notify:all">notify:all</a></li><li><a href="Hunt.html#event:notify:email">notify:email</a></li><li><a href="Hunt.html#event:notify:sio">notify:sio</a></li><li><a href="Hunt.html#event:user:save">user:save</a></li></ul>
 </div>
 <div id="documentation">
-<h1 class="page-title">Class: HTTPAuthorizationAPI</h1>
+    <h1 class="page-title">Class: HTTPAuthorizationAPI</h1>
+    
+
 
 
 <section>
 
-<h2>
+    <h2>
     HTTPAuthorizationAPI
-</h2>
-
-<div class="class-description">HTTP requests used for authorization with cookie based sessions.
-    The <a href="http://passport.js">http://passport.js</a> and <a href="http://www.senchalabs.org/connect/">http://www.senchalabs.org/connect/</a>
-    is used. The authorization api is mainly configured by
-    <a href="passport.html"><code>passport</code></a> config object
-</div>
-
+    </h2>
+    
+        <div class="class-description">HTTP requests used for authorization with cookie based sessions.
+The <a href="http://passport.js">http://passport.js</a> and <a href="http://www.senchalabs.org/connect/">http://www.senchalabs.org/connect/</a>
+is used. The authorization api is mainly configured by
+<a href="passport.html"><code>passport</code></a> config object</div>
+    
 
 <article>
-<div class="container-overview">
+    <div class="container-overview">
+    
 
-
-    <dt>
-    <h4 class="name" id="HTTPAuthorizationAPI"><span class="type-signature"></span>new HTTPAuthorizationAPI<span
-            class="signature">()</span><span class="type-signature"></span></h4>
-
-
-    </dt>
-    <dd>
-
-
-        <dl class="details">
-
-
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source">
-                <ul class="dummy">
-                    <li>
-                        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L4">lib/generators/http/passport.js
-                            line 4</a>
-                    </li>
-                </ul>
-            </dd>
-
-
-        </dl>
-
-
-    </dd>
-
-
-</div>
-
-
-<h3 class="subsection-title">Methods</h3>
-
-<dl>
-
+    
+        
 <dt>
-<h4 class="name" id="GET /auth/confirm/:hash"><span class="type-signature"></span>GET /auth/confirm/:hash<span
-        class="signature">()</span><span class="type-signature"></span></h4>
-
-
+    <h4 class="name" id="HTTPAuthorizationAPI"><span class="type-signature"></span>new HTTPAuthorizationAPI<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
 </dt>
 <dd>
-
-
-    <div class="description">
-        Used to sign in user, who visited the verification link in email,
-        along with setting user profile as verified
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/hash.js#L15">lib/passportStrategies/hash.js
-                        line 15</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="GET /auth/facebook"><span class="type-signature"></span>GET /auth/facebook<span class="signature">()</span><span
-        class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Start oauth authorization with facebook as provider.
-        If user was authorized before the authorization request is done,
-        the oauth profile is attached to <code>User#keychain</code> of current user.
-        If user was present in database, he/she is authorized.
-        If user was not present in database, his/her account is created as verified.
-        After authorization user is redirected to
-        <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
-        or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
-        endpoints.
-        This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
-        has fields of FACEBOOK_CLIENT_ID and FACEBOOK_CLIENT_SECRET populated
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/facebook.js#L25">lib/passportStrategies/facebook.js
-                        line 25</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="GET /auth/failure"><span class="type-signature"></span>GET /auth/failure<span
-        class="signature">()</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Route, where user is redirected after unsuccesseful authorization
-        by any default passport.js strategies. This routes adds flash message
-        of `error` to <a href="response.html"><code>response</code></a> locals.flash.error and makes a 302
-        redirect on /.
-        This route can be redefined by <a href="Hunt.html#extendRoutes"><code>Hunt#extendRoutes</code></a>
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L94">lib/generators/http/passport.js
-                        line 94</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="GET /auth/github"><span class="type-signature"></span>GET /auth/github<span
-        class="signature">()</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Start oauth authorization with github as provider.
-        If user was authorized before the authorization request is done,
-        the oauth profile is attached to <code>User#keychain</code> of current user.
-        If user was present in database, he/she is authorized.
-        If user was not present in database, his/her account is created as verified.
-        After authorization user is redirected to
-        <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
-        or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
-        endpoints.
-        This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
-        has fields of GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET populated
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/github.js#L27">lib/passportStrategies/github.js
-                        line 27</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="GET /auth/google"><span class="type-signature"></span>GET /auth/google<span
-        class="signature">()</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Start openId authorization with google as provider.
-        If user was authorized before the authorization request is done,
-        the oauth profile is attached to <code>User#keychain</code> of current user.
-        If user was present in database, he/she is authorized.
-        If user was not present in database, his/her account is created as verified.
-        After authorization user is redirected to
-        <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
-        or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
-        endpoints.
-        This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
-        has fields of `google` set to true
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/google.openid.js#L29">lib/passportStrategies/google.openid.js
-                        line 29</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="GET /auth/intuit"><span class="type-signature"></span>GET /auth/intuit<span
-        class="signature">()</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Start openId authorization with google as provider.
-        If user was authorized before the authorization request is done,
-        the oauth profile is attached to <code>User#keychain</code> of current user.
-        If user was present in database, he/she is authorized.
-        If user was not present in database, his/her account is created as verified.
-        After authorization user is redirected to
-        <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
-        or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
-        endpoints.
-        This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
-        has fields of `intuit` set to true
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/intuit.openid.js#L27">lib/passportStrategies/intuit.openid.js
-                        line 27</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="GET /auth/logout"><span class="type-signature"></span>GET /auth/logout<span
-        class="signature">()</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Clears current user session, that results in logout and redirect
-        to /
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L110">lib/generators/http/passport.js
-                        line 110</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="GET /auth/paypal"><span class="type-signature"></span>GET /auth/paypal<span
-        class="signature">()</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Start openId authorization with google as provider.
-        If user was authorized before the authorization request is done,
-        the oauth profile is attached to <code>User#keychain</code> of current user.
-        If user was present in database, he/she is authorized.
-        If user was not present in database, his/her account is created as verified.
-        After authorization user is redirected to
-        <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
-        or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
-        endpoints.
-        This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
-        has fields of `paypal` set to true
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/paypal.openid.js#L39">lib/passportStrategies/paypal.openid.js
-                        line 39</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="GET /auth/steam"><span class="type-signature"></span>GET /auth/steam<span
-        class="signature">()</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Start openId authorization with steam as provider.
-        If user was authorized before the authorization request is done,
-        the oauth profile is attached to <code>User#keychain</code> of current user.
-        If user was present in database, he/she is authorized.
-        If user was not present in database, his/her account is created as verified.
-        After authorization user is redirected to
-        <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
-        or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
-        endpoints.
-        This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
-        has fields of `google` set to true
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/steam.openid.js#L33">lib/passportStrategies/steam.openid.js
-                        line 33</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="GET /auth/success"><span class="type-signature"></span>GET /auth/success<span
-        class="signature">()</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Route, where user is redirected after successeful authorization
-        by any default passport.js strategies. This routes adds flash message
-        of `success` to <a href="response.html"><code>response</code></a> locals.flash.success and makes a 302
-        redirect on /.
-        This route can be redefined by <a href="Hunt.html#extendRoutes"><code>Hunt#extendRoutes</code></a>
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L77">lib/generators/http/passport.js
-                        line 77</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="GET /auth/twitter"><span class="type-signature"></span>GET /auth/twitter<span
-        class="signature">()</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Start oauth authorization with github as provider.
-        If user was authorized before the authorization request is done,
-        the oauth profile is attached to <code>User#keychain</code> of current user.
-        If user was present in database, he/she is authorized.
-        If user was not present in database, his/her account is created as verified.
-        After authorization user is redirected to
-        <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
-        or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
-        endpoints.
-        This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
-        has fields of TWITTER_CONSUMER_KEY and TWITTER_CONSUMER_SECRET populated
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/twitter.js#L25">lib/passportStrategies/twitter.js
-                        line 25</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="GET /auth/vk"><span class="type-signature"></span>GET /auth/vk<span
-        class="signature">()</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Start oauth authorization with github as provider.
-        If user was authorized before the authorization request is done,
-        the oauth profile is attached to <code>User#keychain</code> of current user.
-        If user was present in database, he/she is authorized.
-        If user was not present in database, his/her account is created as verified.
-        After authorization user is redirected to
-        <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
-        or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
-        endpoints.
-        This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
-        has fields of VK_APP_ID and VK_APP_SECRET populated.
-        VK_SCOPE property is also used for setting access rules for vk.com application
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/vkcom.js#L25">lib/passportStrategies/vkcom.js
-                        line 25</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="GET /auth/yahoo"><span class="type-signature"></span>GET /auth/yahoo<span
-        class="signature">()</span><span class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Start openId authorization with Yahoo as provider.
-        If user was authorized before the authorization request is done,
-        the oauth profile is attached to <code>User#keychain</code> of current user.
-        If user was present in database, he/she is authorized.
-        If user was not present in database, his/her account is created as verified.
-        After authorization user is redirected to
-        <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
-        or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
-        endpoints.
-        This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
-        has fields of `yahoo` set to true
-    </div>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/yahoo.openid.js#L26">lib/passportStrategies/yahoo.openid.js
-                        line 26</a>
-                </li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="POST /auth/logout"><span class="type-signature"></span>POST /auth/logout<span class="signature">(_csrf)</span><span
-        class="type-signature"></span></h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
-        Clears current user session, that results in logout and redirect
-        to /
-    </div>
-
-
-    <h5>Parameters:</h5>
-
-
-    <table class="params">
-        <thead>
-        <tr>
-
-            <th>Name</th>
-
-
-            <th>Type</th>
-
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-
-        <tr>
-
-            <td class="name"><code>_csrf</code></td>
-
-
-            <td class="type">
-
-
-                <span class="param-type">string</span>
-
-
-            </td>
-
-
-            <td class="description last">csrf protection token, if config option is enabled</td>
-        </tr>
-
-
-        </tbody>
-    </table>
-
-
-    <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L117">lib/generators/http/passport.js
-                        line 117</a>
-                </li>
-            </ul>
-        </dd>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="config.html">config</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L4">lib/generators/http/passport.js line 4</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
 </dl>
 
+    
+    
 
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+            
+<dt>
+    <h4 class="name" id="GET /auth/confirm/:hash"><span class="type-signature"></span>GET /auth/confirm/:hash<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Used to sign in user, who visited the verification link in email,
+along with setting user profile as verified
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/hash.js#L15">lib/passportStrategies/hash.js line 15</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="GET /auth/facebook"><span class="type-signature"></span>GET /auth/facebook<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Start oauth authorization with facebook as provider.
+If user was authorized before the authorization request is done,
+the oauth profile is attached to <code>User#keychain</code> of current user.
+If user was present in database, he/she is authorized.
+If user was not present in database, his/her account is created as verified.
+After authorization user is redirected to
+<a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
+or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
+endpoints.
+This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
+has fields of FACEBOOK_CLIENT_ID and FACEBOOK_CLIENT_SECRET populated
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/facebook.js#L25">lib/passportStrategies/facebook.js line 25</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="GET /auth/failure"><span class="type-signature"></span>GET /auth/failure<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Route, where user is redirected after unsuccesseful authorization
+by any default passport.js strategies. This routes adds flash message
+of `error` to <a href="response.html"><code>response</code></a> locals.flash.error and makes a 302
+redirect on /.
+This route can be redefined by <a href="Hunt.html#extendRoutes"><code>Hunt#extendRoutes</code></a>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L94">lib/generators/http/passport.js line 94</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="GET /auth/github"><span class="type-signature"></span>GET /auth/github<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Start oauth authorization with github as provider.
+If user was authorized before the authorization request is done,
+the oauth profile is attached to <code>User#keychain</code> of current user.
+If user was present in database, he/she is authorized.
+If user was not present in database, his/her account is created as verified.
+After authorization user is redirected to
+<a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
+or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
+endpoints.
+This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
+has fields of GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET populated
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/github.js#L27">lib/passportStrategies/github.js line 27</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="GET /auth/google"><span class="type-signature"></span>GET /auth/google<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Start openId authorization with google as provider.
+If user was authorized before the authorization request is done,
+the oauth profile is attached to <code>User#keychain</code> of current user.
+If user was present in database, he/she is authorized.
+If user was not present in database, his/her account is created as verified.
+After authorization user is redirected to
+<a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
+or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
+endpoints.
+This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
+has fields of `google` set to true
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/google.openid.js#L29">lib/passportStrategies/google.openid.js line 29</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="GET /auth/intuit"><span class="type-signature"></span>GET /auth/intuit<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Start openId authorization with google as provider.
+If user was authorized before the authorization request is done,
+the oauth profile is attached to <code>User#keychain</code> of current user.
+If user was present in database, he/she is authorized.
+If user was not present in database, his/her account is created as verified.
+After authorization user is redirected to
+<a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
+or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
+endpoints.
+This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
+has fields of `intuit` set to true
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/intuit.openid.js#L27">lib/passportStrategies/intuit.openid.js line 27</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="GET /auth/logout"><span class="type-signature"></span>GET /auth/logout<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Clears current user session, that results in logout and redirect
+to /
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L110">lib/generators/http/passport.js line 110</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="GET /auth/paypal"><span class="type-signature"></span>GET /auth/paypal<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Start openId authorization with google as provider.
+If user was authorized before the authorization request is done,
+the oauth profile is attached to <code>User#keychain</code> of current user.
+If user was present in database, he/she is authorized.
+If user was not present in database, his/her account is created as verified.
+After authorization user is redirected to
+<a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
+or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
+endpoints.
+This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
+has fields of `paypal` set to true
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/paypal.openid.js#L39">lib/passportStrategies/paypal.openid.js line 39</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="GET /auth/steam"><span class="type-signature"></span>GET /auth/steam<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Start openId authorization with steam as provider.
+If user was authorized before the authorization request is done,
+the oauth profile is attached to <code>User#keychain</code> of current user.
+If user was present in database, he/she is authorized.
+If user was not present in database, his/her account is created as verified.
+After authorization user is redirected to
+<a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
+or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
+endpoints.
+This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
+has fields of `google` set to true
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/steam.openid.js#L33">lib/passportStrategies/steam.openid.js line 33</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="GET /auth/success"><span class="type-signature"></span>GET /auth/success<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Route, where user is redirected after successeful authorization
+by any default passport.js strategies. This routes adds flash message
+of `success` to <a href="response.html"><code>response</code></a> locals.flash.success and makes a 302
+redirect on /.
+This route can be redefined by <a href="Hunt.html#extendRoutes"><code>Hunt#extendRoutes</code></a>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L77">lib/generators/http/passport.js line 77</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="GET /auth/twitter"><span class="type-signature"></span>GET /auth/twitter<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Start oauth authorization with github as provider.
+If user was authorized before the authorization request is done,
+the oauth profile is attached to <code>User#keychain</code> of current user.
+If user was present in database, he/she is authorized.
+If user was not present in database, his/her account is created as verified.
+After authorization user is redirected to
+<a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
+or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
+endpoints.
+This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
+has fields of TWITTER_CONSUMER_KEY and TWITTER_CONSUMER_SECRET populated
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/twitter.js#L25">lib/passportStrategies/twitter.js line 25</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="GET /auth/vk"><span class="type-signature"></span>GET /auth/vk<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Start oauth authorization with github as provider.
+If user was authorized before the authorization request is done,
+the oauth profile is attached to <code>User#keychain</code> of current user.
+If user was present in database, he/she is authorized.
+If user was not present in database, his/her account is created as verified.
+After authorization user is redirected to
+<a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
+or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
+endpoints.
+This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
+has fields of VK_APP_ID and VK_APP_SECRET populated.
+VK_SCOPE property is also used for setting access rules for vk.com application
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/vkcom.js#L25">lib/passportStrategies/vkcom.js line 25</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="GET /auth/yahoo"><span class="type-signature"></span>GET /auth/yahoo<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Start openId authorization with Yahoo as provider.
+If user was authorized before the authorization request is done,
+the oauth profile is attached to <code>User#keychain</code> of current user.
+If user was present in database, he/she is authorized.
+If user was not present in database, his/her account is created as verified.
+After authorization user is redirected to
+<a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/success,
+or <a href="HTTPAuthorizationAPI.html"><code>HTTPAuthorizationAPI</code></a> GET /auth/failure
+endpoints.
+This api endpoint is enabled when <a href="passport.html"><code>passport</code></a> object
+has fields of `yahoo` set to true
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/passportStrategies/yahoo.openid.js#L26">lib/passportStrategies/yahoo.openid.js line 26</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="POST /auth/logout"><span class="type-signature"></span>POST /auth/logout<span class="signature">(_csrf)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Clears current user session, that results in logout and redirect
+to /
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>_csrf</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">csrf protection token, if config option is enabled</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="https://github.com/vodolaz095/hunt/blob/master/lib/generators/http/passport.js#L117">lib/generators/http/passport.js line 117</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="config.html">config</a></li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        </dl>
+    
+
+    
+
+    
 </article>
 
 </section>
 
 
-<p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha8</a> on Thu Jun 26 2014
-    23:26:42 GMT+0400 (MSK)</p>
+
+
+  <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Mon Jul 21 2014 22:02:21 GMT+0400 (MSK)</p>
 </div>
