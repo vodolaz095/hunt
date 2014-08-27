@@ -1,6 +1,6 @@
 HOST: http://huntjs.herokuapp.com/
 
---- huntjs Api V1 ---
+--- Embedded routes for authorization strategies ---
 
 
 -- Default redirect routes
@@ -8,7 +8,6 @@ HOST: http://huntjs.herokuapp.com/
 Success authorization. By default, if user present, it sets flash.success message of `Welcome to our site, Username!` and redirects to /. This route can be redefined by https://huntjs.herokuapp.com/documentation/Hunt.html#extendRoutes
 GET /auth/success
 < 302
-
 
 Failure authorization. By default, if not present,  it sets flash.error message of `Authorization failed!` and redirects to /. This route can be redefined by https://huntjs.herokuapp.com/documentation/Hunt.html#extendRoutes
 GET /auth/failure
