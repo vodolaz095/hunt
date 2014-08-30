@@ -44,7 +44,7 @@ Hunt.extendRoutes(function(core){
 //that will be catched by error reporter middleware and will not stop the process
 
   core.app.get('/error', function(req,res){
-    throw new Error('Something is wrong... Please, wipe your spectackles with alchohol or spirit and carefully kick PC with hammer 3 times.');
+    throw new Error('Something is wrong... Please, wipe your spectacles with alcohol or spirit and carefully kick PC with hammer 3 times.');
   });
   core.app.get('/baderror', function(req,res){
     (function(){

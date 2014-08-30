@@ -11,18 +11,6 @@ module.exports = exports = function(core) {
     }
   });
 
-  core.app.get('/profile', function(req,res){
-    if (req.user) {
-      res.render('cabinet/profile',
-        {
-          'title': 'Hunt authorization example',
-          'description': 'Your profile'
-        });
-    } else {
-      res.redirect('/');
-    }
-  });
-
   core.app.get('/myself', function (req, res) {
     if (req.user) {
       res.json(req.user);
@@ -41,5 +29,4 @@ module.exports = exports = function(core) {
       });
     }
   });
-
-}
+};
