@@ -4,7 +4,6 @@
  */
 
 var
-//  hrw = require('hunt-mongoose-rest'),
   populateDb = require('./lib/populateDatabase.js'),
   pinger = require('./lib/pinger.js');
 
@@ -232,12 +231,12 @@ hunt.extendRoutes(function (core) {
 /*
  * Exporting Trophy model as REST interface
  */
-/*
- hrw(hunt, {
- 'mountPount': '/api/v1/trophy',
- 'modelName': 'Trophy'
- });
- */
+
+hunt.exportModelToRest({
+  'mountPount': '/api/v1/trophy',
+  'modelName': 'Trophy'
+});
+
 /*
  * setting up the event handlers
  */

@@ -97,6 +97,16 @@ function Hunt(config) {
     return configGenerator(config);
   });
 
+
+  /**
+   * @name Hunt#exportModelToRest
+   * @type {function}
+   * @description
+   * Export models as REST api
+   */
+
+  this.extendCore('exportModelToRest', require('./lib/exportModel/exportModelToRest.js'));
+
   /**
    * @name Hunt#async
    * @type {Object}

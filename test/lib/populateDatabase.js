@@ -7,7 +7,7 @@ module.exports = exports = function (core, done) {
   core.async.parallel({
     'userRoot': function (cb) {
       core.model.User.findOneAndUpdate({
-          'apiKey': 'i_am_root'
+          'huntKey': 'i_am_root'
         }, {
           'root': true
         }, {
@@ -17,7 +17,7 @@ module.exports = exports = function (core, done) {
     },
     'userNonRoot': function (cb) {
       core.model.User.findOneAndUpdate({
-          'apiKey': 'i_am_prep'
+          'huntKey': 'i_am_prep'
         }, {
           'root': false,
           'name': {

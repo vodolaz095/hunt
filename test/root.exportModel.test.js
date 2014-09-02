@@ -1,5 +1,4 @@
-var hunt = require('hunt'),
-  hrw = require('./../index.js'),
+var hunt = require('./../index.js'),
   model = require('./model/article.model.js'),
   populateDb = require('./lib/populateDatabase.js'),
   should = require('should'),
@@ -21,15 +20,15 @@ function isArticle(a) {
 describe('Testing REST api as root', function () {
   before(function (done) {
     Hunt = hunt({
-      'port': 3002,
+      'port': 3602,
       'disableCsrf': true,
-      'huntKey': true,
-      'mongoUrl': 'mongodb://localhost/hrw_dev'
+      'huntKeyHeader': true,
+      'mongoUrl': 'mongodb://localhost/hunt_dev'
     });
 
     Hunt.extendModel('Article', model);
 
-    hrw(Hunt, { 'modelName': 'Article', 'methods': ['doSmth'], 'statics': 'doSmth'});
+    Hunt.exportModelToRest({ 'modelName': 'Article', 'methods': ['doSmth'], 'statics': 'doSmth'});
 
     Hunt.once('start', function (evnt) {
       populateDb(Hunt, done);
