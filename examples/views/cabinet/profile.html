@@ -1,34 +1,71 @@
-{{#myself}}
-<img src="{{gravatar100}}" alt="Your gravatar"/>
-<p>Id: {{id}}</p>
-<p>Email: <a href="mailto:{{email}}">{{email}}</a></p>
-<p>Account verified - {{#accountVerified}}yes{{/accountVerified}} {{^accountVerified}}no{{/accountVerified}}.</p>
-<p>Online: {{isOnline}}</p>
-<p>Given name: {{name.givenName}}</p>
-<p>Family name: {{name.familyName}}</p>
-<h2>Attach accounts to profile</h2>
-{{#keychain}}
+[[#myself]]
+<div class="col-md-6">
+    <img src="[[gravatar100]]" alt="Your gravatar"/>
 
-{{#github}}
-<p>Github profile #{{github}} attached.</p>
-{{/github}}
-{{^github}}
-<p><a href="/auth/github">Attach github profile</a></p>
-{{/github}}
+    <p>Id: [[id]]</p>
 
-{{#twitter}}
-<p>Twitter profile #{{twitter}} attached.</p>
-{{/twitter}}
-{{^twitter}}
-<p><a href="/auth/twitter">Attach Twitter profile</a></p>
-{{/twitter}}
+    <p>Email: <a href="mailto:[[email]]">[[email]]</a></p>
 
-{{#vkontakte}}
-<p>Vkontakte profile #{{vkontakte}} attached.</p>
-{{/vkontakte}}
-{{^vkontakte}}
-<p><a href="/auth/vk">Attach Vkontakte profile</a></p>
-{{/vkontakte}}
+    <form action="/notify_me" method="post">
+        <input type="hidden" value="[[csrf]]" name="_csrf"/>
+        <input type="submit" value="Send greeting!" class="btn btn-success">
+    </form>
+    <p>Account verified - [[#accountVerified]]yes[[/accountVerified]] [[^accountVerified]]no[[/accountVerified]].</p>
 
-{{/keychain}}
-{{/myself}}
+    <p>Online: [[isOnline]]</p>
+
+    <p>Given name: [[name.givenName]]</p>
+
+    <p>Family name: [[name.familyName]]</p>
+</div>
+<div class="col-md-6">
+    <h2>Attach accounts to profile</h2>
+    [[#keychain]]
+
+    [[#github]]
+    <p>Github profile #[[github]] attached.</p>
+    [[/github]]
+    [[^github]]
+    <p>
+        <a class="btn btn-success" href="/auth/github">Attach Github profile</a>
+    </p>
+    [[/github]]
+
+    [[#twitter]]
+    <p>Twitter profile #[[twitter]] attached.</p>
+    [[/twitter]]
+    [[^twitter]]
+    <p>
+        <a class="btn btn-success" href="/auth/twitter">Attach Twitter account</a>
+    </p>
+    [[/twitter]]
+
+    [[#vkontakte]]
+    <p>Vkontakte profile #[[vkontakte]] attached.</p>
+    [[/vkontakte]]
+    [[^vkontakte]]
+    <p>
+        <a class="btn btn-success" href="/auth/vk">Attach Vkontakte profile</a>
+    </p>
+    [[/vkontakte]]
+
+    [[#facebook]]
+    <p>Facebook profile #[[facebook]] attached.</p>
+    [[/facebook]]
+    [[^facebook]]
+    <p>
+        <a class="btn btn-success" href="/auth/facebook">Attach Facebook profile</a>
+    </p>
+    [[/facebook]]
+
+    [[#steam]]
+    <p>Steam profile #[[steam]] attached.</p>
+    [[/steam]]
+    [[^steam]]
+    <p>
+        <a class="btn btn-success" href="/auth/steam">Attach Steam profile</a>
+    </p>
+    [[/steam]]
+    [[/keychain]]
+    [[/myself]]
+</div>

@@ -1,139 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="huntApp">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>{{title}}</title>
-    <meta name="description" content="{{description}}"/>
-    <meta name="keywords" content="{{keywords}}"/>
+    <title>[[title]]</title>
+    <meta name="description" content="[[description]]"/>
+    <meta name="keywords" content="[[keywords]]"/>
     <meta name="author" content="vodolaz095"/>
-    {{#css}}
-    <link rel="stylesheet" href="{{href}}" type="text/css" media="{{media}}"/>
-    {{/css}}
+    [[#css]]
+    <link rel="stylesheet" href="[[href]]" type="text/css" media="[[media]]"/>
+    [[/css]]
     <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 </head>
 <body>
-    <a href="https://github.com/vodolaz095/hunt">
-        <img style="position: absolute; top: 0; right: 0; border: 0;"
-             src="https://github-camo.global.ssl.fastly.net/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67"
-             alt="Fork me on GitHub" data-canonical-src="//s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
-    </a>
+<a href="https://github.com/vodolaz095/hunt">
+    <img style="position: absolute; top: 0; right: 0; border: 0;"
+         src="https://github-camo.global.ssl.fastly.net/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67"
+         alt="Fork me on GitHub" data-canonical-src="//s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+</a>
+
+<div ng-controller="notificationController">
     <div class="jumbotron">
-        <h1>{{title}}</h1>
-        <h2>{{description}}</h2>
+        <h1>[[title]]</h1>
 
-    <nav class="navbar navbar-inverse" role="navigation">
-        <div class="container-fluid">
-            <ul class="nav navbar-nav">
-                <li><a class="navbar-brand" href="/">HuntJS</a></li>
-                {{#menu}}
-                <li><a href="{{url}}">{{name}}</a></li>
-                {{/menu}}
-{{^myself}}
-                <li><a href="/auth/login">Sign up or sign in</a></li>
-{{/myself}}
-{{#myself}}
-                <li><a href="/profile"><img width="10" height="10" src="{{gravatar}}"/>{{displayName}}</a></li>
-                <li><a href="/auth/logout">LogOut</a></li>
-{{/myself}}
-                <li><a href="/online#clock" data-bind="text: clock" title="This is clock, we have websockets support!">00:00:00</a></li>
-            </ul>
-        </div>
-    </nav>
+        <h2>[[description]]</h2>
+
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li><a class="navbar-brand" href="/">HuntJS</a></li>
+                    [[#menu]]
+                    <li><a href="[[url]]">[[name]]</a></li>
+                    [[/menu]]
+                    [[^myself]]
+                    <li><a href="/#/login">Sign up or sign in</a></li>
+                    [[/myself]]
+                    [[#myself]]
+                    <li><a href="/#/profile"><img width="10" height="10" src="[[gravatar]]"/>[[displayName]]</a></li>
+                    <li><a href="/auth/logout">LogOut</a></li>
+                    [[/myself]]
+                    <li><a href="/#/events" title="This is clock, we have websockets support!">{{ clock ||
+                        "00:00:00"}}</a></li>
+                </ul>
+            </div>
+        </nav>
     </div>
-    {{#flash}}
+    [[#flash]]
 
-    {{#error}}
+    [[#error]]
     <div class="alert alert-danger alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{error}}
+        [[error]]
     </div>
-    {{/error}}
+    [[/error]]
 
-    {{#success}}
+    [[#success]]
     <div class="alert alert-success alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{success}}
+        [[success]]
     </div>
-    {{/success}}
+    [[/success]]
 
-    {{#info}}
+    [[#info]]
     <div class="alert alert-info alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{info}}
+        [[info]]
     </div>
-    {{/info}}
+    [[/info]]
 
-    {{/flash}}
-    <div data-bind="visible: flash" style="display:none">
-      <div data-bind="foreach: flash.error">
-        <div class="alert alert-danger alert-dismissable">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <span data-bind="text: $data"></span>
-        </div>
-      </div>
+    [[/flash]]
 
-      <div data-bind="foreach: flash.success">
-        <div class="alert alert-success alert-dismissable">
+    <div ng-cloak>
+        <div class="alert alert-danger alert-dismissable" ng-repeat="flashError in flash.error">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <span data-bind="text: $data"></span>
+            {{ flashError }}
         </div>
-      </div>
-
-      <div data-bind="foreach: flash.info">
-        <div class="alert alert-info alert-dismissable">
+        <div class="alert success alert-dismissable" ng-repeat="flashSuccess in flash.success">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <span data-bind="text: $data"></span>
+            {{ flashSuccess }}
         </div>
-      </div>
+        <div class="alert alert-info alert-dismissable" ng-repeat="flashInfo in flash.info">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ flashInfo }}
+        </div>
     </div>
 
-    <article class="container">
-        <div class="row">
-            <div class="col-md-12">
-<!-- YIELD START -->
-{{{ yield }}}
-<!-- YIELD STOP -->
-            </div>
+
+</div>
+<article class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- YIELD START -->
+            [[& yield ]]
+            <!-- YIELD STOP -->
         </div>
-    </article>
+    </div>
+</article>
 
 <footer id="footer">
     <div class="container">
-        <p>&copy; 2013 <a href="//github.com/vodolaz095">vodolaz095</a></p>
+        <p>&copy; 2014 <a href="//github.com/vodolaz095">vodolaz095</a></p>
     </div>
 </footer>
-{{#javascripts}}
-<script type="text/javascript" src="{{url}}"></script>
-{{/javascripts}}
+[[#javascripts]]
+<script type="text/javascript" src="[[url]]"></script>
+[[/javascripts]]
 <!--[if lt IE 9]>
 <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">(function (d, w, c) {
-    (w[c] = w[c] || []).push(function () {
-        try {
-            w.yaCounter24127096 = new Ya.Metrika({id: 24127096, webvisor: true, clickmap: true, trackLinks: true, accurateTrackBounce: true});
-        } catch (e) {
-        }
-    });
-    var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () {
-        n.parentNode.insertBefore(s, n);
-    };
-    s.type = "text/javascript";
-    s.async = true;
-    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
-    if (w.opera == "[object Opera]") {
-        d.addEventListener("DOMContentLoaded", f, false);
-    } else {
-        f();
-    }
-})(document, window, "yandex_metrika_callbacks");</script>
-<noscript>
-    <div><img src="//mc.yandex.ru/watch/24127096" style="position:absolute; left:-9999px;" alt=""/></div>
-</noscript>
-<!-- /Yandex.Metrika counter -->
 </body>
 </html>

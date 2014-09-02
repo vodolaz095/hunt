@@ -3,7 +3,7 @@
     "allowUnknownTags": false
   },
   "source": {
-    "include" : [
+    "include": [
       "README.md",
       "index.js",
       "lib/api/",
@@ -26,7 +26,7 @@
       "outputSourceFiles": false
     }
   },
-  "opts":{
-    "destination":"./examples/views/documentation"
+  "opts": {
+    "destination": "./examples/public/documentation"
   }
 }

@@ -1,47 +1,38 @@
-<div id="docNav">
-    <h2><a href="/documentation/index.html">Index</a></h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: User</title>
 
-    <h3>Classes</h3>
-    <ul>
-        <li><a href="config.html">config</a></li>
-        <li><a href="Hunt.html">Hunt</a></li>
-        <li><a href="Message.html">Message</a></li>
-        <li><a href="model.html">model</a></li>
-        <li><a href="passport.html">passport</a></li>
-        <li><a href="request.html">request</a></li>
-        <li><a href="response.html">response</a></li>
-        <li><a href="User.html">User</a></li>
-    </ul>
-    <h3>Events</h3>
-    <ul>
-        <li><a href="Hunt.html#event:broadcast">broadcast</a></li>
-        <li><a href="Hunt.html#event:httpError">httpError</a></li>
-        <li><a href="Hunt.html#event:httpSuccess">httpSuccess</a></li>
-        <li><a href="Hunt.html#event:notify">notify</a></li>
-        <li><a href="Hunt.html#event:start">start</a></li>
-        <li><a href="Hunt.html#event:message:sio">message:sio</a></li>
-        <li><a href="Hunt.html#event:notify:all">notify:all</a></li>
-        <li><a href="Hunt.html#event:notify:email">notify:email</a></li>
-        <li><a href="Hunt.html#event:notify:sio">notify:sio</a></li>
-        <li><a href="Hunt.html#event:user:auth">user:auth</a></li>
-        <li><a href="Hunt.html#event:user:save">user:save</a></li>
-    </ul>
-</div>
-<div id="documentation">
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
 <h1 class="page-title">Class: User</h1>
 
 
 <section>
 
-<h2>
-    User
-</h2>
+<header>
+    <h2>
+        User
+    </h2>
 
-<div class="class-description">Active record class to represent users of application, with mongodb as backend.
-    This class is ancestor of mongoose active record object, described here <a
-            href="http://mongoosejs.com/docs/documents.html">http://mongoosejs.com/docs/documents.html</a>,
-    <a href="http://mongoosejs.com/docs/queries.html">http://mongoosejs.com/docs/queries.html</a></div>
+    <div class="class-description">Active record class to represent users of application, with mongodb as backend.
+        This class is ancestor of mongoose active record object, described here <a
+                href="http://mongoosejs.com/docs/documents.html">http://mongoosejs.com/docs/documents.html</a>,
+        <a href="http://mongoosejs.com/docs/queries.html">http://mongoosejs.com/docs/queries.html</a></div>
 
+</header>
 
 <article>
 <div class="container-overview">
@@ -537,17 +528,6 @@
 </dl>
 
 
-<dt class="tag-source">Source:</dt>
-<dd class="tag-source">
-    <ul class="dummy">
-        <li>
-            <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L7">lib/models/user.mongoose.js
-                line 7</a>
-        </li>
-    </ul>
-</dd>
-
-
 </dl>
 
 
@@ -562,8 +542,8 @@
 <dl>
 
 <dt>
-<h4 class="name" id="findOneByEmail"><span class="type-signature">&lt;static> </span>findOneByEmail<span
-        class="signature">(email, callback)</span><span class="type-signature"></span></h4>
+<h4 class="name" id="findOneByEmail"><span class="type-signature">(static) </span>findOneByEmail<span class="signature">(email, callback)</span><span
+        class="type-signature"></span></h4>
 
 
 </dt>
@@ -633,17 +613,6 @@
     <dl class="details">
 
 
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L351">lib/models/user.mongoose.js
-                        line 351</a>
-                </li>
-            </ul>
-        </dd>
-
-
     </dl>
 
 
@@ -651,7 +620,7 @@
 
 
 <dt>
-<h4 class="name" id="findOneByHuntKey"><span class="type-signature">&lt;static> </span>findOneByHuntKey<span
+<h4 class="name" id="findOneByHuntKey"><span class="type-signature">(static) </span>findOneByHuntKey<span
         class="signature">(huntKey, callback)</span><span class="type-signature"></span></h4>
 
 
@@ -722,17 +691,6 @@
     <dl class="details">
 
 
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L362">lib/models/user.mongoose.js
-                        line 362</a>
-                </li>
-            </ul>
-        </dd>
-
-
     </dl>
 
 
@@ -740,7 +698,7 @@
 
 
 <dt>
-<h4 class="name" id="findOneByHuntKeyAndResetPassword"><span class="type-signature">&lt;static> </span>findOneByHuntKeyAndResetPassword<span
+<h4 class="name" id="findOneByHuntKeyAndResetPassword"><span class="type-signature">(static) </span>findOneByHuntKeyAndResetPassword<span
         class="signature">(huntKey, password, callback)</span><span class="type-signature"></span></h4>
 
 
@@ -834,17 +792,6 @@
     <dl class="details">
 
 
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L475">lib/models/user.mongoose.js
-                        line 475</a>
-                </li>
-            </ul>
-        </dd>
-
-
     </dl>
 
 
@@ -852,7 +799,7 @@
 
 
 <dt>
-<h4 class="name" id="findOneByHuntKeyAndVerifyEmail"><span class="type-signature">&lt;static> </span>findOneByHuntKeyAndVerifyEmail<span
+<h4 class="name" id="findOneByHuntKeyAndVerifyEmail"><span class="type-signature">(static) </span>findOneByHuntKeyAndVerifyEmail<span
         class="signature">(huntKey, callback)</span><span class="type-signature"></span></h4>
 
 
@@ -923,17 +870,6 @@
     <dl class="details">
 
 
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L454">lib/models/user.mongoose.js
-                        line 454</a>
-                </li>
-            </ul>
-        </dd>
-
-
     </dl>
 
 
@@ -941,7 +877,7 @@
 
 
 <dt>
-<h4 class="name" id="findOneByKeychain"><span class="type-signature">&lt;static> </span>findOneByKeychain<span
+<h4 class="name" id="findOneByKeychain"><span class="type-signature">(static) </span>findOneByKeychain<span
         class="signature">(provider, id, callback)</span><span class="type-signature"></span></h4>
 
 
@@ -1030,17 +966,6 @@
     <dl class="details">
 
 
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L370">lib/models/user.mongoose.js
-                        line 370</a>
-                </li>
-            </ul>
-        </dd>
-
-
     </dl>
 
 
@@ -1048,7 +973,7 @@
 
 
 <dt>
-<h4 class="name" id="findOneFuzzy"><span class="type-signature">&lt;static> </span>findOneFuzzy<span class="signature">(needle, callback)</span><span
+<h4 class="name" id="findOneFuzzy"><span class="type-signature">(static) </span>findOneFuzzy<span class="signature">(needle, callback)</span><span
         class="type-signature"></span></h4>
 
 
@@ -1124,17 +1049,6 @@
     <dl class="details">
 
 
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L382">lib/models/user.mongoose.js
-                        line 382</a>
-                </li>
-            </ul>
-        </dd>
-
-
     </dl>
 
 
@@ -1142,7 +1056,7 @@
 
 
 <dt>
-<h4 class="name" id="processOAuthProfile"><span class="type-signature">&lt;static> </span>processOAuthProfile<span
+<h4 class="name" id="processOAuthProfile"><span class="type-signature">(static) </span>processOAuthProfile<span
         class="signature">(user, profile, callback)</span><span class="type-signature"></span></h4>
 
 
@@ -1238,17 +1152,6 @@
     <dl class="details">
 
 
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L540">lib/models/user.mongoose.js
-                        line 540</a>
-                </li>
-            </ul>
-        </dd>
-
-
     </dl>
 
 
@@ -1256,7 +1159,7 @@
 
 
 <dt>
-<h4 class="name" id="signIn"><span class="type-signature">&lt;static> </span>signIn<span class="signature">(email, password, callback)</span><span
+<h4 class="name" id="signIn"><span class="type-signature">(static) </span>signIn<span class="signature">(email, password, callback)</span><span
         class="type-signature"></span></h4>
 
 
@@ -1345,17 +1248,6 @@
     <dl class="details">
 
 
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L431">lib/models/user.mongoose.js
-                        line 431</a>
-                </li>
-            </ul>
-        </dd>
-
-
     </dl>
 
 
@@ -1363,7 +1255,7 @@
 
 
 <dt>
-<h4 class="name" id="signUp"><span class="type-signature">&lt;static> </span>signUp<span class="signature">(email, password, callback)</span><span
+<h4 class="name" id="signUp"><span class="type-signature">(static) </span>signUp<span class="signature">(email, password, callback)</span><span
         class="type-signature"></span></h4>
 
 
@@ -1450,17 +1342,6 @@
 
 
     <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L403">lib/models/user.mongoose.js
-                        line 403</a>
-                </li>
-            </ul>
-        </dd>
 
 
     </dl>
@@ -1521,17 +1402,6 @@
 
 
     <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L234">lib/models/user.mongoose.js
-                        line 234</a>
-                </li>
-            </ul>
-        </dd>
 
 
     </dl>
@@ -1654,17 +1524,6 @@
     <dl class="details">
 
 
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L742">lib/models/user.mongoose.js
-                        line 742</a>
-                </li>
-            </ul>
-        </dd>
-
-
     </dl>
 
 
@@ -1764,17 +1623,6 @@
 
 
     <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L173">lib/models/user.mongoose.js
-                        line 173</a>
-                </li>
-            </ul>
-        </dd>
 
 
     </dl>
@@ -1899,17 +1747,6 @@
     <dl class="details">
 
 
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L724">lib/models/user.mongoose.js
-                        line 724</a>
-                </li>
-            </ul>
-        </dd>
-
-
     </dl>
 
 
@@ -1968,17 +1805,6 @@
 
 
     <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L787">lib/models/user.mongoose.js
-                        line 787</a>
-                </li>
-            </ul>
-        </dd>
 
 
     </dl>
@@ -2079,17 +1905,6 @@
     <dl class="details">
 
 
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L222">lib/models/user.mongoose.js
-                        line 222</a>
-                </li>
-            </ul>
-        </dd>
-
-
     </dl>
 
 
@@ -2097,8 +1912,9 @@
 
 
 <dt>
-<h4 class="name" id="notify"><span class="type-signature"></span>notify<span class="signature">(<span class="optional">all</span>, message)</span><span
-        class="type-signature"> &rarr; {Boolean}</span></h4>
+<h4 class="name" id="notify"><span class="type-signature"></span>notify<span class="signature">(all<span
+        class="signature-attributes">opt</span>, message)</span><span class="type-signature"> &rarr; {Boolean}</span>
+</h4>
 
 
 </dt>
@@ -2123,7 +1939,7 @@
             <th>Type</th>
 
 
-            <th>Argument</th>
+            <th>Attributes</th>
 
 
             <th class="last">Description</th>
@@ -2191,17 +2007,6 @@
 
 
     <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L251">lib/models/user.mongoose.js
-                        line 251</a>
-                </li>
-            </ul>
-        </dd>
 
 
     </dl>
@@ -2305,17 +2110,6 @@
     <dl class="details">
 
 
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L302">lib/models/user.mongoose.js
-                        line 302</a>
-                </li>
-            </ul>
-        </dd>
-
-
     </dl>
 
 
@@ -2409,17 +2203,6 @@
 
 
     <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L326">lib/models/user.mongoose.js
-                        line 326</a>
-                </li>
-            </ul>
-        </dd>
 
 
     </dl>
@@ -2550,17 +2333,6 @@
     <dl class="details">
 
 
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L664">lib/models/user.mongoose.js
-                        line 664</a>
-                </li>
-            </ul>
-        </dd>
-
-
     </dl>
 
 
@@ -2645,17 +2417,6 @@
 
 
     <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L530">lib/models/user.mongoose.js
-                        line 530</a>
-                </li>
-            </ul>
-        </dd>
 
 
     </dl>
@@ -2757,17 +2518,6 @@
 
 
     <dl class="details">
-
-
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L604">lib/models/user.mongoose.js
-                        line 604</a>
-                </li>
-            </ul>
-        </dd>
 
 
     </dl>
@@ -2874,17 +2624,6 @@
     <dl class="details">
 
 
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L501">lib/models/user.mongoose.js
-                        line 501</a>
-                </li>
-            </ul>
-        </dd>
-
-
     </dl>
 
 
@@ -2945,17 +2684,6 @@
     <dl class="details">
 
 
-        <dt class="tag-source">Source:</dt>
-        <dd class="tag-source">
-            <ul class="dummy">
-                <li>
-                    <a href="https://github.com/vodolaz095/hunt/blob/master/lib/models/user.mongoose.js#L242">lib/models/user.mongoose.js
-                        line 242</a>
-                </li>
-            </ul>
-        </dd>
-
-
     </dl>
 
 
@@ -2969,6 +2697,46 @@
 </section>
 
 
-<p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Mon Jul 21 2014
-    23:04:51 GMT+0400 (MSK)</p>
 </div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2>
+
+    <h3>Classes</h3>
+    <ul>
+        <li><a href="config.html">config</a></li>
+        <li><a href="Hunt.html">Hunt</a></li>
+        <li><a href="Message.html">Message</a></li>
+        <li><a href="model.html">model</a></li>
+        <li><a href="passport.html">passport</a></li>
+        <li><a href="request.html">request</a></li>
+        <li><a href="response.html">response</a></li>
+        <li><a href="User.html">User</a></li>
+    </ul>
+    <h3>Events</h3>
+    <ul>
+        <li><a href="Hunt.html#event:broadcast">broadcast</a></li>
+        <li><a href="Hunt.html#event:httpError">httpError</a></li>
+        <li><a href="Hunt.html#event:httpSuccess">httpSuccess</a></li>
+        <li><a href="Hunt.html#event:notify">notify</a></li>
+        <li><a href="Hunt.html#event:start">start</a></li>
+        <li><a href="Hunt.html#event:message:sio">message:sio</a></li>
+        <li><a href="Hunt.html#event:notify:all">notify:all</a></li>
+        <li><a href="Hunt.html#event:notify:email">notify:email</a></li>
+        <li><a href="Hunt.html#event:notify:sio">notify:sio</a></li>
+        <li><a href="Hunt.html#event:user:auth">user:auth</a></li>
+        <li><a href="Hunt.html#event:user:save">user:save</a></li>
+    </ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Tue Sep 02 2014
+    22:48:25 GMT+0400 (MSK)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
