@@ -3,6 +3,7 @@
 var EventEmitter = require('events').EventEmitter,
   async = require('async'),
   util = require('util'),
+  assert = require('assert'),
 
   configGenerator = require('./lib/misc/config.js'),
   redisGenerator = require('./lib/datastore/redisClient.js'),
@@ -99,10 +100,10 @@ function Hunt(config) {
 
 
   /**
-   * @name Hunt#exportModelToRest
-   * @type {function}
+   * @method Hunt#exportModelToRest
+   * @param {ExportModelToRestParameters} parameters - for exporting model to REST interface properly
    * @description
-   * Export models as REST api
+   * Export models as REST api, exposed by current http server
    */
 
   this.extendCore('exportModelToRest', require('./lib/exportModel/exportModelToRest.js'));
@@ -158,10 +159,6 @@ function Hunt(config) {
 
   if (this.config.enableMongoose) {
     mongooseGenerator(this);
-  }
-
-  if (this.config.sequelizeUrl) {
-    sequelizeGenerator(this);
   }
 
   /**

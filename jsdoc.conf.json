@@ -8,6 +8,7 @@
       "index.js",
       "lib/api/",
       "lib/datastore",
+      "lib/exportModel",
       "lib/http",
       "lib/misc",
       "lib/telnet",

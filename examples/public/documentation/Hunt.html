@@ -189,39 +189,6 @@
 
 
 <dt>
-<h4 class="name" id="exportModelToRest"><span class="type-signature"></span>exportModelToRest<span
-        class="type-signature"> :function</span></h4>
-
-
-</dt>
-<dd>
-
-    <div class="description">
-        Export models as REST api
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type">function</span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
 <h4 class="name" id="express"><span class="type-signature"></span>express<span class="type-signature"></span></h4>
 
 
@@ -988,6 +955,72 @@
 
 
         </dd>
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="exportModelToRest"><span class="type-signature"></span>exportModelToRest<span class="signature">(parameters)</span><span
+        class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Export models as REST api, exposed by current http server
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>parameters</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type"><a
+                        href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></span>
+
+
+            </td>
+
+
+            <td class="description last">for exporting model to REST interface properly</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
     </dl>
 
 
@@ -3805,127 +3838,6 @@
 
 
     <div class="description">
-        Emitted when Hunt is started as webserver process
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type">object</span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-        <h5 class="subsection-title">Properties:</h5>
-
-        <dl>
-
-            <table class="props">
-                <thead>
-                <tr>
-
-                    <th>Name</th>
-
-
-                    <th>Type</th>
-
-
-                    <th class="last">Description</th>
-                </tr>
-                </thead>
-
-                <tbody>
-
-
-                <tr>
-
-                    <td class="name"><code>type</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">string</span>
-
-
-                    </td>
-
-
-                    <td class="description last">with a value of string of 'webserver'</td>
-                </tr>
-
-
-                <tr>
-
-                    <td class="name"><code>port</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">number</span>
-
-
-                    </td>
-
-
-                    <td class="description last">with a value of port this application listens to</td>
-                </tr>
-
-
-                <tr>
-
-                    <td class="name"><code>address</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">string</span>
-
-
-                    </td>
-
-
-                    <td class="description last">with a value of address application is bound to</td>
-                </tr>
-
-
-                </tbody>
-            </table>
-        </dl>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="Hunt.html#startWebServer">Hunt#startWebServer</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="event:start">start</h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
         Emitted when Hunt is started as telnet process
     </div>
 
@@ -4113,6 +4025,127 @@
         <dd class="tag-see">
             <ul>
                 <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="event:start">start</h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Emitted when Hunt is started as webserver process
+    </div>
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+            <span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+    <dl class="details">
+
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+            <table class="props">
+                <thead>
+                <tr>
+
+                    <th>Name</th>
+
+
+                    <th>Type</th>
+
+
+                    <th class="last">Description</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+
+                <tr>
+
+                    <td class="name"><code>type</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">string</span>
+
+
+                    </td>
+
+
+                    <td class="description last">with a value of string of 'webserver'</td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="name"><code>port</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">number</span>
+
+
+                    </td>
+
+
+                    <td class="description last">with a value of port this application listens to</td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="name"><code>address</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">string</span>
+
+
+                    </td>
+
+
+                    <td class="description last">with a value of address application is bound to</td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </dl>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="Hunt.html#startWebServer">Hunt#startWebServer</a></li>
             </ul>
         </dd>
 
@@ -4853,39 +4886,6 @@
 
 
 <dt>
-<h4 class="name" id="exportModelToRest"><span class="type-signature"></span>exportModelToRest<span
-        class="type-signature"> :function</span></h4>
-
-
-</dt>
-<dd>
-
-    <div class="description">
-        Export models as REST api
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type">function</span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
 <h4 class="name" id="express"><span class="type-signature"></span>express<span class="type-signature"></span></h4>
 
 
@@ -5652,6 +5652,72 @@
 
 
         </dd>
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="exportModelToRest"><span class="type-signature"></span>exportModelToRest<span class="signature">(parameters)</span><span
+        class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Export models as REST api, exposed by current http server
+    </div>
+
+
+    <h5>Parameters:</h5>
+
+
+    <table class="params">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+
+
+            <th>Type</th>
+
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        <tr>
+
+            <td class="name"><code>parameters</code></td>
+
+
+            <td class="type">
+
+
+                <span class="param-type"><a
+                        href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></span>
+
+
+            </td>
+
+
+            <td class="description last">for exporting model to REST interface properly</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <dl class="details">
+
+
     </dl>
 
 
@@ -8469,127 +8535,6 @@
 
 
     <div class="description">
-        Emitted when Hunt is started as webserver process
-    </div>
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-
-            <span class="param-type">object</span>
-
-
-        </li>
-    </ul>
-
-
-    <dl class="details">
-
-
-        <h5 class="subsection-title">Properties:</h5>
-
-        <dl>
-
-            <table class="props">
-                <thead>
-                <tr>
-
-                    <th>Name</th>
-
-
-                    <th>Type</th>
-
-
-                    <th class="last">Description</th>
-                </tr>
-                </thead>
-
-                <tbody>
-
-
-                <tr>
-
-                    <td class="name"><code>type</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">string</span>
-
-
-                    </td>
-
-
-                    <td class="description last">with a value of string of 'webserver'</td>
-                </tr>
-
-
-                <tr>
-
-                    <td class="name"><code>port</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">number</span>
-
-
-                    </td>
-
-
-                    <td class="description last">with a value of port this application listens to</td>
-                </tr>
-
-
-                <tr>
-
-                    <td class="name"><code>address</code></td>
-
-
-                    <td class="type">
-
-
-                        <span class="param-type">string</span>
-
-
-                    </td>
-
-
-                    <td class="description last">with a value of address application is bound to</td>
-                </tr>
-
-
-                </tbody>
-            </table>
-        </dl>
-
-
-        <dt class="tag-see">See:</dt>
-        <dd class="tag-see">
-            <ul>
-                <li><a href="Hunt.html#startWebServer">Hunt#startWebServer</a></li>
-            </ul>
-        </dd>
-
-
-    </dl>
-
-
-</dd>
-
-
-<dt>
-<h4 class="name" id="event:start">start</h4>
-
-
-</dt>
-<dd>
-
-
-    <div class="description">
         Emitted when Hunt is started as telnet process
     </div>
 
@@ -8777,6 +8722,127 @@
         <dd class="tag-see">
             <ul>
                 <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
+            </ul>
+        </dd>
+
+
+    </dl>
+
+
+</dd>
+
+
+<dt>
+<h4 class="name" id="event:start">start</h4>
+
+
+</dt>
+<dd>
+
+
+    <div class="description">
+        Emitted when Hunt is started as webserver process
+    </div>
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+
+            <span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+    <dl class="details">
+
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+            <table class="props">
+                <thead>
+                <tr>
+
+                    <th>Name</th>
+
+
+                    <th>Type</th>
+
+
+                    <th class="last">Description</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+
+                <tr>
+
+                    <td class="name"><code>type</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">string</span>
+
+
+                    </td>
+
+
+                    <td class="description last">with a value of string of 'webserver'</td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="name"><code>port</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">number</span>
+
+
+                    </td>
+
+
+                    <td class="description last">with a value of port this application listens to</td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="name"><code>address</code></td>
+
+
+                    <td class="type">
+
+
+                        <span class="param-type">string</span>
+
+
+                    </td>
+
+
+                    <td class="description last">with a value of address application is bound to</td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </dl>
+
+
+        <dt class="tag-see">See:</dt>
+        <dd class="tag-see">
+            <ul>
+                <li><a href="Hunt.html#startWebServer">Hunt#startWebServer</a></li>
             </ul>
         </dd>
 
@@ -9324,6 +9390,7 @@
     <h3>Classes</h3>
     <ul>
         <li><a href="config.html">config</a></li>
+        <li><a href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></li>
         <li><a href="Hunt.html">Hunt</a></li>
         <li><a href="Message.html">Message</a></li>
         <li><a href="model.html">model</a></li>
@@ -9351,8 +9418,8 @@
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Tue Sep 02 2014
-    23:57:02 GMT+0400 (MSK)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Wed Sep 03 2014
+    00:53:40 GMT+0400 (MSK)
 </footer>
 
 <script> prettyPrint(); </script>
