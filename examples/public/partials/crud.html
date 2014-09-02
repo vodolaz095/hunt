@@ -1,0 +1,88 @@
+<div ng-controller="crudController">
+    <h1>Trophies</h1>
+
+    <p>We can easily expose mongoose model to <a href="http://restapitutorial.com">REST</a>
+        interface with access control:</p>
+
+    <p><b>Hint</b>: open this page in 2 different browser tabs - you can see that changes persist between clients!</p>
+    <table class="table-responsive table-hover col-sm-12" border="1">
+        <thead>
+        <tr>
+            <th class="col-sm-3">Name <input type="text" ng-model="nameFilter" placeholder="filter"></th>
+            <th class="col-sm-3">Priority</th>
+            <th class="col-sm-3">Scored</th>
+        </tr>
+        </thead>
+        <tbody ng-controller="trophyController"
+               ng-repeat="trophy in trophies  | filter:nameFilter | orderBy:'-priority'">
+        <tr>
+            <td><input class="col-sm-12" type="text" ng-change="update()" ng-model="trophy.name"></td>
+            <td><input class="col-sm-12" type="number" ng-change="update()" ng-model="trophy.priority"></td>
+            <td>
+                <input class="col-sm-12" type="checkbox" ng-change="update()" value="true" ng-model="trophy.scored">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p>It is done like this by providing a thick model:</p>
+<pre>
+module.exports = exports = function (core) {
+
+  var TrophySchema = new core.mongoose.Schema({
+    'name': {type: String, unique: true},
+    'scored': Boolean,
+    'priority': Number,
+    'author': { type: core.mongoose.Schema.Types.ObjectId, ref: 'User' }
+  });
+
+  TrophySchema.index({
+    name: 1
+  });
+
+  //hunt-rest-mongoose exporting
+
+  //ACL check for what fields can user populate on creation
+  TrophySchema.statics.canCreate = function (user, callback) {
+    if (user) {
+      callback(null, true, 'author');
+    } else {
+      callback(null, false);
+    }
+  };
+
+//ACL check for what fields this particular (from `request.user`) user can list and filter
+  TrophySchema.statics.listFilter = function (user, callback) {
+    callback(null, {}, ['id', 'name', 'scored', 'priority']);
+  };
+
+//ACL check for readable fields in this current document
+  TrophySchema.methods.canRead = function (user, callback) {
+    callback(null, {}, ['id', 'name', 'scored', 'priority']);
+  };
+
+//ACL check for ability to update some fields in this current document
+  TrophySchema.methods.canUpdate = function (user, callback) {
+     callback(null, true, ['name', 'scored', 'priority']);
+  };
+
+//ACL check for ability to delete this particular document
+  TrophySchema.methods.canDelete = function (user, callback) {
+     callback(null, true);
+  };
+
+//after saving every document changes to database, we broadcast changes to all users
+  TrophySchema.post('save', function (documentSaved) {
+    core.emit('broadcast', {'trophySaved': {
+      'id': documentSaved.id,
+      'name': documentSaved.name,
+      'scored': documentSaved.scored,
+      'priority': documentSaved.priority
+    }});
+  });
+
+//this step is very important - bind mongoose model to current mongo database connection
+//and assign it to collection
+  return core.mongoConnection.model('Trophy', TrophySchema);
+};
+</pre>
+</div>

@@ -1,0 +1,34 @@
+<h2>Observe the console output and try to ruin this application:</h2>
+
+<pre>
+  core.app.get('/boom',function(req,res){
+    setTimeout(function(){
+      core.stop();
+      process.exit(0);
+    },100);
+    res.redirect('/');
+  });
+</pre>
+<p><a href="/boom" target="_blank">Boom</a> - route to cruelly kill one of helpless nodejs processes,
+    and make cluster spawn another one to make you happy killing it too!</p>
+<hr>
+<pre>
+  core.app.get('/error', function(req,res){
+    throw new Error('Something is wrong... Please, wipe your spectacles with alcohol or spirit and carefully kick PC with hammer 3 times.');
+  });
+</pre>
+<p><a href="/error" target="_blank">Error</a> - route to throw some stupid error,
+    that will be catch by <a href="//www.npmjs.org/package/errorhandler">error reporter middleware</a>
+    and will not stop the HuntJS.</p>
+<hr>
+<pre>
+  core.app.get('/baderror', function(req,res){
+    (function(){
+      throw new Error('Catch this!');
+    })();
+  });
+</pre>
+<p><a href="/baderror" target="_blank">Bad Error</a> - route to throw some really vicious error,
+    that cannot be catch by <a href="//www.npmjs.org/package/errorhandler">error reporter middleware</a>,
+    but will be catch by <a href="http://nodejs.org/docs/latest/api/domain.html">domain</a>,
+    and will not stop the HuntJS.</p>

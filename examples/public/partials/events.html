@@ -1,0 +1,115 @@
+<div ng-controller="eventsController">
+    <h1><a href="http://socket.io">Socket.io</a> real time events interaction</h1>
+
+    <h2>1. Sending events to backend</h2>
+
+    <p>You can issue ping online by this form</p>
+
+    <p>
+        <input type="text"
+               size="64"
+               ng-model="pingerUrl"
+               ng-change="startPinging()"
+               placeholder="https://huntjs.herokuapp.com/"/>
+    </p>
+
+    <p>
+        Status: {{pingerAnswer}}
+    </p>
+<pre>
+//in index.js
+    hunt.once('start', function (startParameters) {
+        //we process socket.io events here.
+        //note, that Hunt.io is generated only after
+        //application is started
+
+          if (startParameters.type === 'webserver') {
+        //if application is started as background service, it do not have socket.io support
+            hunt.io.sockets.on('connection', function(socket){
+              socket.on('pingerUrl', function(payload){
+                pinger(payload, socket);
+              });
+            });
+          }
+        //...more code
+    });
+</pre>
+
+    <a name="clock"></a>
+
+    <h2>2. Clock</h2>
+
+    <p>The clock in the right corner of menu shows current time of the day for server.</p>
+<pre>
+//in index.js
+    hunt.once('start', function (startParameters) {
+      setInterval(function () {
+        var now = new Date().toLocaleTimeString();
+        hunt.emit('broadcast', {'time':now}); //to be broadcasted by socket.io
+      }, 500);
+    });
+</pre>
+
+    <h2>3. Send message by socket.io directly</h2>
+
+    <p>
+        <input ng-model="sioMessage" type="text" placeholder="Your message, please!">
+        <button class="btn btn-success" ng-click="sendSioMessage()">Send</button>
+    </p>
+    <p>This message will be shown on console of application's server.</p>
+<pre>
+    //in client side code
+    var socket = io.connect('');
+    io.emit('message', 'Hello!');
+</pre>
+
+    <h2>4. Recent visits streaming</h2>
+
+    <p>We can stream <a href="https://huntjs.herokuapp.com/documentation/Hunt.html#event:httpSuccess">httpSuccess</a>
+        events via <a href="https://huntjs.herokuapp.com/documentation/hunt.html#event:broadcast">hunt.emit('broadcast',
+            payload)</a>,
+        to broadcast the information about recent user activity on the site.
+        You can open some site links as background tabs in browser and see
+        this table populated.
+    </p>
+
+    <p>Hint: open other pages of this site in background, for example, <a href="/" target="_blank">this one</a> in new
+        window, and return to this page.</p>
+<pre>
+    hunt.on('httpSuccess', function(httpSuccess){
+      if(httpSuccess.body && httpSuccess.body.password){
+        httpSuccess.body.password = '************'; //because we do not want to stream passwords!
+      }
+      hunt.emit('broadcast', {'httpSuccess':httpSuccess});
+    });
+</pre>
+    <table id="recentVisits" class="table-responsive table-hover col-sm-10" border="1">
+        <thead>
+        <tr>
+            <th>IP</th>
+            <th>Method</th>
+            <th>URI</th>
+            <th>Status Code</th>
+            <th>User</th>
+            <th>Reguest query</th>
+            <th>Request body</th>
+        </tr>
+        </thead>
+        <tbody ng-repeat="visit in recentVisits">
+        <tr>
+            <td><a href="http://who.is/whois-ip/ip-address/{{visit.ip}}">{{visit.ip}}</a></td>
+            <td>{{visit.method}}</td>
+            <td><a href="{{visit.uri}}">{{visit.uri}}</a></td>
+            <td>{{visit.statusCode}}</td>
+            <td ng-if="visit.user">{{visit.user.displayName}}</td>
+            <td ng-if="!visit.user">Anonymous</td>
+            <td>
+                <pre>{{visit.query}}</pre>
+            </td>
+            <td>
+                <pre>{{visit.body}}</pre>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

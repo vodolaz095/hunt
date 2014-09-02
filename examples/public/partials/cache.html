@@ -1,0 +1,37 @@
+<h1>Caching middleware</h1>
+<p>This middleware allows us to cache server responses in redis database.</p>
+<ul>
+    <li ng-repeat="res in responses">{{res.data}} - {{res.status}}</li>
+</ul>
+<p>The code with server side caching is implemented like this:</p>
+<pre>
+hunt.extendRoutes(function(core){
+//code
+  core.app.get('/time', core.cachingMiddleware(3000), function(request, response){
+    response.send('Current time is '+new Date());
+  });
+//code
+});
+</pre>
+<p> Let us consider this code:</p>
+<pre>
+core.app.get('/getPopularPosts',function(req, res){
+    req.model.posts.getPopular(function(err, posts){
+        if(err) throw err;
+        res.json({"posts":posts});
+    });
+});
+</pre>
+<p>The `getPopular` method do not depend on current user and we can assume,
+    that it requires a heavy database calculations. To speed up this request, we can cache this information. So
+    when this page is rendered first time, the cache is empty,
+    the user can experience some lags, but in future,
+    the next requests to this endpoint will be served directly from cache, without accessing the database at all.
+</p>
+<p>Also it can be wise to provide some sort of time to live for every cache record,
+    so it will be invalidated automatically.</p>
+<p>The key for retrevieng information from cache is URL.
+    So, <a href="/time?a=b">/time?a=b</a> and <a href="/time">/time</a> are stored separately.</p>
+<p>To demonstate this caching speedup, we have made this example.
+    The frontend script will hit every 500 ms the <a href="/time">/time</a> endpoint.</p>
+<p>This endpoint provides the value of current time with caching (for 3 seconds) middleware applied.</p>
