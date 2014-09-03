@@ -709,6 +709,7 @@ function Hunt(config) {
   /**
    * @method Hunt#startTelnetServer
    * @param {(number|null)} port what port to use, if null - use port value from config
+   * @param {(string|null)} [address="0.0.0.0"] - address to listen on, if null - use address from config
    * @fires Hunt#start
    * @since 0.0.18
    * @description
@@ -718,7 +719,7 @@ function Hunt(config) {
    *     Hunt.startTelnetServer(3003);
    * 
    */
-  this.startTelnetServer = function (port) {
+  this.startTelnetServer = function (port, address) {
     var p = port || this.config.port,
       address = address || this.config.address || '0.0.0.0';
     console.log(('Trying to start Hunt as telnet server on port ' + p + '...').magenta);
@@ -871,6 +872,7 @@ function Hunt(config) {
     });
 
     runtimeConfig.port = parseInt(parameters.port) || config.port || 3000;
+    runtimeConfig.address = parameters.port || config.address;
 
     if ((runtimeConfig.web + runtimeConfig.background + runtimeConfig.telnet ) <= maxWorkers) {
 
@@ -921,13 +923,13 @@ function Hunt(config) {
               h.startBackGround(); // the child process is ran as background application
               break;
             case 'be_webserver':
-              h.startWebServer(runtimeConfig.port);
+              h.startWebServer(runtimeConfig.port, runtimeConfig.address);
               break;
             case 'be_telnet':
-              if (runtimeConfig.web > 1) {
-                h.startTelnetServer((runtimeConfig.port + 1));
+              if (runtimeConfig.web > 0) {
+                h.startTelnetServer((runtimeConfig.port + 1), runtimeConfig.address);
               } else {
-                h.startTelnetServer(runtimeConfig.port);
+                h.startTelnetServer(runtimeConfig.port, runtimeConfig.address);
               }
               break;
             default:
@@ -947,6 +949,7 @@ function Hunt(config) {
  * @param {string} eventName
  * @param {function} listener
  * @returns {Hunt}
+ * @see Hunt#once
  * @description
  * Adds a listener to the end of the listeners array for the specified event.
  * Calls can be chained.
