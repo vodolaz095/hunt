@@ -301,6 +301,84 @@ interface.</div>
     
 
     
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>module.exports = exports = function (core) {
+  var TrophySchema = new core.mongoose.Schema({
+    'name': {type: String, unique: true},
+    'scored': Boolean,
+    'priority': Number,
+    'owner': { type: core.mongoose.Schema.Types.ObjectId, ref: 'User' }
+  });
+
+  TrophySchema.index({
+    name: 1
+  });
+
+  //hunt-rest-mongoose exporting
+
+  //ACL check for what fields can user populate on creation
+   TrophySchema.statics.canCreate = function (user, callback) {
+      if (user) {
+        callback(null, true, 'owner');
+      } else {
+        callback(null, false);
+      }
+    };
+
+//ACL check for what fields can user list and filter
+TrophySchema.statics.listFilter = function (user, callback) {
+  if(user) {
+    if(user.roles.gameMaster) {
+      callback(null, {}, ['id','name','scored','priority','owner'],['owner']);
+    } else {
+      callback(null, {'owner':user.id}, ['id','name','scored','priority']);
+    }
+  } else {
+      callback(null, false);
+  }
+};
+
+//ACL check for readable fields in this current document
+TrophySchema.methods.canRead = function (user, callback) {
+  if(user) {
+    if(user.roles.gameMaster) {
+      callback(null, true, ['id','name','scored','priority','owner'],['owner']);
+    } else {
+      callback(null, true, ['id','name','scored','priority']);
+    }
+  } else {
+      callback(null, false);
+  }
+};
+
+//ACL check for ability to update some fields in this current document
+TrophySchema.methods.canUpdate = function (user, callback) {
+  var document = this;
+  callback(null, (document.owner == user.id), ['name', 'scored', 'priority']);
+};
+
+//ACL check for ability to delete this particular document
+TrophySchema.methods.canDelete = function (user, callback) {
+   var document = this;
+   callback(null, (user &amp;&amp; document.owner == user.id));
+};
+
+//after saving every document changes to database, we broadcast changes to all users
+  TrophySchema.post('save', function (documentSaved) {
+    core.emit('broadcast', {'trophySaved': {
+      'id': documentSaved.id,
+      'name': documentSaved.name,
+      'scored': documentSaved.scored,
+      'priority': documentSaved.priority
+    }});
+  });
+//this step is very important - bind mongoose model to current mongo database connection
+//and assign it to collection
+  return core.mongoConnection.model('Trophy', TrophySchema);
+};</code></pre>
+
+    
 </dd>
 
     
@@ -320,6 +398,760 @@ interface.</div>
 
     
 
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+            
+<dt>
+    <h4 class="name" id="canCreate"><span class="type-signature">(static) </span>canCreate<span class="signature">(User, callback)</span><span class="type-signature"></span></h4>
+
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Model static method, that is called to determine, does the current authenticated user have rights to create entities
+    </div>
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>User</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="User.html">User</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">function(error, canCreateBoolean, NameOfFieldToBeUsedAsOwnerName){...}</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+    
+
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>//ACL check for what fields can user populate on creation
+ TrophySchema.statics.canCreate = function (user, callback) {
+    if (user) {
+      callback(null, true, 'author');
+    } else {
+      callback(null, false);
+    }
+  };</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="listFilter"><span class="type-signature">(static) </span>listFilter<span class="signature">(User, callback)</span><span class="type-signature"></span></h4>
+
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Model static method, that is called to determine, does the current authenticated user have rights to read fields of
+this particular entity, and what fields are readable.
+The filter object is passed to model query builder.
+    </div>
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>User</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="User.html">User</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">function(error, filter, arrayOfNamesOfInstanceFieldsToShow, arrayOfNamesOfInstanceFieldsToPopulate){...}</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+    
+
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>TrophySchema.statics.listFilter = function (user, callback) {
+  if(user) {
+    if(user.roles.gameMaster) {
+      callback(null, {}, ['id','name','scored','priority','owner'],['owner']);
+    } else {
+      callback(null, {'owner':user.id}, ['id','name','scored','priority']);
+    }
+  } else {
+      callback(null, false);
+  }
+};</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="canDelete"><span class="type-signature"></span>canDelete<span class="signature">(User, callback)</span><span class="type-signature"></span></h4>
+
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Model instance method, that is called to determine, does the current authenticated user have rights to delete this particular entity.
+    </div>
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>User</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="User.html">User</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">function(error, canDeleteBoolean){...}</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+    
+
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>//ACL check for ability to delete this particular document
+TrophySchema.methods.canDelete = function (user, callback) {
+   var document = this;
+   callback(null, (user &amp;&amp; document.owner == user.id));
+};</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="canRead"><span class="type-signature"></span>canRead<span class="signature">(User, callback)</span><span class="type-signature"></span></h4>
+
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Model static method, that is called to determine, does the current authenticated user have rights to read fields of
+this particular entity, and what fields are readable.
+    </div>
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>User</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="User.html">User</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">function(error, canRead, fieldsToShow, fieldsToPopulate){...}</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+    
+
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>//ACL check for readable fields in this current document
+TrophySchema.methods.canRead = function (user, callback) {
+  if(user) {
+    if(user.roles.gameMaster) {
+      callback(null, true, ['id','name','scored','priority','owner'],['owner']);
+    } else {
+      callback(null, true, ['id','name','scored','priority']);
+    }
+  } else {
+      callback(null, false);
+  }
+};</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="canUpdate"><span class="type-signature"></span>canUpdate<span class="signature">(User, callback)</span><span class="type-signature"></span></h4>
+
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Model instance method, that is called to determine, does the current authenticated user
+have rights to edit this particular entity, and what setters can be used.
+    </div>
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>User</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="User.html">User</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">function(error, canUpdateBoolean, arrayOfSettersNamesToUse){...}</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+    
+
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>//ACL check for ability to update some fields in this current document
+TrophySchema.methods.canUpdate = function (user, callback) {
+ var document = this;
+ callback(null, (document.owner == user.id), ['name', 'scored', 'priority']);
+};</code></pre>
+
+    
+</dd>
+
+        </dl>
     
 
     
@@ -341,7 +1173,7 @@ interface.</div>
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Wed Sep 03 2014 18:47:26 GMT+0400 (MSK)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Wed Sep 03 2014 19:57:37 GMT+0400 (MSK)
 </footer>
 
 <script> prettyPrint(); </script>

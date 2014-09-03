@@ -28,7 +28,7 @@ module.exports = exports = function (core) {
 
 //ACL check for readable fields in this current document
   TrophySchema.methods.canRead = function (user, callback) {
-    callback(null, {}, ['id', 'name', 'scored', 'priority']);
+    callback(null, true, ['id', 'name', 'scored', 'priority']);
   };
 
 //ACL check for ability to update some fields in this current document
