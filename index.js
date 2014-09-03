@@ -166,7 +166,7 @@ function Hunt(config) {
    * @type {model}
    * @description
    * Class to hold {@link model | data models} of Hunt application,
-   * they are injected into request object of controller.
+   * they are injected into {@link request } object of controller.
    * @see model
    * @see request
    */
@@ -591,6 +591,14 @@ function Hunt(config) {
       h.model.Users = h.model.User;
       h.model.user = h.model.User;
       h.model.users = h.model.User;
+//sanity checks on model
+      [
+        'findOneByHuntKey', 'findOneByEmail', 'findOneFuzzy',
+        'signUp', 'signIn', 'findOneByHuntKeyAndVerifyEmail', 'findOneByHuntKeyAndResetPassword',
+        'processOAuthProfile'
+      ].map(function (f) {
+          assert(typeof h.model.User[f] === 'function', 'Hunt.model.User.' + f + ' is not a function!');
+        });
 
 //private messages model
       h.extendModel('Message', mongooseMessages);
