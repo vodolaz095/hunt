@@ -582,6 +582,47 @@ function Hunt(config) {
       throw new Error('Telnet server behavior for command of "' + command + '" is already defined!');
     }
   };
+  /**
+   * @method Hunt#onSocketIoEvent
+   * @param {string} eventName
+   * @param {function} callback - function(payload, socket, function(error){...});
+   * @since 0.2.0
+   * @returns {Hunt} hunt object
+   * @example
+   * //client side code
+   * <script>
+   * var socket = io.connect(); // TIP: io.connect() with no args does auto-discovery
+   * socket.emit('message', 'I will find you!', function (data) {
+   *   console.log(data); // data will be 'cool!'
+   * });
+   * socket.send('I will find you!', function (data) { //the same
+   *   console.log(data); // data will be 'cool!'
+   * });
+   * </script>
+   *
+   * //server side code
+   * hunt.onSocketIoEvent('message', function(payload, socket, fn){
+   *   console.log('Message recieved',payload);
+   *   socket.emit('thanks','for the message');
+   *   fn('cool!');
+   * });
+   */
+  this.onSocketIoEvent = function (eventName, callback) {
+    var h = this;
+    h.once('start', function (startParameters) {
+//we process socket.io events here.
+//note, that Hunt.io is generated only after
+//application is started
+      if (startParameters.type === 'webserver') {
+//if application is started as background service, it do not have socket.io support
+        h.io.sockets.on('connection', function (socket) {
+          socket.on('' + eventName, function (payload, cb) {
+            callback(payload, socket, cb);
+          });
+        });
+      }
+    });
+  };
 
   /**
    * @class model

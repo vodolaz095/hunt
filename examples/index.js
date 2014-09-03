@@ -259,18 +259,23 @@ hunt.on('httpError', function (err) {
   console.error(err);
 });
 
+
+hunt.onSocketIoEvent('pingerUrl', function (payload, socket) {
+  pinger(payload, socket);
+});
 hunt.once('start', function (startParameters) {
 //we process socket.io events here.
 //note, that Hunt.io is generated only after
 //application is started
   if (startParameters.type === 'webserver') {
 //if application is started as background service, it do not have socket.io support
-    hunt.io.sockets.on('connection', function (socket) {
+    /*/
+     hunt.io.sockets.on('connection', function (socket) {
       socket.on('pingerUrl', function (payload) {
         pinger(payload, socket);
       });
     });
-
+     //*/
     setInterval(function () {
       hunt.emit('broadcast', {'time': new Date().toLocaleTimeString()}); //to be broadcasted by socket.io
     }, 500);
