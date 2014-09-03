@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <title>JSDoc: Class: config</title>
 
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
@@ -17,656 +17,798 @@
 
 <div id="main">
 
-<h1 class="page-title">Class: config</h1>
+    <h1 class="page-title">Class: config</h1>
+
+    
+
 
 
 <section>
 
 <header>
     <h2>
-        config
+    config
     </h2>
-
-    <div class="class-description">Configuration object, that is passed to Hunt constructor</div>
-
+    
+        <div class="class-description">Configuration object, that is passed to Hunt constructor</div>
+    
 </header>
 
 <article>
-<div class="container-overview">
+    <div class="container-overview">
+    
 
-
+    
+        
 <dt>
-<h4 class="name" id="config"><span class="type-signature"></span>new config<span class="signature">()</span><span
-        class="type-signature"></span></h4>
+    <h4 class="name" id="config"><span class="type-signature"></span>new config<span class="signature">()</span><span class="type-signature"></span></h4>
 
-
+    
 </dt>
 <dd>
 
+    
 
+    
+
+    
+
+    
+
+    
 <dl class="details">
+    
 
+        <h5 class="subsection-title">Properties:</h5>
 
-<h5 class="subsection-title">Properties:</h5>
-
-<dl>
+        <dl>
 
 <table class="props">
-<thead>
-<tr>
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
 
-    <th>Name</th>
+        <th>Type</th>
 
+        
 
-    <th>Type</th>
+        
 
+        <th class="last">Description</th>
+    </tr>
+    </thead>
 
-    <th class="last">Description</th>
-</tr>
-</thead>
+    <tbody>
+    
 
-<tbody>
+        <tr>
+            
+                <td class="name"><code>hostUrl</code></td>
+            
 
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
 
-<tr>
 
-    <td class="name"><code>hostUrl</code></td>
+            
+            </td>
 
+            
 
-    <td class="type">
+            
 
+            <td class="description last">url to host of current application,
+used in oAuth authentication strategies and for building redirects.
+For example - http://example.org/</td>
+        </tr>
 
-        <span class="param-type">string</span>
+    
 
+        <tr>
+            
+                <td class="name"><code>env</code></td>
+            
 
-    </td>
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
 
 
-    <td class="description last">url to host of current application,
-        used in oAuth authentication strategies and for building redirects.
-        For example - http://example.org/
-    </td>
-</tr>
+            
+            </td>
 
+            
 
-<tr>
+            
 
-    <td class="name"><code>env</code></td>
+            <td class="description last">application environment, if not set, populated
+from enviromental value of NODE_ENV. Default is `development`, the values
+of `staging` and `production` can be used</td>
+        </tr>
 
+    
 
-    <td class="type">
+        <tr>
+            
+                <td class="name"><code>port</code></td>
+            
 
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
 
-        <span class="param-type">string</span>
 
+            
+            </td>
 
-    </td>
+            
 
+            
 
-    <td class="description last">application environment, if not set, populated
-        from enviromental value of NODE_ENV. Default is `development`, the values
-        of `staging` and `production` can be used
-    </td>
-</tr>
+            <td class="description last">port for webserver process(es) to bind to.
+Note: on *nix machines ports with number bellow 1000 are only bindable
+by applicaiton ran as root user.</td>
+        </tr>
 
+    
 
-<tr>
+        <tr>
+            
+                <td class="name"><code>address</code></td>
+            
 
-    <td class="name"><code>port</code></td>
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
 
+<span class="param-type">null</span>
 
-    <td class="type">
 
+            
+            </td>
 
-        <span class="param-type">number</span>
+            
 
+            
 
-    </td>
+            <td class="description last">what address to bind to.
+Default is '0.0.0.0' - all IPv4 addresses.
+The address is populated from environment address of HUNTJS_ADDR.
+HuntJS supports both IPv4 and IPv6 addresses as described
+<a href="http://code.danyork.com/2011/01/21/how-to-use-node-js-with-ipv6/">here</a>.</td>
+        </tr>
 
+    
 
-    <td class="description last">port for webserver process(es) to bind to.
-        Note: on *nix machines ports with number bellow 1000 are only bindable
-        by applicaiton ran as root user.
-    </td>
-</tr>
+        <tr>
+            
+                <td class="name"><code>enableMongoose</code></td>
+            
 
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
 
-<tr>
 
-    <td class="name"><code>address</code></td>
+            
+            </td>
 
+            
 
-    <td class="type">
+            
 
+            <td class="description last">enable mongo database support,
+default is true - enabled</td>
+        </tr>
 
-        <span class="param-type">string</span>
-        |
+    
 
-        <span class="param-type">null</span>
+        <tr>
+            
+                <td class="name"><code>templateEngine</code></td>
+            
 
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
 
-    </td>
 
+            
+            </td>
 
-    <td class="description last">what address to bind to.
-        Default is '0.0.0.0' - all IPv4 addresses.
-        The address is populated from environment address of HUNTJS_ADDR.
-        HuntJS supports both IPv4 and IPv6 addresses as described
-        <a href="http://code.danyork.com/2011/01/21/how-to-use-node-js-with-ipv6/">here</a>.
-    </td>
-</tr>
+            
 
+            
 
-<tr>
+            <td class="description last">template engine to use,
+default is <a href="https://github.com/vol4ok/hogan-express "> hogan-express</a>
+- <a href="http://mustache.github.io/ "> mustache</a> based template engine with layouts,
+partials and locals,
+other options are <a href="http://paularmstrong.github.io/swig/ "> swig</a>,
+<a href="http://npmjs.org/package/ejs "> ejs </a> and <a href="http://npmjs.org/package/jade "> jade</a>.</td>
+        </tr>
 
-    <td class="name"><code>enableMongoose</code></td>
+    
 
+        <tr>
+            
+                <td class="name"><code>enableMongoose</code></td>
+            
 
-    <td class="type">
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
 
 
-        <span class="param-type">boolean</span>
+            
+            </td>
 
+            
 
-    </td>
+            
 
+            <td class="description last">enable mongo support via mongoose orm, default is true - enabled</td>
+        </tr>
 
-    <td class="description last">enable mongo database support,
-        default is true - enabled
-    </td>
-</tr>
+    
 
+        <tr>
+            
+                <td class="name"><code>mongoUrl</code></td>
+            
 
-<tr>
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
 
-    <td class="name"><code>templateEngine</code></td>
 
+            
+            </td>
 
-    <td class="type">
+            
 
+            
 
-        <span class="param-type">string</span>
+            <td class="description last">connection string for mongoose ORM,
+default is 'mongodb://localhost/hunt_dev'.
+It can be automatically populated from enviromental values of `MONGO_URL`,
+`MONGOSOUP_URL`,`MONGOHQ_URL`,`MONGOLAB_URL`.
+Connection string has this <a href="http://docs.mongodb.org/manual/reference/connection-string/">syntax </a></td>
+        </tr>
 
+    
 
-    </td>
+        <tr>
+            
+                <td class="name"><code>enableMongooseUsers</code></td>
+            
 
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
 
-    <td class="description last">template engine to use,
-        default is <a href="https://github.com/vol4ok/hogan-express "> hogan-express</a>
-        - <a href="http://mustache.github.io/ "> mustache</a> based template engine with layouts,
-        partials and locals,
-        other options are <a href="http://paularmstrong.github.io/swig/ "> swig</a>,
-        <a href="http://npmjs.org/package/ejs "> ejs </a> and <a href="http://npmjs.org/package/jade "> jade</a>.
-    </td>
-</tr>
 
+            
+            </td>
 
-<tr>
+            
 
-    <td class="name"><code>enableMongoose</code></td>
+            
 
+            <td class="description last">enable mongodb based user object, build by pattern of Active Record.
+Default is true - enabled</td>
+        </tr>
 
-    <td class="type">
+    
 
+        <tr>
+            
+                <td class="name"><code>redisUrl</code></td>
+            
 
-        <span class="param-type">boolean</span>
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
 
 
-    </td>
+            
+            </td>
 
+            
 
-    <td class="description last">enable mongo support via mongoose orm, default is true - enabled</td>
-</tr>
+            
 
+            <td class="description last">connection string for redis, default is
+'redis://localhost:6379', can be populated from enviromental variables
+of 'REDISTOGO_URL', 'OPENREDIS_URL', 'REDISCLOUD_URL',
+ 'REDISGREEN_URL', 'REDIS_URL'</td>
+        </tr>
 
-<tr>
+    
 
-    <td class="name"><code>mongoUrl</code></td>
+        <tr>
+            
+                <td class="name"><code>sequelizeUrl</code></td>
+            
 
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
 
-    <td class="type">
 
+            
+            </td>
 
-        <span class="param-type">string</span>
+            
 
+            
 
-    </td>
+            <td class="description last">URI for relational database connection. Is used in <a href="https://www.npmjs.org/package/hunt-sequilize "> Hunt-sequilize</a> plugin</td>
+        </tr>
 
+    
 
-    <td class="description last">connection string for mongoose ORM,
-        default is 'mongodb://localhost/hunt_dev'.
-        It can be automatically populated from enviromental values of `MONGO_URL`,
-        `MONGOSOUP_URL`,`MONGOHQ_URL`,`MONGOLAB_URL`.
-        Connection string has this <a href="http://docs.mongodb.org/manual/reference/connection-string/">syntax </a>
-    </td>
-</tr>
+        <tr>
+            
+                <td class="name"><code>public</code></td>
+            
 
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
 
-<tr>
 
-    <td class="name"><code>enableMongooseUsers</code></td>
+            
+            </td>
 
+            
 
-    <td class="type">
+            
 
+            <td class="description last">directory for assets - css, images,
+client side javascripts, that are served by <a href="http://www.senchalabs.org/connect/static.html "> connect static middleware</a>
+for example, 'public': __dirname+'/public'</td>
+        </tr>
 
-        <span class="param-type">boolean</span>
+    
 
+        <tr>
+            
+                <td class="name"><code>views</code></td>
+            
 
-    </td>
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
 
 
-    <td class="description last">enable mongodb based user object, build by pattern of Active Record.
-        Default is true - enabled
-    </td>
-</tr>
+            
+            </td>
 
+            
 
-<tr>
+            
 
-    <td class="name"><code>redisUrl</code></td>
+            <td class="description last">directory for templates, used by template
+engine for rendering static HTML pages on server side.
+<a href="http://expressjs.com/api.html#app-settings">http://expressjs.com/api.html#app-settings</a></td>
+        </tr>
 
+    
 
-    <td class="type">
+        <tr>
+            
+                <td class="name"><code>emailConfig</code></td>
+            
 
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
 
-        <span class="param-type">string</span>
 
+            
+            </td>
 
-    </td>
+            
 
+            
 
-    <td class="description last">connection string for redis, default is
-        'redis://localhost:6379', can be populated from enviromental variables
-        of 'REDISTOGO_URL', 'OPENREDIS_URL', 'REDISCLOUD_URL',
-        'REDISGREEN_URL', 'REDIS_URL'
-    </td>
-</tr>
+            <td class="description last">configuration string for <a href="https://npmjs.org/package/nodemailer/ "> email delivery system </a>,
+used for notify users.
+When left blank, the direct transport is used - it is quite slow, and the emails
+are usually marked as spam.
+Also you can set up SMTP options directly like mentioned here <a href="https://github.com/andris9/nodemailer#setting-up-smtp">https://github.com/andris9/nodemailer#setting-up-smtp</a>
+Examples:
+'nodemailer://somebody@gmail.com:somepassword@gmail',
+'nodemailer://postmaster@teksi.ru:7tu8z3zsaa421@Mailgun',</td>
+        </tr>
 
+    
 
-<tr>
+        <tr>
+            
+                <td class="name"><code>dialog</code></td>
+            
 
-    <td class="name"><code>sequelizeUrl</code></td>
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
 
 
-    <td class="type">
+            
+            </td>
 
+            
 
-        <span class="param-type">string</span>
+            
 
+            <td class="description last">enable dialog REST-api for private messages</td>
+        </tr>
 
-    </td>
+    
 
+        <tr>
+            
+                <td class="name"><code>huntKey</code></td>
+            
 
-    <td class="description last">URI for relational database connection. Is used in <a
-            href="https://www.npmjs.org/package/hunt-sequilize "> Hunt-sequilize</a> plugin
-    </td>
-</tr>
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
 
 
-<tr>
+            
+            </td>
 
-    <td class="name"><code>public</code></td>
+            
 
+            
 
-    <td class="type">
+            <td class="description last">enable authorization by huntKey as GET query, or POST/PUT/DELETE body parameter. Default is false - disabled</td>
+        </tr>
 
+    
 
-        <span class="param-type">string</span>
+        <tr>
+            
+                <td class="name"><code>huntKeyHeader</code></td>
+            
 
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
 
-    </td>
 
+            
+            </td>
 
-    <td class="description last">directory for assets - css, images,
-        client side javascripts, that are served by <a href="http://www.senchalabs.org/connect/static.html "> connect
-            static middleware</a>
-        for example, 'public': __dirname+'/public'
-    </td>
-</tr>
+            
 
+            
 
-<tr>
+            <td class="description last">enable authorization by huntKey as custom header, default is false - disabled</td>
+        </tr>
 
-    <td class="name"><code>views</code></td>
+    
 
+        <tr>
+            
+                <td class="name"><code>disableCsrf</code></td>
+            
 
-    <td class="type">
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
 
 
-        <span class="param-type">string</span>
+            
+            </td>
 
+            
 
-    </td>
+            
 
+            <td class="description last">disable csrf protection, default is false - CSRF protection is enabled. See <a href="https://www.npmjs.org/package/csurf">https://www.npmjs.org/package/csurf</a> for details. Also this works from the box with AngularJS $resourse and $http</td>
+        </tr>
 
-    <td class="description last">directory for templates, used by template
-        engine for rendering static HTML pages on server side.
-        <a href="http://expressjs.com/api.html#app-settings">http://expressjs.com/api.html#app-settings</a></td>
-</tr>
+    
 
+        <tr>
+            
+                <td class="name"><code>adminEmail</code></td>
+            
 
-<tr>
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
 
-    <td class="name"><code>emailConfig</code></td>
 
+            
+            </td>
 
-    <td class="type">
+            
 
+            
 
-        <span class="param-type">string</span>
+            <td class="description last">email address of server administrator. If present, every error will be reported to this email with plenty of additional information and error stack.</td>
+        </tr>
 
+    
 
-    </td>
+        <tr>
+            
+                <td class="name"><code>maxWorkers</code></td>
+            
 
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
 
-    <td class="description last">configuration string for <a href="https://npmjs.org/package/nodemailer/ "> email
-        delivery system </a>,
-        used for notify users.
-        When left blank, the direct transport is used - it is quite slow, and the emails
-        are usually marked as spam.
-        Also you can set up SMTP options directly like mentioned here <a
-                href="https://github.com/andris9/nodemailer#setting-up-smtp">https://github.com/andris9/nodemailer#setting-up-smtp</a>
-        Examples:
-        'nodemailer://somebody@gmail.com:somepassword@gmail',
-        'nodemailer://postmaster@teksi.ru:7tu8z3zsaa421@Mailgun',
-    </td>
-</tr>
 
+            
+            </td>
 
-<tr>
+            
 
-    <td class="name"><code>dialog</code></td>
+            
 
+            <td class="description last">limit the number of webserver/background processes cluster spawns. Default - 1 per CPU core.</td>
+        </tr>
 
-    <td class="type">
+    
 
+        <tr>
+            
+                <td class="name"><code>passport</code></td>
+            
 
-        <span class="param-type">Boolean</span>
+            <td class="type">
+            
+                
+<span class="param-type"><a href="passport.html">passport</a></span>
 
 
-    </td>
+            
+            </td>
 
+            
 
-    <td class="description last">enable dialog REST-api for private messages</td>
-</tr>
+            
 
+            <td class="description last"><a href="http://passportjs.org "> passport.js</a>
+configuration object, used for setting the methods users authorize,</td>
+        </tr>
 
-<tr>
+    
 
-    <td class="name"><code>huntKey</code></td>
+        <tr>
+            
+                <td class="name"><code>uploadFiles</code></td>
+            
 
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
 
-    <td class="type">
 
+            
+            </td>
 
-        <span class="param-type">Boolean</span>
+            
 
+            
 
-    </td>
+            <td class="description last">allow upload of files by HTTP-POST,
+<a href="http://expressjs.com/api.html#req.files">http://expressjs.com/api.html#req.files</a>,
+default is false, disabled, and for a good cause <a href="https://groups.google.com/forum/#!topic/nodejs/6KOlfk5cpcM">https://groups.google.com/forum/#!topic/nodejs/6KOlfk5cpcM</a></td>
+        </tr>
 
+    
 
-    <td class="description last">enable authorization by huntKey as GET query, or POST/PUT/DELETE body parameter.
-        Default is false - disabled
-    </td>
-</tr>
+        <tr>
+            
+                <td class="name"><code>io</code></td>
+            
 
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
 
-<tr>
 
-    <td class="name"><code>huntKeyHeader</code></td>
+            
+            </td>
 
+            
 
-    <td class="type">
+            
 
+            <td class="description last">configuration options for <a href="http://socket.io/">http://socket.io/</a></td>
+        </tr>
 
-        <span class="param-type">Boolean</span>
+    
 
+        <tr>
+            
+                <td class="name"><code>favicon</code></td>
+            
 
-    </td>
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
 
 
-    <td class="description last">enable authorization by huntKey as custom header, default is false - disabled</td>
-</tr>
+            
+            </td>
 
+            
 
-<tr>
+            
 
-    <td class="name"><code>disableCsrf</code></td>
+            <td class="description last">path to favicon</td>
+        </tr>
 
+    
 
-    <td class="type">
+        <tr>
+            
+                <td class="name"><code>secret</code></td>
+            
 
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
 
-        <span class="param-type">Boolean</span>
 
+            
+            </td>
 
-    </td>
+            
 
+            
 
-    <td class="description last">disable csrf protection, default is false - CSRF protection is enabled. See <a
-            href="https://www.npmjs.org/package/csurf">https://www.npmjs.org/package/csurf</a> for details. Also this
-        works from the box with AngularJS $resourse and $http
-    </td>
-</tr>
+            <td class="description last">string to preseed session hashes and do other security related things</td>
+        </tr>
 
+    
 
-<tr>
+        <tr>
+            
+                <td class="name"><code>telnetServer</code></td>
+            
 
-    <td class="name"><code>adminEmail</code></td>
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
 
 
-    <td class="type">
+            
+            </td>
 
+            
 
-        <span class="param-type">String</span>
+            
 
+            <td class="description last">configuration options for RAI telnet server <a href="https://github.com/andris9/rai#starting-a-server">https://github.com/andris9/rai#starting-a-server</a></td>
+        </tr>
 
-    </td>
+    
+    </tbody>
+</table></dl>
 
+    
 
-    <td class="description last">email address of server administrator. If present, every error will be reported to this
-        email with plenty of additional information and error stack.
-    </td>
-</tr>
+    
 
+    
 
-<tr>
+    
 
-    <td class="name"><code>maxWorkers</code></td>
+    
 
+    
 
-    <td class="type">
+    
 
+    
 
-        <span class="param-type">number</span>
+    
 
+    
 
-    </td>
+    
 
+    
 
-    <td class="description last">limit the number of webserver/background processes cluster spawns. Default - 1 per CPU
-        core.
-    </td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>passport</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type"><a href="passport.html">passport</a></span>
-
-
-    </td>
-
-
-    <td class="description last"><a href="http://passportjs.org "> passport.js</a>
-        configuration object, used for setting the methods users authorize,
-    </td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>uploadFiles</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">boolean</span>
-
-
-    </td>
-
-
-    <td class="description last">allow upload of files by HTTP-POST,
-        <a href="http://expressjs.com/api.html#req.files">http://expressjs.com/api.html#req.files</a>,
-        default is false, disabled, and for a good cause <a
-                href="https://groups.google.com/forum/#!topic/nodejs/6KOlfk5cpcM">https://groups.google.com/forum/#!topic/nodejs/6KOlfk5cpcM</a>
-    </td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>io</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">object</span>
-
-
-    </td>
-
-
-    <td class="description last">configuration options for <a href="http://socket.io/">http://socket.io/</a></td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>favicon</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">string</span>
-
-
-    </td>
-
-
-    <td class="description last">path to favicon</td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>secret</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">string</span>
-
-
-    </td>
-
-
-    <td class="description last">string to preseed session hashes and do other security related things</td>
-</tr>
-
-
-<tr>
-
-    <td class="name"><code>telnetServer</code></td>
-
-
-    <td class="type">
-
-
-        <span class="param-type">object</span>
-
-
-    </td>
-
-
-    <td class="description last">configuration options for RAI telnet server <a
-            href="https://github.com/andris9/rai#starting-a-server">https://github.com/andris9/rai#starting-a-server</a>
-    </td>
-</tr>
-
-
-</tbody>
-</table>
+    
 </dl>
 
 
-</dl>
+    
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
 </dd>
 
+    
+    </div>
 
-</div>
+    
 
+    
 
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
 </article>
 
 </section>
 
 
+
+
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2>
-
-    <h3>Classes</h3>
-    <ul>
-        <li><a href="config.html">config</a></li>
-        <li><a href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></li>
-        <li><a href="Hunt.html">Hunt</a></li>
-        <li><a href="Message.html">Message</a></li>
-        <li><a href="model.html">model</a></li>
-        <li><a href="passport.html">passport</a></li>
-        <li><a href="request.html">request</a></li>
-        <li><a href="response.html">response</a></li>
-        <li><a href="User.html">User</a></li>
-    </ul>
-    <h3>Events</h3>
-    <ul>
-        <li><a href="Hunt.html#event:broadcast">broadcast</a></li>
-        <li><a href="Hunt.html#event:httpError">httpError</a></li>
-        <li><a href="Hunt.html#event:httpSuccess">httpSuccess</a></li>
-        <li><a href="Hunt.html#event:notify">notify</a></li>
-        <li><a href="Hunt.html#event:start">start</a></li>
-        <li><a href="Hunt.html#event:message:sio">message:sio</a></li>
-        <li><a href="Hunt.html#event:notify:all">notify:all</a></li>
-        <li><a href="Hunt.html#event:notify:email">notify:email</a></li>
-        <li><a href="Hunt.html#event:notify:sio">notify:sio</a></li>
-        <li><a href="Hunt.html#event:user:auth">user:auth</a></li>
-        <li><a href="Hunt.html#event:user:save">user:save</a></li>
-    </ul>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:httpError">httpError</a></li><li><a href="Hunt.html#event:httpSuccess">httpSuccess</a></li><li><a href="Hunt.html#event:notify">notify</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:message:sio">message:sio</a></li><li><a href="Hunt.html#event:notify:all">notify:all</a></li><li><a href="Hunt.html#event:notify:email">notify:email</a></li><li><a href="Hunt.html#event:notify:sio">notify:sio</a></li><li><a href="Hunt.html#event:user:auth">user:auth</a></li><li><a href="Hunt.html#event:user:save">user:save</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Wed Sep 03 2014
-    17:47:38 GMT+0400 (MSK)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Wed Sep 03 2014 18:47:26 GMT+0400 (MSK)
 </footer>
 
 <script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"></script>
+<script src="scripts/linenumber.js"> </script>
 </body>
 </html>

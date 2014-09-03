@@ -844,10 +844,10 @@ function Hunt(config) {
    * @example
    * 
    *     Hunt.startCluster({ 'web':1, 'background':1, 'telnet': 1 });
-   *     Hunt.startCluster({ 'web':max, 'port':80 });
-   *     Hunt.startCluster({ 'background':max });
+   *     Hunt.startCluster({ 'web':'max', 'port':80, 'address':'127.0.0.1' });
+   *     Hunt.startCluster({ 'background':'max' });
    *     Hunt.startCluster({ 'telnet':max, 'port':25 });
-   *     Hunt.startCluster({ 'web':max, 'telnet':max }); //i strongly do not reccomend doing this!
+   *     Hunt.startCluster({ 'web':'max', 'telnet':'max' }); //i strongly do not recommend doing this!
    *
    * 
    */
