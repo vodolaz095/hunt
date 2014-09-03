@@ -104,7 +104,7 @@ hunt.extendApp(function (core) {
    * Setting up menu - one of many possible approaches
    */
   core.app.locals.menu = [
-    {'url': '//huntjs.herokuapp.com/documentation', 'name': 'Documentation'},
+    {'url': '/documentation', 'name': 'Documentation'},
     {'url': 'http://docs.huntjs.apiary.io/', 'name': 'API Blueprint'},
     {'url': '/#/events', 'name': 'Events Demo'},
     {'url': '/#/crud', 'name': 'CRUD Demo'},

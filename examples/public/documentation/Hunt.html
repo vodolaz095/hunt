@@ -27,7 +27,7 @@
         Hunt
     </h2>
 
-    <div class="class-description">Hunt</div>
+    <div class="class-description">Constructor of HuntJS application</div>
 
 </header>
 
@@ -78,7 +78,7 @@
                 </td>
 
 
-                <td class="description last"></td>
+                <td class="description last">dictionary of configuration parameters</td>
             </tr>
 
 
@@ -90,6 +90,43 @@
 
 
         </dl>
+
+
+        <h5>Fires:</h5>
+        <ul>
+            <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
+
+            <li><a href="Hunt.html#event:httpError">Hunt#event:httpError</a></li>
+
+            <li><a href="Hunt.html#event:httpSuccess">Hunt#event:httpSuccess</a></li>
+
+            <li><a href="Hunt.html#event:notify">Hunt#event:notify</a></li>
+
+            <li><a href="Hunt.html#event:notify:all">Hunt#notify:all</a></li>
+
+            <li><a href="Hunt.html#event:notify:email">Hunt#notify:email</a></li>
+
+            <li><a href="Hunt.html#event:notify:sio">Hunt#notify:sio</a></li>
+
+            <li><a href="Hunt.html#event:user:save">Hunt#user:save</a></li>
+
+            <li><a href="Hunt.html#event:user:auth">Hunt#user:auth</a></li>
+
+            <li><a href="Hunt.html#event:broadcast">Hunt#event:broadcast</a></li>
+        </ul>
+
+
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>var hunt = require('hunt')({
+        'port': 3000
+        })
+        .extendRoutes(function (core) {
+        core.app.get('/', function (req, res) {
+        res.send('Hello, world!');
+        });
+        })
+        .startWebServer();</code></pre>
 
 
     </dd>
@@ -306,7 +343,7 @@
 
     <div class="description">
         Class to hold <code> data models</code> of Hunt application,
-        they are injected into request object of controller.
+        they are injected into <a href="request.html"><code>request</code></a> object of controller.
     </div>
 
 
@@ -567,17 +604,13 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```
-
-        Hunt.extendRoutes(core){
+    <pre class="prettyprint"><code>Hunt.extendRoutes(core){
         core.app.use('/cacheForTenSeconds', Hunt.cachingMiddleware(10000));
         core.app.use('/cacheForSixtySeconds', Hunt.cachingMiddleware(60000));
         core.app.get('*', function(request, response){
         response.send('Current time is '+new Date());
         });
-        }
-
-        ```</code></pre>
+        }</code></pre>
 
 
 </dd>
@@ -825,6 +858,14 @@
 
 
     </dl>
+
+
+    <h5>Returns:</h5>
+
+
+    <div class="param-desc">
+        boolean
+    </div>
 
 
 </dd>
@@ -1151,16 +1192,14 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-        //example of setting template engine
+    <pre class="prettyprint"><code>//example of setting template engine
         hunt.extendApp = function (core) {
         core.app.set('views', __dirname + '/views');
         core.app.set('view engine', 'ejs');
         core.app.set('layout', 'layout');
         core.app.enable('view cache');
         core.app.engine('html', require('ejs'));
-        };
-        ```</code></pre>
+        };</code></pre>
 
 
 </dd>
@@ -1284,9 +1323,7 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-
-        var Hunt = require('hunt')(configObj);
+    <pre class="prettyprint"><code>var Hunt = require('hunt')(configObj);
 
         //extending application core
 
@@ -1307,8 +1344,7 @@
         });
 
         //Hunt core works after extending
-        console.log('Sum of 2, 2 and 42 is ' + Hunt.getSumWithSomeVar(2, 2));
-        ```</code></pre>
+        console.log('Sum of 2, 2 and 42 is ' + Hunt.getSumWithSomeVar(2, 2));</code></pre>
 
 
 </dd>
@@ -1494,9 +1530,7 @@
 
 <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-
-        hunt.extendMiddleware(function(core){
+    <pre class="prettyprint"><code>hunt.extendMiddleware(function(core){
         return function(req, res, next){
         res.setHeader('X-hunt','YES!');
         next();
@@ -1569,8 +1603,7 @@
         next();
         }
         };
-        });
-        ```</code></pre>
+        });</code></pre>
 
 
 </dd>
@@ -1687,8 +1720,7 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-        //for mongoose model
+    <pre class="prettyprint"><code>//for mongoose model
         if (Hunt.config.enableMongoose) { //verify that we enabled mongoose
         Hunt.extendModel('Trophy', function (core) {
         var TrophySchema = new core.mongoose.Schema({
@@ -1713,8 +1745,7 @@
         name: core.Sequelize.STRING //note that core.Sequilize != core.sequilize
         });
         return Planet;
-        });
-        ```</code></pre>
+        });</code></pre>
 
 
 </dd>
@@ -1807,8 +1838,7 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-        hunt.extendRoutes(function(core){
+    <pre class="prettyprint"><code>hunt.extendRoutes(function(core){
         core.app.get('/', function(req,res){
         res.send('Hello!');
         });
@@ -1816,8 +1846,7 @@
         core.app.all('*',function(req,res){
         res.send(404);
         });
-        }
-        ```</code></pre>
+        }</code></pre>
 
 
 </dd>
@@ -1917,8 +1946,7 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-        var HashStrategy = require('passport-hash').Strategy;
+    <pre class="prettyprint"><code>var HashStrategy = require('passport-hash').Strategy;
         //used for verify account by email
         exports.strategy = function (core) {
         return new HashStrategy(function (hash, done) {
@@ -1933,8 +1961,7 @@
         successRedirect: '/auth/success',
         failureRedirect: '/auth/failure'
         }));
-        };
-        ```</code></pre>
+        };</code></pre>
 
 
 </dd>
@@ -2052,16 +2079,12 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-
-        hunt.extendTelnet('version', function(core, client){
+    <pre class="prettyprint"><code>hunt.extendTelnet('version', function(core, client){
         client.send('HuntJS version is '+core.version);
         });
         hunt.extendTelnet('echo', function(core, client, payload){
         client.send(payload);
-        });
-
-        ```</code></pre>
+        });</code></pre>
 
 
 </dd>
@@ -2168,11 +2191,9 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-        Hunt.on('start', function (params) {
+    <pre class="prettyprint"><code>Hunt.on('start', function (params) {
         console.log('Hunt is started as '+params.type+' on port '+params.port);
-        }).on('httpError', console.error);
-        ```</code></pre>
+        }).on('httpError', console.error);</code></pre>
 
 
 </dd>
@@ -2443,11 +2464,15 @@
     </dl>
 
 
+    <h5>Fires:</h5>
+    <ul>
+        <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
+    </ul>
+
+
     <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        Hunt.startBackGround();
-        ```</code></pre>
+
+    <pre class="prettyprint"><code>Hunt.startBackGround();</code></pre>
 
 
 </dd>
@@ -2464,7 +2489,7 @@
 
     <div class="description">
         Starts Hunt application as single threaded background application, that controls, by the means of
-        [cluster](http://nodejs.org/docs/latest/api/cluster.html), other background applications.
+        <a href="http://nodejs.org/docs/latest/api/cluster.html "> cluster</a>, other background applications.
         By default it spawns 1 process per CPU core.
     </div>
 
@@ -2522,6 +2547,12 @@
     </dl>
 
 
+    <h5>Fires:</h5>
+    <ul>
+        <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
+    </ul>
+
+
     <h5>Returns:</h5>
 
 
@@ -2545,12 +2576,8 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-
-        var numberOfProcessesToSpawn = 10;
-        Hunt.startBackGroundCluster(numberOfProcessesToSpawn);
-
-        ```</code></pre>
+    <pre class="prettyprint"><code>var numberOfProcessesToSpawn = 10;
+        Hunt.startBackGroundCluster(numberOfProcessesToSpawn);</code></pre>
 
 
 </dd>
@@ -2622,6 +2649,12 @@
     </dl>
 
 
+    <h5>Fires:</h5>
+    <ul>
+        <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
+    </ul>
+
+
     <h5>Returns:</h5>
 
 
@@ -2645,15 +2678,11 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-
-        Hunt.startCluster({ 'web':1, 'background':1, 'telnet': 1 });
+    <pre class="prettyprint"><code>Hunt.startCluster({ 'web':1, 'background':1, 'telnet': 1 });
         Hunt.startCluster({ 'web':max, 'port':80 });
         Hunt.startCluster({ 'background':max });
         Hunt.startCluster({ 'telnet':max, 'port':25 });
-        Hunt.startCluster({ 'web':max, 'telnet':max }); //i strongly do not reccomend doing this!
-
-        ```</code></pre>
+        Hunt.startCluster({ 'web':max, 'telnet':max }); //i strongly do not reccomend doing this!</code></pre>
 
 
 </dd>
@@ -2753,6 +2782,12 @@
     </dl>
 
 
+    <h5>Fires:</h5>
+    <ul>
+        <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
+    </ul>
+
+
     <h5>Returns:</h5>
 
 
@@ -2775,10 +2810,8 @@
 
 
     <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        Hunt.startTelnetCluster(25, 10000);
-        ```</code></pre>
+
+    <pre class="prettyprint"><code>Hunt.startTelnetCluster(25, 10000);</code></pre>
 
 
 </dd>
@@ -2856,11 +2889,15 @@
     </dl>
 
 
+    <h5>Fires:</h5>
+    <ul>
+        <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
+    </ul>
+
+
     <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        Hunt.startTelnetServer(3003);
-        ```</code></pre>
+
+    <pre class="prettyprint"><code>Hunt.startTelnetServer(3003);</code></pre>
 
 
 </dd>
@@ -2960,6 +2997,12 @@
     </dl>
 
 
+    <h5>Fires:</h5>
+    <ul>
+        <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
+    </ul>
+
+
     <h5>Returns:</h5>
 
 
@@ -2982,10 +3025,8 @@
 
 
     <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        Hunt.startWebCluster(80, 10000);
-        ```</code></pre>
+
+    <pre class="prettyprint"><code>Hunt.startWebCluster(80, 10000);</code></pre>
 
 
 </dd>
@@ -3081,12 +3122,17 @@
     </dl>
 
 
+    <h5>Fires:</h5>
+    <ul>
+        <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
+    </ul>
+
+
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-        Hunt.startWebServer(80);
+    <pre class="prettyprint"><code>Hunt.startWebServer(80);
         Hunt.startWebServer(80, '0.0.0.0');
-        ```</code></pre>
+        Hunt.startWebServer(80, 'fe80::7218:8bff:fe86:542b');</code></pre>
 
 
 </dd>
@@ -3443,8 +3489,7 @@
 
 <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-        Hunt.extendCore(function(core){
+    <pre class="prettyprint"><code>Hunt.extendCore(function(core){
         core.app.get('/error', function(request,response){
         throw new Error('Shit happens!');
         });
@@ -3453,8 +3498,7 @@
         Hunt.on('httpError', function(httpError){
         console.log(httpError.error.toString());
         });
-        //=> Shit happens!
-        ```</code></pre>
+        //=> Shit happens!</code></pre>
 
 
 </dd>
@@ -4261,12 +4305,9 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-
-        var socket = io.connect();
+    <pre class="prettyprint"><code>var socket = io.connect();
         socket.send('Hello!', function(error){...});
 
-        ```
 
     </code></pre>
 
@@ -4692,8 +4733,6 @@
         Hunt
     </h2>
 
-    <div class="class-description">Main object, that have everything that we need in it.</div>
-
 </header>
 
 <article>
@@ -4707,6 +4746,11 @@
 
     </dt>
     <dd>
+
+
+        <div class="description">
+            HuntJS framework module
+        </div>
 
 
         <h5>Parameters:</h5>
@@ -4754,39 +4798,7 @@
         <dl class="details">
 
 
-            <dt class="tag-see">See:</dt>
-            <dd class="tag-see">
-                <ul>
-                    <li><a href="config.html">config</a></li>
-                </ul>
-            </dd>
-
-
         </dl>
-
-
-        <h5>Fires:</h5>
-        <ul>
-            <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
-
-            <li><a href="Hunt.html#event:httpError">Hunt#event:httpError</a></li>
-
-            <li><a href="Hunt.html#event:httpSuccess">Hunt#event:httpSuccess</a></li>
-
-            <li><a href="Hunt.html#event:notify">Hunt#event:notify</a></li>
-
-            <li><a href="Hunt.html#event:notify:all">Hunt#notify:all</a></li>
-
-            <li><a href="Hunt.html#event:notify:email">Hunt#notify:email</a></li>
-
-            <li><a href="Hunt.html#event:notify:sio">Hunt#notify:sio</a></li>
-
-            <li><a href="Hunt.html#event:user:save">Hunt#user:save</a></li>
-
-            <li><a href="Hunt.html#event:user:auth">Hunt#user:auth</a></li>
-
-            <li><a href="Hunt.html#event:broadcast">Hunt#event:broadcast</a></li>
-        </ul>
 
 
     </dd>
@@ -5003,7 +5015,7 @@
 
     <div class="description">
         Class to hold <code> data models</code> of Hunt application,
-        they are injected into request object of controller.
+        they are injected into <a href="request.html"><code>request</code></a> object of controller.
     </div>
 
 
@@ -5264,17 +5276,13 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```
-
-        Hunt.extendRoutes(core){
+    <pre class="prettyprint"><code>Hunt.extendRoutes(core){
         core.app.use('/cacheForTenSeconds', Hunt.cachingMiddleware(10000));
         core.app.use('/cacheForSixtySeconds', Hunt.cachingMiddleware(60000));
         core.app.get('*', function(request, response){
         response.send('Current time is '+new Date());
         });
-        }
-
-        ```</code></pre>
+        }</code></pre>
 
 
 </dd>
@@ -5522,6 +5530,14 @@
 
 
     </dl>
+
+
+    <h5>Returns:</h5>
+
+
+    <div class="param-desc">
+        boolean
+    </div>
 
 
 </dd>
@@ -5848,16 +5864,14 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-        //example of setting template engine
+    <pre class="prettyprint"><code>//example of setting template engine
         hunt.extendApp = function (core) {
         core.app.set('views', __dirname + '/views');
         core.app.set('view engine', 'ejs');
         core.app.set('layout', 'layout');
         core.app.enable('view cache');
         core.app.engine('html', require('ejs'));
-        };
-        ```</code></pre>
+        };</code></pre>
 
 
 </dd>
@@ -5981,9 +5995,7 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-
-        var Hunt = require('hunt')(configObj);
+    <pre class="prettyprint"><code>var Hunt = require('hunt')(configObj);
 
         //extending application core
 
@@ -6004,8 +6016,7 @@
         });
 
         //Hunt core works after extending
-        console.log('Sum of 2, 2 and 42 is ' + Hunt.getSumWithSomeVar(2, 2));
-        ```</code></pre>
+        console.log('Sum of 2, 2 and 42 is ' + Hunt.getSumWithSomeVar(2, 2));</code></pre>
 
 
 </dd>
@@ -6191,9 +6202,7 @@
 
 <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-
-        hunt.extendMiddleware(function(core){
+    <pre class="prettyprint"><code>hunt.extendMiddleware(function(core){
         return function(req, res, next){
         res.setHeader('X-hunt','YES!');
         next();
@@ -6266,8 +6275,7 @@
         next();
         }
         };
-        });
-        ```</code></pre>
+        });</code></pre>
 
 
 </dd>
@@ -6384,8 +6392,7 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-        //for mongoose model
+    <pre class="prettyprint"><code>//for mongoose model
         if (Hunt.config.enableMongoose) { //verify that we enabled mongoose
         Hunt.extendModel('Trophy', function (core) {
         var TrophySchema = new core.mongoose.Schema({
@@ -6410,8 +6417,7 @@
         name: core.Sequelize.STRING //note that core.Sequilize != core.sequilize
         });
         return Planet;
-        });
-        ```</code></pre>
+        });</code></pre>
 
 
 </dd>
@@ -6504,8 +6510,7 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-        hunt.extendRoutes(function(core){
+    <pre class="prettyprint"><code>hunt.extendRoutes(function(core){
         core.app.get('/', function(req,res){
         res.send('Hello!');
         });
@@ -6513,8 +6518,7 @@
         core.app.all('*',function(req,res){
         res.send(404);
         });
-        }
-        ```</code></pre>
+        }</code></pre>
 
 
 </dd>
@@ -6614,8 +6618,7 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-        var HashStrategy = require('passport-hash').Strategy;
+    <pre class="prettyprint"><code>var HashStrategy = require('passport-hash').Strategy;
         //used for verify account by email
         exports.strategy = function (core) {
         return new HashStrategy(function (hash, done) {
@@ -6630,8 +6633,7 @@
         successRedirect: '/auth/success',
         failureRedirect: '/auth/failure'
         }));
-        };
-        ```</code></pre>
+        };</code></pre>
 
 
 </dd>
@@ -6749,16 +6751,12 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-
-        hunt.extendTelnet('version', function(core, client){
+    <pre class="prettyprint"><code>hunt.extendTelnet('version', function(core, client){
         client.send('HuntJS version is '+core.version);
         });
         hunt.extendTelnet('echo', function(core, client, payload){
         client.send(payload);
-        });
-
-        ```</code></pre>
+        });</code></pre>
 
 
 </dd>
@@ -6865,11 +6863,9 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-        Hunt.on('start', function (params) {
+    <pre class="prettyprint"><code>Hunt.on('start', function (params) {
         console.log('Hunt is started as '+params.type+' on port '+params.port);
-        }).on('httpError', console.error);
-        ```</code></pre>
+        }).on('httpError', console.error);</code></pre>
 
 
 </dd>
@@ -7140,11 +7136,15 @@
     </dl>
 
 
+    <h5>Fires:</h5>
+    <ul>
+        <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
+    </ul>
+
+
     <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        Hunt.startBackGround();
-        ```</code></pre>
+
+    <pre class="prettyprint"><code>Hunt.startBackGround();</code></pre>
 
 
 </dd>
@@ -7161,7 +7161,7 @@
 
     <div class="description">
         Starts Hunt application as single threaded background application, that controls, by the means of
-        [cluster](http://nodejs.org/docs/latest/api/cluster.html), other background applications.
+        <a href="http://nodejs.org/docs/latest/api/cluster.html "> cluster</a>, other background applications.
         By default it spawns 1 process per CPU core.
     </div>
 
@@ -7219,6 +7219,12 @@
     </dl>
 
 
+    <h5>Fires:</h5>
+    <ul>
+        <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
+    </ul>
+
+
     <h5>Returns:</h5>
 
 
@@ -7242,12 +7248,8 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-
-        var numberOfProcessesToSpawn = 10;
-        Hunt.startBackGroundCluster(numberOfProcessesToSpawn);
-
-        ```</code></pre>
+    <pre class="prettyprint"><code>var numberOfProcessesToSpawn = 10;
+        Hunt.startBackGroundCluster(numberOfProcessesToSpawn);</code></pre>
 
 
 </dd>
@@ -7319,6 +7321,12 @@
     </dl>
 
 
+    <h5>Fires:</h5>
+    <ul>
+        <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
+    </ul>
+
+
     <h5>Returns:</h5>
 
 
@@ -7342,15 +7350,11 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-
-        Hunt.startCluster({ 'web':1, 'background':1, 'telnet': 1 });
+    <pre class="prettyprint"><code>Hunt.startCluster({ 'web':1, 'background':1, 'telnet': 1 });
         Hunt.startCluster({ 'web':max, 'port':80 });
         Hunt.startCluster({ 'background':max });
         Hunt.startCluster({ 'telnet':max, 'port':25 });
-        Hunt.startCluster({ 'web':max, 'telnet':max }); //i strongly do not reccomend doing this!
-
-        ```</code></pre>
+        Hunt.startCluster({ 'web':max, 'telnet':max }); //i strongly do not reccomend doing this!</code></pre>
 
 
 </dd>
@@ -7450,6 +7454,12 @@
     </dl>
 
 
+    <h5>Fires:</h5>
+    <ul>
+        <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
+    </ul>
+
+
     <h5>Returns:</h5>
 
 
@@ -7472,10 +7482,8 @@
 
 
     <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        Hunt.startTelnetCluster(25, 10000);
-        ```</code></pre>
+
+    <pre class="prettyprint"><code>Hunt.startTelnetCluster(25, 10000);</code></pre>
 
 
 </dd>
@@ -7553,11 +7561,15 @@
     </dl>
 
 
+    <h5>Fires:</h5>
+    <ul>
+        <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
+    </ul>
+
+
     <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        Hunt.startTelnetServer(3003);
-        ```</code></pre>
+
+    <pre class="prettyprint"><code>Hunt.startTelnetServer(3003);</code></pre>
 
 
 </dd>
@@ -7657,6 +7669,12 @@
     </dl>
 
 
+    <h5>Fires:</h5>
+    <ul>
+        <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
+    </ul>
+
+
     <h5>Returns:</h5>
 
 
@@ -7679,10 +7697,8 @@
 
 
     <h5>Example</h5>
-        
-    <pre class="prettyprint"><code>```javascript
-        Hunt.startWebCluster(80, 10000);
-        ```</code></pre>
+
+    <pre class="prettyprint"><code>Hunt.startWebCluster(80, 10000);</code></pre>
 
 
 </dd>
@@ -7778,12 +7794,17 @@
     </dl>
 
 
+    <h5>Fires:</h5>
+    <ul>
+        <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
+    </ul>
+
+
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-        Hunt.startWebServer(80);
+    <pre class="prettyprint"><code>Hunt.startWebServer(80);
         Hunt.startWebServer(80, '0.0.0.0');
-        ```</code></pre>
+        Hunt.startWebServer(80, 'fe80::7218:8bff:fe86:542b');</code></pre>
 
 
 </dd>
@@ -8140,8 +8161,7 @@
 
 <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-        Hunt.extendCore(function(core){
+    <pre class="prettyprint"><code>Hunt.extendCore(function(core){
         core.app.get('/error', function(request,response){
         throw new Error('Shit happens!');
         });
@@ -8150,8 +8170,7 @@
         Hunt.on('httpError', function(httpError){
         console.log(httpError.error.toString());
         });
-        //=> Shit happens!
-        ```</code></pre>
+        //=> Shit happens!</code></pre>
 
 
 </dd>
@@ -8958,12 +8977,9 @@
 
     <h5>Example</h5>
         
-    <pre class="prettyprint"><code>```javascript
-
-        var socket = io.connect();
+    <pre class="prettyprint"><code>var socket = io.connect();
         socket.send('Hello!', function(error){...});
 
-        ```
 
     </code></pre>
 
@@ -9419,7 +9435,7 @@
 
 <footer>
     Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Wed Sep 03 2014
-    00:53:40 GMT+0400 (MSK)
+    17:47:38 GMT+0400 (MSK)
 </footer>
 
 <script> prettyPrint(); </script>

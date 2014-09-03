@@ -18,8 +18,30 @@ var EventEmitter = require('events').EventEmitter,
 require('colors');
 /**
  * @class Hunt
- * @param {config} config
+ * @param {config} config - dictionary of configuration parameters
  * @constructor
+ * @classdesc
+ * Constructor of HuntJS application
+ * @fires Hunt#start
+ * @fires Hunt#httpError
+ * @fires Hunt#httpSuccess
+ * @fires Hunt#notify
+ * @fires Hunt#notify:all
+ * @fires Hunt#notify:email
+ * @fires Hunt#notify:sio
+ * @fires Hunt#user:save
+ * @fires Hunt#user:auth
+ * @fires Hunt#broadcast
+ * @example
+ * var hunt = require('hunt')({
+ *  'port': 3000
+ * })
+ * .extendRoutes(function (core) {
+ *    core.app.get('/', function (req, res) {
+ *      res.send('Hello, world!');
+ *    });
+ *  })
+ *  .startWebServer();
  */
 function Hunt(config) {
   EventEmitter.call(this);
@@ -41,8 +63,6 @@ function Hunt(config) {
    * else `value` injected is AS IS.
    * @returns {Hunt} hunt object for functions chaining
    * @example
-   *```javascript
-   *
    *    var Hunt = require('hunt')(configObj);
    *
    *    //extending application core
@@ -65,7 +85,6 @@ function Hunt(config) {
    *
    *    //Hunt core works after extending
    *    console.log('Sum of 2, 2 and 42 is ' + Hunt.getSumWithSomeVar(2, 2));
-   *```
    */
   this.extendCore = function (field, value) {
     if (prepared) {
@@ -181,7 +200,6 @@ function Hunt(config) {
    * Inject public property with model object to hunt.model.
    * @returns {Hunt} hunt object
    * @example
-   * ```javascript
    * //for mongoose model
    *    if (Hunt.config.enableMongoose) { //verify that we enabled mongoose
    *      Hunt.extendModel('Trophy', function (core) {
@@ -208,7 +226,6 @@ function Hunt(config) {
    *     });
    *     return Planet;
    *   });
-   * ```
    */
   this.extendModel = function (modelName, modelConstructor) {
     if (prepared) {
@@ -235,7 +252,7 @@ function Hunt(config) {
    * @param {object} Strategy object
    * @see passport
    * @example
-   * ```javascript
+   *
    *    var HashStrategy = require('passport-hash').Strategy;
    *    //used for verify account by email
    *    exports.strategy = function (core) {
@@ -252,7 +269,7 @@ function Hunt(config) {
    *        failureRedirect: '/auth/failure'
    *      }));
    *    };
-   * ```
+   * 
    * @returns {Hunt} hunt object
    */
   this.extendStrategy = function (Strategy) {
@@ -281,7 +298,7 @@ function Hunt(config) {
    * @param {function} settingsFunction - function(core){....}
    * @example
    *
-   * ```javascript
+   * 
    *     //example of setting template engine
    *     hunt.extendApp = function (core) {
    *       core.app.set('views', __dirname + '/views');
@@ -290,7 +307,7 @@ function Hunt(config) {
    *       core.app.enable('view cache');
    *       core.app.engine('html', require('ejs'));
    *     };
-   * ```
+   * 
    *
    * @returns {Hunt} hunt object
    */
@@ -354,7 +371,7 @@ function Hunt(config) {
    * @param {(String/undefined)} [path=/] path to mount middleware - default is /
    * @param {function} settingsFunction function(core){ return function(req,res,next){.....}}
    * @example
-   * ```javascript
+   * 
    *
    *     hunt.extendMiddleware(function(core){
    *       return function(req, res, next){
@@ -430,7 +447,7 @@ function Hunt(config) {
    *        }
    *      };
    *    });
-   * ```
+   * 
    * @returns {Hunt} hunt object
    */
   this.extendMiddleware = function (environment, path, settingsFunction) {
@@ -507,7 +524,7 @@ function Hunt(config) {
    * Adds {@link http://expressjs.com/api.html#app.VERB | application routes and verbs} for them.
    * The {@link https://github.com/visionmedia/express-resource | REST api helper} npm module is already provided
    * @example
-   * ```javascript
+   * 
    *     hunt.extendRoutes(function(core){
    *       core.app.get('/', function(req,res){
    *         res.send('Hello!');
@@ -517,7 +534,7 @@ function Hunt(config) {
    *         res.send(404);
    *       });
    *     }
-   * ```
+   * 
    * @returns {Hunt} hunt object
    */
   this.extendRoutes = function (settingsFunction) {
@@ -543,7 +560,7 @@ function Hunt(config) {
    * arguments, first one is core object, and second one is
    * {@link https://github.com/andris9/rai | RAI client object }
    * @example
-   * ```javascript
+   * 
    *
    *     hunt.extendTelnet('version', function(core, client){
    *      client.send('HuntJS version is '+core.version);
@@ -552,7 +569,7 @@ function Hunt(config) {
    *      client.send(payload);
    *     });
    *
-   * ```
+   * 
    * @since 0.0.18
    * @returns {Hunt} hunt object
    */
@@ -621,14 +638,15 @@ function Hunt(config) {
 
   /**
    * @method Hunt#startBackGround
+   * @fires Hunt#start
    * @description
    * Starts Hunt application as single threaded background application
    * It have redis client and data models, event emitting system exposed.
    * It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
    * @example
-   * ```javascript
+   * 
    *     Hunt.startBackGround();
-   * ```
+   * 
    */
   this.startBackGround = function () {
     console.log('Trying to start Hunt as background service...'.magenta);
@@ -649,6 +667,7 @@ function Hunt(config) {
 
   /**
    * @method Hunt#startWebServer
+   * @fires Hunt#start
    * @description
    * Starts Hunt application as single threaded web server
    * It have redis client/models, expressJS application and event emitting system exposed.
@@ -656,10 +675,11 @@ function Hunt(config) {
    * @param {(number|null)} port - what port to use, if null - use port value from config
    * @param {(string|null)} address - what address to bind to. Default is '0.0.0.0' - all IPv4 addresses. The address is populated from environment address of HUNTJS_ADDR
    * @example
-   * ```javascript
+   * 
    *     Hunt.startWebServer(80);
    *     Hunt.startWebServer(80, '0.0.0.0');
-   * ```
+   *     Hunt.startWebServer(80, 'fe80::7218:8bff:fe86:542b');
+   * 
    */
   this.startWebServer = function (port, address) {
     var p = port || this.config.port,
@@ -689,14 +709,14 @@ function Hunt(config) {
   /**
    * @method Hunt#startTelnetServer
    * @param {(number|null)} port what port to use, if null - use port value from config
-   *
+   * @fires Hunt#start
    * @since 0.0.18
    * @description
    * Start Hunt as single process telnet server
    * @example
-   * ```javascript
+   * 
    *     Hunt.startTelnetServer(3003);
-   * ```
+   * 
    */
   this.startTelnetServer = function (port) {
     var p = port || this.config.port,
@@ -748,11 +768,12 @@ function Hunt(config) {
    * It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
    * in master process, and events of "start" with payload of `{'type':'webserver',  'port':80}`
    * in web server processes.
+   * @fires Hunt#start
    * @returns {Boolean} true if this is master process, false if this is worker process.
    * @example
-   * ```javascript
+   * 
    *     Hunt.startWebCluster(80, 10000);
-   * ```
+   * 
    */
   this.startWebCluster = function (port, maxProcesses) {
     var p = port || this.config.port,
@@ -772,11 +793,12 @@ function Hunt(config) {
    * It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
    * in master process, and events of "start" with payload of `{'type':'telnet',  'port':25}`
    * in each of telnet server processes.
+   * @fires Hunt#start
    * @returns {Boolean} true if this is master process, false if this is worker process.
    * @example
-   * ```javascript
+   * 
    *     Hunt.startTelnetCluster(25, 10000);
-   * ```
+   * 
    */
   this.startTelnetCluster = function (port, maxProcesses) {
     var p = port || this.config.port,
@@ -787,19 +809,20 @@ function Hunt(config) {
 
   /**
    * @method Hunt#startBackGroundCluster
+   * @fires Hunt#start
    * @param {(Number|null)} maxProcesses maximal number of web server processes to spawn, default - 1 process per CPU core
    * @description
    * Starts Hunt application as single threaded background application, that controls, by the means of
-   * [cluster](http://nodejs.org/docs/latest/api/cluster.html), other background applications.
+   * {@link http://nodejs.org/docs/latest/api/cluster.html | cluster}, other background applications.
    * By default it spawns 1 process per CPU core.
    * @returns {Boolean} true if this is master process, false if this is worker process.
    * @example
-   * ```javascript
+   * 
    *
    *    var numberOfProcessesToSpawn = 10;
    *    Hunt.startBackGroundCluster(numberOfProcessesToSpawn);
    *
-   * ```
+   * 
    */
   this.startBackGroundCluster = function (maxProcesses) {
     console.log(('Trying to start Hunt as background cluster service...').magenta);
@@ -809,6 +832,7 @@ function Hunt(config) {
   /**
    * @method Hunt#startCluster
    * @param {object} parameters - configuration parameters
+   * @fires Hunt#start
    * @description
    * Start Hunt as cluster. `Parameters` is object with 4 field -
    * - `web`, `background`, `telnet`, 'port'.
@@ -817,15 +841,14 @@ function Hunt(config) {
    * It is worth notice, that in this case telnet server listens on `Hunt.config.port+1` port!
    * @returns {Boolean} true if this is master process, false if this is worker process.
    * @example
-   * ```javascript
-   *
+   * 
    *     Hunt.startCluster({ 'web':1, 'background':1, 'telnet': 1 });
    *     Hunt.startCluster({ 'web':max, 'port':80 });
    *     Hunt.startCluster({ 'background':max });
    *     Hunt.startCluster({ 'telnet':max, 'port':25 });
    *     Hunt.startCluster({ 'web':max, 'telnet':max }); //i strongly do not reccomend doing this!
    *
-   * ```
+   * 
    */
   this.startCluster = function (parameters) {
 
@@ -917,7 +940,8 @@ function Hunt(config) {
       throw new Error('This configuration requires more workers, than allowed by `config.maxWorkers`! ');
     }
   };
-};
+}
+
 /**
  * @method Hunt#on
  * @param {string} eventName
@@ -928,11 +952,11 @@ function Hunt(config) {
  * Calls can be chained.
  * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standard nodejs event emitter object }, so it supports all event emitter methods.
  * @example
- * ```javascript
+ * 
  *    Hunt.on('start', function (params) {
  *      console.log('Hunt is started as '+params.type+' on port '+params.port);
  *    }).on('httpError', console.error);
- * ```
+ * 
  */
 
 /**
@@ -963,6 +987,7 @@ function Hunt(config) {
  * @method Hunt#emit
  * @param {string} eventName
  * @param {object} payload
+ * @return boolean
  * @description
  * Makes Hunt emit an event. Returns true if event had listeners, false otherwise.
  * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standard nodejs event emitter object }, so it supports all event emitter methods.
@@ -990,23 +1015,10 @@ Hunt.prototype.stop = function () {
 };
 
 /**
+ * HuntJS framework module
  * @module Hunt
- * @class Hunt
- * @classdesc
- * Main object, that have everything that we need in it.
  * @constructs Hunt
  * @param {config} config - key-value object with settings
- * @see config
- * @fires Hunt#start
- * @fires Hunt#httpError
- * @fires Hunt#httpSuccess
- * @fires Hunt#notify
- * @fires Hunt#notify:all
- * @fires Hunt#notify:email
- * @fires Hunt#notify:sio
- * @fires Hunt#user:save
- * @fires Hunt#user:auth
- * @fires Hunt#broadcast
  */
 module.exports = exports = function (config) {
   return new Hunt(config);
