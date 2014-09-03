@@ -269,7 +269,7 @@ function Hunt(config) {
    *        failureRedirect: '/auth/failure'
    *      }));
    *    };
-   * 
+   *
    * @returns {Hunt} hunt object
    */
   this.extendStrategy = function (Strategy) {
@@ -298,7 +298,7 @@ function Hunt(config) {
    * @param {function} settingsFunction - function(core){....}
    * @example
    *
-   * 
+   *
    *     //example of setting template engine
    *     hunt.extendApp = function (core) {
    *       core.app.set('views', __dirname + '/views');
@@ -307,7 +307,7 @@ function Hunt(config) {
    *       core.app.enable('view cache');
    *       core.app.engine('html', require('ejs'));
    *     };
-   * 
+   *
    *
    * @returns {Hunt} hunt object
    */
@@ -371,7 +371,7 @@ function Hunt(config) {
    * @param {(String/undefined)} [path=/] path to mount middleware - default is /
    * @param {function} settingsFunction function(core){ return function(req,res,next){.....}}
    * @example
-   * 
+   *
    *
    *     hunt.extendMiddleware(function(core){
    *       return function(req, res, next){
@@ -447,7 +447,7 @@ function Hunt(config) {
    *        }
    *      };
    *    });
-   * 
+   *
    * @returns {Hunt} hunt object
    */
   this.extendMiddleware = function (environment, path, settingsFunction) {
@@ -524,7 +524,7 @@ function Hunt(config) {
    * Adds {@link http://expressjs.com/api.html#app.VERB | application routes and verbs} for them.
    * The {@link https://github.com/visionmedia/express-resource | REST api helper} npm module is already provided
    * @example
-   * 
+   *
    *     hunt.extendRoutes(function(core){
    *       core.app.get('/', function(req,res){
    *         res.send('Hello!');
@@ -534,7 +534,7 @@ function Hunt(config) {
    *         res.send(404);
    *       });
    *     }
-   * 
+   *
    * @returns {Hunt} hunt object
    */
   this.extendRoutes = function (settingsFunction) {
@@ -560,7 +560,7 @@ function Hunt(config) {
    * arguments, first one is core object, and second one is
    * {@link https://github.com/andris9/rai | RAI client object }
    * @example
-   * 
+   *
    *
    *     hunt.extendTelnet('version', function(core, client){
    *      client.send('HuntJS version is '+core.version);
@@ -569,7 +569,7 @@ function Hunt(config) {
    *      client.send(payload);
    *     });
    *
-   * 
+   *
    * @since 0.0.18
    * @returns {Hunt} hunt object
    */
@@ -608,9 +608,9 @@ function Hunt(config) {
       h.model.Users = h.model.User;
       h.model.user = h.model.User;
       h.model.users = h.model.User;
-//sanity checks on model
+//sanity checks on model of User
       [
-        'findOneByHuntKey', 'findOneByEmail', 'findOneFuzzy',
+        'findOneByHuntKey', 'findOneByEmail', 'findOneFuzzy', 'findById', 'find',
         'signUp', 'signIn', 'findOneByHuntKeyAndVerifyEmail', 'findOneByHuntKeyAndResetPassword',
         'processOAuthProfile'
       ].map(function (f) {
@@ -644,9 +644,9 @@ function Hunt(config) {
    * It have redis client and data models, event emitting system exposed.
    * It makes Hunt to emit event of "start" with payload of `{'type':'background'}`
    * @example
-   * 
+   *
    *     Hunt.startBackGround();
-   * 
+   *
    */
   this.startBackGround = function () {
     console.log('Trying to start Hunt as background service...'.magenta);
@@ -675,11 +675,11 @@ function Hunt(config) {
    * @param {(number|null)} port - what port to use, if null - use port value from config
    * @param {(string|null)} address - what address to bind to. Default is '0.0.0.0' - all IPv4 addresses. The address is populated from environment address of HUNTJS_ADDR
    * @example
-   * 
+   *
    *     Hunt.startWebServer(80);
    *     Hunt.startWebServer(80, '0.0.0.0');
    *     Hunt.startWebServer(80, 'fe80::7218:8bff:fe86:542b');
-   * 
+   *
    */
   this.startWebServer = function (port, address) {
     var p = port || this.config.port,
@@ -715,9 +715,9 @@ function Hunt(config) {
    * @description
    * Start Hunt as single process telnet server
    * @example
-   * 
+   *
    *     Hunt.startTelnetServer(3003);
-   * 
+   *
    */
   this.startTelnetServer = function (port, address) {
     var p = port || this.config.port,
@@ -772,9 +772,9 @@ function Hunt(config) {
    * @fires Hunt#start
    * @returns {Boolean} true if this is master process, false if this is worker process.
    * @example
-   * 
+   *
    *     Hunt.startWebCluster(80, 10000);
-   * 
+   *
    */
   this.startWebCluster = function (port, maxProcesses) {
     var p = port || this.config.port,
@@ -797,9 +797,9 @@ function Hunt(config) {
    * @fires Hunt#start
    * @returns {Boolean} true if this is master process, false if this is worker process.
    * @example
-   * 
+   *
    *     Hunt.startTelnetCluster(25, 10000);
-   * 
+   *
    */
   this.startTelnetCluster = function (port, maxProcesses) {
     var p = port || this.config.port,
@@ -818,12 +818,12 @@ function Hunt(config) {
    * By default it spawns 1 process per CPU core.
    * @returns {Boolean} true if this is master process, false if this is worker process.
    * @example
-   * 
+   *
    *
    *    var numberOfProcessesToSpawn = 10;
    *    Hunt.startBackGroundCluster(numberOfProcessesToSpawn);
    *
-   * 
+   *
    */
   this.startBackGroundCluster = function (maxProcesses) {
     console.log(('Trying to start Hunt as background cluster service...').magenta);
@@ -842,14 +842,14 @@ function Hunt(config) {
    * It is worth notice, that in this case telnet server listens on `Hunt.config.port+1` port!
    * @returns {Boolean} true if this is master process, false if this is worker process.
    * @example
-   * 
+   *
    *     Hunt.startCluster({ 'web':1, 'background':1, 'telnet': 1 });
    *     Hunt.startCluster({ 'web':'max', 'port':80, 'address':'127.0.0.1' });
    *     Hunt.startCluster({ 'background':'max' });
    *     Hunt.startCluster({ 'telnet':max, 'port':25 });
    *     Hunt.startCluster({ 'web':'max', 'telnet':'max' }); //i strongly do not recommend doing this!
    *
-   * 
+   *
    */
   this.startCluster = function (parameters) {
 
@@ -955,11 +955,11 @@ function Hunt(config) {
  * Calls can be chained.
  * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standard nodejs event emitter object }, so it supports all event emitter methods.
  * @example
- * 
+ *
  *    Hunt.on('start', function (params) {
  *      console.log('Hunt is started as '+params.type+' on port '+params.port);
  *    }).on('httpError', console.error);
- * 
+ *
  */
 
 /**
