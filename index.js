@@ -151,7 +151,7 @@ function Hunt(config) {
    * @name Hunt#version
    * @type {string}
    * @description
-   * Current Hunt version
+   * Current HuntJS version
    */
   this.version = require('./package.json').version;
 
