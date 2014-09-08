@@ -78,7 +78,7 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
       }
     };
   })
-  .controller('trophyController', ['$scope', 'trophy', function ($scope, $http) {
+  .controller('trophyController', ['$scope', '$http', function ($scope, $http) {
     $scope.update = function () {
       $http.post('/api/v1/trophy', $scope.trophy)//performs the default behaviour for $resource entiry.$save
         .success(function (data, status) {
