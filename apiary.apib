@@ -235,7 +235,9 @@ GET /api/v1/trophy
         "page": 1,
         "itemsPerPage": 10,
         "numberOfPages": 1,
-        "count": 6
+        "count": 6,
+        "sort":"_id",
+        "filter":{ }
     }
 }
 
@@ -257,7 +259,9 @@ GET /api/v1/trophy?scored=false
         "page": 1,
         "itemsPerPage": 10,
         "numberOfPages": 1,
-        "count": 2
+        "count": 2,
+        "sort":"_id",
+        "filter":{ "scored":true }
     },
     "data": [
         {
