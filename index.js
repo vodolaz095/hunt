@@ -125,13 +125,13 @@ function Hunt(config) {
    * Export models as REST api, exposed by current http server
    */
 
-  this.extendCore('exportModelToRest', require('./lib/exportModel/exportModelToRest.js'));
+  this.extendCore('exportModelToRest', require('./lib/exportModel/toRest.js'));
 
   /**
    * @name Hunt#async
    * @type {Object}
    * @description
-   * Embedded {@link https://www.npmjs.org/package/async | npm module of async} for better workflow
+   * Embedded {@link https://www.npmjs.org/package/async | npm module of async} of 0.9.0 version for better workflow
    */
   this.extendCore('async', function () {
     return require('async');

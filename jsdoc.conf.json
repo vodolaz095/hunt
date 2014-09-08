@@ -9,7 +9,7 @@
       "lib/api/",
       "lib/datastore",
       "lib/exportModel",
-      "lib/exportModel/lib/toRest",
+      "lib/exportModel/toRest",
       "lib/http",
       "lib/misc",
       "lib/telnet",
