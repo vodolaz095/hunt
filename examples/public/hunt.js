@@ -39,18 +39,18 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
     //https://stackoverflow.com/questions/16387202/angularjs-resource-query-result-array-as-a-property
     return $resource('/api/v1/trophy/:id', {'id': '@id'}, {
       'query': {
-        method: 'GET',
-        transformResponse: function (data) {
+        'method': 'GET',
+        'transformResponse': function (data) {
           return angular.fromJson(data).data
         },
-        isArray: true
+        'isArray': true
       },
       'get': {
-        method: 'GET',
-        transformResponse: function (data) {
+        'method': 'GET',
+        'transformResponse': function (data) {
           return angular.fromJson(data).data
         },
-        isArray: false
+        'isArray': false
       },
       'create': { method: 'post' }
     });
@@ -78,9 +78,9 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
       }
     };
   })
-  .controller('trophyController', ['$scope', '$http', function ($scope, $http) {
+  .controller('trophyController', ['$scope', 'trophy', function ($scope, $http) {
     $scope.update = function () {
-      $http.put('/api/v1/trophy/' + $scope.trophy.id, $scope.trophy)
+      $http.post('/api/v1/trophy', $scope.trophy)//performs the default behaviour for $resource entiry.$save
         .success(function (data, status) {
           //$scope.$apply();
         })
