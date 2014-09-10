@@ -8,7 +8,7 @@ var should = require('should'),
 describe('Users model', function () {
   before(function (done) {
     Hunt = hunt();
-    Hunt.on('start', function () {
+    Hunt.once('start', function () {
       done();
     });
     Hunt.startBackGround();
@@ -42,7 +42,7 @@ describe('Users model', function () {
     it('exposes function @findOneByHuntKeyAndVerifyEmail', function () {
       Hunt.model.User.findOneByHuntKeyAndVerifyEmail.should.be.a.Function;
     });
-    it('exposes function findOneByHuntKeyAndResetPassword', function () {
+    it('exposes function @findOneByHuntKeyAndResetPassword', function () {
       Hunt.model.User.findOneByHuntKeyAndResetPassword.should.be.a.Function;
     });
 
