@@ -33,13 +33,13 @@ describe('Local strategy test', function () {
     });
     Hunt.startWebServer();
   });
-//*/
+
   describe('trying to signup user by POST /auth/signup', function () {
     var r1, r2, r3, b1, b2, b3, evnt;
     before(function (done) {
       Hunt.once('notify:email', function (emailOrdered) {
         evnt = emailOrdered;
-        done();
+        setTimeout(done, 500);
       });
       async.parallel({
         'doSignUp': function (cb) {
@@ -145,8 +145,12 @@ describe('Local strategy test', function () {
             if (err1) {
               done(err1);
             } else {
-              userFound.accountVerified.should.be.true;
-              userFound.remove(done);
+              if(userFound){
+                userFound.accountVerified.should.be.true;
+                userFound.remove(done);
+              } else {
+                done(new Error('Unable to confirm users account!'));
+              }
             }
           });
         }
@@ -154,7 +158,7 @@ describe('Local strategy test', function () {
     });
 
   });
-//*/
+
   describe('trying to ask email for password reset by POST /auth/restoreAccount', function () {
     var evnt,
       user;
@@ -211,15 +215,4 @@ describe('Local strategy test', function () {
     it('will be done');
   });
 
-  /*/
-   after(function (done) {
-   Hunt.model.User.findOneByEmail('spam2me@example.org', function (err, userFound) {
-   if (err) {
-   done(err);
-   } else {
-   userFound.remove(done);
-   }
-   });
-   });
-   //*/
 });
