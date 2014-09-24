@@ -13,18 +13,15 @@ This is short, basic, "hello, world!" example, to start http server on 3000 port
 
 ```javascript
 
-    var hunt = require('./../index.js'),
-      Hunt = hunt({
+    var Hunt = require('hunt')({
         'port':3000
-      });
-
-    Hunt.extendRoutes(function(core){
-      core.app.get('/', function(req,res){
-        res.send('Hello, world!');
-      });
-    });
-
-    Hunt.startWebServer();
+      })
+      .extendRoutes(function(core){
+        core.app.get('/', function(req,res){
+            res.send('Hello, world!');
+         });
+      })
+      .startWebServer();
 
 ```
 
@@ -80,7 +77,7 @@ This is it. *Hunt*...
     [Active Record](https://en.wikipedia.org/wiki/Active_record_pattern)
     and [Observer](https://en.wikipedia.org/wiki/Observer_pattern) patterns
 
--  [Redis](http://redis.io) database support from the box, with default use of it as session storage.
+-  [Redis](http://redis.io) database support from the box, with default use of it as session storage and socket.io backend.
 
 -  Hunt applications are easy to run on [Heroku](http://heroku.com/) hosting - many config values
     (mongo/redis database access URLs, etc...) are populated automatically
@@ -116,7 +113,7 @@ This is it. *Hunt*...
 ```
 
 -  Possibility to run HuntJs as [Telnet](https://en.wikipedia.org/wiki/Telnet) - server with TLS support,
-  authentication and expendable commands' list, created with help of [RAI server](https://www.npmjs.org/package/rai)
+  authentication and expandable commands' list, created with help of [RAI server](https://www.npmjs.org/package/rai)
 
 
 **System requirements**
@@ -143,7 +140,7 @@ this module is hard to understand. Please, read this information above before pr
 
 **Deploying the HuntJS application for production**
 
-We will post some advices on server configuration here:
+We will post some advices and configuration examples:
 [https://github.com/vodolaz095/hunt/tree/master/examples/serverConfigsExamples](https://github.com/vodolaz095/hunt/tree/master/examples/serverConfigsExamples)
 
 
@@ -151,7 +148,7 @@ License
 ====================
 The MIT License (MIT)
 
-Copyright (c) 2013 Ostroumov Anatolij <ostroumov095 at gmail dot com> et al.
+Copyright (c) 2013 Ostroumov Anatolij ostroumov095(at)gmail(dot)com et al.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
