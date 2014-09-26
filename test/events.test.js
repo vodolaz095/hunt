@@ -1,14 +1,9 @@
 'use strict';
 var hunt = require('./../index.js'),
-  should = require('should'),
-  async = require('async'),
-  events = require('events'),
-  request = require('request');
+  should = require('should');
 
-describe('Testing Hunt event emiting system', function () {
-  var Hunt = hunt(),
-    error,
-    message;
+describe('Testing Hunt event emitting system', function () {
+  var Hunt = hunt();
 
   before(function (done) {
     setTimeout(done, 200);
@@ -24,35 +19,70 @@ describe('Testing Hunt event emiting system', function () {
   });
   Hunt.startBackGround();
 
+  describe('native event emitter test', function () {
+    var error,
+      message;
+    before(function (done) {
 
-  before(function (done) {
-    var promise = new events.EventEmitter();
+      Hunt.on('error', function (err) {
+        error = err;
+        done();
+      });
 
-    Hunt.on('error', function (err) {
-      promise.emit('error', err);
-      error = err;
-      done();
+      Hunt.on('ping', function (msg) {
+        message = msg;
+        done();
+      });
+
+      setTimeout(function () {
+        Hunt.emit('ping', 'pong');
+      }, 100);
+
     });
 
-    Hunt.on('ping', function (msg) {
-      promise.emit('success', msg);
-      message = msg;
-      done();
+    it('can emit and listen to events', function () {
+      Hunt.emit.should.be.type('function');
+      Hunt.on.should.be.type('function');
     });
 
-    setTimeout(function () {
-      Hunt.emit('ping', 'pong');
-    }, 100);
-
+    it('emits and catches events by itself', function () {
+      should.not.exist(error);
+      message.should.be.equal('pong');
+    });
   });
+//*/
+  describe('eventEmitter2 test', function () {
+    var error,
+      message;
+    before(function (done) {
 
-  it('can emit and listen to events', function () {
-    Hunt.emit.should.be.type('function');
-    Hunt.on.should.be.type('function');
-  });
+      Hunt.on('error', function (err) {
+        error = err;
+        done();
+      });
 
-  it('emits and catches events by itself', function () {
-    should.not.exist(error);
-    message.should.be.equal('pong');
+      Hunt.on('ping:*', function (msg) {
+        console.log(this.event);
+        message = msg;
+        done();
+      });
+
+      setTimeout(function () {
+        Hunt.emit(['ping', 'event2'], 'pong');
+        //Hunt.emit('ping.event2', 'pong');
+      }, 100);
+
+    });
+
+    it('can emit and listen to events', function () {
+      Hunt.emit.should.be.type('function');
+      Hunt.on.should.be.type('function');
+    });
+
+    it('emits and catches events by itself', function () {
+      should.not.exist(error);
+      message.should.be.equal('pong');
+    });
   });
+//*/
 });

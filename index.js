@@ -1,6 +1,6 @@
 'use strict';
 
-var EventEmitter = require('events').EventEmitter,
+var EventEmitter = require('eventemitter2').EventEmitter2,
   async = require('async'),
   util = require('util'),
   assert = require('assert'),
@@ -44,7 +44,11 @@ require('colors');
  *  .startWebServer();
  */
 function Hunt(config) {
-  EventEmitter.call(this);
+  EventEmitter.call(this, {
+    delimiter: ":",
+    wildcard: true,
+    maxListeners: 20
+  });
 
 //http://www.crockford.com/javascript/private.html
   var prepared = false,
@@ -995,11 +999,40 @@ function Hunt(config) {
  * Adds a listener to the end of the listeners array for the specified event.
  * Calls can be chained.
  * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standard nodejs event emitter object }, so it supports all event emitter methods.
+ * Also Hunt object possess the functions of {@link https://www.npmjs.org/package/eventemitter2 | EventEmitter2}
+ * The default delimiter is ":"
  * @example
  *
- *    Hunt.on('start', function (params) {
- *      console.log('Hunt is started as '+params.type+' on port '+params.port);
- *    }).on('httpError', console.error);
+ *    hunt
+ *      .on('start', function (params) {
+ *        console.log('Hunt is started as '+params.type+' on port '+params.port);
+ *      })
+ *      .on('httpError', console.error);
+ *
+ */
+
+/**
+ * @method Hunt#many
+ * @param {string} eventName
+ * @param {integer} howManyTimesToFire
+ * @param {function} listener
+ * @returns {Hunt}
+ * @see Hunt#once
+ * @description
+ * Adds a listener to the end of the listeners array for the specified event
+ * that will execute n times for the event before being removed.
+ * The listener is invoked only the first n times the event is fired, after which it is removed.
+ * Calls can be chained.
+ * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standard nodejs event emitter object }, so it supports all event emitter methods.
+ * Also Hunt object possess the functions of {@link https://www.npmjs.org/package/eventemitter2 | EventEmitter2}
+ * The default delimiter is ":"
+ * @example
+ *
+ *    hunt
+ *      .once('start', function (params) {
+ *        console.log('Hunt is started as '+params.type+' on port '+params.port);
+ *      })
+ *      .many('httpError', 1, console.error); //1 error is enough :-)
  *
  */
 
@@ -1012,6 +1045,8 @@ function Hunt(config) {
  * Adds a one time listener for the event. This listener is invoked only the next time the event is fired, after which it is removed.
  * Calls can be chained.
  * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standard nodejs event emitter object }, so it supports all event emitter methods.
+ * Also Hunt object possess the functions of {@link https://www.npmjs.org/package/eventemitter2 | EventEmitter2}
+ * The default delimiter is ":"
  * @see Hunt#on
  */
 
@@ -1022,6 +1057,7 @@ function Hunt(config) {
  * @returns {Hunt} Hunt
  * @description
  * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standard nodejs event emitter object }, so it supports all event emitter methods.
+ * Also Hunt object possess the functions of {@link https://www.npmjs.org/package/eventemitter2 | EventEmitter2}
  * Remove a listener from the listener array for the specified event.
  * Caution: changes array indices in the listener array behind the listener.
  * Calls can be chained.
@@ -1029,12 +1065,96 @@ function Hunt(config) {
 
 /**
  * @method Hunt#emit
- * @param {string} eventName
+ * @param {string|Array<string>} eventName
  * @param {object} payload
+ * @param {object} [additionalOptionalPayload]
+ * @param {object} [oneMoreAdditionalOptionalPayload]
+ * @param {object} [evenOneMoreAdditionalOptionalPayload]
  * @return boolean
  * @description
  * Makes Hunt emit an event. Returns true if event had listeners, false otherwise.
  * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standard nodejs event emitter object }, so it supports all event emitter methods.
+ * Also Hunt object possess the functions of {@link https://www.npmjs.org/package/eventemitter2 | EventEmitter2}
+ * The default delimiter is ":"
+ *
+ * @example
+ *
+ * var hunt = require('./index.js')();
+ * hunt.extendCore('a', 'b');
+ * console.log('hunt.a=', hunt.a);
+ *
+ * hunt.on('ping', function (msg, msg1) {
+ *  console.log('+++ping+++', this.event, msg, msg1, '+++ping+++');
+ *});
+ *
+ * hunt.on('ping:2', function (msg, msg1) {
+ *  console.log('+++ping:2+++', this.event, msg, msg1, '+++ping:2+++');
+ *});
+ *
+ * hunt.on('ping:*', function (msg, msg1) {
+ *  console.log('+++ping:*+++', this.event, msg, msg1, '+++ping:*+++');
+ *});
+ *
+ *
+ * hunt.once('start', function (type) {
+ *  console.log('Starting to send events...');
+ *  hunt.emit(['ping', '2'], 'pong', 'lll');
+ * });
+ * hunt.startBackGround();
+ */
+
+/**
+ * @method Hunt#onAny
+ * @param {object} payload
+ * @param {object} [additionalOptionalPayload]
+ * @param {object} [oneMoreAdditionalOptionalPayload]
+ * @param {object} [evenOneMoreAdditionalOptionalPayload]
+ * @return boolean
+ * @see Hunt#onAny
+ * @see Hunt#emit
+ * @see Hunt#once
+ * @see Hunt#on
+ * @description
+ * Adds a listener that will be fired when any event is emitted.
+ * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standard nodejs event emitter object }, so it supports all event emitter methods.
+ * Also Hunt object possess the functions of {@link https://www.npmjs.org/package/eventemitter2 | EventEmitter2}
+ * @example
+ *
+ *    function vortex(value1, value2) {
+ *      console.log('All events trigger this. This is for you: ', value1, value2);
+ *    }
+ *    hunt.onAny(vortex);
+ *
+ *    if (iHaveChangedMyMindToDoThis) {
+ *      hunt.offAny(vortex);
+ *    }
+ */
+
+/**
+ * @method Hunt#offAny
+ * @param {object} payload
+ * @param {object} [additionalOptionalPayload]
+ * @param {object} [oneMoreAdditionalOptionalPayload]
+ * @param {object} [evenOneMoreAdditionalOptionalPayload]
+ * @return boolean
+ * @description
+ * Removes the listener that will be fired when any event is emitted.
+ * Hunt object is a {@link http://nodejs.org/docs/latest/api/events.html | standard nodejs event emitter object }, so it supports all event emitter methods.
+ * Also Hunt object possess the functions of {@link https://www.npmjs.org/package/eventemitter2 | EventEmitter2}
+ * @see Hunt#onAny
+ * @see Hunt#emit
+ * @see Hunt#once
+ * @see Hunt#on
+ * @example
+ *
+ *    function vortex(value1, value2) {
+ *      console.log('All events trigger this. This is for you: ', value1, value2);
+ *    }
+ *    hunt.onAny(vortex);
+ *
+ *    if (iHaveChangedMyMindToDoThis) {
+ *      hunt.offAny(vortex);
+ *    }
  */
 
 util.inherits(Hunt, EventEmitter);
