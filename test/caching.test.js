@@ -30,17 +30,17 @@ describe('Redis caching middleware', function () {
       'PUT': function (cb) {
         request({'method': 'PUT', 'url': 'http://localhost:3100/1sec'}, function (error, response, body) {
           cb(error, body);
-        })
+        });
       },
       'POST': function (cb) {
         request({'method': 'POST', 'url': 'http://localhost:3100/1sec'}, function (error, response, body) {
           cb(error, body);
-        })
+        });
       },
       'DELETE': function (cb) {
         request({'method': 'DELETE', 'url': 'http://localhost:3100/1sec'}, function (error, response, body) {
           cb(error, body);
-        })
+        });
       }
     }, function (error, obj) {
       if (error) {
@@ -58,7 +58,7 @@ describe('Redis caching middleware', function () {
       'now': function (cb) {
         request({'method': 'GET', 'url': 'http://localhost:3100/1sec'}, function (error, response, body) {
           cb(error, body);
-        })
+        });
       },
       '1sec': function (cb) {
         setTimeout(function () {
