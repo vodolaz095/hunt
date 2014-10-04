@@ -23,7 +23,7 @@ describe('Hunt resists when we want to extend it\' core in strange way', functio
       'io',
       'encrypt', 'decrypt',
       'sessionStorage',
-      'on', 'once', 'emit'
+      'on', 'off', 'once', 'emit', 'many', 'onAny', 'offAny', 'removeListener'
     ].map(function (name) {
         (function () {
           Hunt.extendCore(('' + name), 'someStupidValueToIrritateCoreExtender');
@@ -169,7 +169,8 @@ describe('Hunt builds single threaded webserver application', function () {
   var Hunt = hunt(),
     startedType,
     response1,
-    response2;
+    response2,
+    response3;
 
   after(function (done) {
     Hunt.stop();
@@ -215,20 +216,25 @@ describe('Hunt builds single threaded webserver application', function () {
   });
   Hunt.extendRoutes(function (core) {
     core.app.get('/', function (req, res) {
-      res.send('OK');
+      res.status(403).send('OK');
     });
     core.app.get('/somePath', function (req, res) {
-      res.send('somePath');
+      res.status(404).send('somePath');
+    });
+  });
+  Hunt.extendController('/controller', function (core, router) {
+    router.get('/', function (req, res) {
+      res.send('Hello?');
     });
   });
 
 
-  describe('Hunt emit events of started', function () {
+  describe('Hunt emit events of `start`', function () {
     var httpEvent1;
     before(function (done) {
       Hunt.on('start', function (type) {
         startedType = type;
-        async.parallel([
+        async.series([
           function (cb) {
             Hunt.once('httpSuccess', function (evnt) {
               httpEvent1 = evnt;
@@ -241,6 +247,12 @@ describe('Hunt builds single threaded webserver application', function () {
           function (cb) {
             request.get(Hunt.config.hostUrl + 'somePath', function (err, response, body) {
               response2 = response;
+              cb(err, response);
+            });
+          },
+          function (cb) {
+            request.get(Hunt.config.hostUrl + 'controller', function (err, response, body) {
+              response3 = response;
               cb(err, response);
             });
           }
@@ -258,11 +270,25 @@ describe('Hunt builds single threaded webserver application', function () {
       //httpEvent1.should.be.equal(1);
       httpEvent1.startTime.should.be.instanceOf(Date);
       httpEvent1.duration.should.be.below(100);
-      httpEvent1.statusCode.should.be.equal(200);
+      httpEvent1.statusCode.should.be.equal(403);
       httpEvent1.method.should.be.equal('GET');
       httpEvent1.ip.should.be.equal('127.0.0.1');
       httpEvent1.uri.should.be.equal('/');
       should.not.exist(httpEvent1.user);
+    });
+
+    it('has proper response for case 1', function () {
+      response1.statusCode.should.be.equal(403);
+      response1.body.should.be.equal('OK')
+    });
+    it('has proper response for case 2', function () {
+      response2.statusCode.should.be.equal(404);
+      response2.body.should.be.equal('somePath')
+    });
+
+    it('has proper response for case 3', function () {
+      response3.statusCode.should.be.equal(200);
+      response3.body.should.be.equal('Hello?')
     });
   });
 

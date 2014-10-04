@@ -56,6 +56,7 @@ function Hunt(config) {
     extendAppFunctions = [],
     extendMiddlewareFunctions = [],
     extendRoutesFunctions = [],
+    extendControllerFunctions = [],
     extendTelnetFunctions = {};
   /**
    * @method Hunt#extendCore
@@ -309,7 +310,7 @@ function Hunt(config) {
    *       core.app.set('view engine', 'ejs');
    *       core.app.set('layout', 'layout');
    *       core.app.enable('view cache');
-   *       core.app.engine('html', require('ejs'));
+   *       core.app.engine('ejs', require('ejs'));
    *     };
    *
    *
@@ -317,7 +318,7 @@ function Hunt(config) {
    */
   this.extendApp = function (environment, settingsFunction) {
     if (prepared) {
-      throw new Error('Hunt core application is already prepared! WE CAN\'T EXTEND IT NOW!');
+      throw new Error('Hunt application is already prepared! WE CAN\'T EXTEND IT NOW!');
     } else {
       var environmentToUse = null,
         i,
@@ -360,6 +361,7 @@ function Hunt(config) {
 
   /**
    * @method Hunt#extendMiddleware
+   * @deprecated since 0.3.0
    * @description
    * Adds new middleware to expressJS application
    * This function can be executed multiple times, the middlewares applied
@@ -456,7 +458,7 @@ function Hunt(config) {
    */
   this.extendMiddleware = function (environment, path, settingsFunction) {
     if (prepared) {
-      throw new Error('Hunt core application is already prepared! WE CAN\'T EXTEND IT NOW!');
+      throw new Error('Hunt application is already prepared! WE CAN\'T EXTEND IT NOW!');
     } else {
       var environmentToUse = null,
         pathToUse = '/',
@@ -524,6 +526,7 @@ function Hunt(config) {
   /**
    * @method Hunt#extendRoutes
    * @param {function} settingsFunction Settings Function
+   * @deprecated since 0.3.0
    * @description
    * Adds {@link http://expressjs.com/api.html#app.VERB | application routes and verbs} for them.
    * The {@link https://github.com/visionmedia/express-resource | REST api helper} npm module is already provided
@@ -543,12 +546,56 @@ function Hunt(config) {
    */
   this.extendRoutes = function (settingsFunction) {
     if (prepared) {
-      throw new Error('Hunt core application is already prepared! WE CAN\'T EXTEND IT NOW!');
+      throw new Error('Hunt application is already prepared! WE CAN\'T EXTEND IT NOW!');
     } else {
       if (typeof settingsFunction === 'function') {
         extendRoutesFunctions.push(settingsFunction);
       } else {
         throw new Error('Wrong argument for Hunt.extendAppRoutes(function(core){...});');
+      }
+      return this;
+    }
+  };
+
+  /**
+   * @method Hunt#extendController
+   * @param {string} mountPoint
+   * @param {function} settingsFunction
+   * @returns {Hunt} hunt object
+   * @see Hunt#startWebServer
+   * @see Hunt#express
+   * @see Hunt#extendRoutes
+   * @see Hunt#extendMiddleware
+   * @see Hunt#extendApp
+   * @since 0.2.2
+   * @description
+   * Add custom {@link http://expressjs.com/4x/api.html#router | router } for expressjs application
+   * @example
+   *
+   * hunt.extendController('/', function(core, router){
+   *  router.get('/', function(request,response){
+   *    response.render('index',{'title':'Hello!'});
+   *  });
+   * });
+   * //this controller overwrites the first one!
+   * hunt.extendController('/', function(core, router){
+   *  router.get('/', function(request,response){
+   *    response.render('index2',{'title':'Hello!'});
+   *  });
+   * });
+   *
+   */
+  this.extendController = function (mountPoint, settingsFunction) {
+    if (prepared) {
+      throw new Error('Hunt application is already prepared! WE CAN\'T EXTEND IT NOW!');
+    } else {
+      if (typeof settingsFunction === 'function' && typeof mountPoint === 'string') {
+        extendControllerFunctions.push({
+          'mountPoint': mountPoint,
+          'settingsFunction': settingsFunction
+        });
+      } else {
+        throw new Error('Wrong argument for Hunt.extendController(mountPoint,function(core, router){...});');
       }
       return this;
     }
@@ -673,7 +720,7 @@ function Hunt(config) {
 
   function buildExpressApp(h) {
     passportGenerator.call(h, extendPassportStrategiesFunctions, extendRoutesFunctions);
-    appGenerator.call(h, extendAppFunctions, extendMiddlewareFunctions, extendRoutesFunctions);
+    appGenerator.call(h, extendAppFunctions, extendControllerFunctions, extendMiddlewareFunctions, extendRoutesFunctions);
   }
 
   function buildTelnet(h) {
