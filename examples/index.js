@@ -114,10 +114,14 @@ hunt.extendApp(function (core) {
 });
 
 /*
- * Setting middleware to irritate user who have not verified his account
+ * Setting up the expressjs application
  */
-hunt.extendMiddleware(function (core) {
-  return function (req, res, next) {
+
+hunt.extendController('/', function (core, router) {
+  /*
+   * Setting middleware to irritate user who have not verified his account
+   */
+  router.use(function (req, res, next) {
     if (req.user) {
       if (req.user.accountVerified) {
         next();
@@ -128,15 +132,12 @@ hunt.extendMiddleware(function (core) {
     } else {
       next();
     }
-  };
-});
+  });
 
-/*
- * Setting custom routes
- */
-hunt.extendRoutes(function (core) {
-
-  core.app.get('/', function (req, res) {
+  /*
+   * Setting custom routes
+   */
+  router.get('/', function (req, res) {
     res.render('index', {
       'title': 'HuntJS V' + core.version + ' demo',
       'description': 'mix expressjs, mongoose, sequilize, socketio and passportjs'
@@ -146,7 +147,7 @@ hunt.extendRoutes(function (core) {
   /*
    * Routes to test notifications
    */
-  core.app.post('/notify_me', function (req, res) {
+  router.post('/notify_me', function (req, res) {
     if (req.user && req.user.email) {
       req.user.notifyByEmail({ 'template': 'email/hello', 'layout': false });
       req.flash('success', 'Check our INBOX, please!');
@@ -160,7 +161,7 @@ hunt.extendRoutes(function (core) {
   /*
    * Page for users to authorize
    */
-  core.app.get('/auth/login', function (req, res) {
+  router.get('/auth/login', function (req, res) {
     if (req.user) {
       res.redirect('/profile');
     } else {
@@ -170,7 +171,10 @@ hunt.extendRoutes(function (core) {
     }
   });
 
-  core.app.get('/profile', function (req, res) {
+  /*
+   * Route for user to see his/her profile
+   */
+  router.get('/profile', function (req, res) {
     if (req.user) {
       res.render('cabinet/profile', {
         'layout': false
@@ -180,7 +184,10 @@ hunt.extendRoutes(function (core) {
     }
   });
 
-  core.app.get('/auth/resetPassword', function (req, res) {
+  /*
+   * Form where user can reset password
+   */
+  router.get('/auth/resetPassword', function (req, res) {
     if (req.user) {
       res.redirect('/profile');
     } else {
@@ -191,14 +198,11 @@ hunt.extendRoutes(function (core) {
     }
   });
 
-  /*
-   * Routes to try to kill application
+  /* route to cruelly kill this helpless nodejs process,
+   * and make cluster spawn another one to make you
+   * happy killing it too)
    */
-
-//route to cruelly kill this helpless nodejs process,
-//and make cluster spawn another one to make you
-//happy killing it too)
-  core.app.get('/boom', function (req, res) {
+  router.get('/boom', function (req, res) {
     setTimeout(function () {
       core.stop();
       process.exit(0);
@@ -206,24 +210,29 @@ hunt.extendRoutes(function (core) {
     res.redirect('/');
   });
 
-//route to throw some stupid error,
-//that will be catch by error reporter middleware and will not stop the process
-
-  core.app.get('/error', function (req, res) {
+  /*
+   * route to throw some stupid error,
+   * that will be catch by error reporter middleware and will not stop the process
+   */
+  router.get('/error', function (req, res) {
     throw new Error('Something is wrong... Please, wipe your spectacles with alcohol or spirit and carefully kick PC with hammer 3 times.');
   });
 
-// route to throw some really vicious error,
-//  that cannot be catch by error reporter middleware, but will be catch by
-//  *doman* and will not stop the process.
-  core.app.get('/baderror', function (req, res) {
+  /*
+   *  route to throw some really vicious error,
+   *  that cannot be catch by error reporter middleware, but will be catch by
+   *  *doman* and will not stop the process.
+   */
+  router.get('/baderror', function (req, res) {
     (function () {
       throw new Error('Catch this!');
     })();
   });
 
-//route to demonstrate caching middleware
-  core.app.get('/time', core.cachingMiddleware(3000), function (request, response) {
+  /*
+   * route to demonstrate caching middleware
+   */
+  router.get('/time', core.cachingMiddleware(3000), function (request, response) {
     response.send('Current time is ' + new Date());
   });
 });
@@ -231,7 +240,6 @@ hunt.extendRoutes(function (core) {
 /*
  * Exporting Trophy model as REST interface
  */
-
 hunt.exportModelToRest({
   'mountPount': '/api/v1/trophy',
   'modelName': 'Trophy'
@@ -263,6 +271,7 @@ hunt.on('httpError', function (err) {
 hunt.onSocketIoEvent('pingerUrl', function (payload, socket) {
   pinger(payload, socket);
 });
+
 hunt.once('start', function (startParameters) {
 //we process socket.io events here.
 //note, that Hunt.io is generated only after
