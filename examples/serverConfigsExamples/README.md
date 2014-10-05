@@ -8,9 +8,9 @@ Main idea behind this is to allow Hunt.js application to be ran on behalf
 of limited user account. This is more save, than running hunt.js applications
 as root user, but it prevents us from listening on ports with numbers greater
 than 1000 - because on Linux only root user can run applications that listens
-on standart ports of 80 and 443.
+on standard ports of 80 and 443.
 
-We asume you have Linux machine.
+We assume you have Linux machine.
 
 pound.cfg
 ==================================
@@ -19,7 +19,7 @@ Configuration file for [Pound reverse proxy and load balancer](http://www.apsis.
 So, we can run the Pound service as root on 80 port as http server, and on 443 port
 as https server, with http backend on port 3000, that is a hunt application, ran
 on behalf of user with limited account.
-The strong sides of this approach is very high security and perfomance of
+The strong sides of this approach is very high security and performance of
 Pound, and the bad side is issues with websockets connectivity in socket.io module.
 
 nginx.conf

@@ -307,7 +307,7 @@ hunt.on('message:sio', function (event) {
  * and what port to use (from config or process.env.PORT or default - 3000)
  * we recommend 1 process per CPU core
  */
-if (hunt.startCluster({ 'web': 2 })) {
+if (hunt.startCluster({ 'web': 2 })) { // Hunt#startCluster returns true for MASTER process
   hunt.once('start', function () {
 //we populate database in master process
     populateDb(hunt);

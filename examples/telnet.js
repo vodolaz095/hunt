@@ -1,31 +1,29 @@
-var hunt = require('./../index.js'),
+var Hunt = require('./../index.js'),
   config = {
-    'port':3000,
-    'telnetServer':{
+    'port': 3000,
+    'telnetServer': {
       'debug': true
     }
   };
 
-var Hunt = hunt(config);
+var hunt = Hunt(config);
 
-Hunt.extendTelnet('hi', function(core, client, payload){
-  client.send('HuntJS application of version '+core.version+' greets you!');
-  console.log(payload);
-
-  if(payload.toString() != ''){
-    client.send('Your payload for this command is '+ payload);
-  }
-//*/
-  setTimeout(function(){
-    client.send('Server is tired. Sorry.'); // :-)
-    client.end();
-  }, 10000);
-//*/
+hunt.once('start', function (event) {
+  console.log('Now you can connect to hunjs application with telnet \n $ telnet localhost ' + event.port);
 });
 
-Hunt.startTelnetServer();
+hunt
+  .extendTelnet('hi', function (core, client, payload) {
+    client.send('HuntJS application of version ' + core.version + ' greets you!');
+    console.log(payload);
 
-Hunt.on('start', function(event){
-  console.log('Now you can connect to hunjs application with telnet \n $ telnet localhost '+event.port);
-});
+    if (payload.toString() != '') {
+      client.send('Your payload for this command is ' + payload);
+    }
 
+    setTimeout(function () {
+      client.send('Server is tired. Sorry.'); // :-)
+      client.end();
+    }, 10000);
+  })
+  .startTelnetServer();
