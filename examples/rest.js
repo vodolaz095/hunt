@@ -1,4 +1,11 @@
-module.exports = exports = function (core) {
+var hunt = require('./../index.js')({
+  'port': 3000,
+  //'mongoUrl' : 'mongo://localhost/hunt_dev',
+  //'enableMongoose' : true,
+  'disableCsrf': true
+});
+
+hunt.extendModel('Trophy', function(core){
   var TrophySchema = new core.mongoose.Schema({
     'name': {type: String, unique: true},
     'scored': Boolean,
@@ -43,10 +50,10 @@ module.exports = exports = function (core) {
 //ACL check for ability to delete this particular document
 //it cannot be deleted
   TrophySchema.methods.canDelete = function (user, callback) {
-    callback(null, true);
+    callback(null, false);
   };
 
-//after saving every document changes to database, we broadcast changes to all users
+//after saving every document changes to database, we broadcast changes to all users by socket.io
   TrophySchema.post('save', function (documentSaved) {
     core.emit('broadcast', {'trophySaved': {
       'id': documentSaved.id,
@@ -55,8 +62,17 @@ module.exports = exports = function (core) {
       'priority': documentSaved.priority
     }});
   });
-
 //this step is very important - bind mongoose model to current mongo database connection
 //and assign it to collection
   return core.mongoConnection.model('Trophy', TrophySchema);
-};
+});
+
+/*
+ * Exporting Trophy model as REST interface
+ */
+hunt.exportModelToRest({
+  'mountPount': '/api/v1/trophy',
+  'modelName': 'Trophy'
+});
+
+hunt.startWebServer();
