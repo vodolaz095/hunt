@@ -56,7 +56,7 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
     });
   }])
   .factory('socket', function ($rootScope) {
-    var socket = io('', {'connect timeout': 1000, 'reconnection':true});
+    var socket = io();
     return {
       on: function (eventName, callback) {
         socket.on(eventName, function () {
@@ -139,11 +139,11 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
                 next();
               })
               .error(function (data, status) {
-                next(new Error('Error hiting /time endpoint'));
+                next(new Error('Error getting /time endpoint'));
               });
-          }, 500);
+          }, 1000);
         } else {
-          next();
+          setTimeout(next, 1000);
         }
       },
       function (error) {
