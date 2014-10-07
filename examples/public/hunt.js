@@ -56,7 +56,7 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
     });
   }])
   .factory('socket', function ($rootScope) {
-    var socket = io.connect('', {'connect timeout': 1000, 'reconnection':true});
+    var socket = io('', {'connect timeout': 1000, 'reconnection':true});
     return {
       on: function (eventName, callback) {
         socket.on(eventName, function () {
