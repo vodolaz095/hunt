@@ -295,7 +295,7 @@ hunt.once('start', function (startParameters) {
  * Listening to socket.io events, emitted by client
  */
 hunt.on('message:sio', function (event) {
-  console.log('We recieved socket.io event!', event);
+  console.log('We received socket.io event!', event);
 });
 
 
