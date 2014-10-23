@@ -250,7 +250,7 @@ hunt.exportModelToRest({
  */
 
 //event that is emmited on any successefull http request processed
-hunt.on('httpSuccess', function (httpSuccess) {
+hunt.on('http:success', function (httpSuccess) {
   if (httpSuccess.body && httpSuccess.body.password) {
     httpSuccess.body.password = '************'; //because we do not want to stream passwords!
   }
@@ -263,7 +263,7 @@ hunt.on('httpSuccess', function (httpSuccess) {
 //that there is some sort of error
 //by default it is done by direct mail transport, so it will work alwayes,
 //but the message will likely be marked as spam
-hunt.on('httpError', function (err) {
+hunt.on('http:error', function (err) {
   console.error(err);
 });
 
