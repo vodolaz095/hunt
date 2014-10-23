@@ -62,6 +62,7 @@
     "hogan-express": "0.5.2",
     "jade": "1.7.0",
     "swig": "1.4.2",
+    "express-handlebars":"1.1.0",
     "redis": "0.12.1",
     "connect-redis": "2.1.0",
     "connect-flash": "0.1.1",

@@ -236,7 +236,7 @@ describe('Hunt builds single threaded webserver application', function () {
         startedType = type;
         async.series([
           function (cb) {
-            Hunt.once('httpSuccess', function (evnt) {
+            Hunt.once('http:*', function (evnt) {
               httpEvent1 = evnt;
             });
             request.get(Hunt.config.hostUrl, function (err, response, body) {
@@ -266,7 +266,7 @@ describe('Hunt builds single threaded webserver application', function () {
       startedType.should.be.eql({'type': 'webserver', 'port': Hunt.config.port, 'address': Hunt.config.address});
     });
 
-    it('emits proper `httpSuccess` event for route /', function () {
+    it('emits proper `http:success` event for route /', function () {
       //httpEvent1.should.be.equal(1);
       httpEvent1.startTime.should.be.instanceOf(Date);
       httpEvent1.duration.should.be.below(100);
