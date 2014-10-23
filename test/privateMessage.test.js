@@ -308,7 +308,6 @@ describe('Private messages', function () {
           messages.should.be.instanceOf(Array);
           messages.length.should.be.equal(3);
 
-
           messages[2].to.should.be.eql(User2._id.toString());
           messages[2].toProfile.displayName.should.be.eql(User2.displayName);
           messages[2].toProfile.gravatar.should.be.eql(User2.gravatar);
@@ -317,8 +316,6 @@ describe('Private messages', function () {
           messages[2].fromProfile.displayName.should.be.eql(User1.displayName);
           messages[2].fromProfile.gravatar.should.be.eql(User1.gravatar);
           messages[2].message.should.be.equal('test1');
-
-
         });
 
       });

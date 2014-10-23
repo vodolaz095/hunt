@@ -432,29 +432,6 @@ This class is ancestor of mongoose active record object, described here <a href=
 
         <tr>
             
-                <td class="name"><code>User#groups</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;Group></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
                 <td class="name"><code>roles</code></td>
             
 
@@ -1736,7 +1713,7 @@ with accountVerified
     
     <h5>Fires:</h5>
     <ul>
-        <li><a href="Hunt.html#event:user:auth">Hunt#user:auth</a></li>
+        <li>Hunt#user:auth</li>
     </ul>
     
 
@@ -1897,7 +1874,7 @@ with accountVerified
     
     <h5>Fires:</h5>
     <ul>
-        <li><a href="Hunt.html#event:user:auth">Hunt#user:auth</a></li>
+        <li>Hunt#user:signin</li>
     </ul>
     
 
@@ -2058,7 +2035,7 @@ with accountVerified
     
     <h5>Fires:</h5>
     <ul>
-        <li><a href="Hunt.html#event:user:auth">Hunt#user:auth</a></li>
+        <li>Hunt#user:signup</li>
     </ul>
     
 
@@ -2897,7 +2874,7 @@ with accountVerified
     throw error;
   } else {
     usersFound.map(function(user){
-      if(!user.hasRole['hunter']){
+      if(!user.hasRole('hunter')){
         throw new Error('User #'+user.id +' is not a Hunter! We need to punish him/her!');
       }
     });
@@ -3788,7 +3765,7 @@ with accountVerified
 
             
 
-            <td class="description last">profiver name, for example - twitter, github, google</td>
+            <td class="description last">provider name, for example - twitter, github, google</td>
         </tr>
 
     
@@ -4087,7 +4064,7 @@ with accountVerified
 
             
 
-            <td class="description last">profiver name, for example - twitter, github, google</td>
+            <td class="description last">provider name, for example - twitter, github, google</td>
         </tr>
 
     
@@ -4133,7 +4110,7 @@ with accountVerified
 
             
 
-            <td class="description last">function(err,userSaved)</td>
+            <td class="description last">function(err,userSaved){..}</td>
         </tr>
 
     
@@ -4312,13 +4289,13 @@ with accountVerified
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:notify">notify</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:http:*">http:*</a></li><li><a href="Hunt.html#event:http:error">http:error</a></li><li><a href="Hunt.html#event:http:success">http:success</a></li><li><a href="Hunt.html#event:message:sio">message:sio</a></li><li><a href="Hunt.html#event:notify:all">notify:all</a></li><li><a href="Hunt.html#event:notify:email">notify:email</a></li><li><a href="Hunt.html#event:notify:sio">notify:sio</a></li><li><a href="Hunt.html#event:user:auth">user:auth</a></li><li><a href="Hunt.html#event:user:save">user:save</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-authorization.html">authorization</a></li><li><a href="tutorial-events.html">events</a></li><li><a href="tutorial-hello.html">hello</a></li><li><a href="tutorial-modelToRest.html">modelToRest</a></li><li><a href="tutorial-telnetApplication.html">telnetApplication</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:notify">notify</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:http:*">http:*</a></li><li><a href="Hunt.html#event:http:error">http:error</a></li><li><a href="Hunt.html#event:http:success">http:success</a></li><li><a href="Hunt.html#event:message:sio">message:sio</a></li><li><a href="Hunt.html#event:notify:all">notify:all</a></li><li><a href="Hunt.html#event:notify:email">notify:email</a></li><li><a href="Hunt.html#event:notify:sio">notify:sio</a></li><li><a href="Hunt.html#event:user:*">user:*</a></li><li><a href="Hunt.html#event:user:auth:providerName">user:auth:providerName</a></li><li><a href="Hunt.html#event:user:auth:signin">user:auth:signin</a></li><li><a href="Hunt.html#event:user:auth:signup">user:auth:signup</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-authorization.html">authorization</a></li><li><a href="tutorial-events.html">events</a></li><li><a href="tutorial-hello.html">hello</a></li><li><a href="tutorial-modelToRest.html">modelToRest</a></li><li><a href="tutorial-telnetApplication.html">telnetApplication</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Thu Oct 23 2014 23:33:06 GMT+0400 (MSK)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Fri Oct 24 2014 03:16:35 GMT+0400 (MSK)
 </footer>
 
 <script> prettyPrint(); </script>
