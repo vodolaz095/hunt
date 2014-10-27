@@ -719,7 +719,7 @@ describe('Users model', function () {
             user.notify('Hello!');
           }, 300);
 
-          Hunt.on('notify:all', function (message) {
+          Hunt.on('user:notify:all', function (message) {
             messageObj = message;
             done();
           });
