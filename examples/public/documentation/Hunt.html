@@ -706,7 +706,7 @@ they are injected into <a href="request.html"><code>request</code></a> object of
 <dd>
     
     <div class="description">
-        Mongoose object, used for object relation maping to mongo database
+        Mongoose object, used for object relation mapping to mongo database
 <a href="http://mongoosejs.com/ "> Official Mongoose Documentation </a>
     </div>
     
@@ -6243,6 +6243,140 @@ and non authorized site visitors
 
     
     <div class="description">
+        Emitted when Hunt is started as background process
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">object</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">with a value of string of 'background'</td>
+        </tr>
+
+    
+    </tbody>
+</table></dl>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="event:start">start</h4>
+
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
         Emitted when Hunt is started as telnet process
     </div>
     
@@ -6569,140 +6703,6 @@ and non authorized site visitors
     <dd class="tag-see">
         <ul>
             <li><a href="Hunt.html#startWebServer">Hunt#startWebServer</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="event:start">start</h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Emitted when Hunt is started as background process
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">object</span>
-
-
-            </li>
-        </ul>
-    
-
-    
-
-    
-
-    
-<dl class="details">
-    
-
-        <h5 class="subsection-title">Properties:</h5>
-
-        <dl>
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">with a value of string of 'background'</td>
-        </tr>
-
-    
-    </tbody>
-</table></dl>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
         </ul>
     </dd>
     
@@ -8330,6 +8330,360 @@ Hunt.on('profiling:redis:set:*', listener);
 Hunt.on('profiling:redis:set:someKeyName:*', listener);
 Hunt.on('profiling:redis:set:someKeyName:someKeyValue', listener);
 Hunt.redisClient.set('someKeyName','someKeyValue');</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="event:profiling:mongoose:*">profiling:mongoose:*</h4>
+
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Emitted on every redis command.
+Namespace is `profiling:mongoose:*` with namespaces consisted of
+database name, collection and command
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">object</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>startedAt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>finishedAt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>duration</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">duration of request in milliseconds</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>driver</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">database driver used, `mongoose` in this case</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>command</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>database</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>collection</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>error</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Error</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>result</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table></dl>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-tutorial">Tutorials:</dt>
+    <dd class="tag-tutorial">
+        <ul>
+            <li><a href="tutorial-profiling.html">profiling</a></li>
+        
+            <li><a href="tutorial-events.html">events</a></li>
+        </ul>
+    </dd>
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Hunt.html#on">Hunt#on</a></li>
+        
+            <li><a href="Hunt.html#onAny">Hunt#onAny</a></li>
+        
+            <li><a href="Hunt.html#once">Hunt#once</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>function listener(payload){
+  console.log('We received event '+this.event+' with payload', payload);
+}
+
+//All this listeners will be fired on
+//redis command `set someKeyName someKeyValue`
+
+Hunt.on('profiling:*', listener);
+Hunt.on('profiling:mongoose:*', listener);
+Hunt.on('profiling:mongoose:hunt_dev:*', listener);
+Hunt.on('profiling:mongoose:hunt_dev:users:*', listener);
+Hunt.on('profiling:mongoose:hunt_dev:users:ensureIndex', listener);
+Hunt.on('profiling:mongoose:hunt_dev:users:find:*', listener);
+Hunt.on('profiling:mongoose:hunt_dev:users:find:toArray', listener);</code></pre>
 
     
 </dd>
@@ -11253,7 +11607,7 @@ they are injected into <a href="request.html"><code>request</code></a> object of
 <dd>
     
     <div class="description">
-        Mongoose object, used for object relation maping to mongo database
+        Mongoose object, used for object relation mapping to mongo database
 <a href="http://mongoosejs.com/ "> Official Mongoose Documentation </a>
     </div>
     
@@ -16790,6 +17144,140 @@ and non authorized site visitors
 
     
     <div class="description">
+        Emitted when Hunt is started as background process
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">object</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">with a value of string of 'background'</td>
+        </tr>
+
+    
+    </tbody>
+</table></dl>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="event:start">start</h4>
+
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
         Emitted when Hunt is started as telnet process
     </div>
     
@@ -17116,140 +17604,6 @@ and non authorized site visitors
     <dd class="tag-see">
         <ul>
             <li><a href="Hunt.html#startWebServer">Hunt#startWebServer</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="event:start">start</h4>
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Emitted when Hunt is started as background process
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">object</span>
-
-
-            </li>
-        </ul>
-    
-
-    
-
-    
-
-    
-<dl class="details">
-    
-
-        <h5 class="subsection-title">Properties:</h5>
-
-        <dl>
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">with a value of string of 'background'</td>
-        </tr>
-
-    
-    </tbody>
-</table></dl>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
         </ul>
     </dd>
     
@@ -18877,6 +19231,360 @@ Hunt.on('profiling:redis:set:*', listener);
 Hunt.on('profiling:redis:set:someKeyName:*', listener);
 Hunt.on('profiling:redis:set:someKeyName:someKeyValue', listener);
 Hunt.redisClient.set('someKeyName','someKeyValue');</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="event:profiling:mongoose:*">profiling:mongoose:*</h4>
+
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Emitted on every redis command.
+Namespace is `profiling:mongoose:*` with namespaces consisted of
+database name, collection and command
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">object</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>startedAt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>finishedAt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>duration</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">duration of request in milliseconds</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>driver</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">database driver used, `mongoose` in this case</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>command</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>database</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>collection</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>error</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Error</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>result</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table></dl>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-tutorial">Tutorials:</dt>
+    <dd class="tag-tutorial">
+        <ul>
+            <li><a href="tutorial-profiling.html">profiling</a></li>
+        
+            <li><a href="tutorial-events.html">events</a></li>
+        </ul>
+    </dd>
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Hunt.html#on">Hunt#on</a></li>
+        
+            <li><a href="Hunt.html#onAny">Hunt#onAny</a></li>
+        
+            <li><a href="Hunt.html#once">Hunt#once</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>function listener(payload){
+  console.log('We received event '+this.event+' with payload', payload);
+}
+
+//All this listeners will be fired on
+//redis command `set someKeyName someKeyValue`
+
+Hunt.on('profiling:*', listener);
+Hunt.on('profiling:mongoose:*', listener);
+Hunt.on('profiling:mongoose:hunt_dev:*', listener);
+Hunt.on('profiling:mongoose:hunt_dev:users:*', listener);
+Hunt.on('profiling:mongoose:hunt_dev:users:ensureIndex', listener);
+Hunt.on('profiling:mongoose:hunt_dev:users:find:*', listener);
+Hunt.on('profiling:mongoose:hunt_dev:users:find:toArray', listener);</code></pre>
 
     
 </dd>
@@ -21070,13 +21778,13 @@ with payload of user being saved.
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:http:*">http:*</a></li><li><a href="Hunt.html#event:http:error">http:error</a></li><li><a href="Hunt.html#event:http:success">http:success</a></li><li><a href="Hunt.html#event:message:sio">message:sio</a></li><li><a href="Hunt.html#event:profiling:*">profiling:*</a></li><li><a href="Hunt.html#event:profiling:redis:*">profiling:redis:*</a></li><li><a href="Hunt.html#event:user:*">user:*</a></li><li><a href="Hunt.html#event:user:notify:*">user:notify:*</a></li><li><a href="Hunt.html#event:user:notify:all">user:notify:all</a></li><li><a href="Hunt.html#event:user:notify:email">user:notify:email</a></li><li><a href="Hunt.html#event:user:notify:sio">user:notify:sio</a></li><li><a href="Hunt.html#event:user:save">user:save</a></li><li><a href="Hunt.html#event:user:signin:*">user:signin:*</a></li><li><a href="Hunt.html#event:user:signin:local">user:signin:local</a></li><li><a href="Hunt.html#event:user:signin:providerName">user:signin:providerName</a></li><li><a href="Hunt.html#event:user:signup">user:signup</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-authorization.html">authorization</a></li><li><a href="tutorial-events.html">events</a></li><li><a href="tutorial-hello.html">hello</a></li><li><a href="tutorial-modelToRest.html">modelToRest</a></li><li><a href="tutorial-profiling.html">profiling</a></li><li><a href="tutorial-telnetApplication.html">telnetApplication</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:http:*">http:*</a></li><li><a href="Hunt.html#event:http:error">http:error</a></li><li><a href="Hunt.html#event:http:success">http:success</a></li><li><a href="Hunt.html#event:message:sio">message:sio</a></li><li><a href="Hunt.html#event:profiling:*">profiling:*</a></li><li><a href="Hunt.html#event:profiling:mongoose:*">profiling:mongoose:*</a></li><li><a href="Hunt.html#event:profiling:redis:*">profiling:redis:*</a></li><li><a href="Hunt.html#event:user:*">user:*</a></li><li><a href="Hunt.html#event:user:notify:*">user:notify:*</a></li><li><a href="Hunt.html#event:user:notify:all">user:notify:all</a></li><li><a href="Hunt.html#event:user:notify:email">user:notify:email</a></li><li><a href="Hunt.html#event:user:notify:sio">user:notify:sio</a></li><li><a href="Hunt.html#event:user:save">user:save</a></li><li><a href="Hunt.html#event:user:signin:*">user:signin:*</a></li><li><a href="Hunt.html#event:user:signin:local">user:signin:local</a></li><li><a href="Hunt.html#event:user:signin:providerName">user:signin:providerName</a></li><li><a href="Hunt.html#event:user:signup">user:signup</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-authorization.html">authorization</a></li><li><a href="tutorial-events.html">events</a></li><li><a href="tutorial-hello.html">hello</a></li><li><a href="tutorial-modelToRest.html">modelToRest</a></li><li><a href="tutorial-profiling.html">profiling</a></li><li><a href="tutorial-telnetApplication.html">telnetApplication</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Mon Oct 27 2014 20:02:40 GMT+0300 (MSK)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Mon Oct 27 2014 22:43:37 GMT+0300 (MSK)
 </footer>
 
 <script> prettyPrint(); </script>

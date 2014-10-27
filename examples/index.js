@@ -61,9 +61,7 @@ var config = {
 //    'FACEBOOK_CLIENT_ID': '1415057178733225',
 //    'FACEBOOK_CLIENT_SECRET': 'SECRETSECRET'
   },
-  'io': {
-    'loglevel': 0
-  },
+  'io': true,
   'dialog': true,//enable dialogs api on /api/dialog
   'public': __dirname + '/public', //directory for assets - css, images, client side javascripts
   'views': __dirname + '/views', //directory for templates
@@ -298,6 +296,20 @@ hunt.on('message:sio', function (event) {
   console.log('We received socket.io event!', event);
 });
 
+/*
+ * Profiling
+ */
+function profilingListener(payload){
+  console.log('>>>PROFILING', this.event, payload, '<<<');
+}
+//various means to perform it:
+
+//hunt.on('profiling:*', profilingListener);
+//hunt.on('profiling:redis:*', profilingListener);
+//hunt.on('profiling:mongoose:*', profilingListener);
+//hunt.on('profiling:mongoose:hunt_dev:*', profilingListener);
+//hunt.on('profiling:mongoose:hunt_dev:users:ensureIndex', profilingListener);
+hunt.onAny(profilingListener);
 
 /*
  * Starting cluster of webserveres
@@ -316,7 +328,3 @@ if (hunt.startCluster({ 'web': 2 })) { // Hunt#startCluster returns true for MAS
     }, 60 * 1000);
   });
 }
-
-hunt.on('profiling:redis:*', function(payload){
-  console.log('>>>REDIS', this.event, payload, '<<<');
-});

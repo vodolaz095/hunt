@@ -53,6 +53,7 @@ describe('Testing Hunt event emitting system', function () {
 //*/
   describe('eventEmitter2 test', function () {
     var error,
+      name,
       message;
     before(function (done) {
 
@@ -63,6 +64,7 @@ describe('Testing Hunt event emitting system', function () {
 
       Hunt.on('ping:*', function (msg) {
         console.log(this.event);
+        name = this.event.join(':');
         message = msg;
         done();
       });
@@ -72,6 +74,14 @@ describe('Testing Hunt event emitting system', function () {
         //Hunt.emit('ping.event2', 'pong');
       }, 100);
 
+    });
+
+    it('event have proper name', function () {
+      name.should.be.equal('ping:event2');
+    });
+
+    it('event have proper payload', function () {
+      message.should.be.equal('pong');
     });
 
     it('can emit and listen to events', function () {

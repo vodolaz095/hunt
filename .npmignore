@@ -5,7 +5,7 @@ test/
 node_modules/
 Procfile
 coverage/
-
+tutorials/
 
 lib-cov
 *.seed

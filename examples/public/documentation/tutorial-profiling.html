@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Tutorial: hello</title>
+    <title>JSDoc: Tutorial: profiling</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,30 +17,60 @@
 
 <div id="main">
 
-    <h1 class="page-title">Tutorial: hello</h1>
+    <h1 class="page-title">Tutorial: profiling</h1>
 
     <section>
 
 <header>
     
 
-    <h2>hello</h2>
+    <h2>profiling</h2>
 </header>
 
 <article>
-    <h1>&quot;Hello, world!&quot; Example</h1><pre class="prettyprint source lang-javascript"><code>
-  var hunt = require('hunt')({
-    'port': 3000 //set up config parameters -- 1
-  })
-    .extendController('/', function (core, router) { //add router to expressjs web application -- 2
-      router.get('/', function (req, res) { // -- 3
-        res.send('Hello, world!');
-      });
-    })
-    .startWebServer(); //start web server // -- 4</code></pre><h1>Explanation</h1><p>1) <a href="/documentation/config.html">Full list of configuration options</a></p>
-<p>2) <a href="/documentation/Hunt.html#extendController">extendController documentation</a></p>
-<p>3) <a href="https://expressjs.com/4x/api.html#router">Documentation about ExpressJS routers</a></p>
-<p>4) <a href="/documentation/Hunt.html#startWebServer">startWebServer</a></p>
+    <h1>Profiling in HuntJS</h1><p>There is a way to profile database interactions in Huntjs by observing events emitted in namespace of
+<code>profiling:*</code></p>
+<h2>Profiling the redis database</h2><p>There are events emitted on every redis command. Namespace is <code>profiling:redis:*</code> with namespaces consisted of redis command names and arguments' values</p>
+<pre class="prettyprint source lang-javascript"><code>
+    var Hunt  = require('hunt')({
+      //some config options
+    });
+
+    function listener(payload){
+      console.log('We received event '+this.event+' with payload', payload);
+    }
+
+    //All this listeners will be fired on
+    //redis command `set someKeyName someKeyValue`
+
+    Hunt.on('profiling:*', listener);
+    Hunt.on('profiling:redis:*', listener);
+    Hunt.on('profiling:redis:set:*', listener);
+    Hunt.on('profiling:redis:set:someKeyName:*', listener);
+    Hunt.on('profiling:redis:set:someKeyName:someKeyValue', listener);
+    Hunt.on('start', function(){
+      Hunt.redisClient.set('someKeyName','someKeyValue');
+    });
+    Hunt.startBackground();</code></pre><h2>Profiling the Mongo database</h2><pre class="prettyprint source lang-javascript"><code>
+    var Hunt  = require('hunt')({
+      //some config options
+    });
+
+    function listener(payload){
+      console.log('We received event '+this.event+' with payload', payload);
+    }
+
+    //All this listeners will be fired on
+    //when mongoose initialize collection of `users` in `hunt_dev` database
+
+    Hunt.on('profiling:*', listener);
+    Hunt.on('profiling:mongoose:*', listener);
+    Hunt.on('profiling:mongoose:hunt_dev:*', listener);
+    Hunt.on('profiling:mongoose:hunt_dev:users:*', listener);
+    Hunt.on('profiling:mongoose:hunt_dev:users:ensureIndex', listener);
+    Hunt.on('profiling:mongoose:hunt_dev:users:find:*', listener);
+    Hunt.on('profiling:mongoose:hunt_dev:users:find:toArray', listener);
+    Hunt.startBackground();</code></pre><h2>Profiling the Sequilize</h2><p>Will be done shortly</p>
 </article>
 
 </section>
