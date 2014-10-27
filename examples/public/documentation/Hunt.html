@@ -8728,6 +8728,327 @@ the user have email address, of course
         
             
 <dt>
+    <h4 class="name" id="event:profiling:redis:*">profiling:redis:*</h4>
+
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Emitted on every redis command.
+Namespace is `profiling:redis:*` with namespaces consisted of
+redis command names and arguments' values
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">object</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>startedAt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>finishedAt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>duration</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">duration of request in milliseconds</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>driver</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">database driver used, `redis` in this case</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>command</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>command</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>error</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Error</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>result</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table></dl>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Hunt.html#on">Hunt#on</a></li>
+        
+            <li><a href="Hunt.html#onAny">Hunt#onAny</a></li>
+        
+            <li><a href="Hunt.html#once">Hunt#once</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>function listener(payload){
+  console.log('We recieved event '+this.event+' with payload', payload);
+}
+
+//All this listeners will be fired on
+//redis command `set someKeyName someKeyValue`
+
+Hunt.on('profiling:*', listener);
+Hunt.on('profiling:redis:*', listener);
+Hunt.on('profiling:redis:set:*', listener);
+Hunt.on('profiling:redis:set:someKeyName:*', listener);
+Hunt.on('profiling:redis:set:someKeyName:someKeyValue', listener);
+Hunt.redisClient.set('someKeyName','someKeyValue');</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
     <h4 class="name" id="event:user:*">user:*</h4>
 
     
@@ -8736,8 +9057,7 @@ the user have email address, of course
 
     
     <div class="description">
-        Event is emitted each time the user profile is updated and saved
-with payload of user being saved.
+        Namespace for events related to <a href="User.html"><code>User</code></a> model.
     </div>
     
 
@@ -8803,7 +9123,7 @@ with payload of user being saved.
 
             
 
-            <td class="description last">type of event `save`...</td>
+            <td class="description last">type of event - `auth`,`save`...</td>
         </tr>
 
     
@@ -8917,7 +9237,8 @@ with payload of user being saved.
 
     
     <div class="description">
-        Namespace for events related to <a href="User.html"><code>User</code></a> model.
+        Event is emitted each time the user profile is updated and saved
+with payload of user being saved.
     </div>
     
 
@@ -8983,7 +9304,7 @@ with payload of user being saved.
 
             
 
-            <td class="description last">type of event - `auth`,`save`...</td>
+            <td class="description last">type of event `save`...</td>
         </tr>
 
     
@@ -18308,6 +18629,327 @@ the user have email address, of course
         
             
 <dt>
+    <h4 class="name" id="event:profiling:redis:*">profiling:redis:*</h4>
+
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Emitted on every redis command.
+Namespace is `profiling:redis:*` with namespaces consisted of
+redis command names and arguments' values
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">object</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+        <h5 class="subsection-title">Properties:</h5>
+
+        <dl>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>startedAt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>finishedAt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>duration</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">duration of request in milliseconds</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>driver</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">database driver used, `redis` in this case</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>command</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>command</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>error</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Error</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>result</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table></dl>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Hunt.html#on">Hunt#on</a></li>
+        
+            <li><a href="Hunt.html#onAny">Hunt#onAny</a></li>
+        
+            <li><a href="Hunt.html#once">Hunt#once</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>function listener(payload){
+  console.log('We recieved event '+this.event+' with payload', payload);
+}
+
+//All this listeners will be fired on
+//redis command `set someKeyName someKeyValue`
+
+Hunt.on('profiling:*', listener);
+Hunt.on('profiling:redis:*', listener);
+Hunt.on('profiling:redis:set:*', listener);
+Hunt.on('profiling:redis:set:someKeyName:*', listener);
+Hunt.on('profiling:redis:set:someKeyName:someKeyValue', listener);
+Hunt.redisClient.set('someKeyName','someKeyValue');</code></pre>
+
+    
+</dd>
+
+        
+            
+<dt>
     <h4 class="name" id="event:user:*">user:*</h4>
 
     
@@ -18316,8 +18958,7 @@ the user have email address, of course
 
     
     <div class="description">
-        Event is emitted each time the user profile is updated and saved
-with payload of user being saved.
+        Namespace for events related to <a href="User.html"><code>User</code></a> model.
     </div>
     
 
@@ -18383,7 +19024,7 @@ with payload of user being saved.
 
             
 
-            <td class="description last">type of event `save`...</td>
+            <td class="description last">type of event - `auth`,`save`...</td>
         </tr>
 
     
@@ -18497,7 +19138,8 @@ with payload of user being saved.
 
     
     <div class="description">
-        Namespace for events related to <a href="User.html"><code>User</code></a> model.
+        Event is emitted each time the user profile is updated and saved
+with payload of user being saved.
     </div>
     
 
@@ -18563,7 +19205,7 @@ with payload of user being saved.
 
             
 
-            <td class="description last">type of event - `auth`,`save`...</td>
+            <td class="description last">type of event `save`...</td>
         </tr>
 
     
@@ -19218,13 +19860,13 @@ with payload of user being saved.
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:notify">notify</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:http:*">http:*</a></li><li><a href="Hunt.html#event:http:error">http:error</a></li><li><a href="Hunt.html#event:http:success">http:success</a></li><li><a href="Hunt.html#event:message:sio">message:sio</a></li><li><a href="Hunt.html#event:notify:all">notify:all</a></li><li><a href="Hunt.html#event:notify:email">notify:email</a></li><li><a href="Hunt.html#event:notify:sio">notify:sio</a></li><li><a href="Hunt.html#event:user:*">user:*</a></li><li><a href="Hunt.html#event:user:auth:providerName">user:auth:providerName</a></li><li><a href="Hunt.html#event:user:auth:signin">user:auth:signin</a></li><li><a href="Hunt.html#event:user:auth:signup">user:auth:signup</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-authorization.html">authorization</a></li><li><a href="tutorial-events.html">events</a></li><li><a href="tutorial-hello.html">hello</a></li><li><a href="tutorial-modelToRest.html">modelToRest</a></li><li><a href="tutorial-telnetApplication.html">telnetApplication</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:notify">notify</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:http:*">http:*</a></li><li><a href="Hunt.html#event:http:error">http:error</a></li><li><a href="Hunt.html#event:http:success">http:success</a></li><li><a href="Hunt.html#event:message:sio">message:sio</a></li><li><a href="Hunt.html#event:notify:all">notify:all</a></li><li><a href="Hunt.html#event:notify:email">notify:email</a></li><li><a href="Hunt.html#event:notify:sio">notify:sio</a></li><li><a href="Hunt.html#event:profiling:redis:*">profiling:redis:*</a></li><li><a href="Hunt.html#event:user:*">user:*</a></li><li><a href="Hunt.html#event:user:auth:providerName">user:auth:providerName</a></li><li><a href="Hunt.html#event:user:auth:signin">user:auth:signin</a></li><li><a href="Hunt.html#event:user:auth:signup">user:auth:signup</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-authorization.html">authorization</a></li><li><a href="tutorial-events.html">events</a></li><li><a href="tutorial-hello.html">hello</a></li><li><a href="tutorial-modelToRest.html">modelToRest</a></li><li><a href="tutorial-telnetApplication.html">telnetApplication</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Mon Oct 27 2014 17:19:37 GMT+0300 (MSK)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Mon Oct 27 2014 17:37:29 GMT+0300 (MSK)
 </footer>
 
 <script> prettyPrint(); </script>
