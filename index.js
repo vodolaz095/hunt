@@ -22,6 +22,7 @@ require('colors');
  * @constructor
  * @classdesc
  * Constructor of HuntJS application
+
  * @fires Hunt#start
 
  * @fires Hunt#http:*
@@ -29,20 +30,21 @@ require('colors');
  * @fires Hunt#http:error
 
  * @fires Hunt#user:*
+ * @fires Hunt#user:signup
+ * @fires Hunt#user:signin:*
  * @fires Hunt#user:notify:*
  * @fires Hunt#user:notify:all
  * @fires Hunt#user:notify:email
  * @fires Hunt#user:notify:sio
  * @fires Hunt#user:save
- * @fires Hunt#user:auth
 
  * @fires Hunt#broadcast
- *
+
  * @fires Hunt#profiling:*
  * @fires Hunt#profiling:redis:*
  * @fires Hunt#profiling:mongo:*
  * @fires Hunt#profiling:sequilize:*
-
+ *
  * @example
  * var hunt = require('hunt')({
  *  'port': 3000
