@@ -316,3 +316,7 @@ if (hunt.startCluster({ 'web': 2 })) { // Hunt#startCluster returns true for MAS
     }, 60 * 1000);
   });
 }
+
+hunt.on('profiling:redis:*', function(payload){
+  console.log('>>>REDIS', this.event, payload, '<<<');
+});
