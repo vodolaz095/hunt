@@ -27,7 +27,7 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
           controller: 'profileController'
         })
         .when('/', {
-          templateUrl: '/documentation/',
+          templateUrl: '/partials/main.html',
           controller: 'mainController'
         })
         .otherwise({

@@ -30,7 +30,22 @@
 <article>
     <h1>Events</h1><p>HuntJS applicaton instance is <a href="http://nodejs.org/api/events.html">native nodejs event emitter</a>, 
 extended by <a href="https://www.npmjs.org/package/eventemitter2">EventEmitter2</a>.</p>
-<p>We can expose this features by utilizing the 
+<p>When an EventEmitter instance experiences an error, the typical action is to emit an error event.
+Error events are treated as a special case.
+If there is no listener for it, then the default action is to print a stack trace and exit the program.</p>
+<p>All EventEmitters emit the event newListener when new listeners are added.</p>
+<p>Namespaces with Wildcards To use namespaces/wildcards, pass the wildcard option into the EventEmitter
+constructor. When namespaces/wildcards are enabled, events can either be strings (<code>foo:bar</code>)
+separated by a delimiter or arrays (['foo', 'bar']). The delimiter is also configurable as a constructor option.
+The default delimeter is <code>:</code></p>
+<p>An event name passed to any event emitter listener can contain a wild card (the <em> character).
+If the event name is a string, a wildcard may appear as foo:</em>.
+If the event name is an array, the wildcard may appear as ['foo', '*'].</p>
+<p>If either of the above described events were passed to the on method,
+subsequent emits such as the following would be observed...</p>
+<pre class="prettyprint source lang-javascript"><code>
+    Hunt.emit('foo:bazz', payloadObj);
+    Hunt.emit(['foo', 'bar'], payloadObj);</code></pre><p>We can expose this features by utilizing the 
 <a href="https://en.wikipedia.org/wiki/Observer_pattern">observer pattern</a>
 and, for example, add background processing to events emitted from
 web application.</p>
@@ -107,13 +122,13 @@ web application.</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:http:*">http:*</a></li><li><a href="Hunt.html#event:http:error">http:error</a></li><li><a href="Hunt.html#event:http:success">http:success</a></li><li><a href="Hunt.html#event:message:sio">message:sio</a></li><li><a href="Hunt.html#event:profiling:*">profiling:*</a></li><li><a href="Hunt.html#event:profiling:mongoose:*">profiling:mongoose:*</a></li><li><a href="Hunt.html#event:profiling:redis:*">profiling:redis:*</a></li><li><a href="Hunt.html#event:user:*">user:*</a></li><li><a href="Hunt.html#event:user:notify:*">user:notify:*</a></li><li><a href="Hunt.html#event:user:notify:all">user:notify:all</a></li><li><a href="Hunt.html#event:user:notify:email">user:notify:email</a></li><li><a href="Hunt.html#event:user:notify:sio">user:notify:sio</a></li><li><a href="Hunt.html#event:user:save">user:save</a></li><li><a href="Hunt.html#event:user:signin:*">user:signin:*</a></li><li><a href="Hunt.html#event:user:signin:local">user:signin:local</a></li><li><a href="Hunt.html#event:user:signin:providerName">user:signin:providerName</a></li><li><a href="Hunt.html#event:user:signup">user:signup</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-authorization.html">authorization</a></li><li><a href="tutorial-events.html">events</a></li><li><a href="tutorial-hello.html">hello</a></li><li><a href="tutorial-modelToRest.html">modelToRest</a></li><li><a href="tutorial-profiling.html">profiling</a></li><li><a href="tutorial-telnetApplication.html">telnetApplication</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:http:*">http:*</a></li><li><a href="Hunt.html#event:http:error">http:error</a></li><li><a href="Hunt.html#event:http:success">http:success</a></li><li><a href="Hunt.html#event:message:sio">message:sio</a></li><li><a href="Hunt.html#event:profiling:*">profiling:*</a></li><li><a href="Hunt.html#event:profiling:mongoose:*">profiling:mongoose:*</a></li><li><a href="Hunt.html#event:profiling:redis:*">profiling:redis:*</a></li><li><a href="Hunt.html#event:user:*">user:*</a></li><li><a href="Hunt.html#event:user:notify:*">user:notify:*</a></li><li><a href="Hunt.html#event:user:notify:all">user:notify:all</a></li><li><a href="Hunt.html#event:user:notify:email">user:notify:email</a></li><li><a href="Hunt.html#event:user:notify:sio">user:notify:sio</a></li><li><a href="Hunt.html#event:user:save">user:save</a></li><li><a href="Hunt.html#event:user:signin:*">user:signin:*</a></li><li><a href="Hunt.html#event:user:signin:local">user:signin:local</a></li><li><a href="Hunt.html#event:user:signin:providerName">user:signin:providerName</a></li><li><a href="Hunt.html#event:user:signup">user:signup</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-authorization.html">authorization</a></li><li><a href="tutorial-events.html">events</a></li><li><a href="tutorial-hello.html">hello</a></li><li><a href="tutorial-modelToRest.html">modelToRest</a></li><li><a href="tutorial-profiling.html">profiling</a></li><li><a href="tutorial-telnetApplication.html">telnetApplication</a></li><li><a href="tutorial-webapplication.html">webapplication</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Mon Oct 27 2014 22:43:38 GMT+0300 (MSK)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Tue Oct 28 2014 03:07:41 GMT+0300 (MSK)
 </footer>
 
 <script> prettyPrint(); </script>

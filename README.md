@@ -13,7 +13,7 @@ This is short, basic, "hello, world!" example, to start http server on 3000 port
 
 ```javascript
 
-  var hunt = require('hunt')({
+  require('hunt')({
    'port': 3000
   })
   .extendController('/', function (core, router) {
@@ -28,6 +28,16 @@ This is short, basic, "hello, world!" example, to start http server on 3000 port
 **Documentation and live example**
 
 [https://huntjs.herokuapp.com/](https://huntjs.herokuapp.com/)
+
+**Tutorials**
+
+-  [Hello, world!](https://huntjs.herokuapp.com/documentation/tutorial-authorization.html)
+-  [Authorization](https://huntjs.herokuapp.com/documentation/tutorial-authorization.html)
+-  [Events](https://huntjs.herokuapp.com/documentation/tutorial-events.html)
+-  [Database profiling](https://huntjs.herokuapp.com/documentation/tutorial-profiling.html)
+-  [Exporting mongoose models to REST interface](https://huntjs.herokuapp.com/documentation/tutorial-modelToRest.html)
+-  [Telnet application](https://huntjs.herokuapp.com/documentation/tutorial-telnetApplication.html)
+-  [Web application](https://huntjs.herokuapp.com/documentation/tutorial-webapplication.html)
 
 
 **More examples**
@@ -93,24 +103,6 @@ This is it. *Hunt*...
 -  [socket.io](http://socket.io/) is perfectly linked with user
     model and passportjs authorization system, so you can send realtime
     notifications to users online just like this
-
-```javascript
-
-    Hunt.model.User.findOne({'email':'somebody@example.org'},
-      function(err, userFound){
-        //notify on user
-        userFound.notifyBySocketIo({
-          'priority':'high',
-          'message':'You are being hunted!'
-        });
-        //notify all online users by means of socket.io broadcast
-        Hunt.emit('broadcast', {
-          'priority':'high',
-          'message':'Everybody hunts Somebody at example dot org!'
-        })
-      });
-
-```
 
 -  Possibility to run HuntJs as [Telnet](https://en.wikipedia.org/wiki/Telnet) - server with TLS support,
   authentication and expandable commands' list, created with help of [RAI server](https://www.npmjs.org/package/rai)

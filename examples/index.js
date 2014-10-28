@@ -309,7 +309,7 @@ function profilingListener(payload){
 //hunt.on('profiling:mongoose:*', profilingListener);
 //hunt.on('profiling:mongoose:hunt_dev:*', profilingListener);
 //hunt.on('profiling:mongoose:hunt_dev:users:ensureIndex', profilingListener);
-hunt.onAny(profilingListener);
+//hunt.onAny(profilingListener);
 
 /*
  * Starting cluster of webserveres
@@ -327,4 +327,6 @@ if (hunt.startCluster({ 'web': 2 })) { // Hunt#startCluster returns true for MAS
       populateDb(hunt);
     }, 60 * 1000);
   });
+} else {
+  console.log('We have started child process #' + process.pid);
 }

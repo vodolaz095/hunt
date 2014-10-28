@@ -156,11 +156,107 @@ We can add middlewares to our application in this way:
 
 ###Setting up custom routes
 
+We can set custom routes using [extendRoutes](/documentation/Hunt.html#extendRoutes)
+using [ExpressJS verbs](http://expressjs.com/api.html#app.VERB).
+
+```javascript
+
+    hunt.extendRoutes(function(core){
+
+      core.app.get('/', function(req,res){
+        res.send('Hello!');
+      });
+
+      core.app.all('*',function(req,res){
+        res.send(404);
+      });
+    }
+
+```
+
+
 ###Setting up custom router
+Add custom [router](http://expressjs.com/api.html#router) for expressjs application
+
+```javascript
+
+    hunt.extendController('/', function(core, router){
+       router.use(function(request,response,next){
+         response.setHeader('devMiddleware1', core.someVar);
+         next();
+       });
+       router.get('/', function(request,response){
+         response.render('index',{'title':'Hello!'});
+       });
+      router.post('/', function(request,response){
+        response.render('index',{'title':'Hello!'});
+      });
+    });
+
+    hunt.extendController('/some_path', function(core, router){
+       router.use(function(request,response,next){
+         response.setHeader('devMiddleware1', core.someVar);
+         next();
+       });
+       router.get('/', function(request,response){
+         response.render('index',{'title':'Hello!'});
+       });
+      router.post('/', function(request,response){
+        response.render('index',{'title':'Hello!'});
+      });
+    });
+
+    //this controller overwrites the first one!
+    hunt.extendController('/', function(core, router){
+     router.get('/', function(request,response){
+       response.render('index2',{'title':'Hello!'});
+     });
+    });
+
+```
+
 
 ###Starting as single threaded application
+In can be done by [hunt.StartWebServer](/documentation/Hunt.html#startWebServer) easily
 
+```javascript
 
+    hunt.on('start', function(payload){
+      console.log('Started HuntJS as '+payload.type+' on '+payload.address+':'+payload.port);
+    //will output ->
+    //Started HuntJS as webserver on 0.0.0.0:80
+    });
+    hunt.startWebServer(); //listen on port from config
+    hunt.startWebServer(80); //listen on hardcoded port of 80
+    hunt.startWebServer(80,'0.0.0.0'); //listen on hardcoded port of 80, listening to all interfaces
+    hunt.startWebServer(80, 'fe80::7218:8bff:fe86:542b'); //listen on specified IPv6 address
 
+```
 
 ###Starting as clustered application
+We can scale HuntJS applications easily to manifold
+of processes by means of [native nodejs cluster](http://nodejs.org/api/cluster.html)
+
+```javascript
+
+    //we start 5 processes on port 80
+    if (hunt.startWebCluster(80, 5)) { // Hunt#startCluster returns true for MASTER process
+    //this code is executed in MASTER process only
+      hunt.once('start', function () {
+      //do things here
+      });
+    } else {
+      console.log('We have started child process #' + process.pid);
+    }
+
+    //we start 2 web processes on port fron config
+    if (hunt.startCluster({ 'web': 2 })) { // Hunt#startCluster returns true for MASTER process
+    //this code is executed in MASTER process only
+      hunt.once('start', function () {
+      //do things here
+      });
+    } else {
+      console.log('We have started child process #' + process.pid);
+    }
+
+```

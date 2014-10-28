@@ -264,6 +264,7 @@ function Hunt(config) {
 
   /**
    * @method Hunt#extendStrategy
+   * @tutorial webapplication
    * @description
    * Add new passportJS strategy to application by adding them to Hunt.passport object
    * All strategies have to redirect to `/auth/success` on success or `/auth/failure`
@@ -301,6 +302,7 @@ function Hunt(config) {
 
   /**
    * @method Hunt#extendApp
+   * @tutorial webapplication
    * @see Hunt#app
    * @description
    * Set expressJS application parameters - template engine, variables, locals
@@ -374,6 +376,7 @@ function Hunt(config) {
 
   /**
    * @method Hunt#extendMiddleware
+   * @tutorial webapplication
    * @deprecated since 0.3.0
    * @description
    * Adds new middleware to expressJS application
@@ -540,16 +543,15 @@ function Hunt(config) {
    * @method Hunt#extendRoutes
    * @param {function} settingsFunction Settings Function
    * @deprecated since 0.3.0
+   * @tutorial webapplication
    * @description
    * Adds {@link http://expressjs.com/api.html#app.VERB | application routes and verbs} for them.
-   * The {@link https://github.com/visionmedia/express-resource | REST api helper} npm module is already provided
    * @example
    *
    *     hunt.extendRoutes(function(core){
    *       core.app.get('/', function(req,res){
    *         res.send('Hello!');
    *       });
-   *       core.app.resource('forum', require('./forum.js'));
    *       core.app.all('*',function(req,res){
    *         res.send(404);
    *       });
@@ -581,6 +583,7 @@ function Hunt(config) {
    * @see Hunt#extendMiddleware
    * @see Hunt#extendApp
    * @since 0.2.2
+   * @tutorial webapplication
    * @description
    * Add custom {@link http://expressjs.com/4x/api.html#router | router } for expressjs application
    * @example
@@ -635,6 +638,7 @@ function Hunt(config) {
    *
    *
    * @since 0.0.18
+   * @tutorial telnetApplication
    * @returns {Hunt} hunt object
    */
 
@@ -773,6 +777,7 @@ function Hunt(config) {
   /**
    * @method Hunt#startWebServer
    * @fires Hunt#start
+   * @tutorial webapplication
    * @description
    * Starts Hunt application as single threaded web server
    * It have redis client/models, expressJS application and event emitting system exposed.
@@ -813,6 +818,7 @@ function Hunt(config) {
 
   /**
    * @method Hunt#startTelnetServer
+   * @tutorial telnetApplication
    * @param {(number|null)} port what port to use, if null - use port value from config
    * @param {(string|null)} [address="0.0.0.0"] - address to listen on, if null - use address from config
    * @fires Hunt#start
@@ -865,6 +871,7 @@ function Hunt(config) {
 
   /**
    * @method Hunt#startWebCluster
+   * @tutorial webapplication
    * @param {(number|null)} port what port to use, if null - use port value from config
    * @param {(number|null)} maxProcesses maximal number of web server processes to spawn, default - 1 process per CPU core
    * @description
