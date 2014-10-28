@@ -31,7 +31,7 @@ This is short, basic, "hello, world!" example, to start http server on 3000 port
 
 **Tutorials**
 
--  [Hello, world!](https://huntjs.herokuapp.com/documentation/tutorial-authorization.html)
+-  [Hello, world!](https://huntjs.herokuapp.com/documentation/tutorial-hello.html)
 -  [Authorization](https://huntjs.herokuapp.com/documentation/tutorial-authorization.html)
 -  [Events](https://huntjs.herokuapp.com/documentation/tutorial-events.html)
 -  [Database profiling](https://huntjs.herokuapp.com/documentation/tutorial-profiling.html)
