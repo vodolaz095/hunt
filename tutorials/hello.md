@@ -1,7 +1,3 @@
-"Hello, world!" Example
-====================================
-
-
 ```javascript
 
   var hunt = require('hunt')({

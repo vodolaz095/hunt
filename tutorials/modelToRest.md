@@ -1,5 +1,3 @@
-Export model to REST Example
-====================================
 We can expose the model as [CRUD - REST interface](http://www.restapitutorial.com/)
 (Create, Read, Update, Delete - Representational State Transfer interface), with respect 
 to access control lists for every operation and of field object.

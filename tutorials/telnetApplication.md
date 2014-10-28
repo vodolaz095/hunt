@@ -1,6 +1,3 @@
-Telnet application example
-=========================================
-
 ```javascript
 
     var Hunt = require('./../index.js'),

@@ -1,6 +1,3 @@
-Profiling in HuntJS
-============================================
-
 There is a way to profile database interactions in Huntjs by observing events emitted in namespace of
 `profiling:*`
 

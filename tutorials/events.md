@@ -1,5 +1,3 @@
-Events
-====================================
 HuntJS applicaton instance is [native nodejs event emitter](http://nodejs.org/api/events.html), 
 extended by [EventEmitter2](https://www.npmjs.org/package/eventemitter2).
 

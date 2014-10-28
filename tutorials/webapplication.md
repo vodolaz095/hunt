@@ -1,5 +1,3 @@
-Building a web application
-===================
 The main purpose of HuntJS is to make web applications.
 In this tutorial we will follow step by step this process.
 
