@@ -5,7 +5,7 @@ HuntJS
 [![Build Status](https://drone.io/bitbucket.org/vodolaz095/hunt/status.png)](https://drone.io/bitbucket.org/vodolaz095/hunt/latest)
 [![Build Status](https://travis-ci.org/vodolaz095/hunt.png?branch=master)](https://travis-ci.org/vodolaz095/hunt)
 [![Stories in Ready](https://badge.waffle.io/vodolaz095/hunt.png?label=ready&title=Ready)](https://waffle.io/vodolaz095/hunt)
-
+[![Dependency Status](https://gemnasium.com/vodolaz095/hunt.svg)](https://gemnasium.com/vodolaz095/hunt)
 
 **"Hello, world!" Example**
 
