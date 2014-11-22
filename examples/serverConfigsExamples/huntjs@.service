@@ -9,6 +9,9 @@ WorkingDirectory=%h/myHuntJSapp
 Environment=NODE_ENV=production hostUrl=https://example.org/
 ExecStart=/usr/local/bin/node %h/myHuntJSapp/index.js
 Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=huntjs
 
 [Install]
 WantedBy=multi-user.target
