@@ -1,6 +1,8 @@
 HuntJS
 ====================
 
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/vodolaz095/hunt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![NPM version](https://badge.fury.io/js/hunt.svg)](http://badge.fury.io/js/hunt)
 [![Build Status](https://drone.io/bitbucket.org/vodolaz095/hunt/status.png)](https://drone.io/bitbucket.org/vodolaz095/hunt/latest)
 [![Build Status](https://travis-ci.org/vodolaz095/hunt.png?branch=master)](https://travis-ci.org/vodolaz095/hunt)
