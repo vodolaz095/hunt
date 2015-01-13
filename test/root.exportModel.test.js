@@ -10,7 +10,7 @@ var hunt = require('./../index.js'),
 
 
 function isArticle(a) {
-  a.id.should.be.a.String
+  a.id.should.be.a.String;
   a.name.should.be.a.String;
   a.content.should.be.a.String;
   a.author.id.should.be.a.String;
@@ -106,7 +106,7 @@ describe('Testing REST api as root', function () {
       });
   });
 
-  it('Updates content for PUT /:id', function (done) {
+  it('Updates content by PUT /:id', function (done) {
     request({
         'method': 'PUT',
         'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
@@ -149,14 +149,13 @@ describe('Testing REST api as root', function () {
       });
   });
 
-  it('returns `Method not allowed` for POST /:id', function (done) {
+  it('Updates content by POST /:id', function (done) {
     request({
         'method': 'POST',
-        'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/53b43aded6202872e0e3371f',
+        'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
         'headers': {'huntKey': rootKey},
         'form': {
-          'name': 'Da book',
-          'content': 'some content'
+          'content': 'some extra new content'
         },
         'json': true
       },
@@ -164,16 +163,35 @@ describe('Testing REST api as root', function () {
         if (error) {
           done(error);
         } else {
-          response.statusCode.should.be.equal(405);
-          body.status.should.be.equal('Error');
-          body.errors.should.be.an.Array;
-          body.errors.length.should.be.equal(1);
-          body.errors[0].code.should.be.equal(405);
-          body.errors[0].message.should.be.equal('Method not allowed!');
-          done();
+          response.statusCode.should.be.equal(200);
+          body.status.should.be.equal('Ok');
+          body.data.name.should.be.equal(bookName);
+          body.data.content.should.be.equal('some extra new content');
+          body.data.id.should.be.a.equal(articleId);
+          body.data.author.id.should.be.a.String;
+          request({
+              'method': 'GET',
+              'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
+              'headers': {'huntKey': rootKey},
+              'json': true
+            },
+            function (error, response, body) {
+              if (error) {
+                done(error);
+              } else {
+                response.statusCode.should.be.equal(200);
+                body.status.should.be.equal('Ok');
+                body.data.name.should.be.equal(bookName);
+                body.data.content.should.be.equal('some extra new content');
+                body.data.id.should.be.a.equal(articleId);
+                body.data.author.id.should.be.a.String;
+                done();
+              }
+            });
         }
       });
   });
+
 
   it('returns `This API endpoint do not exists!` for some stupid requests', function (done) {
     request({
@@ -303,7 +321,7 @@ describe('Testing REST api as root', function () {
   it('Disallows to call method of non existent instance', function (done) {
     request({
         'method': 'POST',
-        'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/53b43aded6202872e0e3371f/method',
+        'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/54a6168aa027eb0326220518/method',
         'headers': {'huntKey': rootKey},
         'form': {
           'method': 'doSmth',

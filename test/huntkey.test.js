@@ -17,9 +17,9 @@ describe('Authorization by huntkey', function () {
     Hunt.extendRoutes(function (core) {
       core.app.all('*', function (req, res) {
         if (req.user) {
-          res.send(200, req.user.id);
+          res.status(200).send(req.user.id);
         } else {
-          res.send(403);
+          res.status(403).send('Forbidden');
         }
       });
     });
