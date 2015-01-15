@@ -2,6 +2,7 @@
  * Full example, user authorization, REST interface for trophies,
  * socket.io notifications, dialog system
  */
+'use strict';
 
 var
   populateDb = require('./lib/populateDatabase.js'),
