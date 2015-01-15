@@ -1,6 +1,6 @@
 {
   "name": "hunt",
-  "version": "0.2.10",
+  "version": "0.3.0",
   "description": "High level nodejs framework build on top of expressjs, mongoose, sequilize, socketio and passportjs",
   "main": "index.js",
   "engines": {
@@ -68,7 +68,7 @@
     "passport": "0.2.1",
     "passport-facebook": "1.0.3",
     "passport-github": "0.1.5",
-    "passport-google": "0.3.0",
+    "passport-google-oauth": "0.1.5",
     "passport-hash": "0.3.0",
     "passport-intuit": "0.2.0",
     "passport-local": "1.0.0",
