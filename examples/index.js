@@ -30,8 +30,6 @@ var config = {
     'resetPasswordPageTemplate': 'cabinet/resetPasswordStage2',
     'resetPassword': true, //allow user to reset password for account
 
-//authorization by gmail openid account, GET /auth/google
-    'google': true,
 //authorization by Steam openid account, GET /auth/steam
     'steam': true,
 //authorization by Paypal openid account, GET /auth/paypal
@@ -41,6 +39,16 @@ var config = {
 //authorization by Yahoo openid account, GET /auth/yahoo
     'yahoo': true,
 
+// Google OAuth2 Strategy
+//    'GOOGLE_CLIENT_ID': '323040484611-82ju1isetg8dkbvgb.apps.googleusercontent.com',
+//    'GOOGLE_CLIENT_SECRET': 'SECRETSECRET',
+/*
+// Default scopes
+    'GOOGLE_SCOPES': [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email'
+    ]
+*/
 // Github oAuth strategy, GET /auth/github
 //populated from environment values
 //    'GITHUB_CLIENT_ID': '1fca293397b695386e24', //obtainable here - https://github.com/settings/applications
@@ -84,30 +92,30 @@ hunt.extendModel('Trophy', require('./models/trophy.model.js'));
 hunt.extendApp(function (core) {
 //loading client side javascripts/css from public cdns
 
-  core.app.locals.css.push({'href': '//yandex.st/bootstrap/3.1.1/css/bootstrap.min.css', 'media': 'screen'});
-  core.app.locals.javascripts.push({'url': '//yandex.st/jquery/2.0.3/jquery.min.js'});
-  core.app.locals.javascripts.push({'url': '//yandex.st/bootstrap/3.1.1/js/bootstrap.min.js'});
-  core.app.locals.javascripts.push({'url': '//cdnjs.cloudflare.com/ajax/libs/async/0.9.0/async.js'});
-  core.app.locals.javascripts.push({'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js'});
-  core.app.locals.javascripts.push({'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-route.min.js'});
-  core.app.locals.javascripts.push({'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-resource.min.js'});
+  core.app.locals.css.push({ 'href': '//yandex.st/bootstrap/3.1.1/css/bootstrap.min.css', 'media': 'screen' });
+  core.app.locals.javascripts.push({ 'url': '//yandex.st/jquery/2.0.3/jquery.min.js' });
+  core.app.locals.javascripts.push({ 'url': '//yandex.st/bootstrap/3.1.1/js/bootstrap.min.js' });
+  core.app.locals.javascripts.push({ 'url': '//cdnjs.cloudflare.com/ajax/libs/async/0.9.0/async.js' });
+  core.app.locals.javascripts.push({ 'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js' });
+  core.app.locals.javascripts.push({ 'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-route.min.js' });
+  core.app.locals.javascripts.push({ 'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-resource.min.js' });
 
 // we set server side template engine delimiters to be
 // different from the ones used by AngularJS
   core.app.locals.delimiters = '[[ ]]';
 
-  core.app.locals.javascripts.push({'url': '/hunt.js'});
+  core.app.locals.javascripts.push({ 'url': '/hunt.js' });
 
   /*
    * Setting up menu - one of many possible approaches
    */
   core.app.locals.menu = [
-    {'url': '/documentation', 'name': 'Documentation'},
-    {'url': 'http://docs.huntjs.apiary.io/', 'name': 'API Blueprint'},
-    {'url': '/#/events', 'name': 'Events Demo'},
-    {'url': '/#/crud', 'name': 'CRUD Demo'},
-    {'url': '/#/cache', 'name': 'Caching Demo'},
-    {'url': '/#/cluster', 'name': 'Invincibility Demo'}
+    { 'url': '/documentation', 'name': 'Documentation' },
+    { 'url': 'http://docs.huntjs.apiary.io/', 'name': 'API Blueprint' },
+    { 'url': '/#/events', 'name': 'Events Demo' },
+    { 'url': '/#/crud', 'name': 'CRUD Demo' },
+    { 'url': '/#/cache', 'name': 'Caching Demo' },
+    { 'url': '/#/cluster', 'name': 'Invincibility Demo' }
   ];
 });
 
@@ -252,7 +260,7 @@ hunt.on('http:success', function (httpSuccess) {
   if (httpSuccess.body && httpSuccess.body.password) {
     httpSuccess.body.password = '************'; //because we do not want to stream passwords!
   }
-  hunt.emit('broadcast', {'httpSuccess': httpSuccess});
+  hunt.emit('broadcast', { 'httpSuccess': httpSuccess });
 //  console.log(httpSuccess);
 });
 
@@ -278,13 +286,13 @@ hunt.once('start', function (startParameters) {
 //if application is started as background service, it do not have socket.io support
     /*/
      hunt.io.sockets.on('connection', function (socket) {
-      socket.on('pingerUrl', function (payload) {
-        pinger(payload, socket);
-      });
-    });
+     socket.on('pingerUrl', function (payload) {
+     pinger(payload, socket);
+     });
+     });
      //*/
     setInterval(function () {
-      hunt.emit('broadcast', {'time': new Date().toLocaleTimeString()}); //to be broadcasted by socket.io
+      hunt.emit('broadcast', { 'time': new Date().toLocaleTimeString() }); //to be broadcasted by socket.io
     }, 500);
   }
 });
@@ -299,7 +307,7 @@ hunt.on('message:sio', function (event) {
 /*
  * Profiling
  */
-function profilingListener(payload){
+function profilingListener(payload) {
   console.log('>>>PROFILING', this.event, payload, '<<<');
 }
 //various means to perform it:
