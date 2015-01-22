@@ -228,7 +228,7 @@ hunt.extendController('/', function (core, router) {
   /*
    *  route to throw some really vicious error,
    *  that cannot be catch by error reporter middleware, but will be catch by
-   *  *doman* and will not stop the process.
+   *  *domain* and will not stop the process.
    */
   router.get('/baderror', function (req, res) {
     (function () {
