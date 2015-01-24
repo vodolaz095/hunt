@@ -11,13 +11,12 @@ describe('Rendering with jade', function () {
 
   before(function (done) {
     Hunt = hunt({
-      'templateEngine': 'jade',
       'views': __dirname + '/jade-views' //directory for templates
     });
 
     Hunt.extendRoutes(function (core) {
       core.app.get('/', function(req, res){
-        res.render('users', { 'users': users });
+        res.render('users.jade', { 'users': users });
       });
     });
 
@@ -31,7 +30,7 @@ describe('Rendering with jade', function () {
   describe('it works', function () {
       var page;
       before(function (done) {
-        Hunt.app.render('users', { 'users': users }, function(err, html){
+        Hunt.app.render('users.jade', { 'users': users }, function(err, html){
           if(err){
             done(err);
           } else {

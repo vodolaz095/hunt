@@ -152,6 +152,38 @@ hunt.extendController('/', function (core, router) {
   });
 
   /*
+   * Rendering Jade templates
+   */
+  router.get('/jade', function (req, res) {
+    res.render('jade.jade', {
+      'title': 'HuntJS V' + core.version + ' demo',
+      'description': 'We use Jade template!'
+    });
+  });
+
+  /*
+   * Rendering Handlebars templates
+   */
+  router.get('/handlebars', function (req, res) {
+    res.render('hbs.hbs', {
+      'title': 'HuntJS V' + core.version + ' demo',
+      'description': 'We use Handlebars template!',
+      'layout':false
+    });
+  });
+
+  /*
+   * Rendering Swig templates
+   */
+  router.get('/swig', function (req, res) {
+    res.render('swig.swig', {
+      'title': 'HuntJS V' + core.version + ' demo',
+      'description': 'We use Swig template!',
+      'layout':false
+    });
+  });
+
+  /*
    * Routes to test notifications
    */
   router.post('/notify_me', function (req, res) {
@@ -328,6 +360,7 @@ function profilingListener(payload) {
  * and what port to use (from config or process.env.PORT or default - 3000)
  * we recommend 1 process per CPU core
  */
+
 if (hunt.startCluster({ 'web': 2 })) { // Hunt#startCluster returns true for MASTER process
   hunt.once('start', function () {
 //we populate database in master process
