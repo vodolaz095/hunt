@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Tutorial: profiling</title>
+    <title>JSDoc: Tutorial: templating</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,62 +17,65 @@
 
 <div id="main">
 
-    <h1 class="page-title">Tutorial: profiling</h1>
+    <h1 class="page-title">Tutorial: templating</h1>
 
     <section>
 
 <header>
     
 
-    <h2>profiling</h2>
+    <h2>templating</h2>
 </header>
 
 <article>
-    <p>There is a way to profile database interactions in Huntjs by observing events emitted in namespace of
-<code>profiling:*</code></p>
-<h2>Events and namespaces</h2><p>HuntJS uses the <a href="https://www.npmjs.org/package/eventemitter2">Event Emitter2</a> to help catching the event needed.
-You can see broad description of <a href="/documentation/tutorial-events.html">this in tutorial of events</a></p>
-<h2>Profiling the redis database</h2><p>There are events emitted on every redis command. Namespace is <code>profiling:redis:*</code> with namespaces consisted of redis command names and arguments' values</p>
+    <p>We can use few templating engines in HuntJS applications.</p>
+<p>The <a href="https://npmjs.org/package/jade">Jade</a> is used for <code>.jade</code> templates.
+To use it from the box, create <code>someJadeTemplate.jade</code> file in <code>views/</code>
+directory configured by <a href="/documentation/config.html">config.views</a>, and call it in
+code of controller.</p>
+<p>The <a href="https://www.npmjs.com/package/hogan-express">Hogan.js</a> can be used
+with <code>.html</code> files being treated as templates in views directory.
+It is worth notice, that <a href="http://mustache.github.io/mustache.5.html#Set-Delimiter">default delimeters</a>
+are <code>[[ ... ]]</code>, and not <code>{{ ... }}</code>.
+This is done for compatibility with <a href="https://angularjs.org/">AngularJS</a>,
+that use <code>{{ ... }}</code> as delimeters in views and partials. So, we can render
+angularjs partials on server side, without conflicts.
+Also we can use code like this <code>[[&amp; yield ]]</code> to output variable
+<code>as-is</code> without html escaping.
+To use it from the box, create <code>someHoganJSTemplate.html</code> file in <code>views/</code>
+directory configured by <a href="/documentation/config.html">config.views</a>,
+and call it in code of controller.</p>
+<p>The <a href="https://www.npmjs.com/package/express-handlebars">Handelbars</a> templates
+are used with <code>.hbs</code> files. They do not offer changing default delimeters
+instead of <code>Hogan.js</code>, but offers more features. To use it from the box,
+create <code>someHandlebarsTemplate.hbs</code> file in <code>views/</code> directory
+ configured by <a href="/documentation/config.html">config.views</a>,
+and call it in code of controller.</p>
 <pre class="prettyprint source lang-javascript"><code>
-    var Hunt  = require('hunt')({
-      //some config options
+
+    var
+      config = {
+        'views': __dirname+'/views'
+      },
+      hunt = require('hunt')(config);
+
+    hunt.extendController(function(core, router){
+
+      router.get('/jade', function(request, response){
+        response.render('someJadeTemplate', {'title':'Jade is cool!'});
+      });
+
+      router.get('/hogan', function(request, response){
+        response.render('someHoganJSTemplate', {'title':'HoganJS is cool!'});
+      });
+
+      router.get('/handlebars', function(request, response){
+        response.render('someHandlebarsTemplate', {'title':'Handlebars is cool!'});
+      });
+
     });
 
-    function listener(payload){
-      console.log('We received event '+this.event+' with payload', payload);
-    }
-
-    //All this listeners will be fired on
-    //redis command `set someKeyName someKeyValue`
-
-    Hunt.on('profiling:*', listener);
-    Hunt.on('profiling:redis:*', listener);
-    Hunt.on('profiling:redis:set:*', listener);
-    Hunt.on('profiling:redis:set:someKeyName:*', listener);
-    Hunt.on('profiling:redis:set:someKeyName:someKeyValue', listener);
-    Hunt.on('start', function(){
-      Hunt.redisClient.set('someKeyName','someKeyValue');
-    });
-    Hunt.startBackground();</code></pre><h2>Profiling the Mongo database</h2><pre class="prettyprint source lang-javascript"><code>
-    var Hunt  = require('hunt')({
-      //some config options
-    });
-
-    function listener(payload){
-      console.log('We received event '+this.event+' with payload', payload);
-    }
-
-    //All this listeners will be fired on
-    //when mongoose initialize collection of `users` in `hunt_dev` database
-
-    Hunt.on('profiling:*', listener);
-    Hunt.on('profiling:mongoose:*', listener);
-    Hunt.on('profiling:mongoose:hunt_dev:*', listener);
-    Hunt.on('profiling:mongoose:hunt_dev:users:*', listener);
-    Hunt.on('profiling:mongoose:hunt_dev:users:ensureIndex', listener);
-    Hunt.on('profiling:mongoose:hunt_dev:users:find:*', listener);
-    Hunt.on('profiling:mongoose:hunt_dev:users:find:toArray', listener);
-    Hunt.startBackground();</code></pre><h2>Profiling the Sequilize</h2><p>Will be done shortly</p>
+    hunt.startWebServer();</code></pre>
 </article>
 
 </section>
