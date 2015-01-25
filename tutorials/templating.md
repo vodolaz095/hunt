@@ -1,11 +1,6 @@
-We can use few templating engines in HuntJS applications.
+We can use few template engines in HuntJS applications.
 
-The [Jade](https://npmjs.org/package/jade) is used for `.jade` templates.
-To use it from the box, create `someJadeTemplate.jade` file in `views/`
-directory configured by [config.views](/documentation/config.html), and call it in
-code of controller.
-
-The [Hogan.js](https://www.npmjs.com/package/hogan-express) can be used
+The default one, [Hogan.js](https://www.npmjs.com/package/hogan-express) can be used
 with `.html` files being treated as templates in views directory.
 It is worth notice, that [default delimeters](http://mustache.github.io/mustache.5.html#Set-Delimiter)
 are `[[ ... ]]`, and not `{{ ... }}`.
@@ -19,8 +14,13 @@ directory configured by [config.views](/documentation/config.html),
 and call it in code of controller.
 
 
+The [Jade](https://npmjs.org/package/jade) is used for `.jade` templates.
+To use it from the box, create `someJadeTemplate.jade` file in `views/`
+directory configured by [config.views](/documentation/config.html), and call it in
+code of controller.
+
 The [Handelbars](https://www.npmjs.com/package/express-handlebars) templates
-are used with `.hbs` files. They do not offer changing default delimeters
+are used with files with extension of `hbs`. They do not offer changing default delimeters
 instead of `Hogan.js`, but offers more features. To use it from the box,
 create `someHandlebarsTemplate.hbs` file in `views/` directory
  configured by [config.views](/documentation/config.html),
@@ -40,7 +40,7 @@ and call it in code of controller.
     hunt.extendController(function(core, router){
 
       router.get('/jade', function(request, response){
-        response.render('someJadeTemplate', {'title':'Jade is cool!'});
+        response.render('someJadeTemplate.jade', {'title':'Jade is cool!'});
       });
 
       router.get('/hogan', function(request, response){
@@ -48,7 +48,7 @@ and call it in code of controller.
       });
 
       router.get('/handlebars', function(request, response){
-        response.render('someHandlebarsTemplate', {'title':'Handlebars is cool!'});
+        response.render('someHandlebarsTemplate.hbs', {'title':'Handlebars is cool!'});
       });
 
     });
