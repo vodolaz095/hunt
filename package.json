@@ -1,6 +1,6 @@
 {
   "name": "hunt",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "High level nodejs framework build on top of expressjs, mongoose, sequilize, socketio and passportjs",
   "main": "index.js",
   "engines": {

@@ -210,58 +210,6 @@ HuntJS supports both IPv4 and IPv6 addresses as described
 
             
 
-            <td class="description last">enable mongo database support,
-default is true - enabled</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>templateEngine</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">template engine to use,
-default is <a href="https://github.com/vol4ok/hogan-express%20"> hogan-express</a>
-- <a href="http://mustache.github.io/%20"> mustache</a> based template engine with layouts,
-partials and locals,
-other options are <a href="http://paularmstrong.github.io/swig/%20"> swig</a>,
-<a href="http://npmjs.org/package/ejs%20"> ejs </a> and <a href="http://npmjs.org/package/jade%20"> jade</a>.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>enableMongoose</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
             <td class="description last">enable mongo support via mongoose orm, default is true - enabled</td>
         </tr>
 
@@ -410,9 +358,9 @@ for example, 'public': __dirname+'/public'</td>
 
             
 
-            <td class="description last">directory for templates, used by template
-engine for rendering static HTML pages on server side.
-<a href="http://expressjs.com/api.html#app-settings">http://expressjs.com/api.html#app-settings</a></td>
+            <td class="description last">directory for <a href="http://expressjs.com/api.html#app-settings%20"> templates</a>,
+used by template engine for rendering static HTML pages on server side.
+See this <a href="https://huntjs.herokuapp.com/documentation/tutorial-templating.html%20"> tutorial</a> for details</td>
         </tr>
 
     
@@ -810,13 +758,13 @@ default is false, disabled, and for a good cause <a href="https://groups.google.
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:http:*">http:*</a></li><li><a href="Hunt.html#event:http:error">http:error</a></li><li><a href="Hunt.html#event:http:success">http:success</a></li><li><a href="Hunt.html#event:message:sio">message:sio</a></li><li><a href="Hunt.html#event:profiling:*">profiling:*</a></li><li><a href="Hunt.html#event:profiling:mongoose:*">profiling:mongoose:*</a></li><li><a href="Hunt.html#event:profiling:redis:*">profiling:redis:*</a></li><li><a href="Hunt.html#event:user:*">user:*</a></li><li><a href="Hunt.html#event:user:notify:*">user:notify:*</a></li><li><a href="Hunt.html#event:user:notify:all">user:notify:all</a></li><li><a href="Hunt.html#event:user:notify:email">user:notify:email</a></li><li><a href="Hunt.html#event:user:notify:sio">user:notify:sio</a></li><li><a href="Hunt.html#event:user:save">user:save</a></li><li><a href="Hunt.html#event:user:signin:*">user:signin:*</a></li><li><a href="Hunt.html#event:user:signin:local">user:signin:local</a></li><li><a href="Hunt.html#event:user:signin:providerName">user:signin:providerName</a></li><li><a href="Hunt.html#event:user:signup">user:signup</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-authorization.html">authorization</a></li><li><a href="tutorial-events.html">events</a></li><li><a href="tutorial-hello.html">hello</a></li><li><a href="tutorial-modelToRest.html">modelToRest</a></li><li><a href="tutorial-profiling.html">profiling</a></li><li><a href="tutorial-telnetApplication.html">telnetApplication</a></li><li><a href="tutorial-webapplication.html">webapplication</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:http:*">http:*</a></li><li><a href="Hunt.html#event:http:error">http:error</a></li><li><a href="Hunt.html#event:http:success">http:success</a></li><li><a href="Hunt.html#event:message:sio">message:sio</a></li><li><a href="Hunt.html#event:profiling:*">profiling:*</a></li><li><a href="Hunt.html#event:profiling:mongoose:*">profiling:mongoose:*</a></li><li><a href="Hunt.html#event:profiling:redis:*">profiling:redis:*</a></li><li><a href="Hunt.html#event:user:*">user:*</a></li><li><a href="Hunt.html#event:user:notify:*">user:notify:*</a></li><li><a href="Hunt.html#event:user:notify:all">user:notify:all</a></li><li><a href="Hunt.html#event:user:notify:email">user:notify:email</a></li><li><a href="Hunt.html#event:user:notify:sio">user:notify:sio</a></li><li><a href="Hunt.html#event:user:save">user:save</a></li><li><a href="Hunt.html#event:user:signin:*">user:signin:*</a></li><li><a href="Hunt.html#event:user:signin:local">user:signin:local</a></li><li><a href="Hunt.html#event:user:signin:providerName">user:signin:providerName</a></li><li><a href="Hunt.html#event:user:signup">user:signup</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-authorization.html">authorization</a></li><li><a href="tutorial-events.html">events</a></li><li><a href="tutorial-hello.html">hello</a></li><li><a href="tutorial-modelToRest.html">modelToRest</a></li><li><a href="tutorial-profiling.html">profiling</a></li><li><a href="tutorial-telnetApplication.html">telnetApplication</a></li><li><a href="tutorial-templating.html">templating</a></li><li><a href="tutorial-webapplication.html">webapplication</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha10</a> on Thu Jan 15 2015 18:55:55 GMT+0300 (MSK)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha10</a> on Sun Jan 25 2015 02:21:30 GMT+0300 (MSK)
 </footer>
 
 <script> prettyPrint(); </script>
