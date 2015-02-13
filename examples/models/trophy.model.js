@@ -15,7 +15,7 @@ module.exports = exports = function (core) {
   //ACL check for what fields can user populate on creation
   TrophySchema.statics.canCreate = function (user, callback) {
     if (user) {
-      callback(null, true, 'author');
+      callback(null, true, ['name', 'scored', 'priority']);
     } else {
       callback(null, false);
     }
@@ -31,7 +31,7 @@ module.exports = exports = function (core) {
 //ACL check for readable fields in this current document
 //everybody can read 'id', 'name', 'scored', 'priority'
   TrophySchema.methods.canRead = function (user, callback) {
-    callback(null, true, ['id', 'name', 'scored', 'priority']);
+    callback(null, true, ['id', 'name', 'scored', 'priority'], ['author']);
   };
 
 //ACL check for ability to update some fields in this current document

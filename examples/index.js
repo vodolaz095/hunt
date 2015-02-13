@@ -70,7 +70,9 @@ var config = {
 //    'FACEBOOK_CLIENT_ID': '1415057178733225',
 //    'FACEBOOK_CLIENT_SECRET': 'SECRETSECRET'
   },
-  'io': true,
+  'huntKey': false, //disallow huntKey authorization by GET query field and POST,PUT,DELETE body parameter. Default is false - denied
+  'huntKeyHeader': true, //allow huntKey authorization by header. Default is false - denied
+  'io': true, //enable socket.io support
   'dialog': true,//enable dialogs api on /api/dialog
   'public': __dirname + '/public', //directory for assets - css, images, client side javascripts
   'views': __dirname + '/views', //directory for templates

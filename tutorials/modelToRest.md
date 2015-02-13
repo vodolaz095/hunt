@@ -29,7 +29,7 @@ to access control lists for every operation and of field object.
       //ACL check for what fields can user populate on creation
       TrophySchema.statics.canCreate = function (user, callback) {
         if (user) {
-          callback(null, true, 'author');
+          callback(null, true, ['name','scored','priority']);
         } else {
           callback(null, false);
         }
@@ -38,14 +38,26 @@ to access control lists for every operation and of field object.
     //ACL check for what fields can user list and filter
     // {} is filter used for getting list of documents, for example
     // {} - all, {'scored':true } - for only scored, and so on
+    // for authorized users we populate the field of `author`
       TrophySchema.statics.listFilter = function (user, callback) {
-        callback(null, {}, ['id', 'name', 'scored', 'priority']);
+        if (user) {
+          callback(null, {}, ['id', 'name', 'scored', 'priority'],['author']);
+        } else {
+          callback(null, {}, ['id', 'name', 'scored', 'priority']);
+        }
       };
     
     //ACL check for readable fields in this current document
     //everybody can read 'id', 'name', 'scored', 'priority'
+    //banned users cannot read the entries
+    //authorized users can see the author of Trophy
       TrophySchema.methods.canRead = function (user, callback) {
-        callback(null, true, ['id', 'name', 'scored', 'priority']);
+        if (user) {
+          callback(null, !user.isBanned, ['id', 'name', 'scored', 'priority'], ['author']);
+        } else {
+          callback(null, true, ['id', 'name', 'scored', 'priority']);
+        }
+
       };
     
     //ACL check for ability to update some fields in this current document
@@ -78,6 +90,7 @@ to access control lists for every operation and of field object.
      * Exporting Trophy model as REST interface
      */
     hunt.exportModelToRest({
+      'ownerId':'author', //what field stories the author's id
       'mountPount': '/api/v1/trophy',
       'modelName': 'Trophy'
     });

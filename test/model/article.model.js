@@ -31,7 +31,7 @@ module.exports = exports = function (core) {
 
   ArticleSchema.statics.canCreate = function (user, callback) {
     if (user) { //only authorized user can create new article
-      callback(null, true, 'author');
+      callback(null, true, ['name', 'content']);
     } else {
       callback(null, false);
     }
@@ -53,10 +53,10 @@ module.exports = exports = function (core) {
     if (user) {
       if (user.root) {
 //root can list all documents and all document fields, with populating author
-        callback(null, true, ['id', 'name', 'content', 'author'], ['author']);
+        callback(null, true, ['id', 'name', 'content'], ['author']);
       } else {
 //non root user can see documents, where he/she is an owner
-        callback(null, (this.author == user.id), ['id', 'name', 'content']);
+        callback(null, (this.author.equals(user.id)), ['id', 'name', 'content']);
       }
     } else {
       callback(null, false); //non authorized user cannot read anything!
