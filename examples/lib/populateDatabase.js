@@ -1,3 +1,5 @@
+"use strict";
+
 var preys = [
   {
     'name': 'Alan Schaefer',
@@ -28,24 +30,43 @@ var preys = [
     'name': 'Anna Goncalves',
     'scored': false,
     'priority': 0
-  },
+  }
 ];
 
+//populating the trophies' collection in database
 module.exports = exports = function (hunt) {
-  //populating the trophies' collection in database
-  hunt.model.Trophy.remove({}, function (error) {
-    if (error) {
-      throw error;
-    } else {
-      hunt.async.map(preys, function (prey, cb) {
-        hunt.model.Trophy.create(prey, cb);
-      }, function (error, preysSaved) {
+  var gameMasterId;
+  hunt.async.series([
+    function (cb) {
+      hunt.model.Trophy.remove({}, cb);
+    },
+    function (cb) {
+      hunt.model.User.remove({ 'huntKey': 'i_am_game_master_grr' }, cb);
+    },
+    function (cb) {
+      hunt.model.User.create({
+        'displayName': 'Gamemaster',
+        'root': false,
+        'huntKey': 'i_am_game_master_grr'
+      }, function (error, userCreated) {
         if (error) {
-          throw error;
+          cb(error);
         } else {
-          console.log('' + preysSaved.length + ' trophies recorded.');
+          console.log('Gamemaster created with ' + userCreated.huntKey);
+          gameMasterId = userCreated.id;
+          cb(null);
         }
       });
+    },
+    function (cb) {
+      hunt.async.map(preys, function (prey, clb) {
+        prey.author = gameMasterId;
+        hunt.model.Trophy.create(prey, clb);
+      }, cb);
+    }
+  ], function (error) {
+    if (error) {
+      throw error;
     }
   });
 };

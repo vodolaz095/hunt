@@ -34,26 +34,55 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
           redirectTo: '/'
         });
     }])
-  .factory('trophy', ['$resource', function ($resource) {
-    //https://stackoverflow.com/questions/13269882/angularjs-resource-restful-example
-    //https://stackoverflow.com/questions/16387202/angularjs-resource-query-result-array-as-a-property
-    return $resource('/api/v1/trophy/:id', {'id': '@id'}, {
-      'query': {
-        'method': 'GET',
-        'transformResponse': function (data) {
-          return angular.fromJson(data).data
+  .factory('huntModel', ['$resource', function ($resource) {
+    return function (modelName) {
+      //https://stackoverflow.com/questions/13269882/angularjs-resource-restful-example
+      //https://stackoverflow.com/questions/16387202/angularjs-resource-query-result-array-as-a-property
+      //http://jsfiddle.net/wortzwei/bez79/
+      return $resource('/api/v1/' + modelName + '/:id', { 'id': '@id' }, {
+        'query': {
+          'method': 'GET',
+          'transformResponse': function (data) {
+            var wrappedResult = angular.fromJson(data);
+            wrappedResult.data.$metadata = wrappedResult.metadata;
+            return wrappedResult.data;
+          },
+          'isArray': true,
+          'interceptor': {
+            response: function (response) {
+              response.resource.$metadata = response.data.$metadata;
+              return response.resource;
+            }
+          }
         },
-        'isArray': true
-      },
-      'get': {
-        'method': 'GET',
-        'transformResponse': function (data) {
-          return angular.fromJson(data).data
+        'get': {
+          'method': 'GET',
+          'transformResponse': function (data) {
+            var wrappedResult = angular.fromJson(data);
+            wrappedResult.data.$metadata = wrappedResult.metadata;
+            return wrappedResult.data;
+          },
+          'interceptor': {
+            response: function (response) {
+              response.resource.$metadata = response.data.$metadata;
+              return response.resource;
+            }
+          },
+          'isArray': false
         },
-        'isArray': false
-      },
-      'create': { method: 'post' }
-    });
+        'create': {
+          'method': 'POST',
+          'isArray': false
+        },
+        'save': {
+          'method': 'PUT',
+          'isArray': false
+        }
+      });
+    };
+  }])
+  .factory('trophy', ['huntModel', function (huntModel) {
+    return huntModel('trophy');
   }])
   .factory('socket', function ($rootScope) {
     var socket = io();
@@ -74,20 +103,13 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
               callback.apply(socket, args);
             }
           });
-        })
+        });
       }
     };
   })
-  .controller('trophyController', ['$scope', '$http', function ($scope, $http) {
+  .controller('trophyController', ['$scope', function ($scope) {
     $scope.update = function () {
-      $http.post('/api/v1/trophy', $scope.trophy)//performs the default behaviour for $resource entiry.$save
-        .success(function (data, status) {
-          //$scope.$apply();
-        })
-        .error(function (data, status) {
-          console.log('error saving');
-          //$scope.$apply();
-        });
+      $scope.trophy.$save();
     };
   }])
   .controller('notificationController', ['$scope', 'socket', function ($scope, socket) {
@@ -151,7 +173,7 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
       });
 
   }])
-  .controller('crudController', ['$scope', '$resource', 'socket', 'trophy', function ($scope, $resource, socket, trophy) {
+  .controller('crudController', ['$scope', 'socket', 'trophy', function ($scope, socket, trophy) {
     $scope.trophies = [];
     trophy.query(function (trophies) {
       $scope.trophies = trophies;
@@ -167,16 +189,16 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
           }
         }
       }
-    })
+    });
   }])
 
   .controller('eventsController', ['$scope', 'socket', function ($scope, socket) {
     $scope.recentVisits = [];
-    $scope.pingerAnswer = "Ready to ping!";
-    $scope.pingerUrl = "http://";
+    $scope.pingerAnswer = 'Ready to ping!';
+    $scope.pingerUrl = 'http://';
 
     $scope.startPinging = function () {
-      $scope.pingerAnswer = "Starting to ping...";
+      $scope.pingerAnswer = 'Starting to ping...';
       socket.emit('pingerUrl', $scope.pingerUrl, function () {
         //event is send!
       });

@@ -43,13 +43,12 @@ var config = {
 // Google OAuth2 Strategy
 //    'GOOGLE_CLIENT_ID': '323040484611-82ju1isetg8dkbvgb.apps.googleusercontent.com',
 //    'GOOGLE_CLIENT_SECRET': 'SECRETSECRET',
-/*
-// Default scopes
-    'GOOGLE_SCOPES': [
-      'https://www.googleapis.com/auth/userinfo.profile',
-      'https://www.googleapis.com/auth/userinfo.email'
-    ]
-*/
+
+// Default scopes for Google OAuth 2.0 strategy
+//   'GOOGLE_SCOPES': [
+//      'https://www.googleapis.com/auth/userinfo.profile',
+//      'https://www.googleapis.com/auth/userinfo.email'
+//   ],
 // Github oAuth strategy, GET /auth/github
 //populated from environment values
 //    'GITHUB_CLIENT_ID': '1fca293397b695386e24', //obtainable here - https://github.com/settings/applications
@@ -170,7 +169,7 @@ hunt.extendController('/', function (core, router) {
     res.render('hbs.hbs', {
       'title': 'HuntJS V' + core.version + ' demo',
       'description': 'We use Handlebars template!',
-      'layout':false
+      'layout': false
     });
   });
 
@@ -181,7 +180,7 @@ hunt.extendController('/', function (core, router) {
     res.render('swig.swig', {
       'title': 'HuntJS V' + core.version + ' demo',
       'description': 'We use Swig template!',
-      'layout':false
+      'layout': false
     });
   });
 
@@ -353,6 +352,7 @@ function profilingListener(payload) {
 //hunt.on('profiling:mongoose:hunt_dev:*', profilingListener);
 //hunt.on('profiling:mongoose:hunt_dev:users:ensureIndex', profilingListener);
 //hunt.onAny(profilingListener);
+hunt.on('start', profilingListener);
 
 /*
  * Starting cluster of webserveres
@@ -362,15 +362,18 @@ function profilingListener(payload) {
  * and what port to use (from config or process.env.PORT or default - 3000)
  * we recommend 1 process per CPU core
  */
-
-if (hunt.startCluster({ 'web': 2 })) { // Hunt#startCluster returns true for MASTER process
-  hunt.once('start', function () {
+hunt.once('start', function (payload) {
 //we populate database in master process
+  if (payload.type === 'background') {
     populateDb(hunt);
     setInterval(function () {
       populateDb(hunt);
     }, 60 * 1000);
-  });
+  }
+});
+
+if (hunt.startCluster({ 'web': 2 })) { // Hunt#startCluster returns true for MASTER process
+  console.log('We have started master process #' + process.pid);
 } else {
   console.log('We have started child process #' + process.pid);
 }
