@@ -939,7 +939,7 @@ function Hunt(config) {
    */
   this.startBackGroundCluster = function (maxProcesses) {
     console.log(('Trying to start Hunt as background cluster service...').magenta);
-    this.startCluster({ 'web': 0, 'telnet': 0, 'background': maxProcesses })
+    return this.startCluster({ 'web': 0, 'telnet': 0, 'background': maxProcesses })
   };
 
   /**
