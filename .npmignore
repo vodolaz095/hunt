@@ -32,3 +32,5 @@ docs
 .idea/
 .DS_Store
 *.geany
+
+localhost:9050
