@@ -37,7 +37,7 @@ describe('Local strategy test', function () {
   describe('trying to signup user by POST /auth/signup', function () {
     var r1, r2, r3, b1, b2, b3, evnt;
     before(function (done) {
-      Hunt.once('user:notify:email', function (emailOrdered) {
+      Hunt.once(['user', 'notify', 'email', '*'], function (emailOrdered) {
         evnt = emailOrdered;
         setTimeout(done, 500);
       });
@@ -117,8 +117,10 @@ describe('Local strategy test', function () {
       b3.isBusy.should.be.false;
     });
 
+    var welcomeLink;
     it('makes Hunt core emit event of notify:email with proper structure', function () {
       huntKey = evnt.user.huntKey;
+      welcomeLink = evnt.user.keychain.welcomeLink;
       evnt.user.huntKey.should.be.a.String;
       evnt.user.displayName.should.be.equal('spam2me');
       evnt.user.keychain.email.should.be.equal('spam2me@example.org');
@@ -137,7 +139,7 @@ describe('Local strategy test', function () {
     });
 
     after(function (done) {
-      request('http://localhost:' + port + '/auth/confirm/' + huntKey, function (err, response, body) {
+      request('http://localhost:' + port + '/auth/confirm/' + welcomeLink, function (err, response, body) {
         if (err) {
           done(err);
         } else {
