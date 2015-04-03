@@ -149,15 +149,18 @@ describe('Users model', function () {
         var user, userBeingActivated;
         before(function (done) {
           Hunt.model.User.create({
-            'email': 'oneByhuntKey@teksi.ru',
             'huntKey': 'vseBydetHoroshooneByhuntKey',
+            'keychain':{
+              'email': 'oneByhuntKey@teksi.ru',
+              'welcomeLink':'lalala'
+            },
             'accountVerified': false
           }, function (err, userCreated) {
             if (err) {
               throw err;
             }
             user = userCreated;
-            Hunt.model.User.findOneByHuntKeyAndVerifyEmail('vseBydetHoroshooneByhuntKey', function (err, userActivated) {
+            Hunt.model.User.findOneByHuntKeyAndVerifyEmail('lalala', function (err, userActivated) {
               userBeingActivated = userActivated;
               done();
             });
@@ -210,15 +213,18 @@ describe('Users model', function () {
           user.remove(done);
         });
       });
-
+/*/
       describe('outdated huntKey', function () {
         var user,
           userBeingActivated,
           errorThrown;
         before(function (done) {
           Hunt.model.User.create({
-            'email': 'oneByhuntKey@teksi.ru',
             'huntKey': 'vseBydetHoroshooneByhuntKey',
+            'keychain':{
+              'email': 'oneByhuntKey@teksi.ru',
+              'welcomeLink':'blablabla'
+            },
             'accountVerified': false,
             'huntKeyCreatedAt': new Date(1986, 1, 12, 11, 45, 36, 21)
           }, function (err, userCreated) {
@@ -226,7 +232,7 @@ describe('Users model', function () {
               throw err;
             }
             user = userCreated;
-            Hunt.model.User.findOneByHuntKeyAndVerifyEmail('vseBydetHoroshooneByhuntKey', function (err, userActivated) {
+            Hunt.model.User.findOneByHuntKeyAndVerifyEmail('blablabla', function (err, userActivated) {
               errorThrown = err;
               userBeingActivated = userActivated;
               done();
@@ -247,18 +253,19 @@ describe('Users model', function () {
           user.remove(done);
         });
       });
-
+//*/
     });
     describe('@findOneByHuntKeyAndResetPassword works for ', function () {
       describe('good api key', function () {
         var user, userWithPasswordReseted;
         before(function (done) {
           async.waterfall([
-
               function (cb) {
                 Hunt.model.User.create({
-                  'email': 'iForgotMyPassWordIamStupid@teksi.ru',
-                  'huntKey': 'iForgotMyPassWordIamStupid1111',
+                  'keychain':{
+                    'email': 'iForgotMyPassWordIamStupid@teksi.ru',
+                    'welcomeLink':'iForgotMyPassWordIamStupid1111'
+                  },
                   'accountVerified': true,
                   'huntKeyCreatedAt': new Date()
                 }, function (err, userCreated) {
@@ -283,11 +290,8 @@ describe('Users model', function () {
               }
             ],
             function (err, userChanged2) {
-              if (err) {
-                throw err;
-              }
               userWithPasswordReseted = userChanged2;
-              done();
+              done(err);
             });
         });
 

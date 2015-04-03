@@ -37,7 +37,7 @@ describe('Local strategy test', function () {
   describe('trying to signup user by POST /auth/signup', function () {
     var r1, r2, r3, b1, b2, b3, evnt;
     before(function (done) {
-      Hunt.once(['user', 'notify', 'email', '*'], function (emailOrdered) {
+      Hunt.once('user:notify:email:*', function (emailOrdered) {
         evnt = emailOrdered;
         setTimeout(done, 500);
       });
