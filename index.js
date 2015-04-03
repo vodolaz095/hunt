@@ -760,6 +760,7 @@ function Hunt(config) {
   this.startBackGround = function () {
     console.log('Trying to start Hunt as background service...'.magenta);
     injectModels(this);
+    buildExpressApp(this);
     prepared = true;
     /**
      * Emitted when Hunt is started as background process
@@ -836,6 +837,7 @@ function Hunt(config) {
     console.log(('Trying to start Hunt as telnet server on port ' + p + '...').magenta);
     this.extendCore('telnetHandler', require('./lib/telnet/telnet.js'));
     injectModels(this);
+    buildExpressApp(this);
     buildTelnet(this);
     prepared = true;
     var RAIServer = require("rai").RAIServer,
