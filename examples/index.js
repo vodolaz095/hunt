@@ -126,15 +126,6 @@ hunt.extendApp(function (core) {
  */
 
 hunt.extendController('/', function (core, router) {
-  if (core.config.env === 'production') {
-    router.use(function (req, res, next) {
-      if (req.protocol === 'http') {
-        res.redirect(core.config.hostUrl);
-      } else {
-        next();
-      }
-    });
-  }
 
   /*
    * Setting middleware to irritate user who have not verified his account
