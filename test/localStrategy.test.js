@@ -9,7 +9,6 @@ var should = require('should'),
 
 
 describe('Local strategy test', function () {
-  this.timeout(3000);
   afterEach(function (done) {
     setTimeout(done, 1500);
   });
