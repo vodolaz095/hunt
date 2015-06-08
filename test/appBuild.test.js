@@ -126,10 +126,10 @@ describe('Hunt builds single threaded background application', function () {
 
   describe('Hunt.extendCore', function () {
     it('saves static value to hunt core', function () {
-      Hunt.someVar.should.be.equal(42);
+      Hunt.someVar.should.be.eql(42);
     });
     it('executes factory function to hunt core', function () {
-      (Hunt.someFunc).should.be.equal(42);
+      (Hunt.someFunc).should.be.eql(42);
     });
   });
 
@@ -279,16 +279,16 @@ describe('Hunt builds single threaded webserver application', function () {
 
     it('has proper response for case 1', function () {
       response1.statusCode.should.be.equal(403);
-      response1.body.should.be.equal('OK')
+      response1.body.should.be.equal('OK');
     });
     it('has proper response for case 2', function () {
       response2.statusCode.should.be.equal(404);
-      response2.body.should.be.equal('somePath')
+      response2.body.should.be.equal('somePath');
     });
 
     it('has proper response for case 3', function () {
       response3.statusCode.should.be.equal(200);
-      response3.body.should.be.equal('Hello?')
+      response3.body.should.be.equal('Hello?');
     });
   });
 
@@ -325,17 +325,17 @@ describe('Hunt builds single threaded webserver application', function () {
   describe('it starts web server', function () {
     it('responds on / properly with respect to routes and middlewares', function () {
       response1.body.should.be.equal('OK');
-      response1.headers.globmiddleware.should.be.eql(42);
-      response1.headers.devmiddleware.should.be.eql(42);
+      response1.headers.globmiddleware.should.be.equal('42');
+      response1.headers.devmiddleware.should.be.equal('42');
       response1.headers['x-powered-by'].should.be.equal('Hunt v' + Hunt.version);
       should.not.exist(response1.headers.prodMiddleware);
       should.not.exist(response1.headers.devMiddleware1);
     });
     it('responds on /somePath properly with respect to routes and middlewares', function () {
       response2.body.should.be.equal('somePath');
-      response2.headers.globmiddleware.should.be.eql(42);
-      response2.headers.devmiddleware.should.be.eql(42);
-      response2.headers.devmiddleware1.should.be.eql(42);
+      response2.headers.globmiddleware.should.be.equal('42');
+      response2.headers.devmiddleware.should.be.equal('42');
+      response2.headers.devmiddleware1.should.be.equal('42');
       response2.headers['x-powered-by'].should.be.equal('Hunt v' + Hunt.version);
       should.not.exist(response1.headers.prodMiddleware);
     });
