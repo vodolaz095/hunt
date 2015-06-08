@@ -9,7 +9,7 @@ describe('Users model', function () {
   before(function (done) {
     Hunt = hunt();
     Hunt.once('start', function () {
-      done();
+      Hunt.model.User.remove({}, done);
     });
     Hunt.startBackGround();
   });

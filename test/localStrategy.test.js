@@ -9,6 +9,7 @@ var should = require('should'),
 
 
 describe('Local strategy test', function () {
+  this.timeout(3000);
   afterEach(function (done) {
     setTimeout(done, 1500);
   });
@@ -147,7 +148,7 @@ describe('Local strategy test', function () {
             if (err1) {
               done(err1);
             } else {
-              if(userFound){
+              if (userFound) {
                 userFound.accountVerified.should.be.true;
                 userFound.remove(done);
               } else {
@@ -180,7 +181,7 @@ describe('Local strategy test', function () {
           request({
             'method': 'POST',
             'url': 'http://localhost:' + port + '/auth/restoreAccount',
-            'form': { 'email': 'donotspam2me@example.org' }
+            'form': {'email': 'donotspam2me@example.org'}
           }, cb);
         }
       ], function (err) {
