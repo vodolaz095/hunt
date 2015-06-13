@@ -271,14 +271,13 @@ describe('Private messages', function () {
           messages.should.be.instanceOf(Array);
           messages.length.should.be.equal(3);
 
-          messages[0].to.should.be.eql(User2._id.toString());
-          messages[0].toProfile.displayName.should.be.eql(User2.displayName);
-          messages[0].toProfile.gravatar.should.be.eql(User2.gravatar);
+          messages[0].to.id.should.be.eql(User2._id.toString());
+          messages[0].to.displayName.should.be.eql(User2.displayName);
+          messages[0].to.gravatar.should.be.eql(User2.gravatar);
 
-          messages[0].from.should.be.eql(User1._id.toString());
-          messages[0].from.should.be.eql(User1._id.toString());
-          messages[0].fromProfile.displayName.should.be.eql(User1.displayName);
-          messages[0].fromProfile.gravatar.should.be.eql(User1.gravatar);
+          messages[0].from.id.should.be.eql(User1._id.toString());
+          messages[0].from.displayName.should.be.eql(User1.displayName);
+          messages[0].from.gravatar.should.be.eql(User1.gravatar);
 
           messages[0].message.should.be.equal('test3');
         });
@@ -308,13 +307,13 @@ describe('Private messages', function () {
           messages.should.be.instanceOf(Array);
           messages.length.should.be.equal(3);
 
-          messages[2].to.should.be.eql(User2._id.toString());
-          messages[2].toProfile.displayName.should.be.eql(User2.displayName);
-          messages[2].toProfile.gravatar.should.be.eql(User2.gravatar);
+          messages[2].to.id.should.be.eql(User2._id.toString());
+          messages[2].to.displayName.should.be.eql(User2.displayName);
+          messages[2].to.gravatar.should.be.eql(User2.gravatar);
 
-          messages[2].from.should.be.eql(User1._id.toString());
-          messages[2].fromProfile.displayName.should.be.eql(User1.displayName);
-          messages[2].fromProfile.gravatar.should.be.eql(User1.gravatar);
+          messages[2].from.id.should.be.eql(User1._id.toString());
+          messages[2].from.displayName.should.be.eql(User1.displayName);
+          messages[2].from.gravatar.should.be.eql(User1.gravatar);
           messages[2].message.should.be.equal('test1');
         });
 
