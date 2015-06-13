@@ -25,11 +25,11 @@ generateDocs.sh
 jsdoc.conf.json
 .travis.yml
 .jshintrc
+.gitignore
 
 nbproject
 *sublime*
 docs
-.idea/
 .DS_Store
 *.geany
 
