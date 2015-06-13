@@ -157,13 +157,18 @@ describe('Users model', function () {
             'accountVerified': false
           }, function (err, userCreated) {
             if (err) {
-              throw err;
+              done(err);
+            } else {
+              user = userCreated;
+              Hunt.model.User.findOneByHuntKeyAndVerifyEmail('lalala', function (err, userActivated) {
+                if(err){
+                  done(err);
+                } else {
+                  userBeingActivated = userActivated;
+                  done();
+                }
+              });
             }
-            user = userCreated;
-            Hunt.model.User.findOneByHuntKeyAndVerifyEmail('lalala', function (err, userActivated) {
-              userBeingActivated = userActivated;
-              done();
-            });
           });
         });
 
@@ -189,14 +194,15 @@ describe('Users model', function () {
             'accountVerified': false
           }, function (err, userCreated) {
             if (err) {
-              throw err;
+              done(err);
+            } else {
+              user = userCreated;
+              Hunt.model.User.findOneByHuntKeyAndVerifyEmail('vseIdetPoPlanu', function (err, userActivated) {
+                errorThrown = err;
+                userBeingActivated = userActivated;
+                done();
+              });
             }
-            user = userCreated;
-            Hunt.model.User.findOneByHuntKeyAndVerifyEmail('vseIdetPoPlanu', function (err, userActivated) {
-              errorThrown = err;
-              userBeingActivated = userActivated;
-              done();
-            });
           });
         });
 

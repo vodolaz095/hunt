@@ -9,9 +9,10 @@ var should = require('should'),
 
 
 describe('Local strategy test', function () {
-  afterEach(function (done) {
-    setTimeout(done, 1500);
-  });
+  this.timeout(5000);
+  //afterEach(function (done) {
+  //  setTimeout(done, 1500);
+  //});
 
   before(function (done) {
     Hunt = hunt({
@@ -28,17 +29,21 @@ describe('Local strategy test', function () {
         'resetPassword': true
       }
     });
-    Hunt.on('start', function () {
-      done();
+    Hunt.once('start', function () {
+      Hunt.model.User.remove({}, done);
     });
     Hunt.startWebServer();
   });
-
+/*/
   describe('trying to signup user by POST /auth/signup', function () {
-    var r1, r2, r3, b1, b2, b3, evnt;
+    var
+      r1, r2, r3, b1, b2, b3,
+      evnt,
+      welcomeLink;
     before(function (done) {
       Hunt.once('user:notify:email', function (emailOrdered) {
         evnt = emailOrdered;
+        welcomeLink = evnt.user.keychain.welcomeLink;
         setTimeout(done, 500);
       });
       async.parallel({
@@ -57,22 +62,21 @@ describe('Local strategy test', function () {
               r1 = response;
               b1 = body;
 
-              request(
-                {
-                  'method': 'POST',
-                  'url': 'http://localhost:' + port + '/auth/isBusy',
-                  'form': {
-                    'email': 'spam2me@example.org'
-                  }
-                }, function (err, response, body) {
-                  if (err) {
-                    cb(err);
-                  } else {
-                    r2 = response;
-                    b2 = body;
-                    cb(null);
-                  }
-                });
+              request({
+                'method': 'POST',
+                'url': 'http://localhost:' + port + '/auth/isBusy',
+                'form': {
+                  'email': 'spam2me@example.org'
+                }
+              }, function (err, response, body) {
+                if (err) {
+                  cb(err);
+                } else {
+                  r2 = response;
+                  b2 = body;
+                  cb(null);
+                }
+              });
             }
           });
         },
@@ -117,10 +121,8 @@ describe('Local strategy test', function () {
       b3.isBusy.should.be.false;
     });
 
-    var welcomeLink;
     it('makes Hunt core emit event of notify:email with proper structure', function () {
       huntKey = evnt.user.huntKey;
-      welcomeLink = evnt.user.keychain.welcomeLink;
       evnt.user.huntKey.should.be.a.String;
       evnt.user.displayName.should.be.equal('spam2me');
       evnt.user.keychain.email.should.be.equal('spam2me@example.org');
@@ -138,11 +140,15 @@ describe('Local strategy test', function () {
       //evnt.message.layout.should.be.false;
     });
 
-    after(function (done) {
-      request('http://localhost:' + port + '/auth/confirm/' + welcomeLink, function (err, response, body) {
+    it('allows to confirm users account', function (done) {
+      request({
+        'method': 'GET',
+        'url': 'http://localhost:' + port + '/auth/confirm/' + welcomeLink
+      }, function (err, response, body) {
         if (err) {
           done(err);
         } else {
+          console.log(body);
           Hunt.model.User.findOneByHuntKey(huntKey, function (err1, userFound) {
             if (err1) {
               done(err1);
@@ -158,7 +164,6 @@ describe('Local strategy test', function () {
         }
       });
     });
-
   });
 
   describe('trying to ask email for password reset by POST /auth/restoreAccount', function () {
@@ -180,7 +185,7 @@ describe('Local strategy test', function () {
           request({
             'method': 'POST',
             'url': 'http://localhost:' + port + '/auth/restoreAccount',
-            'form': {'email': 'donotspam2me@example.org'}
+            'form': { 'email': 'donotspam2me@example.org' }
           }, cb);
         }
       ], function (err) {
@@ -212,7 +217,7 @@ describe('Local strategy test', function () {
     });
 
   });
-
+//*/
   describe('Performing POST /auth/resetPassword', function () {
     it('will be done');
   });

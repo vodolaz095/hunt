@@ -15,7 +15,7 @@ describe('Private messages', function () {
       'hostUrl': 'http://localhost:' + port,
       'disableCsrf': true // NEVER DO IT!
     });
-    Hunt.on('start', function () {
+    Hunt.once('start', function () {
       done();
     });
     Hunt.startWebServer();
@@ -52,7 +52,7 @@ describe('Private messages', function () {
       before(function (done) {
         async.series([
           function (cb) {
-            Hunt.once('notify:pm', function (m) {
+            Hunt.once('user:notify:pm', function (m) {
               event1 = m;
               cb();
             });
@@ -63,7 +63,7 @@ describe('Private messages', function () {
             });
           },
           function (cb) {
-            Hunt.once('notify:pm', function (m) {
+            Hunt.once('user:notify:pm', function (m) {
               event2 = m;
               cb();
             });
@@ -134,12 +134,12 @@ describe('Private messages', function () {
 
 
           recentMessages[1].message.should.be.equal('test1');
-          recentMessages[1].to.should.be.eql(User2._id);
-          recentMessages[1].from.should.be.eql(User1._id);
+          recentMessages[1].to._id.should.be.eql(User2._id);
+          recentMessages[1].from._id.should.be.eql(User1._id);
 
           recentMessages[0].message.should.be.equal('test2');
-          recentMessages[0].to.should.be.eql(User2._id);
-          recentMessages[0].from.should.be.eql(User1._id);
+          recentMessages[0].to._id.should.be.eql(User2._id);
+          recentMessages[0].from._id.should.be.eql(User1._id);
 
         });
       });
@@ -163,12 +163,12 @@ describe('Private messages', function () {
           recentMessages.length.should.be.equal(2);
 
           recentMessages[1].message.should.be.equal('test1');
-          recentMessages[1].to.should.be.eql(User2._id);
-          recentMessages[1].from.should.be.eql(User1._id);
+          recentMessages[1].to._id.should.be.eql(User2._id);
+          recentMessages[1].from._id.should.be.eql(User1._id);
 
           recentMessages[0].message.should.be.equal('test2');
-          recentMessages[0].to.should.be.eql(User2._id);
-          recentMessages[0].from.should.be.eql(User1._id);
+          recentMessages[0].to._id.should.be.eql(User2._id);
+          recentMessages[0].from._id.should.be.eql(User1._id);
 
         });
       });
@@ -192,12 +192,12 @@ describe('Private messages', function () {
           recentMessages.length.should.be.equal(2);
 
           recentMessages[1].message.should.be.equal('test1');
-          recentMessages[1].to.should.be.eql(User2._id);
-          recentMessages[1].from.should.be.eql(User1._id);
+          recentMessages[1].to._id.should.be.eql(User2._id);
+          recentMessages[1].from._id.should.be.eql(User1._id);
 
           recentMessages[0].message.should.be.equal('test2');
-          recentMessages[0].to.should.be.eql(User2._id);
-          recentMessages[0].from.should.be.eql(User1._id);
+          recentMessages[0].to._id.should.be.eql(User2._id);
+          recentMessages[0].from._id.should.be.eql(User1._id);
 
         });
       });
@@ -207,7 +207,7 @@ describe('Private messages', function () {
       describe('User1 sends message to User2 by post request', function () {
         var response, body, event;
         before(function (done) {
-          Hunt.once('notify:pm', function (m) {
+          Hunt.once('user:notify:pm', function (m) {
             event = m;
             setTimeout(done, 1000);
           });
@@ -231,7 +231,7 @@ describe('Private messages', function () {
 
         it('he receives proper response for it', function () {
           response.statusCode.should.be.equal(201);
-          body.should.be.eql({'status': 201, 'description': 'Message is send!'});
+          body.should.be.eql({'status': 201, 'description': 'Message is sent!'});
         });
 
         it('event is emitted once when user sends message', function () {
