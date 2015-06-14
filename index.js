@@ -1,7 +1,6 @@
 'use strict';
 
 var EventEmitter = require('eventemitter2').EventEmitter2,
-  async = require('async'),
   util = require('util'),
   assert = require('assert'),
 
@@ -42,7 +41,7 @@ require('colors');
 
  * @fires Hunt#profiling:*
  * @fires Hunt#profiling:redis:*
- * @fires Hunt#profiling:mongo:*
+ * @fires Hunt#profiling:mongoose:*
  * @fires Hunt#profiling:sequilize:*
  *
  * @example
@@ -149,10 +148,19 @@ function Hunt(config) {
    * @name Hunt#async
    * @type {Object}
    * @description
-   * Embedded {@link https://www.npmjs.org/package/async | npm module of async} of 0.9.0 version for better workflow
+   * Embedded {@link https://www.npmjs.org/package/async | npm module of async} of 1.2.1 version for better workflow
    */
   this.extendCore('async', function () {
     return require('async');
+  });
+  /**
+   * @name Hunt#Q
+   * @type {Object}
+   * @description
+   * Embedded {@link https://www.npmjs.org/package/q | npm module of Q} of 1.4.1 version for better workflow
+   */
+  this.extendCore('Q', function () {
+    return require('q');
   });
   /**
    * @name Hunt#http
@@ -317,7 +325,6 @@ function Hunt(config) {
    *
    * @param {function} settingsFunction - function(core){....}
    * @example
-   *
    *
    *     //example of setting template engine
    *     hunt.extendApp = function (core) {

@@ -32,10 +32,10 @@
         ExportModelToRestParameters
         </h2>
         
-            <div class="class-description">Object that hold the configuration parameters needed
+            <div class="class-description"><p>Object that hold the configuration parameters needed
 for exporting <a href="model.html"><code>model</code></a> as <a href="http://www.restapitutorial.com/%20"> REST</a>
 interface.
-Methods exported are listed here - <a href="http://docs.huntjs.apiary.io/#exportedrestapifortrophiesfromexampleapplication">http://docs.huntjs.apiary.io/#exportedrestapifortrophiesfromexampleapplication</a></div>
+Methods exported are listed here - <a href="http://docs.huntjs.apiary.io/#exportedrestapifortrophiesfromexampleapplication">http://docs.huntjs.apiary.io/#exportedrestapifortrophiesfromexampleapplication</a></p></div>
         
     
 </header>
@@ -123,7 +123,7 @@ Methods exported are listed here - <a href="http://docs.huntjs.apiary.io/#export
                 </td>
             
 
-            <td class="description last">model to be exported, see <a href="model.html"><code>model</code></a> for details</td>
+            <td class="description last"><p>model to be exported, see <a href="model.html"><code>model</code></a> for details</p></td>
         </tr>
 
     
@@ -156,7 +156,7 @@ Methods exported are listed here - <a href="http://docs.huntjs.apiary.io/#export
                 </td>
             
 
-            <td class="description last">name of model field where the creator/owner of the entity is stored</td>
+            <td class="description last"><p>name of model field where the creator/owner of the entity is stored</p></td>
         </tr>
 
     
@@ -189,7 +189,7 @@ Methods exported are listed here - <a href="http://docs.huntjs.apiary.io/#export
                 </td>
             
 
-            <td class="description last">name of <a href="http://mongoosejs.com/docs/guide.html#statics%20"> static methods</a> functions to be exported</td>
+            <td class="description last"><p>name of <a href="http://mongoosejs.com/docs/guide.html#statics%20"> static methods</a> functions to be exported</p></td>
         </tr>
 
     
@@ -222,7 +222,7 @@ Methods exported are listed here - <a href="http://docs.huntjs.apiary.io/#export
                 </td>
             
 
-            <td class="description last">name of <a href="http://mongoosejs.com/docs/guide.html#methods%20"> instance methods </a> functions to be exported</td>
+            <td class="description last"><p>name of <a href="http://mongoosejs.com/docs/guide.html#methods%20"> instance methods </a> functions to be exported</p></td>
         </tr>
 
     
@@ -259,7 +259,7 @@ Methods exported are listed here - <a href="http://docs.huntjs.apiary.io/#export
                 </td>
             
 
-            <td class="description last">mount point of REST interface</td>
+            <td class="description last"><p>mount point of REST interface</p></td>
         </tr>
 
     
@@ -439,7 +439,7 @@ hunt.startWebServer();</code></pre>
 
 
 <div class="description">
-    Model static method, that is called to determine, does the current authenticated user have rights to create entities
+    <p>Model static method, that is called to determine, does the current authenticated user have rights to create entities</p>
 </div>
 
 
@@ -514,7 +514,7 @@ hunt.startWebServer();</code></pre>
 
             
 
-            <td class="description last">function(error, canCreateBoolean, NameOfFieldToBeUsedAsOwnerName){...}</td>
+            <td class="description last"><p>function(error, canCreateBoolean, NameOfFieldToBeUsedAsOwnerName){...}</p></td>
         </tr>
 
     
@@ -600,9 +600,9 @@ hunt.startWebServer();</code></pre>
 
 
 <div class="description">
-    Model static method, that is called to determine, does the current authenticated user have rights to read fields of
+    <p>Model static method, that is called to determine, does the current authenticated user have rights to read fields of
 this particular entity, and what fields are readable.
-The filter object is passed to model query builder.
+The filter object is passed to model query builder.</p>
 </div>
 
 
@@ -677,7 +677,7 @@ The filter object is passed to model query builder.
 
             
 
-            <td class="description last">function(error, filter, arrayOfNamesOfInstanceFieldsToShow, arrayOfNamesOfInstanceFieldsToPopulate){...}</td>
+            <td class="description last"><p>function(error, filter, arrayOfNamesOfInstanceFieldsToShow, arrayOfNamesOfInstanceFieldsToPopulate){...}</p></td>
         </tr>
 
     
@@ -766,7 +766,7 @@ The filter object is passed to model query builder.
 
 
 <div class="description">
-    Model instance method, that is called to determine, does the current authenticated user have rights to delete this particular entity.
+    <p>Model instance method, that is called to determine, does the current authenticated user have rights to delete this particular entity.</p>
 </div>
 
 
@@ -841,7 +841,7 @@ The filter object is passed to model query builder.
 
             
 
-            <td class="description last">function(error, canDeleteBoolean){...}</td>
+            <td class="description last"><p>function(error, canDeleteBoolean){...}</p></td>
         </tr>
 
     
@@ -924,8 +924,8 @@ TrophySchema.methods.canDelete = function (user, callback) {
 
 
 <div class="description">
-    Model static method, that is called to determine, does the current authenticated user have rights to read fields of
-this particular entity, and what fields are readable.
+    <p>Model static method, that is called to determine, does the current authenticated user have rights to read fields of
+this particular entity, and what fields are readable.</p>
 </div>
 
 
@@ -1000,7 +1000,7 @@ this particular entity, and what fields are readable.
 
             
 
-            <td class="description last">function(error, canRead, fieldsToShow, fieldsToPopulate){...}</td>
+            <td class="description last"><p>function(error, canRead, fieldsToShow, fieldsToPopulate){...}</p></td>
         </tr>
 
     
@@ -1090,8 +1090,8 @@ TrophySchema.methods.canRead = function (user, callback) {
 
 
 <div class="description">
-    Model instance method, that is called to determine, does the current authenticated user
-have rights to edit this particular entity, and what setters can be used.
+    <p>Model instance method, that is called to determine, does the current authenticated user
+have rights to edit this particular entity, and what setters can be used.</p>
 </div>
 
 
@@ -1166,7 +1166,7 @@ have rights to edit this particular entity, and what setters can be used.
 
             
 
-            <td class="description last">function(error, canUpdateBoolean, arrayOfSettersNamesToUse){...}</td>
+            <td class="description last"><p>function(error, canUpdateBoolean, arrayOfSettersNamesToUse){...}</p></td>
         </tr>
 
     
@@ -1253,13 +1253,13 @@ TrophySchema.methods.canUpdate = function (user, callback) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:http:*">http:*</a></li><li><a href="Hunt.html#event:http:error">http:error</a></li><li><a href="Hunt.html#event:http:success">http:success</a></li><li><a href="Hunt.html#event:message:sio">message:sio</a></li><li><a href="Hunt.html#event:profiling:*">profiling:*</a></li><li><a href="Hunt.html#event:profiling:mongoose:*">profiling:mongoose:*</a></li><li><a href="Hunt.html#event:profiling:redis:*">profiling:redis:*</a></li><li><a href="Hunt.html#event:user:*">user:*</a></li><li><a href="Hunt.html#event:user:notify:*">user:notify:*</a></li><li><a href="Hunt.html#event:user:notify:all">user:notify:all</a></li><li><a href="Hunt.html#event:user:notify:email">user:notify:email</a></li><li><a href="Hunt.html#event:user:notify:pm">user:notify:pm</a></li><li><a href="Hunt.html#event:user:notify:sio">user:notify:sio</a></li><li><a href="Hunt.html#event:user:save">user:save</a></li><li><a href="Hunt.html#event:user:signin:*">user:signin:*</a></li><li><a href="Hunt.html#event:user:signin:local">user:signin:local</a></li><li><a href="Hunt.html#event:user:signin:providerName">user:signin:providerName</a></li><li><a href="Hunt.html#event:user:signup">user:signup</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-authorization.html">authorization</a></li><li><a href="tutorial-events.html">events</a></li><li><a href="tutorial-hello.html">hello</a></li><li><a href="tutorial-modelToRest.html">modelToRest</a></li><li><a href="tutorial-profiling.html">profiling</a></li><li><a href="tutorial-telnetApplication.html">telnetApplication</a></li><li><a href="tutorial-templating.html">templating</a></li><li><a href="tutorial-webapplication.html">webapplication</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="config.html">config</a></li><li><a href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></li><li><a href="Hunt.html">Hunt</a></li><li><a href="Message.html">Message</a></li><li><a href="model.html">model</a></li><li><a href="passport.html">passport</a></li><li><a href="Preload.html">Preload</a></li><li><a href="request.html">request</a></li><li><a href="response.html">response</a></li><li><a href="User.html">User</a></li></ul><h3>Events</h3><ul><li><a href="Hunt.html#event:broadcast">broadcast</a></li><li><a href="Hunt.html#event:start">start</a></li><li><a href="Hunt.html#event:http:*">http:*</a></li><li><a href="Hunt.html#event:http:error">http:error</a></li><li><a href="Hunt.html#event:http:success">http:success</a></li><li><a href="Hunt.html#event:message:sio">message:sio</a></li><li><a href="Hunt.html#event:profiling:*">profiling:*</a></li><li><a href="Hunt.html#event:profiling:mongoose:*">profiling:mongoose:*</a></li><li><a href="Hunt.html#event:profiling:redis:*">profiling:redis:*</a></li><li><a href="Hunt.html#event:user:*">user:*</a></li><li><a href="Hunt.html#event:user:notify:*">user:notify:*</a></li><li><a href="Hunt.html#event:user:notify:all">user:notify:all</a></li><li><a href="Hunt.html#event:user:notify:email">user:notify:email</a></li><li><a href="Hunt.html#event:user:notify:pm">user:notify:pm</a></li><li><a href="Hunt.html#event:user:notify:sio">user:notify:sio</a></li><li><a href="Hunt.html#event:user:save">user:save</a></li><li><a href="Hunt.html#event:user:signin:*">user:signin:*</a></li><li><a href="Hunt.html#event:user:signin:local">user:signin:local</a></li><li><a href="Hunt.html#event:user:signin:providerName">user:signin:providerName</a></li><li><a href="Hunt.html#event:user:signup">user:signup</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-authorization.html">authorization</a></li><li><a href="tutorial-events.html">events</a></li><li><a href="tutorial-hello.html">hello</a></li><li><a href="tutorial-modelToRest.html">modelToRest</a></li><li><a href="tutorial-profiling.html">profiling</a></li><li><a href="tutorial-telnetApplication.html">telnetApplication</a></li><li><a href="tutorial-templating.html">templating</a></li><li><a href="tutorial-webapplication.html">webapplication</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.1</a> on Sat Jun 13 2015 23:33:54 GMT+0300 (MSK)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.1</a> on Sun Jun 14 2015 03:17:01 GMT+0300 (MSK)
 </footer>
 
 <script> prettyPrint(); </script>
