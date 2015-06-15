@@ -1,3 +1,6 @@
+# v0.4.3
+Fix issues for sending emails with undefined callback
+
 # v0.4.2
 Fix for clearing temporary files resulted from processing uploaded files via `Hunt.multipart` middleware 
 
