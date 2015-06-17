@@ -319,13 +319,11 @@ hunt.once('start', function (startParameters) {
 //application is started
   if (startParameters.type === 'webserver') {
 //if application is started as background service, it do not have socket.io support
-    /*/
-     hunt.io.sockets.on('connection', function (socket) {
-     socket.on('pingerUrl', function (payload) {
-     pinger(payload, socket);
-     });
-     });
-     //*/
+    hunt.io.sockets.on('connection', function (socket) {
+      socket.on('pingerUrl', function (payload) {
+        pinger(payload, socket);
+      });
+    });
     setInterval(function () {
       hunt.emit('broadcast', { 'time': new Date().toLocaleTimeString() }); //to be broadcasted by socket.io
     }, 500);
