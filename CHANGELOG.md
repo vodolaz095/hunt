@@ -1,3 +1,7 @@
+# v0.4.4
+User#notifyByEmail now have the user profile in the context of email message template.
+Fix rare issue with reseting password with missing `keychain.welcomeLink`
+
 # v0.4.3
 Fix issues for sending emails with undefined callback
 
