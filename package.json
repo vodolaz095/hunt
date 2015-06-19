@@ -1,6 +1,6 @@
 {
   "name": "hunt",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "High level nodejs framework build on top of expressjs, mongoose, sequilize, socketio and passportjs",
   "main": "index.js",
   "engines": {
@@ -46,8 +46,8 @@
   "license": "MIT",
   "dependencies": {
     "async": "1.2.1",
-    "body-parser": "1.13.0",
-    "colors": "1.1.0",
+    "body-parser": "1.13.1",
+    "colors": "1.1.2",
     "compression": "1.5.0",
     "connect-flash": "0.1.1",
     "connect-multiparty": "1.2.5",
@@ -94,9 +94,9 @@
     "hiredis": "0.4.0"
   },
   "devDependencies": {
-    "istanbul": "0.3.14",
+    "istanbul": "0.3.15",
     "mocha": "2.2.5",
-    "jsdoc": "3.3.1",
+    "jsdoc": "3.3.2",
     "should": "6.0.3"
   }
 }
