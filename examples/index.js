@@ -371,7 +371,7 @@ hunt.once('start', function (payload) {
   } else {
     if(payload.type === 'webserver'){
       //to work on heroku, i know, it looks strange
-      hunt.io.set('transports', ['websocket','flashsocket','htmlfile','xhr-polling','jsonp-polling','polling']);
+      //hunt.io.set('transports', ['websocket','flashsocket','htmlfile','xhr-polling','jsonp-polling','polling']);
     }
   }
 });
