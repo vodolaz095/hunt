@@ -132,7 +132,7 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
     socket.on('broadcast', function (data) {
       console.log('broadcast', data);
       if (data.time) {
-        $scope.clock = data.time.toLocaleTimeString();
+        $scope.clock = new Date(data.time).toLocaleTimeString();
       }
     });
   }])

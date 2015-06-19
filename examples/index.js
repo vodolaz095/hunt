@@ -329,7 +329,8 @@ hunt.once('start', function (startParameters) {
 //we process socket.io events here.
 //note, that Hunt.io is generated only after
 //application is started
-  if (startParameters.type === 'webserver') {
+  switch (startParameters.type) {
+  case 'webserver':
 //if application is started as background service, it do not have socket.io support
     hunt.io.sockets.on('connection', function (socket) {
       socket.on('pingerUrl', function (payload) {
@@ -337,8 +338,17 @@ hunt.once('start', function (startParameters) {
       });
     });
     setInterval(function () {
-      hunt.emit('broadcast', { 'time': new Date().toLocaleTimeString() }); //to be broadcasted by socket.io
+      hunt.emit('broadcast', { 'time': Date.now() }); //to be broadcasted by socket.io
     }, 500);
+    break;
+  case 'background':
+    populateDb(hunt);
+    setInterval(function () {
+      populateDb(hunt);
+    }, 60 * 1000);
+    break;
+    default:
+      console.log('We started application as ', startParameters.type);
   }
 });
 
@@ -373,21 +383,6 @@ hunt.on('start', profilingListener);
  * and what port to use (from config or process.env.PORT or default - 3000)
  * we recommend 1 process per CPU core
  */
-hunt.once('start', function (payload) {
-//we populate database in master process
-  if (payload.type === 'background') {
-    populateDb(hunt);
-    setInterval(function () {
-      populateDb(hunt);
-    }, 60 * 1000);
-  } else {
-    if(payload.type === 'webserver'){
-      //to work on heroku, i know, it looks strange
-      hunt.io.set('transports', ['polling']);
-    }
-  }
-});
-
 if (hunt.startCluster({ 'web': 2 })) { // Hunt#startCluster returns true for MASTER process
   console.log('We have started master process #' + process.pid);
 } else {
