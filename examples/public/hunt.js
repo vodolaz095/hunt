@@ -86,6 +86,9 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
   }])
   .factory('socket', function ($rootScope) {
     var socket = io();
+    $(window).on('beforeunload', function(){
+      socket.close();
+    });
     return {
       on: function (eventName, callback) {
         socket.on(eventName, function () {
