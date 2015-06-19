@@ -42,9 +42,9 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
       return $resource('/api/v1/' + modelName + '/:id', { 'id': '@id' }, {
         'query': {
           'method': 'GET',
-          'transformResponse': function (data) {
+          'transformResponse': function (data, headers, code) {
             var wrappedResult = angular.fromJson(data);
-            wrappedResult.data.$metadata = wrappedResult.metadata;
+            wrappedResult.data.$metadata = wrappedResult.metadata || {};
             return wrappedResult.data;
           },
           'isArray': true,
@@ -59,6 +59,8 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
           'method': 'GET',
           'transformResponse': function (data) {
             var wrappedResult = angular.fromJson(data);
+            if (typeof(wrappedResult.data) == 'undefined')
+              wrappedResult.data = {};
             wrappedResult.data.$metadata = wrappedResult.metadata;
             return wrappedResult.data;
           },
@@ -72,11 +74,24 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
         },
         'create': {
           'method': 'POST',
+//          'transformResponse': function (data) {
+//            return angular.fromJson(data).data;
+//          },
           'isArray': false
         },
         'save': {
           'method': 'PUT',
+          'transformResponse': function (data) {
+            return angular.fromJson(data).data;
+          },
           'isArray': false
+        },
+        'delete':{ //http://stackoverflow.com/questions/16167463/angular-js-delete-resource-with-parameter
+          'method':'DELETE',
+          'headers': {
+            'Content-Type': 'application/json'
+          },
+          'params': {'id': '@id'}
         }
       });
     };
@@ -87,7 +102,7 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
   .factory('socket', function ($rootScope) {
     var socket = io();
     $(window).on('beforeunload', function(){
-      socket.close();
+      socket.close(); //https://bugzilla.mozilla.org/show_bug.cgi?id=712329
     });
     return {
       on: function (eventName, callback) {
