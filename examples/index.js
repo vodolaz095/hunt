@@ -19,7 +19,7 @@ var config = {
   //'uploadFiles': false, // do not allow upload of files by HTTP-POST
   //'enableMongoose' : true,
   //'enableMongooseUsers' : true,
-  //'disableCsrf': false,
+  'disableCsrf': true,
   //for password strategies
   'passport': {
 //    'sessionExpireAfterSeconds':180,
@@ -383,7 +383,7 @@ hunt.once('start', function (payload) {
   } else {
     if(payload.type === 'webserver'){
       //to work on heroku, i know, it looks strange
-      //hunt.io.set('transports', ['websocket','flashsocket','htmlfile','xhr-polling','jsonp-polling','polling']);
+      hunt.io.set('transports', ['xhr-polling','jsonp-polling','polling']);
     }
   }
 });
