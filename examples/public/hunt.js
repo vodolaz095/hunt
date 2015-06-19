@@ -130,8 +130,9 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
       $scope.flash.error.push(data);
     });
     socket.on('broadcast', function (data) {
+      console.log('broadcast', data);
       if (data.time) {
-        $scope.clock = data.time;
+        $scope.clock = data.time.toLocaleTimeString();
       }
     });
   }])
