@@ -77,7 +77,7 @@ var config = {
   'views': __dirname + '/views', //directory for templates
 
   //'emailConfig':false, //we use directmail transport
-  'maxWorkers': 2
+  'maxWorkers': process.env.MAXWORKERS || 2
 };
 
 //We build application instance
