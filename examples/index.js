@@ -77,7 +77,7 @@ var config = {
   'views': __dirname + '/views', //directory for templates
 
   //'emailConfig':false, //we use directmail transport
-  'maxWorkers': process.env.MAXWORKERS || 2
+  'maxWorkers': 1
 };
 
 //We build application instance
@@ -383,7 +383,7 @@ hunt.on('start', profilingListener);
  * and what port to use (from config or process.env.PORT or default - 3000)
  * we recommend 1 process per CPU core
  */
-if (hunt.startCluster({ 'web': process.env.MAXWORKERS || 2 })) { // Hunt#startCluster returns true for MASTER process
+if (hunt.startCluster({ 'web': 1 })) { // Hunt#startCluster returns true for MASTER process
   console.log('We have started master process #' + process.pid);
 } else {
   console.log('We have started child process #' + process.pid);
