@@ -1,3 +1,6 @@
+# v0.4.6
+Updated dependencies to more recent ones
+
 # v0.4.5
 Fix rare issue with malformed user profiles in session storage.
 User#email setter converts the email to lower case in all places where it is used. (Sorry for Cyrillic domains)
