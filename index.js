@@ -688,7 +688,7 @@ function Hunt(config) {
 //we process socket.io events here.
 //note, that Hunt.io is generated only after
 //application is started
-      if (startParameters.type === 'webserver') {
+      if (startParameters.type === 'webserver' && h.config.io && h.config.io.enabled === true) {
 //if application is started as background service, it do not have socket.io support
         h.io.sockets.on('connection', function (socket) {
           socket.on('' + eventName, function (payload, cb) {
