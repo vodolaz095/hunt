@@ -1,3 +1,6 @@
+# v0.4.8
+Updated dependencies to more recent ones
+
 # v0.4.7
 We can configure socket.io by via config object with this parameters all of this parameters
 [https://github.com/Automattic/engine.io#methods-1](https://github.com/Automattic/engine.io#methods-1)
