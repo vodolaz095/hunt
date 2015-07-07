@@ -1,3 +1,6 @@
+# v0.4.9
+[https://gemnasium.com/npms/validator](Validator) is exported as `hunt.validator`.
+
 # v0.4.8
 Updated dependencies to more recent ones
 

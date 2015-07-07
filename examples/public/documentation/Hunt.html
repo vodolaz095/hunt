@@ -1055,6 +1055,73 @@ taken from config object.
 
         
             
+<h4 class="name" id="validator"><span class="type-signature"></span>validator<span class="type-signature"> :Object</span></h4>
+
+
+
+
+<div class="description">
+    <p>Embedded <a href="https://www.npmjs.org/package/validator%20"> npm module of validator</a> for better workflow</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
 <h4 class="name" id="version"><span class="type-signature"></span>version<span class="type-signature"> :string</span></h4>
 
 
@@ -7198,6 +7265,198 @@ core.emit('broadcast', {type:'screamLoudly',message:'Hello? Can you hear me? Jun
 
 
 <div class="description">
+    <p>Emitted when Hunt is started as telnet process</p>
+</div>
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>with a value of string of 'telnet'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>port</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>with a value of string of port number</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>address</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>with a value of address application is bound to</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Hunt.html#startTelnetServer">Hunt#startTelnetServer</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:start">start</h4>
+
+    
+
+
+
+<div class="description">
     <p>Emitted when Hunt is started as background process</p>
 </div>
 
@@ -7502,198 +7761,6 @@ core.emit('broadcast', {type:'screamLoudly',message:'Hello? Can you hear me? Jun
     <dd class="tag-see">
         <ul>
             <li><a href="Hunt.html#startWebServer">Hunt#startWebServer</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="event:start">start</h4>
-
-    
-
-
-
-<div class="description">
-    <p>Emitted when Hunt is started as telnet process</p>
-</div>
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">object</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>with a value of string of 'telnet'</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>port</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>with a value of string of port number</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>address</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>with a value of address application is bound to</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="Hunt.html#startTelnetServer">Hunt#startTelnetServer</a></li>
         </ul>
     </dd>
     
@@ -13450,6 +13517,73 @@ taken from config object.
 
         
             
+<h4 class="name" id="validator"><span class="type-signature"></span>validator<span class="type-signature"> :Object</span></h4>
+
+
+
+
+<div class="description">
+    <p>Embedded <a href="https://www.npmjs.org/package/validator%20"> npm module of validator</a> for better workflow</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
 <h4 class="name" id="version"><span class="type-signature"></span>version<span class="type-signature"> :string</span></h4>
 
 
@@ -19593,6 +19727,198 @@ core.emit('broadcast', {type:'screamLoudly',message:'Hello? Can you hear me? Jun
 
 
 <div class="description">
+    <p>Emitted when Hunt is started as telnet process</p>
+</div>
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>with a value of string of 'telnet'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>port</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>with a value of string of port number</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>address</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>with a value of address application is bound to</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Hunt.html#startTelnetServer">Hunt#startTelnetServer</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:start">start</h4>
+
+    
+
+
+
+<div class="description">
     <p>Emitted when Hunt is started as background process</p>
 </div>
 
@@ -19897,198 +20223,6 @@ core.emit('broadcast', {type:'screamLoudly',message:'Hello? Can you hear me? Jun
     <dd class="tag-see">
         <ul>
             <li><a href="Hunt.html#startWebServer">Hunt#startWebServer</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="event:start">start</h4>
-
-    
-
-
-
-<div class="description">
-    <p>Emitted when Hunt is started as telnet process</p>
-</div>
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">object</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>with a value of string of 'telnet'</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>port</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>with a value of string of port number</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>address</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>with a value of address application is bound to</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="Hunt.html#startTelnetServer">Hunt#startTelnetServer</a></li>
         </ul>
     </dd>
     
@@ -24870,7 +25004,7 @@ with payload of user being saved.</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Fri Jul 03 2015 17:06:58 GMT+0300 (MSK)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Tue Jul 07 2015 12:52:50 GMT+0300 (MSK)
 </footer>
 
 <script> prettyPrint(); </script>

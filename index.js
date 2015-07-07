@@ -153,6 +153,18 @@ function Hunt(config) {
   this.extendCore('async', function () {
     return require('async');
   });
+
+  /**
+   * @name Hunt#validator
+   * @type {Object}
+   * @description
+   * Embedded {@link https://www.npmjs.org/package/validator | npm module of validator} for better workflow
+   */
+  this.extendCore('validator', function () {
+    return require('validator');
+  });
+
+
   /**
    * @name Hunt#Q
    * @type {Object}
