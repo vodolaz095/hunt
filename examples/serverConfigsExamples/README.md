@@ -12,7 +12,12 @@ on standard ports of 80 and 443.
 
 We assume you have Linux machine.
 
-pound.cfg
+[firewall.sh](https://github.com/vodolaz095/hunt/blob/master/examples/serverConfigsExamples/firewall.sh)
+==================================
+
+Shell script to properly setup the firewall - open 22, 80, 443 port
+
+[pound.cfg](https://github.com/vodolaz095/hunt/blob/master/examples/serverConfigsExamples/pound.cfg)
 ==================================
 
 Configuration file for [Pound reverse proxy and load balancer](http://www.apsis.ch/pound).
@@ -22,7 +27,7 @@ on behalf of user with limited account.
 The strong sides of this approach is very high security and performance of
 Pound, and the bad side is issues with websockets connectivity in socket.io module.
 
-nginx.conf
+[nginx.conf](https://github.com/vodolaz095/hunt/blob/master/examples/serverConfigsExamples/nginx.conf)
 ==================================
 
 Configuration file for [nginx web server and reverse proxy](http://nginx.org/).
@@ -32,7 +37,7 @@ on behalf of user with limited account. Also we serve static assets from `public
 directory of hunt.js application by the means of nginx.
 Also the websockets are supported
 
-huntjs@.service
+[huntjs@.service](https://github.com/vodolaz095/hunt/blob/master/examples/serverConfigsExamples/huntjs%40.service)
 ==================================
 
 [Systemd linux initialization system](https://en.wikipedia.org/wiki/Systemd) allows us
@@ -50,11 +55,7 @@ application like this:
 
 ```
 
-firewall.sh
+[huntjs](https://github.com/vodolaz095/hunt/blob/master/examples/serverConfigsExamples/huntjs)
 ==================================
-
-Shell script to properly setup the firewall - open 22, 80, 443 port
-
-
-
-
+Config example to run HuntJS application by means of `chkconfig` - 
+[http://linuxcommand.org/man_pages/chkconfig8.html](http://linuxcommand.org/man_pages/chkconfig8.html)

@@ -679,7 +679,7 @@ function Hunt(config) {
    * @example
    * //client side code
    * <script>
-   * var socket = io.connect(); // TIP: io.connect() with no args does auto-discovery
+   * var socket = io(); // TIP: io.connect() with no args does auto-discovery
    * socket.emit('message', 'I will find you!', function (data) {
    *   console.log(data); // data will be 'cool!'
    * });

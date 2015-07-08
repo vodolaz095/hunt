@@ -39,6 +39,9 @@ This is short, basic, "hello, world!" example, to start http server on 3000 port
 -  [Exporting mongoose models to REST interface](https://huntjs.herokuapp.com/documentation/tutorial-modelToRest.html)
 -  [Telnet application](https://huntjs.herokuapp.com/documentation/tutorial-telnetApplication.html)
 -  [Web application](https://huntjs.herokuapp.com/documentation/tutorial-webapplication.html)
+-  [Changelog](https://huntjs.herokuapp.com/documentation/tutorial-Changelog.html)
+-  [Deployment](https://huntjs.herokuapp.com/documentation/tutorial-ServerConfig.html)
+
 
 
 **More examples**
