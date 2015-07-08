@@ -59,8 +59,9 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
           'method': 'GET',
           'transformResponse': function (data) {
             var wrappedResult = angular.fromJson(data);
-            if (typeof(wrappedResult.data) == 'undefined')
+            if (typeof(wrappedResult.data) == 'undefined') {
               wrappedResult.data = {};
+            }
             wrappedResult.data.$metadata = wrappedResult.metadata;
             return wrappedResult.data;
           },
@@ -74,9 +75,9 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
         },
         'create': {
           'method': 'POST',
-//          'transformResponse': function (data) {
-//            return angular.fromJson(data).data;
-//          },
+          'transformResponse': function (data) {
+            return angular.fromJson(data).data;
+          },
           'isArray': false
         },
         'save': {
@@ -86,12 +87,12 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
           },
           'isArray': false
         },
-        'delete':{ //http://stackoverflow.com/questions/16167463/angular-js-delete-resource-with-parameter
-          'method':'DELETE',
-          'headers': {
+        'delete': { //http://stackoverflow.com/questions/16167463/angular-js-delete-resource-with-parameter
+          'method': 'DELETE',
+          headers: {
             'Content-Type': 'application/json'
           },
-          'params': {'id': '@id'}
+          params: {id: '@id'}
         }
       });
     };
@@ -101,7 +102,7 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
   }])
   .factory('socket', function ($rootScope) {
     var socket = io();
-    $(window).on('beforeunload', function(){
+    $(window).on('beforeunload', function () {
       socket.close(); //https://bugzilla.mozilla.org/show_bug.cgi?id=712329
     });
     return {
@@ -125,18 +126,13 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
       }
     };
   })
-  .controller('trophyController', ['$scope', function ($scope) {
-    $scope.update = function () {
-      $scope.trophy.$save();
-    };
-  }])
   .controller('notificationController', ['$scope', 'socket', function ($scope, socket) {
     $scope.flash = {
       'success': [],
       'info': [],
       'error': []
     };
-    $scope.clock = '...';
+    $scope.clock = '';
 
     socket.on('notify:flash_success', function (data) {
       $scope.flash.success.push(data);
@@ -147,8 +143,8 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
     socket.on('notify:flash_error', function (data) {
       $scope.flash.error.push(data);
     });
-    socket.on('broadcast', function (data) {
-      console.log('broadcast', data);
+    socket.on('currentTime', function (data) {
+      //console.log('broadcast', data);
       if (data.time) {
         $scope.clock = new Date(data.time).toLocaleTimeString();
       }
@@ -188,7 +184,7 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
         }
       },
       function (error) {
-        throw error
+        throw error;
       });
 
   }])
@@ -198,13 +194,17 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
       $scope.trophies = trophies;
     });
 
-    socket.on('broadcast', function (data) {
+    $scope.update = function (t) {
+      return t.$save();
+    };
+
+    socket.on('trophySaved', function (data) {
       if (data.trophySaved) {
-//        console.log('trophySaved',data.trophySaved);
         for (var i = 0; i < $scope.trophies.length; i++) {
-//          console.log($scope.trophies[i].id, data.trophySaved.id);
           if ($scope.trophies[i].id == data.trophySaved.id) {
-            $scope.trophies[i] = data.trophySaved;
+            $scope.trophies[i].name = data.trophySaved.name;
+            $scope.trophies[i].priority = data.trophySaved.priority;
+            $scope.trophies[i].scored = data.trophySaved.scored;
           }
         }
       }
@@ -232,7 +232,7 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
       });
       $scope.sioMessage = '';
     };
-    socket.on('broadcast', function (data) {
+    socket.on('httpSuccess', function (data) {
       if (data.httpSuccess) {
         $scope.recentVisits.push(data.httpSuccess);
       }

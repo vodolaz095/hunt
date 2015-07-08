@@ -3,7 +3,7 @@ module.exports = exports = function (core) {
     'name': {type: String, unique: true},
     'scored': Boolean,
     'priority': Number,
-    'author': { type: core.mongoose.Schema.Types.ObjectId, ref: 'User' }
+    'author': {type: core.mongoose.Schema.Types.ObjectId, ref: 'User'}
   });
 
   TrophySchema.index({
@@ -48,12 +48,15 @@ module.exports = exports = function (core) {
 
 //after saving every document changes to database, we broadcast changes to all users
   TrophySchema.post('save', function (documentSaved) {
-    core.emit('broadcast', {'trophySaved': {
-      'id': documentSaved.id,
-      'name': documentSaved.name,
-      'scored': documentSaved.scored,
-      'priority': documentSaved.priority
-    }});
+    core.emit('broadcast', {
+      'type': 'trophySaved',
+      'trophySaved': {
+        'id': documentSaved.id,
+        'name': documentSaved.name,
+        'scored': documentSaved.scored,
+        'priority': documentSaved.priority
+      }
+    });
   });
 
 //this step is very important - bind mongoose model to current mongo database connection

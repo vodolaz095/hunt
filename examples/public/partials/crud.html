@@ -13,13 +13,13 @@
             <th class="col-sm-3">Scored</th>
         </tr>
         </thead>
-        <tbody ng-controller="trophyController"
-               ng-repeat="trophy in trophies  | filter:nameFilter | orderBy:'-priority'">
+        <tbody ng-repeat="trophy in trophies  | filter:nameFilter | orderBy:'-priority'">
         <tr>
-            <td><input class="col-sm-12" type="text" ng-change="update()" ng-model="trophy.name"></td>
-            <td><input class="col-sm-12" type="number" ng-change="update()" ng-model="trophy.priority"></td>
+            <td><input class="col-sm-12" type="text" ng-change="update(trophy)" ng-model="trophy.name"></td>
+            <td><input class="col-sm-12" type="number" ng-change="update(trophy)" ng-model="trophy.priority"></td>
             <td>
-                <input class="col-sm-12" type="checkbox" ng-change="update()" value="true" ng-model="trophy.scored">
+                <input class="col-sm-12" type="checkbox" ng-change="update(trophy)" value="true"
+                       ng-model="trophy.scored">
             </td>
         </tr>
         </tbody>

@@ -94,30 +94,30 @@ hunt.extendModel('Trophy', require('./models/trophy.model.js'));
 hunt.extendApp(function (core) {
 //loading client side javascripts/css from public cdns
 
-  core.app.locals.css.push({ 'href': '//yandex.st/bootstrap/3.1.1/css/bootstrap.min.css', 'media': 'screen' });
-  core.app.locals.javascripts.push({ 'url': '//yandex.st/jquery/2.0.3/jquery.min.js' });
-  core.app.locals.javascripts.push({ 'url': '//yandex.st/bootstrap/3.1.1/js/bootstrap.min.js' });
-  core.app.locals.javascripts.push({ 'url': '//cdnjs.cloudflare.com/ajax/libs/async/0.9.0/async.js' });
-  core.app.locals.javascripts.push({ 'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js' });
-  core.app.locals.javascripts.push({ 'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-route.min.js' });
-  core.app.locals.javascripts.push({ 'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-resource.min.js' });
+  core.app.locals.css.push({'href': '//yandex.st/bootstrap/3.1.1/css/bootstrap.min.css', 'media': 'screen'});
+  core.app.locals.javascripts.push({'url': '//yandex.st/jquery/2.0.3/jquery.min.js'});
+  core.app.locals.javascripts.push({'url': '//yandex.st/bootstrap/3.1.1/js/bootstrap.min.js'});
+  core.app.locals.javascripts.push({'url': '//cdnjs.cloudflare.com/ajax/libs/async/0.9.0/async.js'});
+  core.app.locals.javascripts.push({'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js'});
+  core.app.locals.javascripts.push({'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-route.min.js'});
+  core.app.locals.javascripts.push({'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-resource.min.js'});
 
 // we set server side template engine delimiters to be
 // different from the ones used by AngularJS
   core.app.locals.delimiters = '[[ ]]';
 
-  core.app.locals.javascripts.push({ 'url': '/hunt.js' });
+  core.app.locals.javascripts.push({'url': '/hunt.js'});
 
   /*
    * Setting up menu - one of many possible approaches
    */
   core.app.locals.menu = [
-    { 'url': '/documentation', 'name': 'Documentation' },
-    { 'url': 'http://docs.huntjs.apiary.io/', 'name': 'API Blueprint' },
-    { 'url': '/#/events', 'name': 'Events Demo' },
-    { 'url': '/#/crud', 'name': 'CRUD Demo' },
-    { 'url': '/#/cache', 'name': 'Caching Demo' },
-    { 'url': '/#/cluster', 'name': 'Invincibility Demo' }
+    {'url': '/documentation', 'name': 'Documentation'},
+    {'url': 'http://docs.huntjs.apiary.io/', 'name': 'API Blueprint'},
+    {'url': '/#/events', 'name': 'Events Demo'},
+    {'url': '/#/crud', 'name': 'CRUD Demo'},
+    {'url': '/#/cache', 'name': 'Caching Demo'},
+    {'url': '/#/cluster', 'name': 'Invincibility Demo'}
   ];
 });
 
@@ -202,7 +202,7 @@ hunt.extendController('/', function (core, router) {
    */
   router.post('/notify_me', function (req, res) {
     if (req.user && req.user.email) {
-      req.user.notifyByEmail({ 'template': 'email/hello', 'layout': false });
+      req.user.notifyByEmail({'template': 'email/hello', 'layout': false});
       req.flash('success', 'Check our INBOX, please!');
       res.redirect('/#/profile');
     } else {
@@ -307,7 +307,7 @@ hunt.on('http:success', function (httpSuccess) {
   if (httpSuccess.body && httpSuccess.body.password) {
     httpSuccess.body.password = '************'; //because we do not want to stream passwords!
   }
-  hunt.emit('broadcast', { 'httpSuccess': httpSuccess });
+  hunt.emit('broadcast', {'type': 'httpSuccess', 'httpSuccess': httpSuccess});
 //  console.log(httpSuccess);
 });
 
@@ -330,23 +330,23 @@ hunt.once('start', function (startParameters) {
 //note, that Hunt.io is generated only after
 //application is started
   switch (startParameters.type) {
-  case 'webserver':
+    case 'webserver':
 //if application is started as background service, it do not have socket.io support
-    hunt.io.sockets.on('connection', function (socket) {
-      socket.on('pingerUrl', function (payload) {
-        pinger(payload, socket);
+      hunt.io.sockets.on('connection', function (socket) {
+        socket.on('pingerUrl', function (payload) {
+          pinger(payload, socket);
+        });
       });
-    });
-    setInterval(function () {
-      hunt.emit('broadcast', { 'time': Date.now() }); //to be broadcasted by socket.io
-    }, 500);
-    break;
-  case 'background':
-    populateDb(hunt);
-    setInterval(function () {
+      setInterval(function () {
+        hunt.emit('broadcast', {'type': 'currentTime', 'time': Date.now()}); //to be broadcasted by socket.io
+      }, 500);
+      break;
+    case 'background':
       populateDb(hunt);
-    }, 60 * 1000);
-    break;
+      setInterval(function () {
+        populateDb(hunt);
+      }, 60 * 1000);
+      break;
     default:
       console.log('We started application as ', startParameters.type);
   }
@@ -383,7 +383,7 @@ hunt.on('start', profilingListener);
  * and what port to use (from config or process.env.PORT or default - 3000)
  * we recommend 1 process per CPU core
  */
-if (hunt.startCluster({ 'web': 1 })) { // Hunt#startCluster returns true for MASTER process
+if (hunt.startCluster({'web': 1})) { // Hunt#startCluster returns true for MASTER process
   console.log('We have started master process #' + process.pid);
 } else {
   console.log('We have started child process #' + process.pid);
