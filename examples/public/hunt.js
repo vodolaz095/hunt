@@ -39,7 +39,7 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
       //https://stackoverflow.com/questions/13269882/angularjs-resource-restful-example
       //https://stackoverflow.com/questions/16387202/angularjs-resource-query-result-array-as-a-property
       //http://jsfiddle.net/wortzwei/bez79/
-      return $resource('/api/v1/' + modelName + '/:id', { 'id': '@id' }, {
+      return $resource('/api/v1/' + modelName + '/:id', {'id': '@id'}, {
         'query': {
           'method': 'GET',
           'transformResponse': function (data, headers, code) {
@@ -188,11 +188,20 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
       });
 
   }])
-  .controller('crudController', ['$scope', 'socket', 'trophy', function ($scope, socket, trophy) {
+  .controller('crudController', ['$scope', 'socket', 'trophy', '$http', function ($scope, socket, trophy, $http) {
     $scope.trophies = [];
+    $scope.codeSampleForCRUD = 'lalala';
     trophy.query(function (trophies) {
       $scope.trophies = trophies;
     });
+
+    $http.get('https://raw.githubusercontent.com/vodolaz095/hunt/master/examples/models/trophy.model.js')
+      .success(function (data, status) {
+        $scope.codeSampleForCRUD = data;
+      })
+      .error(function (data, status) {
+        throw new Error('Error getting example code for `Trophy` model')
+      });
 
     $scope.update = function (t) {
       return t.$save();

@@ -1,18 +1,17 @@
 module.exports = exports = function (core) {
   var TrophySchema = new core.mongoose.Schema({
-    'name': {type: String, unique: true},
-    'scored': Boolean,
+    'name': {type: String, unique: true, index: true, required: true},
+    'scored': {type: Boolean, default: false},
     'priority': Number,
-    'author': {type: core.mongoose.Schema.Types.ObjectId, ref: 'User'}
+    'author': {type: core.mongoose.Schema.Types.ObjectId, ref: 'User', index: true, required: true}
   });
 
-  TrophySchema.index({
-    name: 1
-  });
+  /*
+   * hunt-rest-mongoose exporting
+   */
 
-  //hunt-rest-mongoose exporting
-
-  //ACL check for what fields can user populate on creation
+//ACL check for what fields can user populate on creation
+// if user is authorized, he/she can create trophy
   TrophySchema.statics.canCreate = function (user, callback) {
     if (user) {
       callback(null, true, ['name', 'scored', 'priority']);
@@ -29,7 +28,8 @@ module.exports = exports = function (core) {
   };
 
 //ACL check for readable fields in this current document
-//everybody can read 'id', 'name', 'scored', 'priority'
+// `true` means everybody can read 'id', 'name', 'scored', 'priority'
+//and the `author` field is populated
   TrophySchema.methods.canRead = function (user, callback) {
     callback(null, true, ['id', 'name', 'scored', 'priority'], ['author']);
   };
@@ -41,9 +41,9 @@ module.exports = exports = function (core) {
   };
 
 //ACL check for ability to delete this particular document
-//it cannot be deleted
+//false means the trophy  cannot be deleted via REST api
   TrophySchema.methods.canDelete = function (user, callback) {
-    callback(null, true);
+    callback(null, (user && user._id.equals(this.author._id || this.author)));
   };
 
 //after saving every document changes to database, we broadcast changes to all users

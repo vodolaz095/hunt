@@ -668,6 +668,7 @@ function Hunt(config) {
     } else {
       throw new Error('Telnet server behavior for command of "' + command + '" is already defined!');
     }
+    return this;
   };
   /**
    * @method Hunt#onSocketIoEvent
