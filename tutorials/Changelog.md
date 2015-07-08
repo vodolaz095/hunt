@@ -1,11 +1,9 @@
-# v0.4.12
-Improvements in documentation and tutorials.
-
 # v0.4.11
 Fix issue with `Hunt.extendTelnet` not returning `Hunt` instance
 Improvements in code of example.
 Updated dependencies to more recent ones. 
 Fix rare race conditions in `Hunt.preload` middleware.
+Improvements in documentation and tutorials.
 
 # v0.4.9
 [https://www.npmjs.com/package/validator](Validator) is exported as `hunt.validator`.
