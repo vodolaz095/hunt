@@ -2,37 +2,37 @@
 
 var preys = [
   {
-    '_id':'557caf8ee7c36e8011b92ea7',
+    '_id': '557caf8ee7c36e8011b92ea7',
     'name': 'Alan Schaefer',
     'scored': false,
     'priority': 10
   },
   {
-    '_id':'557caf8ee7c36e8011b92ea8',
+    '_id': '557caf8ee7c36e8011b92ea8',
     'name': 'George Dillon',
     'scored': true,
     'priority': 9
   },
   {
-    '_id':'557caf8ee7c36e8011b92ea9',
+    '_id': '557caf8ee7c36e8011b92ea9',
     'name': 'Rick Hawkins',
     'scored': true,
     'priority': 8
   },
   {
-    '_id':'557caf8ee7c36e8011b92eaa',
+    '_id': '557caf8ee7c36e8011b92eaa',
     'name': 'Blain Cooper',
     'scored': true,
     'priority': 7
   },
   {
-    '_id':'557caf8ee7c36e8011b92eab',
+    '_id': '557caf8ee7c36e8011b92eab',
     'name': 'Billy Sole',
     'scored': true,
     'priority': 6
   },
   {
-    '_id':'557caf8ee7c36e8011b92eac',
+    '_id': '557caf8ee7c36e8011b92eac',
     'name': 'Anna Goncalves',
     'scored': false,
     'priority': 0
@@ -47,7 +47,7 @@ module.exports = exports = function (hunt) {
       hunt.model.Trophy.remove({}, cb);
     },
     function (cb) {
-      hunt.model.User.remove({ 'huntKey': 'i_am_game_master_grr' }, cb);
+      hunt.model.User.remove({'huntKey': 'i_am_game_master_grr'}, cb);
     },
     function (cb) {
       hunt.model.User.create({

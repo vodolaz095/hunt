@@ -38,7 +38,7 @@ var config = {
 //authorization by Intuit openid account, GET /auth/intuit
     'intuit': true,
 //authorization by Yahoo openid account, GET /auth/yahoo
-    'yahoo': true,
+    'yahoo': true
 
 // Google OAuth2 Strategy
 //    'GOOGLE_CLIENT_ID': '323040484611-82ju1isetg8dkbvgb.apps.googleusercontent.com',
@@ -279,7 +279,7 @@ hunt.extendController('/', function (core, router) {
   router.get('/baderror', function (req, res) {
     (function () {
       throw new Error('Catch this!');
-    })();
+    }());
   });
 
   /*
@@ -295,7 +295,8 @@ hunt.extendController('/', function (core, router) {
  */
 hunt.exportModelToRest({
   'mountPount': '/api/v1/trophy',
-  'modelName': 'Trophy'
+  'modelName': 'Trophy',
+  'ownerId': 'author'
 });
 
 /*
