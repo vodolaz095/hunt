@@ -43,7 +43,7 @@ module.exports = exports = function (core) {
 //ACL check for ability to delete this particular document
 //false means the trophy  cannot be deleted via REST api
   TrophySchema.methods.canDelete = function (user, callback) {
-    callback(null, (user && user._id.equals(this.author._id || this.author)));
+    callback(null, !!user);
   };
 
 //after saving every document changes to database, we broadcast changes to all users
