@@ -1,3 +1,6 @@
+# v0.4.12
+Fix typo with in default user's model and default user's model behaviour
+
 # v0.4.11
 Fix issue with `Hunt.extendTelnet` not returning `Hunt` instance
 Improvements in code of example.

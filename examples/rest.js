@@ -17,7 +17,17 @@ hunt.extendModel('Trophy', require('./models/trophy.model.js'));
  */
 hunt.exportModelToRest({
   'mountPount': '/api/v1/trophy',
-  'modelName': 'Trophy'
+  'modelName': 'Trophy',
+  'ownerId': 'author'
+});
+
+/*
+ * Exporting User model as REST interface
+ */
+hunt.exportModelToRest({
+  'mountPount': '/api/v1/user',
+  'modelName': 'User',
+  'ownerId': '_id'
 });
 
 hunt.startWebServer();

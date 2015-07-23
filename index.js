@@ -754,6 +754,7 @@ function Hunt(config) {
     }
     nodemailerListener(h);
   }
+  injectModels(this);
 
   function buildExpressApp(h) {
     passportGenerator.call(h, extendPassportStrategiesFunctions, extendRoutesFunctions);
@@ -779,7 +780,6 @@ function Hunt(config) {
    */
   this.startBackGround = function () {
     console.log('Trying to start Hunt as background service...'.magenta);
-    injectModels(this);
     buildExpressApp(this);
     prepared = true;
     /**
@@ -816,7 +816,6 @@ function Hunt(config) {
     var p = port || this.config.port,
       address = address || this.config.address || '0.0.0.0';
     console.log(('Trying to start Hunt as web server on ' + address + ':' + p + '...').magenta);
-    injectModels(this);
     buildExpressApp(this);
     var h = this;
     this.httpServer.listen(p, address, function () {
@@ -856,7 +855,6 @@ function Hunt(config) {
       address = address || this.config.address || '0.0.0.0';
     console.log(('Trying to start Hunt as telnet server on port ' + p + '...').magenta);
     this.extendCore('telnetHandler', require('./lib/telnet/telnet.js'));
-    injectModels(this);
     buildExpressApp(this);
     buildTelnet(this);
     prepared = true;

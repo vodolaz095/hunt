@@ -47,12 +47,14 @@ module.exports = exports = function (hunt) {
       hunt.model.Trophy.remove({}, cb);
     },
     function (cb) {
-      hunt.model.User.remove({'huntKey': 'i_am_game_master_grr'}, cb);
+      hunt.model.User.remove({ 'huntKey': 'i_am_game_master_grr' }, cb);
     },
     function (cb) {
       hunt.model.User.create({
+        '_id': '55b0c81ee523c6a60c4325ad',
         'displayName': 'Gamemaster',
         'root': false,
+        'accountVerified': true,
         'huntKey': 'i_am_game_master_grr'
       }, function (error, userCreated) {
         if (error) {

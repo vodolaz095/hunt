@@ -300,6 +300,24 @@ hunt.exportModelToRest({
 });
 
 /*
+ * Exporting User model as REST interface
+ */
+hunt.exportModelToRest({
+  'mountPount': '/api/v1/user',
+  'modelName': 'User',
+  'ownerId': '_id'
+});
+
+/*
+ * Exporting Message model as REST interface
+ */
+hunt.exportModelToRest({
+  'mountPount': '/api/v1/message',
+  'modelName': 'Message',
+  'ownerId': 'from'
+});
+
+/*
  * setting up the event handlers
  */
 
