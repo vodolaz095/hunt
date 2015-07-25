@@ -1,3 +1,6 @@
+# v0.4.13
+Updated dependencies to more recent ones
+
 # v0.4.12
 Fix typo with in default user's model and default user's model behaviour.
 Flash message for logging out. Pretty print json on development environment.
