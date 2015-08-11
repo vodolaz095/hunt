@@ -1,6 +1,8 @@
 [Unit]
 Description=HuntJs application ran on behalf of user  %i
 Before = mongodb.service redis.service
+Wants=network.target
+After=network.target
 
 [Service]
 ProtectSystem=true
