@@ -3,6 +3,7 @@ Description=HuntJs application ran on behalf of user  %i
 Before = mongodb.service redis.service
 
 [Service]
+ProtectSystem=true
 Type=simple
 User=%i
 WorkingDirectory=%h/myHuntJSapp
