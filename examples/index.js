@@ -129,15 +129,7 @@ hunt.extendController('/', function (core, router) {
   /*
    * Middleware to redirect to https on production environment
    */
-  if (core.config.env === 'production') {
-    router.use(function (request, response, next) {
-      if (request.protocol === 'http') {
-        response.redirect(core.config.hostUrl.slice(0, core.config.hostUrl.length - 1) + request.originalUrl);
-      } else {
-        next();
-      }
-    });
-  }
+  router.use(core.forceHttps);
 
   /*
    * Setting middleware to irritate user who have not verified his account
