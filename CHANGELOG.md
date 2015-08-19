@@ -1,3 +1,6 @@
+# v0.4.14
+Updated dependencies to more recent ones
+
 # v0.4.13
 Updated dependencies to more recent ones
 
