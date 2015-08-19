@@ -1,10 +1,10 @@
 {
   "name": "hunt",
-  "version": "0.4.14",
+  "version": "0.4.15",
   "description": "High level nodejs framework build on top of expressjs, mongoose, sequilize, socketio and passportjs",
   "main": "index.js",
   "engines": {
-    "node": ">=0.10.33",
+    "node": ">=0.10.36",
     "npm": ">=2.1.18"
   },
   "os": [ "linux", "darwin" ],
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:vodolaz095/hunt.git"
+    "url": "git@github.com:vodolaz095/hunt.git"
   },
   "directories": {
     "example": "./examples",
@@ -25,7 +25,7 @@
     "test": "./test"
   },
   "bugs": {
-    "url": "https://bitbucket.org/vodolaz095/hunt/issues"
+    "url": "https://github.com/vodolaz095/hunt/issues"
   },
   "keywords": [
     "hunt",
