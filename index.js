@@ -1258,19 +1258,17 @@ Hunt.prototype.stop = function () {
     this.mongoose.connection.close();
     this.mongoose.disconnect();
   }
-  if (this.sequelize) {
-    //todo - do disconnection to SQL database
-  }
-
-  delete this;
+  //if (this.sequelize) {
+  //do disconnection to SQL database
+  //}
   console.log('Hunt is stopped!'.green + '\n');
 };
 
 /**
  * @method Hunt#loadControllersFromDirectory
- * @param {String} dirname - path to directories with controller files.
+ * @param {String} dirname - path to directoriy with controller files.
  * @description
- * Load custom controllers from directory.
+ * Automatically load custom controllers from directory.
  * @example
  * ```javascript
  * //file `controllers/something.controller.js
@@ -1281,12 +1279,17 @@ Hunt.prototype.stop = function () {
  *     res.send('Doing something...');
  *   });
  * }
+ *
+ * //file index.js - main entry point
+ * hunt.loadControllersFromDirectory('./controllers');
+ * hunt.startWebServer();
  * ```
  */
 Hunt.prototype.loadControllersFromDirectory = function (dirname) {
   var h = this;
   /*jslint node: true, stupid: true */
   fs.readdirSync(dirname).map(function (ctrlFileName) {
+    /*jslint node: true, stupid: false */
     if (/^([a-zA-Z0-9_]+)\.controller\.js$/.test(ctrlFileName)) {
       var
         filepath = path.resolve('./' + path.join(dirname, ctrlFileName)),
@@ -1295,7 +1298,55 @@ Hunt.prototype.loadControllersFromDirectory = function (dirname) {
       h.extendController(ctrl.mountpoint, ctrl.handler);
     }
   });
-  /*jslint node: true, stupid: false */
+};
+
+/**
+ * @method Hunt#loadModelsFromDirectory
+ * @param {String} dirname - path to directoriy with model files.
+ * @see Hunt#extendModel
+ * @see ExportModelToRestParameters
+ * @description
+ * Automatically load custom models from directory.
+ * @example
+ * //file `models/Trophy.model.js
+ * 'use strict';
+ *
+ *  exports.modelName = 'Trophy';
+ *  exports.mountPoints = ['/api/v1/trophy', '/api/v1/trophies'];
+ *  exports.exportModel = true;
+ *  exports.ownerId = 'author';
+ *
+ *  exports.init = function (core) {
+ *   var TrophySchema = new core.mongoose.Schema({
+ *   //other model initialization code
+ *   })
+ *  };
+ * //file index.js - main entry point
+ * hunt.loadModelsFromDirectory('./models');
+ * hunt.startWebServer();
+ */
+Hunt.prototype.loadModelsFromDirectory = function (dirname) {
+  var h = this;
+  /*jslint node: true, stupid: true */
+  fs.readdirSync(dirname).map(function (modelFileName) {
+    /*jslint node: true, stupid: false */
+    var
+      filepath = path.resolve('./' + path.join(dirname, modelFileName)),
+      model = require(filepath);
+
+    console.log('Loading model `' + modelFileName + '` into ' + model.modelName);
+    h.extendModel(model.modelName, model.init);
+    if (model.exportModel === true) {
+      model.mountPoints.map(function (mp) {
+        console.log('Exporting model `' + model.modelName + '` on ' + mp);
+        h.exportModelToRest({
+          'mountPoint' : mp,
+          'modelName' : model.modelName,
+          'ownerId' : model.ownerId
+        });
+      });
+    }
+  });
 };
 
 
