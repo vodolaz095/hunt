@@ -14,7 +14,8 @@
   "regexp": true,
   "undef": true,
   "unused": true,
-  "strict": false,
+  "strict": true,
+  "stupid": false,
   "trailing": true,
   "smarttabs": true,
   "predef": [
@@ -24,6 +25,8 @@
     "beforeEach",
     "after",
     "afterEach",
-    "exports"
-  ]
+    "exports",
+    "module"
+  ],
+  "exports": true
 }

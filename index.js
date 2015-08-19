@@ -1,18 +1,18 @@
 'use strict';
 
-var EventEmitter = require('eventemitter2').EventEmitter2,
-  util = require('util'),
+var
   assert = require('assert'),
-
-  configGenerator = require('./lib/misc/config.js'),
-  redisGenerator = require('./lib/datastore/redisClient.js'),
-  mongooseGenerator = require('./lib/datastore/mongooseModels.js'),
-  passportGenerator = require('./lib/http/passport.js'),
+  EventEmitter = require('eventemitter2').EventEmitter2,
+  fs = require('fs'),
+  path = require('path'),
+  util = require('util'),
   appGenerator = require('./lib/http/expressApp.js'),
+  configGenerator = require('./lib/misc/config.js'),
   crypt = require('./lib/misc/crypt.js'),
-
-  nodemailerListener = require('./lib/nodemailer.js');
-
+  mongooseGenerator = require('./lib/datastore/mongooseModels.js'),
+  nodemailerListener = require('./lib/nodemailer.js'),
+  passportGenerator = require('./lib/http/passport.js'),
+  redisGenerator = require('./lib/datastore/redisClient.js');
 
 require('colors');
 /**
@@ -57,9 +57,9 @@ require('colors');
  */
 function Hunt(config) {
   EventEmitter.call(this, {
-    wildcard: true,
-    delimiter: ':',
-    maxListeners: 20
+    wildcard : true,
+    delimiter : ':',
+    maxListeners : 20
   });
 
 //http://www.crockford.com/javascript/private.html
@@ -106,22 +106,21 @@ function Hunt(config) {
   this.extendCore = function (field, value) {
     if (prepared) {
       throw new Error('Hunt is prepared, unable to run hunt.extendCore');
-    } else {
-      if (typeof field === 'string' && value !== undefined) {
-        if (this[field] === undefined) {
-          if (typeof value === 'function') {
-            this[field] = value(this);
-          } else {
-            this[field] = value;
-          }
+    }
+    if (typeof field === 'string' && value !== undefined) {
+      if (this[field] === undefined) {
+        if (typeof value === 'function') {
+          this[field] = value(this);
         } else {
-          throw new Error('Unable to extend Hunt core. Field "' + field + '" already occupied!');
+          this[field] = value;
         }
       } else {
-        throw new Error('Unable to inject "' + field + '" with value "' + value + '" into hunt core! Type mismatch.');
+        throw new Error('Unable to extend Hunt core. Field "' + field + '" already occupied!');
       }
-      return this;
+    } else {
+      throw new Error('Unable to inject "' + field + '" with value "' + value + '" into hunt core! Type mismatch.');
     }
+    return this;
   };
 
   /**
@@ -268,18 +267,17 @@ function Hunt(config) {
   this.extendModel = function (modelName, modelConstructor) {
     if (prepared) {
       throw new Error('Hunt is prepared, unable to run hunt.extendModel');
-    } else {
-      if (this.model[modelName] === undefined) {
-        if (typeof modelName === 'string' && typeof modelConstructor === 'function') {
-          this.model[modelName] = modelConstructor(this);
-        } else {
-          throw new Error('Unable to inject "' + modelName + '" into core! Wrong arguments!');
-        }
-      } else {
-        throw new Error('Unable to inject "' + modelName + '" into core! Model is already defined!');
-      }
-      return this;
     }
+    if (this.model[modelName] === undefined) {
+      if (typeof modelName === 'string' && typeof modelConstructor === 'function') {
+        this.model[modelName] = modelConstructor(this);
+      } else {
+        throw new Error('Unable to inject "' + modelName + '" into core! Wrong arguments!');
+      }
+    } else {
+      throw new Error('Unable to inject "' + modelName + '" into core! Model is already defined!');
+    }
+    return this;
   };
 
   /**
@@ -353,44 +351,43 @@ function Hunt(config) {
   this.extendApp = function (environment, settingsFunction) {
     if (prepared) {
       throw new Error('Hunt application is already prepared! WE CAN\'T EXTEND IT NOW!');
-    } else {
-      var environmentToUse = null,
-        i,
-        j;
-      if (settingsFunction === undefined) {
-        settingsFunction = environment;
-        environment = null;
-      }
-      if (typeof environment === 'string') {
-        environmentToUse = [];
-        environmentToUse.push(environment);
-      }
-      if (environment instanceof Array) {
-        environmentToUse = environment;
-        for (i = 0; i < environment.length; i = i + 1) {
-          if (typeof environment[i] !== 'string') {
-            throw new Error('Hunt.extendApp requires environment name to be a string!');
-          }
+    }
+    var environmentToUse = null,
+      i,
+      j;
+    if (settingsFunction === undefined) {
+      settingsFunction = environment;
+      environment = null;
+    }
+    if (typeof environment === 'string') {
+      environmentToUse = [];
+      environmentToUse.push(environment);
+    }
+    if (environment instanceof Array) {
+      environmentToUse = environment;
+      for (i = 0; i < environment.length; i = i + 1) {
+        if (typeof environment[i] !== 'string') {
+          throw new Error('Hunt.extendApp requires environment name to be a string!');
         }
       }
-      if (typeof settingsFunction === 'function') {
-        if (environmentToUse) {
-          for (j = 0; j < environmentToUse.length; j = j + 1) {
-            extendAppFunctions.push({
-              'environment': environmentToUse[j],
-              'settingsFunction': settingsFunction
-            });
-          }
-        } else {
+    }
+    if (typeof settingsFunction === 'function') {
+      if (environmentToUse) {
+        for (j = 0; j < environmentToUse.length; j = j + 1) {
           extendAppFunctions.push({
-            'settingsFunction': settingsFunction
+            'environment' : environmentToUse[j],
+            'settingsFunction' : settingsFunction
           });
         }
       } else {
-        throw new Error('Wrong arguments for extendApp(arrayOrStringOfEnvironments,settingsFunction)');
+        extendAppFunctions.push({
+          'settingsFunction' : settingsFunction
+        });
       }
-      return this;
+    } else {
+      throw new Error('Wrong arguments for extendApp(arrayOrStringOfEnvironments,settingsFunction)');
     }
+    return this;
   };
 
   /**
@@ -494,68 +491,67 @@ function Hunt(config) {
   this.extendMiddleware = function (environment, path, settingsFunction) {
     if (prepared) {
       throw new Error('Hunt application is already prepared! WE CAN\'T EXTEND IT NOW!');
-    } else {
-      var environmentToUse = null,
-        pathToUse = '/',
-        settingsFunctionToUse = null,
-        k,
-        l;
+    }
+    var environmentToUse = null,
+      pathToUse = '/',
+      settingsFunctionToUse = null,
+      k,
+      l;
 
-      if (typeof environment === 'function' && path === undefined && settingsFunction === undefined) {
-        settingsFunctionToUse = environment;
+    if (typeof environment === 'function' && path === undefined && settingsFunction === undefined) {
+      settingsFunctionToUse = environment;
+    }
+
+    if (typeof environment === 'string' || environment instanceof Array) {
+
+      if (typeof environment === 'string') {
+        environmentToUse = [];
+        environmentToUse.push(environment);
       }
-
-      if (typeof environment === 'string' || environment instanceof Array) {
-
-        if (typeof environment === 'string') {
-          environmentToUse = [];
-          environmentToUse.push(environment);
-        }
-        if (environment instanceof Array) {
-          environmentToUse = environment;
-          for (k = 0; k < environment.length; k = k + 1) {
-            if (typeof environment[k] !== 'string') {
-              throw new Error('Hunt.extendMiddleware(environment, path, settingsFunction) requires environment name to be a string or array of strings!');
-            }
-          }
-        }
-        if (typeof path === 'string') {
-          if (/^\//.test(path)) {
-            pathToUse = path;
-            if (typeof settingsFunction === 'function') {
-              settingsFunctionToUse = settingsFunction;
-            }
-          } else {
-            throw new Error('Hunt.extendMiddleware(environment, path, settingsFunction) requires path to be a valid middleware path, that starts from "/"!');
-          }
-        } else {
-          if (typeof path === 'function') {
-            settingsFunctionToUse = path;
+      if (environment instanceof Array) {
+        environmentToUse = environment;
+        for (k = 0; k < environment.length; k = k + 1) {
+          if (typeof environment[k] !== 'string') {
+            throw new Error('Hunt.extendMiddleware(environment, path, settingsFunction) requires environment name to be a string or array of strings!');
           }
         }
       }
-
-      if (settingsFunctionToUse) {
-        if (environmentToUse) {
-          for (l = 0; l < environmentToUse.length; l = l + 1) {
-            extendMiddlewareFunctions.push({
-              'environment': environmentToUse[l],
-              'path': pathToUse || '/',
-              'SettingsFunction': settingsFunctionToUse
-            });
+      if (typeof path === 'string') {
+        if (/^\//.test(path)) {
+          pathToUse = path;
+          if (typeof settingsFunction === 'function') {
+            settingsFunctionToUse = settingsFunction;
           }
         } else {
-//we set middleware for all environments
+          throw new Error('Hunt.extendMiddleware(environment, path, settingsFunction) requires path to be a valid middleware path, that starts from "/"!');
+        }
+      } else {
+        if (typeof path === 'function') {
+          settingsFunctionToUse = path;
+        }
+      }
+    }
+
+    if (settingsFunctionToUse) {
+      if (environmentToUse) {
+        for (l = 0; l < environmentToUse.length; l = l + 1) {
           extendMiddlewareFunctions.push({
-            'path': pathToUse || '/',
-            'SettingsFunction': settingsFunctionToUse
+            'environment' : environmentToUse[l],
+            'path' : pathToUse || '/',
+            'SettingsFunction' : settingsFunctionToUse
           });
         }
       } else {
-        throw new Error('Wrong arguments for function Hunt.extendMiddleware(environmentArrayOrStrings, [path], settingsFunction(core){...})');
+//we set middleware for all environments
+        extendMiddlewareFunctions.push({
+          'path' : pathToUse || '/',
+          'SettingsFunction' : settingsFunctionToUse
+        });
       }
-      return this;
+    } else {
+      throw new Error('Wrong arguments for function Hunt.extendMiddleware(environmentArrayOrStrings, [path], settingsFunction(core){...})');
     }
+    return this;
   };
 
   /**
@@ -581,14 +577,13 @@ function Hunt(config) {
   this.extendRoutes = function (settingsFunction) {
     if (prepared) {
       throw new Error('Hunt application is already prepared! WE CAN\'T EXTEND IT NOW!');
-    } else {
-      if (typeof settingsFunction === 'function') {
-        extendRoutesFunctions.push(settingsFunction);
-      } else {
-        throw new Error('Wrong argument for Hunt.extendAppRoutes(function(core){...});');
-      }
-      return this;
     }
+    if (typeof settingsFunction === 'function') {
+      extendRoutesFunctions.push(settingsFunction);
+    } else {
+      throw new Error('Wrong argument for Hunt.extendAppRoutes(function(core){...});');
+    }
+    return this;
   };
 
   /**
@@ -623,17 +618,16 @@ function Hunt(config) {
   this.extendController = function (mountPoint, settingsFunction) {
     if (prepared) {
       throw new Error('Hunt application is already prepared! WE CAN\'T EXTEND IT NOW!');
-    } else {
-      if (typeof settingsFunction === 'function' && typeof mountPoint === 'string') {
-        extendControllerFunctions.push({
-          'mountPoint': mountPoint,
-          'settingsFunction': settingsFunction
-        });
-      } else {
-        throw new Error('Wrong argument for Hunt.extendController(mountPoint,function(core, router){...});');
-      }
-      return this;
     }
+    if (typeof settingsFunction === 'function' && typeof mountPoint === 'string') {
+      extendControllerFunctions.push({
+        'mountPoint' : mountPoint,
+        'settingsFunction' : settingsFunction
+      });
+    } else {
+      throw new Error('Wrong argument for Hunt.extendController(mountPoint,function(core, router){...});');
+    }
+    return this;
   };
 
 
@@ -704,7 +698,7 @@ function Hunt(config) {
       if (startParameters.type === 'webserver' && h.config.io && h.config.io.enabled === true) {
 //if application is started as background service, it do not have socket.io support
         h.io.sockets.on('connection', function (socket) {
-          socket.on('' + eventName, function (payload, cb) {
+          socket.on(eventName.toString(), function (payload, cb) {
             callback(payload, socket, cb);
           });
         });
@@ -728,7 +722,7 @@ function Hunt(config) {
    * @property {Message} message - synonim for {@link Message}
    * @see Hunt#extendModel
    */
-  function injectModels(h) {
+  (function (h) {
     if (h.config.enableMongoose && h.config.enableMongooseUsers) {
       var mongooseUsers = require('./lib/models/user.mongoose.js'),
         mongooseMessages = require('./lib/models/message.mongoose.js');
@@ -742,7 +736,8 @@ function Hunt(config) {
         'findOneByHuntKey', 'findOneByEmail', 'findOneFuzzy', 'findById', 'find',
         'signUp', 'signIn', 'findOneByHuntKeyAndVerifyEmail', 'findOneByHuntKeyAndResetPassword',
         'processOAuthProfile'
-      ].map(function (f) {
+      ]
+        .map(function (f) {
           assert(typeof h.model.User[f] === 'function', 'Hunt.model.User.' + f + ' is not a function!');
         });
 
@@ -753,8 +748,7 @@ function Hunt(config) {
       h.model.message = h.model.Message;
     }
     nodemailerListener(h);
-  }
-  injectModels(this);
+  }(this));
 
   function buildExpressApp(h) {
     passportGenerator.call(h, extendPassportStrategiesFunctions, extendRoutesFunctions);
@@ -790,7 +784,7 @@ function Hunt(config) {
      * @type {object}
      * @property {string} type - with a value of string of 'background'
      */
-    this.emit('start', { 'type': 'background' });
+    this.emit('start', { 'type' : 'background' });
     console.log(('Started Hunt as background service with PID#' + process.pid + '!').green);
   };
 
@@ -814,10 +808,10 @@ function Hunt(config) {
    */
   this.startWebServer = function (port, address) {
     var p = port || this.config.port,
-      address = address || this.config.address || '0.0.0.0';
+      h = this;
     console.log(('Trying to start Hunt as web server on ' + address + ':' + p + '...').magenta);
+    address = address || this.config.address || '0.0.0.0';
     buildExpressApp(this);
-    var h = this;
     this.httpServer.listen(p, address, function () {
       /**
        * Emitted when Hunt is started as webserver process
@@ -830,7 +824,7 @@ function Hunt(config) {
        * @property {number} port - with a value of port this application listens to
        * @property {string} address - with a value of address application is bound to
        */
-      h.emit('start', { 'type': 'webserver', 'port': p, 'address': address });
+      h.emit('start', { 'type' : 'webserver', 'port' : p, 'address' : address });
       console.log(('Started Hunt as web server on port ' + p + ' with PID#' + process.pid + '!').green);
       prepared = true;
     });
@@ -851,39 +845,43 @@ function Hunt(config) {
    *
    */
   this.startTelnetServer = function (port, address) {
-    var p = port || this.config.port,
-      address = address || this.config.address || '0.0.0.0';
-    console.log(('Trying to start Hunt as telnet server on port ' + p + '...').magenta);
     this.extendCore('telnetHandler', require('./lib/telnet/telnet.js'));
-    buildExpressApp(this);
+    buildExpressApp(this); //only for `app.render`
     buildTelnet(this);
-    prepared = true;
-    var RAIServer = require("rai").RAIServer,
+
+    var
+      thishunt = this,
+      p = port || this.config.port,
+      RAIServer = require('rai').RAIServer,
       telnetServer = new RAIServer(this.config.telnetServer);
+
+    address = address || this.config.address || '0.0.0.0';
+    console.log(('Trying to start Hunt as telnet server on port ' + p + '...').magenta);
+
+    prepared = true;
 
     telnetServer.on('connect', this.telnetHandler);
 
     telnetServer.on('error', function (error) {
       throw error;
     });
-    var thishunt = this;
+
     telnetServer.listen(p, address, function (error) {
       if (error) {
         throw error;
-      } else {
-        /**
-         * Emitted when Hunt is started as telnet process
-         *
-         * @see Hunt#startTelnetServer
-         * @event Hunt#start
-         * @type {object}
-         * @property {string} type - with a value of string of 'telnet'
-         * @property {string} port - with a value of string of port number
-         * @property {string} address - with a value of address application is bound to
-         */
-        thishunt.emit('start', { 'type': 'telnet', 'port': p, 'address': address });
-        console.log(('Started Hunt as telnet server on ' + address + ':' + p + '!').green);
       }
+      /**
+       * Emitted when Hunt is started as telnet process
+       *
+       * @see Hunt#startTelnetServer
+       * @event Hunt#start
+       * @type {object}
+       * @property {string} type - with a value of string of 'telnet'
+       * @property {string} port - with a value of string of port number
+       * @property {string} address - with a value of address application is bound to
+       */
+      thishunt.emit('start', { 'type' : 'telnet', 'port' : p, 'address' : address });
+      console.log(('Started Hunt as telnet server on ' + address + ':' + p + '!').green);
     });
     return this;
   };
@@ -912,7 +910,7 @@ function Hunt(config) {
     var p = port || this.config.port,
       m = maxProcesses || 'max';
 
-    return this.startCluster({ 'port': p, 'web': m, 'telnet': 0, 'background': 0 });
+    return this.startCluster({ 'port' : p, 'web' : m, 'telnet' : 0, 'background' : 0 });
   };
 
   /**
@@ -937,7 +935,7 @@ function Hunt(config) {
     var p = port || this.config.port,
       m = maxProcesses || 'max';
 
-    return this.startCluster({ 'port': p, 'web': 0, 'telnet': m, 'background': 0 });
+    return this.startCluster({ 'port' : p, 'web' : 0, 'telnet' : m, 'background' : 0 });
   };
 
   /**
@@ -959,7 +957,7 @@ function Hunt(config) {
    */
   this.startBackGroundCluster = function (maxProcesses) {
     console.log(('Trying to start Hunt as background cluster service...').magenta);
-    return this.startCluster({ 'web': 0, 'telnet': 0, 'background': maxProcesses })
+    return this.startCluster({ 'web' : 0, 'telnet' : 0, 'background' : maxProcesses });
   };
 
   /**
@@ -985,7 +983,10 @@ function Hunt(config) {
    */
   this.startCluster = function (parameters) {
 
-    var cluster = require('cluster'),
+    var
+      h = this,
+      cluster = require('cluster'),
+      worker,
       numCPUs = require('os').cpus().length,
       maxWorkers = Math.min(this.config.maxWorkers, numCPUs),
       runtimeConfig = {},
@@ -995,7 +996,7 @@ function Hunt(config) {
       if (parameters[a] === 'max') {
         runtimeConfig[a] = maxWorkers;
       }
-      if (parseInt(parameters[a])) {
+      if (parseInt(parameters[a], 10)) {
         runtimeConfig[a] = parameters[a];
       }
       if (!parameters[a]) {
@@ -1003,10 +1004,10 @@ function Hunt(config) {
       }
     });
 
-    runtimeConfig.port = parseInt(parameters.port) || config.port || 3000;
+    runtimeConfig.port = parseInt(parameters.port, 10) || config.port || 3000;
     runtimeConfig.address = parameters.port || config.address;
 
-    if ((runtimeConfig.web + runtimeConfig.background + runtimeConfig.telnet ) <= maxWorkers) {
+    if ((runtimeConfig.web + runtimeConfig.background + runtimeConfig.telnet) <= maxWorkers) {
 
       if (cluster.isMaster) {
         console.log(('Cluster : We have ' + numCPUs + ' CPU cores present. We can use ' + maxWorkers + ' of them.').bold.green);
@@ -1019,60 +1020,57 @@ function Hunt(config) {
         console.log(('Cluster : Master PID#' + process.pid + ' is online!').green);
 // Fork workers.
         for (i = 0; i < runtimeConfig.web; i = i + 1) {
-          var worker = cluster.fork();
+          worker = cluster.fork();
           worker.send('be_webserver');
           console.log(('Cluster : Spawning web server worker #' + i + ' with PID#' + worker.process.pid + '...').yellow);
         }
 
         for (i = 0; i < runtimeConfig.background; i = i + 1) {
-          var worker = cluster.fork();
+          worker = cluster.fork();
           worker.send('be_background');
           console.log(('Cluster : Spawning background worker #' + i + ' with PID#' + worker.process.pid + '...').yellow);
         }
         for (i = 0; i < runtimeConfig.telnet; i = i + 1) {
-          var worker = cluster.fork();
+          worker = cluster.fork();
           worker.send('be_telnet');
           console.log(('Cluster : Spawning telnet server worker #' + i + ' with PID#' + worker.process.pid + '...').yellow);
         }
-
 
         cluster.on('online', function (worker) {
           console.log(('Cluster : Worker PID#' + worker.process.pid + ' is online!').green);
         });
 
-        cluster.on('exit', function (worker, code, signal) {
+        cluster.on('exit', function (worker) {
           var exitCode = worker.process.exitCode;
           console.log(('Cluster : Worker #' + worker.process.pid + ' died (' + exitCode + ')! Trying to spawn spare one...').red);
           cluster.fork();
         });
         this.startBackGround(); // the master process is ran as background application
         return true;
-      } else {
-        var h = this;
-        process.on('message', function (msg) {
-          switch (msg) {
-            case 'be_background':
-              h.startBackGround(); // the child process is ran as background application
-              break;
-            case 'be_webserver':
-              h.startWebServer(runtimeConfig.port, runtimeConfig.address);
-              break;
-            case 'be_telnet':
-              if (runtimeConfig.web > 0) {
-                h.startTelnetServer((runtimeConfig.port + 1), runtimeConfig.address);
-              } else {
-                h.startTelnetServer(runtimeConfig.port, runtimeConfig.address);
-              }
-              break;
-            default:
-              throw new Error('Unknown command of `' + msg + '` from master process!');
-          }
-        });
-        return false;
       }
-    } else {
-      throw new Error('This configuration requires more workers, than allowed by `config.maxWorkers`! ');
+
+      process.on('message', function (msg) {
+        switch (msg) {
+        case 'be_background':
+          h.startBackGround(); // the child process is ran as background application
+          break;
+        case 'be_webserver':
+          h.startWebServer(runtimeConfig.port, runtimeConfig.address);
+          break;
+        case 'be_telnet':
+          if (runtimeConfig.web > 0) {
+            h.startTelnetServer((runtimeConfig.port + 1), runtimeConfig.address);
+          } else {
+            h.startTelnetServer(runtimeConfig.port, runtimeConfig.address);
+          }
+          break;
+        default:
+          throw new Error('Unknown command of `' + msg + '` from master process!');
+        }
+      });
+      return false;
     }
+    throw new Error('This configuration requires more workers, than allowed by `config.maxWorkers`! ');
   };
 }
 
@@ -1267,6 +1265,39 @@ Hunt.prototype.stop = function () {
   delete this;
   console.log('Hunt is stopped!'.green + '\n');
 };
+
+/**
+ * @method Hunt#loadControllersFromDirectory
+ * @param {String} dirname - path to directories with controller files.
+ * @description
+ * Load custom controllers from directory.
+ * @example
+ * ```javascript
+ * //file `controllers/something.controller.js
+ * "use strict";
+ * exports.mountpoint = '/';
+ * exports.handler = function (core, router) {
+ *   router.get('/', function(req,res){
+ *     res.send('Doing something...');
+ *   });
+ * }
+ * ```
+ */
+Hunt.prototype.loadControllersFromDirectory = function (dirname) {
+  var h = this;
+  /*jslint node: true, stupid: true */
+  fs.readdirSync(dirname).map(function (ctrlFileName) {
+    if (/^([a-zA-Z0-9_]+)\.controller\.js$/.test(ctrlFileName)) {
+      var
+        filepath = path.resolve('./' + path.join(dirname, ctrlFileName)),
+        ctrl = require(filepath);
+      console.log('Mounting controller `' + ctrlFileName + '` on ' + ctrl.mountpoint);
+      h.extendController(ctrl.mountpoint, ctrl.handler);
+    }
+  });
+  /*jslint node: true, stupid: false */
+};
+
 
 /**
  * HuntJS framework module
