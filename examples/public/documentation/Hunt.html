@@ -32,8 +32,6 @@
         Hunt
         </h2>
         
-            <div class="class-description"><p>Constructor of HuntJS application</p></div>
-        
     
 </header>
 
@@ -43,14 +41,16 @@
         
 
     
-    <h2>Constructor</h2>
-    
 
     <h4 class="name" id="Hunt"><span class="type-signature"></span>new Hunt<span class="signature">(config)</span><span class="type-signature"></span></h4>
 
     
 
 
+
+<div class="description">
+    <p>HuntJS framework module</p>
+</div>
 
 
 
@@ -101,7 +101,7 @@
 
             
 
-            <td class="description last"><p>dictionary of configuration parameters</p></td>
+            <td class="description last"><p>key-value object with settings</p></td>
         </tr>
 
     
@@ -152,42 +152,6 @@
 
 
 
-<h5>Fires:</h5>
-<ul>
-    <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
-
-    <li><a href="Hunt.html#event:http:*">Hunt#http:*</a></li>
-
-    <li><a href="Hunt.html#event:http:success">Hunt#http:success</a></li>
-
-    <li><a href="Hunt.html#event:http:error">Hunt#http:error</a></li>
-
-    <li><a href="Hunt.html#event:user:*">Hunt#user:*</a></li>
-
-    <li><a href="Hunt.html#event:user:signup">Hunt#user:signup</a></li>
-
-    <li><a href="Hunt.html#event:user:signin:*">Hunt#user:signin:*</a></li>
-
-    <li><a href="Hunt.html#event:user:notify:*">Hunt#user:notify:*</a></li>
-
-    <li><a href="Hunt.html#event:user:notify:all">Hunt#user:notify:all</a></li>
-
-    <li><a href="Hunt.html#event:user:notify:email">Hunt#user:notify:email</a></li>
-
-    <li><a href="Hunt.html#event:user:notify:sio">Hunt#user:notify:sio</a></li>
-
-    <li><a href="Hunt.html#event:user:save">Hunt#user:save</a></li>
-
-    <li><a href="Hunt.html#event:broadcast">Hunt#event:broadcast</a></li>
-
-    <li><a href="Hunt.html#event:profiling:*">Hunt#profiling:*</a></li>
-
-    <li><a href="Hunt.html#event:profiling:redis:*">Hunt#profiling:redis:*</a></li>
-
-    <li><a href="Hunt.html#event:profiling:mongoose:*">Hunt#profiling:mongoose:*</a></li>
-
-    <li>Hunt#profiling:sequilize:*</li>
-</ul>
 
 
 
@@ -196,20 +160,6 @@
 
 
 
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>var hunt = require('hunt')({
- 'port': 3000
-})
-.extendRoutes(function (core) {
-   core.app.get('/', function (req, res) {
-     res.send('Hello, world!');
-   });
- })
- .startWebServer();</code></pre>
 
 
 
@@ -4095,6 +4045,305 @@ This middleware do nothing if application environment is not <code>production</c
 
     
 
+    <h4 class="name" id="loadControllersFromDirectory"><span class="type-signature"></span>loadControllersFromDirectory<span class="signature">(dirname)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Automatically load custom controllers from directory.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dirname</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>path to directoriy with controller files.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>```javascript
+//file `controllers/something.controller.js
+"use strict";
+exports.mountpoint = '/';
+exports.handler = function (core, router) {
+  router.get('/', function(req,res){
+    res.send('Doing something...');
+  });
+}
+
+//file index.js - main entry point
+hunt.loadControllersFromDirectory('./controllers');
+hunt.startWebServer();
+```</code></pre>
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="loadModelsFromDirectory"><span class="type-signature"></span>loadModelsFromDirectory<span class="signature">(dirname)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Automatically load custom models from directory.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dirname</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>path to directoriy with model files.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Hunt.html#extendModel">Hunt#extendModel</a></li>
+        
+            <li><a href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>//file `models/Trophy.model.js
+'use strict';
+
+ exports.modelName = 'Trophy';
+ exports.mountPoints = ['/api/v1/trophy', '/api/v1/trophies'];
+ exports.exportModel = true;
+ exports.ownerId = 'author';
+
+ exports.init = function (core) {
+  var TrophySchema = new core.mongoose.Schema({
+  //other model initialization code
+  })
+ };
+//file index.js - main entry point
+hunt.loadModelsFromDirectory('./models');
+hunt.startWebServer();</code></pre>
+
+
+
+        
+            
+
+    
+
     <h4 class="name" id="many"><span class="type-signature"></span>many<span class="signature">(eventName, howManyTimesToFire, listener)</span><span class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span></h4>
 
     
@@ -7361,152 +7610,6 @@ core.emit('broadcast', {type:'screamLoudly',message:'Hello? Can you hear me? Jun
 
 
 <div class="description">
-    <p>Emitted when Hunt is started as background process</p>
-</div>
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">object</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>with a value of string of 'background'</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="event:start">start</h4>
-
-    
-
-
-
-<div class="description">
     <p>Emitted when Hunt is started as telnet process</p>
 </div>
 
@@ -7665,6 +7768,152 @@ core.emit('broadcast', {type:'screamLoudly',message:'Hello? Can you hear me? Jun
     <dd class="tag-see">
         <ul>
             <li><a href="Hunt.html#startTelnetServer">Hunt#startTelnetServer</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:start">start</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Emitted when Hunt is started as background process</p>
+</div>
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>with a value of string of 'background'</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
         </ul>
     </dd>
     
@@ -12640,6 +12889,8 @@ with payload of user being saved.</p>
         Hunt
         </h2>
         
+            <div class="class-description"><p>Constructor of HuntJS application</p></div>
+        
     
 </header>
 
@@ -12649,16 +12900,14 @@ with payload of user being saved.</p>
         
 
     
+    <h2>Constructor</h2>
+    
 
     <h4 class="name" id="Hunt"><span class="type-signature"></span>new Hunt<span class="signature">(config)</span><span class="type-signature"></span></h4>
 
     
 
 
-
-<div class="description">
-    <p>HuntJS framework module</p>
-</div>
 
 
 
@@ -12709,7 +12958,7 @@ with payload of user being saved.</p>
 
             
 
-            <td class="description last"><p>key-value object with settings</p></td>
+            <td class="description last"><p>dictionary of configuration parameters</p></td>
         </tr>
 
     
@@ -12760,6 +13009,42 @@ with payload of user being saved.</p>
 
 
 
+<h5>Fires:</h5>
+<ul>
+    <li><a href="Hunt.html#event:start">Hunt#event:start</a></li>
+
+    <li><a href="Hunt.html#event:http:*">Hunt#http:*</a></li>
+
+    <li><a href="Hunt.html#event:http:success">Hunt#http:success</a></li>
+
+    <li><a href="Hunt.html#event:http:error">Hunt#http:error</a></li>
+
+    <li><a href="Hunt.html#event:user:*">Hunt#user:*</a></li>
+
+    <li><a href="Hunt.html#event:user:signup">Hunt#user:signup</a></li>
+
+    <li><a href="Hunt.html#event:user:signin:*">Hunt#user:signin:*</a></li>
+
+    <li><a href="Hunt.html#event:user:notify:*">Hunt#user:notify:*</a></li>
+
+    <li><a href="Hunt.html#event:user:notify:all">Hunt#user:notify:all</a></li>
+
+    <li><a href="Hunt.html#event:user:notify:email">Hunt#user:notify:email</a></li>
+
+    <li><a href="Hunt.html#event:user:notify:sio">Hunt#user:notify:sio</a></li>
+
+    <li><a href="Hunt.html#event:user:save">Hunt#user:save</a></li>
+
+    <li><a href="Hunt.html#event:broadcast">Hunt#event:broadcast</a></li>
+
+    <li><a href="Hunt.html#event:profiling:*">Hunt#profiling:*</a></li>
+
+    <li><a href="Hunt.html#event:profiling:redis:*">Hunt#profiling:redis:*</a></li>
+
+    <li><a href="Hunt.html#event:profiling:mongoose:*">Hunt#profiling:mongoose:*</a></li>
+
+    <li>Hunt#profiling:sequilize:*</li>
+</ul>
 
 
 
@@ -12768,6 +13053,20 @@ with payload of user being saved.</p>
 
 
 
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>var hunt = require('hunt')({
+ 'port': 3000
+})
+.extendRoutes(function (core) {
+   core.app.get('/', function (req, res) {
+     res.send('Hello, world!');
+   });
+ })
+ .startWebServer();</code></pre>
 
 
 
@@ -16653,6 +16952,305 @@ This middleware do nothing if application environment is not <code>production</c
 
     
 
+    <h4 class="name" id="loadControllersFromDirectory"><span class="type-signature"></span>loadControllersFromDirectory<span class="signature">(dirname)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Automatically load custom controllers from directory.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dirname</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>path to directoriy with controller files.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>```javascript
+//file `controllers/something.controller.js
+"use strict";
+exports.mountpoint = '/';
+exports.handler = function (core, router) {
+  router.get('/', function(req,res){
+    res.send('Doing something...');
+  });
+}
+
+//file index.js - main entry point
+hunt.loadControllersFromDirectory('./controllers');
+hunt.startWebServer();
+```</code></pre>
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="loadModelsFromDirectory"><span class="type-signature"></span>loadModelsFromDirectory<span class="signature">(dirname)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Automatically load custom models from directory.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dirname</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>path to directoriy with model files.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Hunt.html#extendModel">Hunt#extendModel</a></li>
+        
+            <li><a href="ExportModelToRestParameters.html">ExportModelToRestParameters</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>//file `models/Trophy.model.js
+'use strict';
+
+ exports.modelName = 'Trophy';
+ exports.mountPoints = ['/api/v1/trophy', '/api/v1/trophies'];
+ exports.exportModel = true;
+ exports.ownerId = 'author';
+
+ exports.init = function (core) {
+  var TrophySchema = new core.mongoose.Schema({
+  //other model initialization code
+  })
+ };
+//file index.js - main entry point
+hunt.loadModelsFromDirectory('./models');
+hunt.startWebServer();</code></pre>
+
+
+
+        
+            
+
+    
+
     <h4 class="name" id="many"><span class="type-signature"></span>many<span class="signature">(eventName, howManyTimesToFire, listener)</span><span class="type-signature"> &rarr; {<a href="Hunt.html">Hunt</a>}</span></h4>
 
     
@@ -19919,152 +20517,6 @@ core.emit('broadcast', {type:'screamLoudly',message:'Hello? Can you hear me? Jun
 
 
 <div class="description">
-    <p>Emitted when Hunt is started as background process</p>
-</div>
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">object</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>with a value of string of 'background'</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="event:start">start</h4>
-
-    
-
-
-
-<div class="description">
     <p>Emitted when Hunt is started as telnet process</p>
 </div>
 
@@ -20223,6 +20675,152 @@ core.emit('broadcast', {type:'screamLoudly',message:'Hello? Can you hear me? Jun
     <dd class="tag-see">
         <ul>
             <li><a href="Hunt.html#startTelnetServer">Hunt#startTelnetServer</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="event:start">start</h4>
+
+    
+
+
+
+<div class="description">
+    <p>Emitted when Hunt is started as background process</p>
+</div>
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>with a value of string of 'background'</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Hunt.html#startBackGround">Hunt#startBackGround</a></li>
         </ul>
     </dd>
     
@@ -25196,7 +25794,7 @@ with payload of user being saved.</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Wed Aug 19 2015 22:32:59 GMT+0300 (MSK)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Thu Aug 20 2015 00:27:50 GMT+0300 (MSK)
 </footer>
 
 <script> prettyPrint(); </script>
