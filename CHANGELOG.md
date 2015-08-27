@@ -1,6 +1,7 @@
 # v0.4.16
 Jshint integration without webstorm
 Fix issues with missing check for deleting uploaded files
+More recent dependencies
 
 # v0.4.15
 Added Hunt#loadModelsFromDirectory function
