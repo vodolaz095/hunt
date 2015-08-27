@@ -1,3 +1,5 @@
+'use strict';
+/*jshint expr: true*/
 var hunt = require('./../index.js'),
   request = require('request');
 

@@ -1,3 +1,5 @@
+'use strict';
+/*jshint expr: true*/
 var should = require('should'),
   async = require('async'),
   hunt = require('./../index.js'),

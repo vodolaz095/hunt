@@ -1,6 +1,6 @@
 {
   "name": "hunt",
-  "version": "0.4.15",
+  "version": "0.4.16",
   "description": "High level nodejs framework build on top of expressjs, mongoose, sequilize, socketio and passportjs",
   "main": "index.js",
   "engines": {
@@ -12,7 +12,9 @@
     "start": "node examples/index.js",
     "test": "./node_modules/.bin/mocha --reporter spec; ./generateDocs.sh",
     "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha",
-    "install":"echo 'HuntJS installing ok!'"
+    "install":"echo 'HuntJS installing ok!'",
+    "jslint":" ./node_modules/.bin/jslint **/* --config jslint.conf",
+    "jshint":"./node_modules/.bin/jshint --verbose -c .jshintrc **/*.js"
   },
   "repository": {
     "type": "git",
@@ -97,6 +99,8 @@
     "istanbul": "0.3.18",
     "mocha": "2.2.5",
     "jsdoc": "3.3.2",
+    "jslint":"0.9.3",
+    "jshint":"2.8.0",
     "should": "7.0.4"
   }
 }

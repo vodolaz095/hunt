@@ -4,6 +4,8 @@
  * Example, that logs to console all users in default mongo database
  */
 
+'use strict';
+
 var hunt = require('./../index.js'),
   Hunt = hunt({
     'enableMongoose': true,

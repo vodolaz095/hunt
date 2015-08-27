@@ -374,7 +374,10 @@ hunt.on('message:sio', function (event) {
  * Profiling
  */
 function profilingListener(payload) {
-  console.log('>>>PROFILING', this.event, payload, '<<<');
+  /* jshint -W040*/
+  var e = this.event;
+  console.log('>>>PROFILING', e, payload, '<<<');
+  /* jshint +W040*/
 }
 //various means to perform it:
 

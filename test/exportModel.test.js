@@ -1,5 +1,5 @@
-"use strict";
-
+'use strict';
+/*jshint expr: true*/
 var hunt = require('./../index.js'),
   model = require('./model/article.model.js'),
   populateDb = require('./lib/populateDatabase.js'),

@@ -1,4 +1,5 @@
-var Hunt = require('./../index.js'),
+'use strict';
+var
   config = {
     'port': 3000,
     'telnetServer': {
@@ -6,7 +7,7 @@ var Hunt = require('./../index.js'),
     }
   };
 
-var hunt = Hunt(config);
+var hunt = require('./../index.js')(config);
 
 hunt.once('start', function (event) {
   console.log('Now you can connect to hunjs application with telnet \n $ telnet localhost ' + event.port);
@@ -17,7 +18,7 @@ hunt
     client.send('HuntJS application of version ' + core.version + ' greets you!');
     console.log(payload);
 
-    if (payload.toString() != '') {
+    if (payload.toString() !== '') {
       client.send('Your payload for this command is ' + payload);
     }
 

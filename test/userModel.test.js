@@ -1,4 +1,5 @@
 'use strict';
+/*jshint expr: true*/
 var should = require('should'),
   async = require('async'),
   testId = Date.now(),
@@ -150,9 +151,9 @@ describe('Users model', function () {
         before(function (done) {
           Hunt.model.User.create({
             'huntKey': 'vseBydetHoroshooneByhuntKey',
-            'keychain':{
+            'keychain': {
               'email': 'oneByhuntKey@teksi.ru',
-              'welcomeLink':'lalala'
+              'welcomeLink': 'lalala'
             },
             'accountVerified': false
           }, function (err, userCreated) {
@@ -161,7 +162,7 @@ describe('Users model', function () {
             } else {
               user = userCreated;
               Hunt.model.User.findOneByHuntKeyAndVerifyEmail('lalala', function (err, userActivated) {
-                if(err){
+                if (err) {
                   done(err);
                 } else {
                   userBeingActivated = userActivated;
@@ -219,47 +220,47 @@ describe('Users model', function () {
           user.remove(done);
         });
       });
-/*/
-      describe('outdated huntKey', function () {
-        var user,
-          userBeingActivated,
-          errorThrown;
-        before(function (done) {
-          Hunt.model.User.create({
-            'huntKey': 'vseBydetHoroshooneByhuntKey',
-            'keychain':{
-              'email': 'oneByhuntKey@teksi.ru',
-              'welcomeLink':'blablabla'
-            },
-            'accountVerified': false,
-            'huntKeyCreatedAt': new Date(1986, 1, 12, 11, 45, 36, 21)
-          }, function (err, userCreated) {
-            if (err) {
-              throw err;
-            }
-            user = userCreated;
-            Hunt.model.User.findOneByHuntKeyAndVerifyEmail('blablabla', function (err, userActivated) {
-              errorThrown = err;
-              userBeingActivated = userActivated;
-              done();
-            });
-          });
-        });
+      /*/
+       describe('outdated huntKey', function () {
+       var user,
+       userBeingActivated,
+       errorThrown;
+       before(function (done) {
+       Hunt.model.User.create({
+       'huntKey': 'vseBydetHoroshooneByhuntKey',
+       'keychain':{
+       'email': 'oneByhuntKey@teksi.ru',
+       'welcomeLink':'blablabla'
+       },
+       'accountVerified': false,
+       'huntKeyCreatedAt': new Date(1986, 1, 12, 11, 45, 36, 21)
+       }, function (err, userCreated) {
+       if (err) {
+       throw err;
+       }
+       user = userCreated;
+       Hunt.model.User.findOneByHuntKeyAndVerifyEmail('blablabla', function (err, userActivated) {
+       errorThrown = err;
+       userBeingActivated = userActivated;
+       done();
+       });
+       });
+       });
 
-        it('throws proper error', function () {
-          errorThrown.should.be.an.instanceOf(Error);
-          errorThrown.message.should.be.equal('Activation key is wrong or outdated!');
-        });
+       it('throws proper error', function () {
+       errorThrown.should.be.an.instanceOf(Error);
+       errorThrown.message.should.be.equal('Activation key is wrong or outdated!');
+       });
 
-        it('do NOT returns the user', function () {
-          should.not.exists(userBeingActivated);
-        });
+       it('do NOT returns the user', function () {
+       should.not.exists(userBeingActivated);
+       });
 
-        after(function (done) {
-          user.remove(done);
-        });
-      });
-//*/
+       after(function (done) {
+       user.remove(done);
+       });
+       });
+       //*/
     });
     describe('@findOneByHuntKeyAndResetPassword works for ', function () {
       describe('good api key', function () {
@@ -268,9 +269,9 @@ describe('Users model', function () {
           async.waterfall([
               function (cb) {
                 Hunt.model.User.create({
-                  'keychain':{
+                  'keychain': {
                     'email': 'iForgotMyPassWordIamStupid@teksi.ru',
-                    'welcomeLink':'iForgotMyPassWordIamStupid1111'
+                    'welcomeLink': 'iForgotMyPassWordIamStupid1111'
                   },
                   'accountVerified': true,
                   'huntKeyCreatedAt': new Date()
@@ -452,7 +453,7 @@ describe('Users model', function () {
 
       after(function (done) {
         Hunt.model.User.remove({}, done);
-      })
+      });
     });
 
     describe('keychain', function () {
@@ -635,7 +636,7 @@ describe('Users model', function () {
       });
 
       it('User#password() returns false on wrong password', function () {
-        user.password('sukapadla_Rozovi#Rassvet_SukePadle_DaliMnogoLet').should.be.false
+        user.password('sukapadla_Rozovi#Rassvet_SukePadle_DaliMnogoLet').should.be.false;
       });
 
       after(function (done) {
@@ -702,7 +703,9 @@ describe('Users model', function () {
 
       it('user have profile properly populated', function (done) {
         Hunt.model.User.findOne({'_id': userId}, function (err, userFound) {
-          if (err) throw err;
+          if (err) {
+            throw err;
+          }
           user = userFound;
           userFound.profile.should.be.an.Object;
           userFound.profile.iHaveProfile.should.be.true;

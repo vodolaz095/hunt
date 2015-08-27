@@ -1,3 +1,5 @@
+'use strict';
+/*jshint expr: true*/
 var configGenerator = require('./../lib/misc/config.js'),
   should = require('should'),
   url = require('url');
