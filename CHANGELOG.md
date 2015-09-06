@@ -1,3 +1,10 @@
+# v0.4.17
+Temporary downgrade for PassportJS to 0.2.2 version for it to work with socket.io properly.
+Various fixes in `dialog` api, even if it is to be deprecated in favour of exporting the messages model.
+Added `myself` boolean in exported user model to show, when we get our profile by means of
+`GET /api/v1/users/{myUserId}`
+More recent dependencies
+
 # v0.4.16
 Jshint integration without webstorm
 Fix issues with missing check for deleting uploaded files

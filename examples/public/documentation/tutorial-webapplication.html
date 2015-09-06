@@ -30,7 +30,8 @@
 <article>
     <p>The main purpose of HuntJS is to make web applications.
 In this tutorial we will follow step by step this process.</p>
-<h3>Instantiating HuntJS application</h3><p>We need to pass the <a href="/documentation/config.html">config object</a> to factory method
+<p>###Instantiating HuntJS application
+We need to pass the <a href="/documentation/config.html">config object</a> to factory method
 to build HuntJS application instance.</p>
 <pre class="prettyprint source lang-javascript"><code>
     var
@@ -39,7 +40,8 @@ to build HuntJS application instance.</p>
 
       };
 
-    var hunt = Hunt(config); //building instance</code></pre><h3>Setting up mongoose models</h3><p>The <a href="http://mongoosejs.com/">mongoose</a> powered models works from the box.
+    var hunt = Hunt(config); //building instance</code></pre><p>###Setting up mongoose models
+The <a href="http://mongoosejs.com/">mongoose</a> powered models works from the box.
 Also we have powerful <a href="/documentation/User.html">User's model</a> at your disposal.</p>
 <p>Basic way to set model via <a href="/documentation/Hunt.html#extendModel">hunt.extendModel</a>:</p>
 <pre class="prettyprint source lang-javascript"><code>
@@ -64,7 +66,8 @@ as <code>hunt.Model.Trophy</code> in application and as <code>request.model.Trop
 <a href="http://www.restapitutorial.com/">REST</a> interface -
 see <a href="http://huntjs.herokuapp.com/documentation/ExportModelToRestParameters.html">ExportModelToRestParameters</a>
 for details.</p>
-<h3>Setting up sequilize models</h3><p>We need to install separate plugin of <a href="https://www.npmjs.org/package/hunt-sequilize">hunt-sequilize</a>
+<p>###Setting up sequilize models
+We need to install separate plugin of <a href="https://www.npmjs.org/package/hunt-sequilize">hunt-sequilize</a>
 to use models provided by <a href="https://www.npmjs.org/package/sequelize">sequilize ORM</a></p>
 <pre class="prettyprint source lang-javascript"><code>
     huntSequilize(Hunt);
@@ -73,7 +76,8 @@ to use models provided by <a href="https://www.npmjs.org/package/sequelize">sequ
       return core.sequelize.define('Planet', {
         name: core.Sequelize.STRING
       });
-    });</code></pre><h3>Setting up custom view engine to render templates</h3><p>We can set <a href="http://expressjs.com/4x/api.html#app-settings">parameters</a> of
+    });</code></pre><p>###Setting up custom view engine to render templates
+We can set <a href="http://expressjs.com/4x/api.html#app-settings">parameters</a> of
 <a href="http://expressjs.com/">ExpressJS</a> application used in HuntJS to set view engine
 by using <a href="/documentation/Hunt.html#extendApp">hunt.extendApp</a>.</p>
 <pre class="prettyprint source lang-javascript"><code>
@@ -83,7 +87,8 @@ by using <a href="/documentation/Hunt.html#extendApp">hunt.extendApp</a>.</p>
       core.app.set('layout', 'layout');
       core.app.enable('view cache');
       core.app.engine('ejs', require('ejs'));
-    };</code></pre><h3>Setting up custom middlewares</h3><p>HuntJS borrows the <a href="http://expressjs.com/4x/api.html#middleware">middleware stack</a> from ExpressJS 4.x
+    };</code></pre><p>###Setting up custom middlewares
+HuntJS borrows the <a href="http://expressjs.com/4x/api.html#middleware">middleware stack</a> from ExpressJS 4.x
 We can add middlewares to our application in this way:</p>
 <pre class="prettyprint source lang-javascript"><code>
     //set middleware for `/` mount point
@@ -135,7 +140,8 @@ We can add middlewares to our application in this way:</p>
            next();
          }
        };
-     });</code></pre><h3>Setting up custom routes</h3><p>We can set custom routes using <a href="/documentation/Hunt.html#extendRoutes">extendRoutes</a>
+     });</code></pre><p>###Setting up custom routes</p>
+<p>We can set custom routes using <a href="/documentation/Hunt.html#extendRoutes">extendRoutes</a>
 using <a href="http://expressjs.com/api.html#app.VERB">ExpressJS verbs</a>.</p>
 <pre class="prettyprint source lang-javascript"><code>
     hunt.extendRoutes(function(core){
@@ -147,7 +153,8 @@ using <a href="http://expressjs.com/api.html#app.VERB">ExpressJS verbs</a>.</p>
       core.app.all('*',function(req,res){
         res.send(404);
       });
-    }</code></pre><h3>Setting up custom router</h3><p>Add custom <a href="http://expressjs.com/api.html#router">router</a> for expressjs application</p>
+    }</code></pre><p>###Setting up custom router
+Add custom <a href="http://expressjs.com/api.html#router">router</a> for expressjs application</p>
 <pre class="prettyprint source lang-javascript"><code>
     hunt.extendController('/', function(core, router){
        router.use(function(request,response,next){
@@ -180,7 +187,8 @@ using <a href="http://expressjs.com/api.html#app.VERB">ExpressJS verbs</a>.</p>
      router.get('/', function(request,response){
        response.render('index2',{'title':'Hello!'});
      });
-    });</code></pre><h3>Starting as single threaded application</h3><p>In can be done by <a href="/documentation/Hunt.html#startWebServer">hunt.StartWebServer</a> easily</p>
+    });</code></pre><p>###Starting as single threaded application
+In can be done by <a href="/documentation/Hunt.html#startWebServer">hunt.StartWebServer</a> easily</p>
 <pre class="prettyprint source lang-javascript"><code>
     hunt.on('start', function(payload){
       console.log('Started HuntJS as '+payload.type+' on '+payload.address+':'+payload.port);
@@ -190,7 +198,8 @@ using <a href="http://expressjs.com/api.html#app.VERB">ExpressJS verbs</a>.</p>
     hunt.startWebServer(); //listen on port from config
     hunt.startWebServer(80); //listen on hardcoded port of 80
     hunt.startWebServer(80,'0.0.0.0'); //listen on hardcoded port of 80, listening to all interfaces
-    hunt.startWebServer(80, 'fe80::7218:8bff:fe86:542b'); //listen on specified IPv6 address</code></pre><h3>Starting as clustered application</h3><p>We can scale HuntJS applications easily to manifold
+    hunt.startWebServer(80, 'fe80::7218:8bff:fe86:542b'); //listen on specified IPv6 address</code></pre><p>###Starting as clustered application
+We can scale HuntJS applications easily to manifold
 of processes by means of <a href="http://nodejs.org/api/cluster.html">native nodejs cluster</a></p>
 <pre class="prettyprint source lang-javascript"><code>
     //we start 5 processes on port 80
@@ -225,7 +234,7 @@ of processes by means of <a href="http://nodejs.org/api/cluster.html">native nod
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Thu Aug 27 2015 15:28:03 GMT+0300 (MSK)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Sun Sep 06 2015 03:40:47 GMT+0300 (MSK)
 </footer>
 
 <script> prettyPrint(); </script>
