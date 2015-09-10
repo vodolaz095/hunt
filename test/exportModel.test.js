@@ -24,10 +24,9 @@ function isArticleForRoot(a) {
 describe('Testing REST api', function () {
   before(function (done) {
     Hunt = hunt({
-      'port': 3601,
+      'port': 3609,
       'disableCsrf': true,
-      'huntKeyHeader': true,
-      'mongoUrl': 'mongodb://localhost/hunt_dev'
+      'huntKeyHeader': true
     });
 
     Hunt.extendModel('Article', model);

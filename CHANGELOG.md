@@ -1,3 +1,8 @@
+# v0.4.18
+Fix issue with `connect-flash` middleware not working.
+Event emitted on OAuth authorization is more useful.
+Script to generate documentation and test coverage on heroku.
+
 # v0.4.17
 Temporary downgrade for PassportJS to 0.2.2 version for it to work with socket.io properly.
 Various fixes in `dialog` api, even if it is to be deprecated in favour of exporting the messages model.

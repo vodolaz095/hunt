@@ -9,7 +9,7 @@ describe('Testing configGenerator', function () {
   describe('it should return proper object for empty config', function () {
     var config = configGenerator();
     it('set the enviroment properly', function () {
-      config.env.should.be.equal('development');
+      config.env.should.be.equal(process.env.NODE_ENV || 'development');
     });
     it('set the port properly', function () {
       config.port.should.be.a.Number;
@@ -52,7 +52,7 @@ describe('Testing configGenerator', function () {
       'templateEngine': 'jade'
     });
     it('set the enviroment properly', function () {
-      config.env.should.be.equal('development');
+      config.env.should.be.equal(process.env.NODE_ENV || 'development');
     });
     it('set the port properly', function () {
       config.port.should.be.a.Number;
