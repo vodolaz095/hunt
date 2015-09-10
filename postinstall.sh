@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ "$LOGNAME"="vodolaz095" ]; then
+if [ "$hostUrl"="https://huntjs.herokuapp.com/" ] || [ "$LOGNAME"="vodolaz095" ]; then
 # Generate documentation
   rm -rf examples/public/documentation/
   rm -rf tutorials/Changelog.md -rf
