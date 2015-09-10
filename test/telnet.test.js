@@ -6,6 +6,7 @@ var hunt = require('./../index.js'),
   net = require('net');
 
 var Hunt = hunt({
+  'enableMongoose': false,
   'port': 3023
 });
 

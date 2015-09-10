@@ -94,7 +94,7 @@ describe('Testing configGenerator', function () {
   describe('it throws errors', function () {
     it('for wrong hostUrl', function () {
       (function () {
-        var config = configGenerator({
+        configGenerator({
           'secret': 'testlasaksdjhfjasfdjafdasfdgjh231313123',
           'hostUrl': 'somehost.com',
           'redisUrl': 'redis://somehost.com:6379',
@@ -105,7 +105,7 @@ describe('Testing configGenerator', function () {
 
     it('for wrong redisUrl', function () {
       (function () {
-        var config = configGenerator({
+        configGenerator({
           'secret': 'testlasaksdjhfjasfdjafdasfdgjh231313123',
           'hostUrl': 'http://somehost.com/',
           'redisUrl': 'somehost',
@@ -114,15 +114,26 @@ describe('Testing configGenerator', function () {
       }).should.throw('Wrong redisUrl in config!');
     });
 
-    it('wrong mongoUrl', function () {
+    it('for wrong mongoUrl', function () {
       (function () {
-        var config = configGenerator({
+        configGenerator({
           'secret': 'testlasaksdjhfjasfdjafdasfdgjh231313123',
           'hostUrl': 'http://somehost.com/',
           'redisUrl': 'redis://somehost.com:6379',
           'mongoUrl': 'somehost.com'
         });
       }).should.throw('Wrong mongoUrl in config!');
+    });
+
+    it('for too short secret', function () {
+      (function () {
+        configGenerator({
+          'secret': 'test',
+          'hostUrl': 'http://somehost.com/',
+          'redisUrl': 'redis://somehost.com:6379',
+          'mongoUrl': 'mongodb://somehost.com/hunt_dev'
+        });
+      }).should.throw('Config.secret is to short!');
     });
   });
 });

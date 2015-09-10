@@ -10,6 +10,7 @@ describe('Rendering with hogan', function () {
   var Hunt;
   before(function (done) {
     Hunt = hunt({
+      'enableMongoose': false,
       'views': __dirname + '/hogan-views' //directory for templates
     });
 

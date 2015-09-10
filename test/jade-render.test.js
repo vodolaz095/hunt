@@ -13,6 +13,7 @@ describe('Rendering with jade', function () {
 
   before(function (done) {
     Hunt = hunt({
+      'enableMongoose': false,
       'views': __dirname + '/jade-views' //directory for templates
     });
 

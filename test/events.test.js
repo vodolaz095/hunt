@@ -4,7 +4,9 @@ var hunt = require('./../index.js'),
   should = require('should');
 
 describe('Testing Hunt event emitting system', function () {
-  var Hunt = hunt();
+  var Hunt = hunt({
+    'enableMongoose': false
+  });
 
   before(function (done) {
     setTimeout(done, 200);
