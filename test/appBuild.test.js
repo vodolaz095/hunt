@@ -36,7 +36,7 @@ describe('Hunt resists when we want to extend it\' core in strange way', functio
 
   it('should throw error when we extend core by non strings field name', function () {
     (function () {
-      Hunt.extendCore({'some': 'shit'}, 'lalala');
+      Hunt.extendCore({ 'some' : 'shit' }, 'lalala');
     }).should.throw(/^Unable\sto\sinject/);
 
     (function () {
@@ -81,7 +81,7 @@ describe('Hunt builds single threaded background application', function () {
     });
 
     it('emits proper `start` event', function () {
-      startedType.should.be.eql({'type': 'background'});
+      startedType.should.be.eql({ 'type' : 'background' });
     });
   });
 
@@ -170,7 +170,7 @@ describe('Hunt builds single threaded background application', function () {
 describe('Hunt builds single threaded webserver application', function () {
   var
     port = 2999,
-    Hunt = hunt({'port': port}),
+    Hunt = hunt({ 'port' : port }),
     startedType,
     response1,
     response2,
@@ -243,19 +243,19 @@ describe('Hunt builds single threaded webserver application', function () {
             Hunt.once('http:*', function (evnt) {
               httpEvent1 = evnt;
             });
-            request.get('http://localhost:'+port+'/', function (err, response, body) {
+            request.get('http://localhost:' + port + '/', function (err, response, body) {
               response1 = response;
               cb(err, response);
             });
           },
           function (cb) {
-            request.get('http://localhost:'+port+'/somePath', function (err, response, body) {
+            request.get('http://localhost:' + port + '/somePath', function (err, response, body) {
               response2 = response;
               cb(err, response);
             });
           },
           function (cb) {
-            request.get('http://localhost:'+port+'/controller', function (err, response, body) {
+            request.get('http://localhost:' + port + '/controller', function (err, response, body) {
               response3 = response;
               cb(err, response);
             });
@@ -267,7 +267,7 @@ describe('Hunt builds single threaded webserver application', function () {
     });
 
     it('emits proper `start` event', function () {
-      startedType.should.be.eql({'type': 'webserver', 'port': Hunt.config.port, 'address': Hunt.config.address});
+      startedType.should.be.eql({ 'type' : 'webserver', 'port' : Hunt.config.port, 'address' : Hunt.config.address });
     });
 
     it('emits proper `http:success` event for route /', function () {
@@ -330,7 +330,7 @@ describe('Hunt builds single threaded webserver application', function () {
     it('responds on / properly with respect to routes and middlewares', function () {
       response1.body.should.be.equal('OK');
       response1.headers.globmiddleware.should.be.equal('42');
-      if(Hunt.config.env === 'development'){
+      if (Hunt.config.env === 'development') {
         response1.headers.devmiddleware.should.be.equal('42');
       }
       response1.headers['x-powered-by'].should.be.equal('Hunt v' + Hunt.version);
@@ -340,10 +340,10 @@ describe('Hunt builds single threaded webserver application', function () {
     it('responds on /somePath properly with respect to routes and middlewares', function () {
       response2.body.should.be.equal('somePath');
       response2.headers.globmiddleware.should.be.equal('42');
-      if(Hunt.config.env === 'development') {
+      if (Hunt.config.env === 'development') {
         response2.headers.devmiddleware.should.be.equal('42');
+        response2.headers.devmiddleware1.should.be.equal('42');
       }
-      response2.headers.devmiddleware1.should.be.equal('42');
       response2.headers['x-powered-by'].should.be.equal('Hunt v' + Hunt.version);
       should.not.exist(response1.headers.prodMiddleware);
     });
