@@ -16,11 +16,11 @@ node_modules/
 
 nbproject
 *sublime*
-docs
 .idea/
 .DS_Store
 *.geany
-coverage/
+examples/public/documentation
+examples/public/coverage
 
 out/
 localhost:9050
