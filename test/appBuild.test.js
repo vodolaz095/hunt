@@ -330,7 +330,9 @@ describe('Hunt builds single threaded webserver application', function () {
     it('responds on / properly with respect to routes and middlewares', function () {
       response1.body.should.be.equal('OK');
       response1.headers.globmiddleware.should.be.equal('42');
-      response1.headers.devmiddleware.should.be.equal('42');
+      if(Hunt.config.env === 'development'){
+        response1.headers.devmiddleware.should.be.equal('42');
+      }
       response1.headers['x-powered-by'].should.be.equal('Hunt v' + Hunt.version);
       should.not.exist(response1.headers.prodMiddleware);
       should.not.exist(response1.headers.devMiddleware1);
@@ -338,7 +340,9 @@ describe('Hunt builds single threaded webserver application', function () {
     it('responds on /somePath properly with respect to routes and middlewares', function () {
       response2.body.should.be.equal('somePath');
       response2.headers.globmiddleware.should.be.equal('42');
-      response2.headers.devmiddleware.should.be.equal('42');
+      if(Hunt.config.env === 'development') {
+        response2.headers.devmiddleware.should.be.equal('42');
+      }
       response2.headers.devmiddleware1.should.be.equal('42');
       response2.headers['x-powered-by'].should.be.equal('Hunt v' + Hunt.version);
       should.not.exist(response1.headers.prodMiddleware);
