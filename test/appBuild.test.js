@@ -168,7 +168,7 @@ describe('Hunt builds single threaded background application', function () {
 });
 
 describe('Hunt builds single threaded webserver application', function () {
-  var Hunt = hunt(),
+  var Hunt = hunt({'port':2999}),
     startedType,
     response1,
     response2,
