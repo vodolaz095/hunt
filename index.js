@@ -809,8 +809,8 @@ function Hunt(config) {
   this.startWebServer = function (port, address) {
     var p = port || this.config.port,
       h = this;
-    console.log(('Trying to start Hunt as web server on ' + address + ':' + p + '...').magenta);
     address = address || this.config.address || '0.0.0.0';
+    console.log(('Trying to start Hunt as web server on ' + address + ':' + p + '...').magenta);
     buildExpressApp(this);
     this.httpServer.listen(p, address, function () {
       /**
