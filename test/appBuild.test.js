@@ -168,7 +168,9 @@ describe('Hunt builds single threaded background application', function () {
 });
 
 describe('Hunt builds single threaded webserver application', function () {
-  var Hunt = hunt({'port':2999}),
+  var
+    port = 2999,
+    Hunt = hunt({'port': port}),
     startedType,
     response1,
     response2,
@@ -241,19 +243,19 @@ describe('Hunt builds single threaded webserver application', function () {
             Hunt.once('http:*', function (evnt) {
               httpEvent1 = evnt;
             });
-            request.get(Hunt.config.hostUrl, function (err, response, body) {
+            request.get('http://localhost:'+port+'/', function (err, response, body) {
               response1 = response;
               cb(err, response);
             });
           },
           function (cb) {
-            request.get(Hunt.config.hostUrl + 'somePath', function (err, response, body) {
+            request.get('http://localhost:'+port+'/somePath', function (err, response, body) {
               response2 = response;
               cb(err, response);
             });
           },
           function (cb) {
-            request.get(Hunt.config.hostUrl + 'controller', function (err, response, body) {
+            request.get('http://localhost:'+port+'/controller', function (err, response, body) {
               response3 = response;
               cb(err, response);
             });
