@@ -1,8 +1,10 @@
 # Editor specific
 .git/
 .idea/
-.DS_Store
 *.geany
+
+# MacOs specific
+.DS_Store
 
 # Distribution folders
 examples/
@@ -21,3 +23,6 @@ jslint.conf
 jslint.xml
 .istanbul.yml
 jsdoc.conf.json
+
+# To disable continious integration in production use
+herokurules.txt

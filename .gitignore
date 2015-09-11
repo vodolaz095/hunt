@@ -1,7 +1,9 @@
 # Editor specific
 .idea/
-.DS_Store
 *.geany
+
+# MacOs specific
+.DS_Store
 
 # Distribution folders
 node_modules/

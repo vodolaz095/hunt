@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ "$hostUrl"="https://huntjs.herokuapp.com/" ] || [ -f herokurules.txt ]; then
+if [ -f herokurules.txt ]; then
 # Clear old files
   rm -rf examples/public/documentation/
   rm -rf tutorials/Changelog.md -rf
@@ -20,7 +20,7 @@ if [ "$hostUrl"="https://huntjs.herokuapp.com/" ] || [ -f herokurules.txt ]; the
   cp examples/serverConfigsExamples/README.md tutorials/ServerConfig.md
   node node_modules/jsdoc/jsdoc.js -c jsdoc.conf.json --pedantic -u tutorials/
   echo "Documentation generated in examples/public/documentation"
-
 else
+# It is production installation, do not run tests and generate documentation.
   echo "HuntJS installing ok!"
 fi
