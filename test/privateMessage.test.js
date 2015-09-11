@@ -61,6 +61,9 @@ describe('Private messages', function () {
               if (err) {
                 throw err;
               }
+              console.log(messageCreated);
+              messageCreated.to.equals(User2._id).should.be.true;
+              messageCreated.from.equals(User1.id).should.be.true;
             });
           },
           function (cb) {
@@ -72,6 +75,8 @@ describe('Private messages', function () {
               if (err) {
                 throw err;
               }
+              messageCreated.to.equals(User2._id).should.be.true;
+              messageCreated.from.equals(User1.id).should.be.true;
             });
           }
         ], done);

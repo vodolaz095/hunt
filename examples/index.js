@@ -259,7 +259,7 @@ hunt.extendController('/', function (core, router) {
    * route to throw some stupid error,
    * that will be catch by error reporter middleware and will not stop the process
    */
-  router.get('/error', function (req, res) {
+  router.get('/error', function () {
     throw new Error('Something is wrong... Please, wipe your spectacles with alcohol or spirit and carefully kick PC with hammer 3 times.');
   });
 
@@ -268,7 +268,7 @@ hunt.extendController('/', function (core, router) {
    *  that cannot be catch by error reporter middleware, but will be catch by
    *  *domain* and will not stop the process.
    */
-  router.get('/baderror', function (req, res) {
+  router.get('/baderror', function () {
     (function () {
       throw new Error('Catch this!');
     }());
@@ -341,25 +341,25 @@ hunt.once('start', function (startParameters) {
 //note, that Hunt.io is generated only after
 //application is started
   switch (startParameters.type) {
-    case 'webserver':
+  case 'webserver':
 //if application is started as background service, it do not have socket.io support
-      hunt.io.sockets.on('connection', function (socket) {
-        socket.on('pingerUrl', function (payload) {
-          pinger(payload, socket);
-        });
+    hunt.io.sockets.on('connection', function (socket) {
+      socket.on('pingerUrl', function (payload) {
+        pinger(payload, socket);
       });
-      setInterval(function () {
-        hunt.emit('broadcast', {'type': 'currentTime', 'time': Date.now()}); //to be broadcasted by socket.io
-      }, 500);
-      break;
-    case 'background':
+    });
+    setInterval(function () {
+      hunt.emit('broadcast', {'type': 'currentTime', 'time': Date.now()}); //to be broadcasted by socket.io
+    }, 500);
+    break;
+  case 'background':
+    populateDb(hunt);
+    setInterval(function () {
       populateDb(hunt);
-      setInterval(function () {
-        populateDb(hunt);
-      }, 60 * 1000);
-      break;
-    default:
-      console.log('We started application as ', startParameters.type);
+    }, 60 * 1000);
+    break;
+  default:
+    console.log('We started application as ', startParameters.type);
   }
 });
 

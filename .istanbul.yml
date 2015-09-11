@@ -17,6 +17,8 @@ instrumentation:
 reporting:
     print: summary
     reports:
+        - clover
+        - cobertura
         - lcov
     dir: ./examples/public/coverage
     watermarks:

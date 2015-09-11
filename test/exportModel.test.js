@@ -31,9 +31,12 @@ describe('Testing REST api', function () {
 
     Hunt.extendModel('Article', model);
 
-    Hunt.exportModelToRest({ 'ownerId': 'author', 'modelName': 'Article', 'methods': ['doSmth'], 'statics': 'doSmth' });
+    Hunt.exportModelToRest({'ownerId': 'author', 'modelName': 'Article', 'methods': ['doSmth'], 'statics': 'doSmth'});
 
-    Hunt.once('start', function (evnt) {
+    Hunt.once('start', function (payload) {
+      payload.type.should.be.equal('webserver');
+      payload.port.should.be.equal(3609);
+      should.not.exist(payload.error);
       populateDb(Hunt, done);
     });
 
@@ -206,15 +209,15 @@ describe('Testing REST api', function () {
     });
   });
 
-  describe('for limited user', function(){
-    var   rootKey = 'i_am_prep',
+  describe('for limited user', function () {
+    var rootKey = 'i_am_prep',
       bookName = 'Da book' + Date.now(),
       articleId;
     it('returns list of articles for GET /', function (done) {
       request({
           'method': 'GET',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article',
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'json': true
         },
         function (error, response, body) {
@@ -234,7 +237,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'POST',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article',
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'form': {
             'name': bookName,
             'content': 'some content',
@@ -259,7 +262,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'GET',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'json': true
         },
         function (error, response, body) {
@@ -281,7 +284,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'PUT',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'form': {
             'content': 'some new content'
           },
@@ -297,7 +300,7 @@ describe('Testing REST api', function () {
             request({
                 'method': 'GET',
                 'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-                'headers': { 'huntKey': rootKey },
+                'headers': {'huntKey': rootKey},
                 'json': true
               },
               function (error, response, body) {
@@ -320,7 +323,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'POST',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'form': {
             'content': 'some extra new content'
           },
@@ -336,7 +339,7 @@ describe('Testing REST api', function () {
             request({
                 'method': 'GET',
                 'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-                'headers': { 'huntKey': rootKey },
+                'headers': {'huntKey': rootKey},
                 'json': true
               },
               function (error, response, body) {
@@ -359,7 +362,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'POST',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/someStupidApiEndpointThatDoNotExists',
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'form': {
             'name': 'Da book',
             'content': 'some content'
@@ -385,7 +388,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'POST',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/method',
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'form': {
             'method': 'doSmth',
             'payload': 'Da book',
@@ -408,7 +411,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'POST',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/method',
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'form': {
             'method': 'doNotDoSmth',
             'payload': 'Da book',
@@ -434,7 +437,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'POST',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId + '/method',
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'form': {
             'method': 'doSmth',
             'payload': 'Da book',
@@ -458,7 +461,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'POST',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/54a6168aa027eb0326220518/method',
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'form': {
             'method': 'doSmth',
             'payload': 'Da book',
@@ -484,7 +487,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'POST',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId + '/method',
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'form': {
             'method': 'doNotDoSmth',
             'payload': 'Da book',
@@ -510,7 +513,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'DELETE',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'json': true
         },
         function (error, response, body) {
@@ -522,7 +525,7 @@ describe('Testing REST api', function () {
             request({
                 'method': 'GET',
                 'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-                'headers': { 'huntKey': rootKey },
+                'headers': {'huntKey': rootKey},
                 'json': true
               },
               function (error, response, body) {
@@ -544,15 +547,15 @@ describe('Testing REST api', function () {
 
   });
 
-  describe('for root user', function(){
-    var   rootKey = 'i_am_root',
+  describe('for root user', function () {
+    var rootKey = 'i_am_root',
       bookName = 'Da book_' + Date.now(),
       articleId;
     it('returns list of articles for GET /', function (done) {
       request({
           'method': 'GET',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article',
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'json': true
         },
         function (error, response, body) {
@@ -573,7 +576,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'POST',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article',
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'form': {
             'name': bookName,
             'content': 'some content',
@@ -601,7 +604,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'GET',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'json': true
         },
         function (error, response, body) {
@@ -625,7 +628,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'PUT',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'form': {
             'content': 'some new content'
           },
@@ -641,7 +644,7 @@ describe('Testing REST api', function () {
             request({
                 'method': 'GET',
                 'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-                'headers': { 'huntKey': rootKey },
+                'headers': {'huntKey': rootKey},
                 'json': true
               },
               function (error, response, body) {
@@ -666,7 +669,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'POST',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'form': {
             'content': 'some extra new content'
           },
@@ -682,7 +685,7 @@ describe('Testing REST api', function () {
             request({
                 'method': 'GET',
                 'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-                'headers': { 'huntKey': rootKey },
+                'headers': {'huntKey': rootKey},
                 'json': true
               },
               function (error, response, body) {
@@ -708,7 +711,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'POST',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/someStupidApiEndpointThatDoNotExists',
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'form': {
             'name': 'Da book',
             'content': 'some content'
@@ -734,7 +737,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'POST',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/method',
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'form': {
             'method': 'doSmth',
             'payload': 'Da book',
@@ -757,7 +760,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'POST',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/method',
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'form': {
             'method': 'doNotDoSmth',
             'payload': 'Da book',
@@ -783,7 +786,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'POST',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId + '/method',
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'form': {
             'method': 'doSmth',
             'payload': 'Da book',
@@ -807,7 +810,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'POST',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId + '/method',
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'form': {
             'method': 'doNotDoSmth',
             'payload': 'Da book',
@@ -833,7 +836,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'POST',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/54a6168aa027eb0326220518/method',
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'form': {
             'method': 'doSmth',
             'payload': 'Da book',
@@ -859,7 +862,7 @@ describe('Testing REST api', function () {
       request({
           'method': 'DELETE',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-          'headers': { 'huntKey': rootKey },
+          'headers': {'huntKey': rootKey},
           'json': true
         },
         function (error, response, body) {
@@ -871,7 +874,7 @@ describe('Testing REST api', function () {
             request({
                 'method': 'GET',
                 'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-                'headers': { 'huntKey': rootKey },
+                'headers': {'huntKey': rootKey},
                 'json': true
               },
               function (error, response, body) {

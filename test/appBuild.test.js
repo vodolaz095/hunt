@@ -45,7 +45,7 @@ describe('Hunt resists when we want to extend it\' core in strange way', functio
 
     (function () {
       Hunt.extendCore(function () {
-        return;
+
       }, 'lalala');
     }).should.throw(/^Unable\sto\sinject/);
 
@@ -243,19 +243,19 @@ describe('Hunt builds single threaded webserver application', function () {
             Hunt.once('http:*', function (evnt) {
               httpEvent1 = evnt;
             });
-            request.get('http://localhost:' + port + '/', function (err, response, body) {
+            request.get('http://localhost:' + port + '/', function (err, response) {
               response1 = response;
               cb(err, response);
             });
           },
           function (cb) {
-            request.get('http://localhost:' + port + '/somePath', function (err, response, body) {
+            request.get('http://localhost:' + port + '/somePath', function (err, response) {
               response2 = response;
               cb(err, response);
             });
           },
           function (cb) {
-            request.get('http://localhost:' + port + '/controller', function (err, response, body) {
+            request.get('http://localhost:' + port + '/controller', function (err, response) {
               response3 = response;
               cb(err, response);
             });

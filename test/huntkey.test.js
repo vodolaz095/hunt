@@ -1,9 +1,10 @@
 'use strict';
 /*jshint expr: true*/
-var hunt = require('./../index.js'),
-  request = require('request');
-
-require('should');
+var
+  port = 3004,
+  hunt = require('./../index.js'),
+  request = require('request'),
+  should = require('should');
 
 describe('Authorization by huntkey', function () {
   var Hunt,
@@ -25,7 +26,10 @@ describe('Authorization by huntkey', function () {
         }
       });
     });
-    Hunt.on('start', function (evnt) {
+    Hunt.once('start', function (payload) {
+      payload.type.should.be.equal('webserver');
+      payload.port.should.be.equal(port);
+      should.not.exist(payload.error);
       Hunt.model.User.create({}, function (err, userCreated) {
         user = userCreated;
         done(err);

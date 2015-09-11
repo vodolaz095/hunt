@@ -30,12 +30,15 @@ describe('Local strategy test', function () {
         'resetPassword': true
       }
     });
-    Hunt.once('start', function () {
+    Hunt.once('start', function (payload) {
+      payload.type.should.be.equal('webserver');
+      payload.port.should.be.equal(port);
+      should.not.exist(payload.error);
       Hunt.model.User.remove({}, done);
     });
     Hunt.startWebServer();
   });
-/*/
+//*/
   describe('trying to signup user by POST /auth/signup', function () {
     var
       r1, r2, r3, b1, b2, b3,
@@ -83,25 +86,24 @@ describe('Local strategy test', function () {
         },
         'doCheckDumpEmail': function (cb) {
           request({
-              'method': 'POST',
-              'url': 'http://localhost:' + port + '/auth/isBusy',
-              'form': {
-                'email': 'spam2me' + Math.floor(10000 * Math.random()) + '@example.org'
-              }
-            }, function (err, response, body) {
-              if (err) {
-                cb(err);
-              } else {
-                r3 = response;
-                b3 = body;
-                cb(null);
-              }
+            'method': 'POST',
+            'url': 'http://localhost:' + port + '/auth/isBusy',
+            'form': {
+              'email': 'spam2me' + Math.floor(10000 * Math.random()) + '@example.org'
             }
-          );
+          }, function (err, response, body) {
+            if (err) {
+              cb(err);
+            } else {
+              r3 = response;
+              b3 = body;
+              cb(null);
+            }
+          });
         }
-      }, function (err) {
-        if (err) {
-          throw err;
+      }, function(error){
+        if(error){
+          done(error);
         }
       });
     });
@@ -110,7 +112,7 @@ describe('Local strategy test', function () {
       r1.statusCode.should.be.equal(302);
     });
 
-    it('have proper response for /auth/isBusy with email of existant user', function () {
+    it('have proper response for /auth/isBusy with email of existent user', function () {
       r2.statusCode.should.be.equal(200);
       b2 = JSON.parse(b2);
       b2.isBusy.should.be.true;
@@ -138,7 +140,7 @@ describe('Local strategy test', function () {
       evnt.message.template.should.be.equal('verifyEmail');
       evnt.message.subject.should.be.equal('Email address verification');
       evnt.message.verifyUrl.should.be.equal('http://localhost:' + port + '/auth/confirm/' + evnt.user.keychain.welcomeLink);
-      //evnt.message.layout.should.be.false;
+      evnt.message.layout.should.be.false;
     });
 
     it('allows to confirm users account', function (done) {
@@ -186,11 +188,13 @@ describe('Local strategy test', function () {
           request({
             'method': 'POST',
             'url': 'http://localhost:' + port + '/auth/restoreAccount',
-            'form': { 'email': 'donotspam2me@example.org' }
+            'form': {'email': 'donotspam2me@example.org'}
           }, cb);
         }
       ], function (err) {
-        if (err) throw err;
+        if (err) {
+          throw err;
+        }
       });
 
     });
@@ -218,7 +222,6 @@ describe('Local strategy test', function () {
     });
 
   });
-//*/
   describe('Performing POST /auth/resetPassword', function () {
     it('will be done');
   });

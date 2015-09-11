@@ -7,11 +7,14 @@ if [ -f herokurules.txt ]; then
   rm -rf examples/public/coverage
   rm -rf tutorials/ServerConfig.md
 
+# Run code quality tools
+ ./node_modules/.bin/jshint --verbose -c .jshintrc **/*.js
+
 # Generate coverage report
-  node node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha
+  ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha
 
 # Generate test report
-  node node_modules/.bin/mocha -G --reporter markdown > tutorials/test.md
+  ./node_modules/.bin/mocha -G --reporter markdown > tutorials/test.md
 
 # Generate documentation
   cp CHANGELOG.md tutorials/Changelog.md

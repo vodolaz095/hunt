@@ -1,6 +1,8 @@
 'use strict';
 /*jshint expr: true*/
-var should = require('should'),
+var
+  port = 3003,
+  should = require('should'),
   async = require('async'),
   hunt = require('./../index.js'),
   request = require('request');
@@ -42,15 +44,18 @@ describe('Rendering with hogan', function () {
 
       core.app.get('/withPartials', function (req, res) {
         res.render('index', {
-          'partials': { testPartial: '_partial' },
+          'partials': {testPartial: '_partial'},
           'text': 'index'
         });
       });
     });
-    Hunt.on('start', function (evnt) {
+    Hunt.on('start', function (payload) {
+      payload.type.should.be.equal('webserver');
+      payload.port.should.be.equal(port);
+      should.not.exist(payload.error);
       done();
     });
-    Hunt.startWebServer(3003);
+    Hunt.startWebServer(port);
   });
 
 
@@ -68,7 +73,7 @@ describe('Rendering with hogan', function () {
           Hunt.app.render('index', {text: 'index', layout: 'layout2'}, cb);
         },
         'withPartials': function (cb) {
-          Hunt.app.render('index', {text: 'index', partials: { testPartial: '_partial'} }, cb);
+          Hunt.app.render('index', {text: 'index', partials: {testPartial: '_partial'}}, cb);
         }
       }, function (err, object) {
         if (err) {
@@ -99,26 +104,26 @@ describe('Rendering with hogan', function () {
     });
 
     describe('it can be used for rendering static html pages for clients', function () {
-      var pagesRendered;
+      var pagesRenderedViaWebServer;
       before(function (done) {
         async.parallel({
           'default': function (cb) {
-            request.get('http://localhost:3003/', function (err, res, body) {
+            request.get('http://localhost:' + port + '/', function (err, res, body) {
               cb(err, body);
             });
           },
           'withoutLayout': function (cb) {
-            request.get('http://localhost:3003/withOutLayout', function (err, res, body) {
+            request.get('http://localhost:' + port + '/withOutLayout', function (err, res, body) {
               cb(err, body);
             });
           },
           'withLayout2': function (cb) {
-            request.get('http://localhost:3003/withLayout2', function (err, res, body) {
+            request.get('http://localhost:' + port + '/withLayout2', function (err, res, body) {
               cb(err, body);
             });
           },
           'withPartials': function (cb) {
-            request.get('http://localhost:3003/withPartials', function (err, res, body) {
+            request.get('http://localhost:' + port + '/withPartials', function (err, res, body) {
               cb(err, body);
             });
           }
@@ -126,22 +131,22 @@ describe('Rendering with hogan', function () {
           if (err) {
             throw err;
           }
-          pagesRendered = object;
+          pagesRenderedViaWebServer = object;
           done();
         });
       });
 
       it('renders with default layout properly with respect to locals', function () {
-        pagesRendered.default.should.equal('<l>indexhogan</l>');
+        pagesRenderedViaWebServer.default.should.equal('<l>indexhogan</l>');
       });
       it('renders without layout properly with respect to locals', function () {
-        pagesRendered.withoutLayout.should.equal('indexhogan');
+        pagesRenderedViaWebServer.withoutLayout.should.equal('indexhogan');
       });
       it('renders with layout2 properly with respect to locals', function () {
-        pagesRendered.withLayout2.should.equal('<l2>indexhogan</l2>');
+        pagesRenderedViaWebServer.withLayout2.should.equal('<l2>indexhogan</l2>');
       });
       it('renders with partials properly with respect to locals', function () {
-        pagesRendered.withPartials.should.equal('<l>indexhoganpartial</l>');
+        pagesRenderedViaWebServer.withPartials.should.equal('<l>indexhoganpartial</l>');
       });
     });
   });

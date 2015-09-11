@@ -1,8 +1,8 @@
 'use strict';
 
 var hunt = require('./../index.js')({
-  'views': __dirname + '/views/',
-  'port': 3000
+  'views' : __dirname + '/views/',
+  'port' : 3000
 });
 
 hunt.once('traps:*', function (payload) {
@@ -47,7 +47,7 @@ hunt.on('ping', function (pong) {
 hunt
   .extendController('/', function (core, router) {
     router.get('/', function (req, res) {
-      res.render('events', {'title': 'events', 'layout': false});
+      res.render('events', { 'title' : 'events', 'layout' : false });
     });
   })
   .extendController('/traps', function (core, router) {
