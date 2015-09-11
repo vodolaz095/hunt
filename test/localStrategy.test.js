@@ -101,8 +101,8 @@ describe('Local strategy test', function () {
             }
           });
         }
-      }, function(error){
-        if(error){
+      }, function (error) {
+        if (error) {
           done(error);
         }
       });
@@ -139,7 +139,14 @@ describe('Local strategy test', function () {
       evnt.message.subject.should.be.equal('Email address verification');
       evnt.message.template.should.be.equal('verifyEmail');
       evnt.message.subject.should.be.equal('Email address verification');
-      evnt.message.verifyUrl.should.be.equal('http://localhost:' + port + '/auth/confirm/' + evnt.user.keychain.welcomeLink);
+
+
+      if (hunt.config.hostUrl) {
+        evnt.message.verifyUrl.should.be.equal(hunt.config.hostUrl + '/auth/confirm/' + evnt.user.keychain.welcomeLink);
+      } else {
+        evnt.message.verifyUrl.should.be.equal('http://localhost:' + port + '/auth/confirm/' + evnt.user.keychain.welcomeLink);
+      }
+
       evnt.message.layout.should.be.false;
     });
 
@@ -213,7 +220,11 @@ describe('Local strategy test', function () {
 
       evnt.message.subject.should.be.equal('Reset password');
       evnt.message.template.should.be.equal('resetEmail');
-      evnt.message.resetUrl.should.be.equal('http://localhost:' + port + '/auth/reset/' + evnt.user.keychain.welcomeLink);
+      if (hunt.config.hostUrl) {
+        evnt.message.resetUrl.should.be.equal(hunt.config.hostUrl + 'auth/reset/' + evnt.user.keychain.welcomeLink);
+      } else {
+        evnt.message.resetUrl.should.be.equal('http://localhost:' + port + '/auth/reset/' + evnt.user.keychain.welcomeLink);
+      }
       //evnt.message.layout.should.be.false;
     });
 
