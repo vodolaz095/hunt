@@ -142,7 +142,7 @@ describe('Local strategy test', function () {
 
 
       if (Hunt.config.hostUrl) {
-        evnt.message.verifyUrl.should.be.equal(Hunt.config.hostUrl + '/auth/confirm/' + evnt.user.keychain.welcomeLink);
+        evnt.message.verifyUrl.should.be.equal(Hunt.config.hostUrl + 'auth/confirm/' + evnt.user.keychain.welcomeLink);
       } else {
         evnt.message.verifyUrl.should.be.equal('http://localhost:' + port + '/auth/confirm/' + evnt.user.keychain.welcomeLink);
       }
