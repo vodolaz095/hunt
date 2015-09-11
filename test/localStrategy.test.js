@@ -141,8 +141,8 @@ describe('Local strategy test', function () {
       evnt.message.subject.should.be.equal('Email address verification');
 
 
-      if (hunt.config.hostUrl) {
-        evnt.message.verifyUrl.should.be.equal(hunt.config.hostUrl + '/auth/confirm/' + evnt.user.keychain.welcomeLink);
+      if (Hunt.config.hostUrl) {
+        evnt.message.verifyUrl.should.be.equal(Hunt.config.hostUrl + '/auth/confirm/' + evnt.user.keychain.welcomeLink);
       } else {
         evnt.message.verifyUrl.should.be.equal('http://localhost:' + port + '/auth/confirm/' + evnt.user.keychain.welcomeLink);
       }
@@ -220,8 +220,8 @@ describe('Local strategy test', function () {
 
       evnt.message.subject.should.be.equal('Reset password');
       evnt.message.template.should.be.equal('resetEmail');
-      if (hunt.config.hostUrl) {
-        evnt.message.resetUrl.should.be.equal(hunt.config.hostUrl + 'auth/reset/' + evnt.user.keychain.welcomeLink);
+      if (Hunt.config.hostUrl) {
+        evnt.message.resetUrl.should.be.equal(Hunt.config.hostUrl + 'auth/reset/' + evnt.user.keychain.welcomeLink);
       } else {
         evnt.message.resetUrl.should.be.equal('http://localhost:' + port + '/auth/reset/' + evnt.user.keychain.welcomeLink);
       }
