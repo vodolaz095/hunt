@@ -1,0 +1,2 @@
+This file is used to force continious integration features on Heroku hosting.
+It includes running tests and generating documentation after NPM install.

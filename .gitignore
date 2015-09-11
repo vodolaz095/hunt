@@ -1,26 +1,13 @@
-lib-cov
-*.seed
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-*~
-
-pids
-logs
-results
-
-node_modules/
-
-nbproject
-*sublime*
+# Editor specific
 .idea/
 .DS_Store
 *.geany
-examples/public/documentation
-examples/public/coverage
 
-out/
-localhost:9050
+# Distribution folders
+node_modules/
+
+# Distribution files
+tutorials/Changelog.md
+tutorials/test.md
+examples/public/coverage
+examples/public/documentation

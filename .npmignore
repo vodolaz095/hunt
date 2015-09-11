@@ -1,36 +1,23 @@
-.git
+# Editor specific
+.git/
 .idea/
+.DS_Store
+*.geany
+
+# Distribution folders
 examples/
 test/
 node_modules/
 Procfile
-coverage/
 tutorials/
 
-lib-cov
-*.seed
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-*~
-
-pids
-logs
-results
-
-generateDocs.sh
-jsdoc.conf.json
-.travis.yml
+# Distribution files
+jshint.xml
 .jshintrc
 .gitignore
-
-nbproject
-*sublime*
-docs
-.DS_Store
-*.geany
-
-localhost:9050
+.travis.yml
+apiary.apib
+jslint.conf
+jslint.xml
+.istanbul.yml
+jsdoc.conf.json
