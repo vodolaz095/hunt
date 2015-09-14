@@ -92,89 +92,9 @@ by using [hunt.extendApp](/documentation/Hunt.html#extendApp).
 ```
 
 
-###Setting up custom middlewares
-HuntJS borrows the [middleware stack](http://expressjs.com/4x/api.html#middleware) from ExpressJS 4.x
-We can add middlewares to our application in this way:
-
-```javascript
-
-    //set middleware for `/` mount point
-    hunt.extendMiddleware(function(core){
-      return function(req, res, next){
-        res.setHeader('X-hunt','YES!');
-        next();
-      };
-    };
-
-    //set middleware only for `production` environment and `/` mount point
-    hunt.extendMiddleware('production',function(core){
-      return function(req, res, next){
-        res.setHeader('X-production','YES!');
-        next();
-      };
-    };
-
-    //set middleware only for `production` and `staging` environments for `/somepath` mount point
-    hunt.extendMiddleware(['production','staging'],'/somepath',function(core){
-      return function(req, res, next){
-         if(!request.user){
-           response.send(403);
-         } else {
-           next();
-         }
-      };
-    };
-
-     //setting middleware for specified path and development environment only
-     Hunt.extendMiddleware('development', '/somePath', function (core) {
-       return function (req, res, next) {
-         res.setHeader('devMiddleware1', core.someVar);
-         next();
-       };
-     });
-
-     //setting middleware, that asks user to verify his/her email address
-     Hunt.extendMiddleware(function (core) {
-       return function(req,res,next){
-         if(req.user){
-           if (req.user.accountVerified) {
-             next();
-           } else {
-             req.flash('error','Verify your email address please!');
-             next();
-           }
-         } else {
-           next();
-         }
-       };
-     });
-
-```
-
-
-###Setting up custom routes
-
-We can set custom routes using [extendRoutes](/documentation/Hunt.html#extendRoutes)
-using [ExpressJS verbs](http://expressjs.com/api.html#app.VERB).
-
-```javascript
-
-    hunt.extendRoutes(function(core){
-
-      core.app.get('/', function(req,res){
-        res.send('Hello!');
-      });
-
-      core.app.all('*',function(req,res){
-        res.send(404);
-      });
-    }
-
-```
-
-
 ###Setting up custom router
-Add custom [router](http://expressjs.com/api.html#router) for expressjs application
+Add custom [router](http://expressjs.com/api.html#router) for expressjs application.
+It supports middlewares, verbs and everything, that makes `expressjs` so awesome
 
 ```javascript
 

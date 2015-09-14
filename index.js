@@ -11,7 +11,6 @@ var
   crypt = require('./lib/misc/crypt.js'),
   mongooseGenerator = require('./lib/datastore/mongooseModels.js'),
   nodemailerListener = require('./lib/nodemailer.js'),
-  passportGenerator = require('./lib/http/passport.js'),
   redisGenerator = require('./lib/datastore/redisClient.js');
 
 require('colors');
@@ -66,8 +65,6 @@ function Hunt(config) {
   var prepared = false,
     extendPassportStrategiesFunctions = [],
     extendAppFunctions = [],
-    extendMiddlewareFunctions = [],
-    extendRoutesFunctions = [],
     extendControllerFunctions = [],
     extendTelnetFunctions = {};
   /**
@@ -391,210 +388,12 @@ function Hunt(config) {
   };
 
   /**
-   * @method Hunt#extendMiddleware
-   * @tutorial webapplication
-   * @deprecated since 0.3.0
-   * @description
-   * Adds new middleware to expressJS application
-   * This function can be executed multiple times, the middlewares applied
-   * are used in application in *order* they were issued by this function.
-   * First argument (array of enviroments), and the second one
-   * (the path where to use middleware, the default is "/") are OPTIONAL
-   * They are applied after setting default exposed internals middleware and before
-   * setting router middleware.
-   *
-   * @param {(String|Array|undefined)} environment - application enviroment to use,
-   * can be something like 'development', ['development','staging'] or null
-   * (for ALL enviroments)
-   * @param {(String/undefined)} [path=/] path to mount middleware - default is /
-   * @param {function} settingsFunction function(core){ return function(req,res,next){.....}}
-   * @example
-   *
-   *
-   *     hunt.extendMiddleware(function(core){
-   *       return function(req, res, next){
-   *         res.setHeader('X-hunt','YES!');
-   *         next();
-   *       };
-   *     };
-   *
-   *     hunt.extendMiddleware('production',function(core){
-   *       return function(req, res, next){
-   *         res.setHeader('X-production','YES!');
-   *         next();
-   *       };
-   *     };
-   *
-   *     hunt.extendMiddleware(['production','staging'],'/somepath',function(core){
-   *       return function(req, res, next){
-   *          if(!request.user){
-   *            response.send(403);
-   *          } else {
-   *            next();
-   *          }
-   *       };
-   *     };
-   *
-   *    Hunt.extendMiddleware(function (core) {
-   *      return function (req, res, next) {
-   *        res.setHeader('globMiddleware', core.someVar);
-   *        next();
-   *      };
-   *    });
-   *
-   *    //setting middleware for production environment only
-   *    Hunt.extendMiddleware('production', function (core) {
-   *      return function (req, res, next) {
-   *        res.setHeader('prodMiddleware', core.someVar);
-   *        next();
-   *      };
-   *    });
-   *    //setting middleware for development environment only
-   *    Hunt.extendMiddleware('development', function (core) {
-   *      return function (req, res, next) {
-   *        res.setHeader('devMiddleware', core.someVar);
-   *        next();
-   *      };
-   *    });
-   *    //setting middleware for specified path and development environment only
-   *    Hunt.extendMiddleware('development', '/somePath', function (core) {
-   *      return function (req, res, next) {
-   *        res.setHeader('devMiddleware1', core.someVar);
-   *        next();
-   *      };
-   *    });
-   *    //setting middleware for specified path and production/staging environments only
-   *    Hunt.extendMiddleware(['production','staging'], '/somePath', function (core) {
-   *      return function (req, res, next) {
-   *        res.setHeader('devMiddleware2', core.someVar);
-   *        next();
-   *      };
-   *    });
-   *    //setting middleware, that asks user to verify his/her email address
-   *    Hunt.extendMiddleware(function (core) {
-   *      return function(req,res,next){
-   *        if(req.user){
-   *          if (req.user.accountVerified) {
-   *            next();
-   *          } else {
-   *            req.flash('error','Verify your email address please!');
-   *            next();
-   *          }
-   *        } else {
-   *          next();
-   *        }
-   *      };
-   *    });
-   *
-   * @returns {Hunt} hunt object
-   */
-  this.extendMiddleware = function (environment, path, settingsFunction) {
-    if (prepared) {
-      throw new Error('Hunt application is already prepared! WE CAN\'T EXTEND IT NOW!');
-    }
-    var environmentToUse = null,
-      pathToUse = '/',
-      settingsFunctionToUse = null,
-      k,
-      l;
-
-    if (typeof environment === 'function' && path === undefined && settingsFunction === undefined) {
-      settingsFunctionToUse = environment;
-    }
-
-    if (typeof environment === 'string' || environment instanceof Array) {
-
-      if (typeof environment === 'string') {
-        environmentToUse = [];
-        environmentToUse.push(environment);
-      }
-      if (environment instanceof Array) {
-        environmentToUse = environment;
-        for (k = 0; k < environment.length; k = k + 1) {
-          if (typeof environment[k] !== 'string') {
-            throw new Error('Hunt.extendMiddleware(environment, path, settingsFunction) requires environment name to be a string or array of strings!');
-          }
-        }
-      }
-      if (typeof path === 'string') {
-        if (/^\//.test(path)) {
-          pathToUse = path;
-          if (typeof settingsFunction === 'function') {
-            settingsFunctionToUse = settingsFunction;
-          }
-        } else {
-          throw new Error('Hunt.extendMiddleware(environment, path, settingsFunction) requires path to be a valid middleware path, that starts from "/"!');
-        }
-      } else {
-        if (typeof path === 'function') {
-          settingsFunctionToUse = path;
-        }
-      }
-    }
-
-    if (settingsFunctionToUse) {
-      if (environmentToUse) {
-        for (l = 0; l < environmentToUse.length; l = l + 1) {
-          extendMiddlewareFunctions.push({
-            'environment' : environmentToUse[l],
-            'path' : pathToUse || '/',
-            'SettingsFunction' : settingsFunctionToUse
-          });
-        }
-      } else {
-//we set middleware for all environments
-        extendMiddlewareFunctions.push({
-          'path' : pathToUse || '/',
-          'SettingsFunction' : settingsFunctionToUse
-        });
-      }
-    } else {
-      throw new Error('Wrong arguments for function Hunt.extendMiddleware(environmentArrayOrStrings, [path], settingsFunction(core){...})');
-    }
-    return this;
-  };
-
-  /**
-   * @method Hunt#extendRoutes
-   * @param {function} settingsFunction Settings Function
-   * @deprecated since 0.3.0
-   * @tutorial webapplication
-   * @description
-   * Adds {@link http://expressjs.com/api.html#app.VERB | application routes and verbs} for them.
-   * @example
-   *
-   *     hunt.extendRoutes(function(core){
-   *       core.app.get('/', function(req,res){
-   *         res.send('Hello!');
-   *       });
-   *       core.app.all('*',function(req,res){
-   *         res.send(404);
-   *       });
-   *     }
-   *
-   * @returns {Hunt} hunt object
-   */
-  this.extendRoutes = function (settingsFunction) {
-    if (prepared) {
-      throw new Error('Hunt application is already prepared! WE CAN\'T EXTEND IT NOW!');
-    }
-    if (typeof settingsFunction === 'function') {
-      extendRoutesFunctions.push(settingsFunction);
-    } else {
-      throw new Error('Wrong argument for Hunt.extendAppRoutes(function(core){...});');
-    }
-    return this;
-  };
-
-  /**
    * @method Hunt#extendController
    * @param {string} mountPoint
    * @param {function} settingsFunction
    * @returns {Hunt} hunt object
    * @see Hunt#startWebServer
    * @see Hunt#express
-   * @see Hunt#extendRoutes
-   * @see Hunt#extendMiddleware
    * @see Hunt#extendApp
    * @since 0.2.2
    * @tutorial webapplication
@@ -751,8 +550,7 @@ function Hunt(config) {
   }(this));
 
   function buildExpressApp(h) {
-    passportGenerator.call(h, extendPassportStrategiesFunctions, extendRoutesFunctions);
-    appGenerator.call(h, extendAppFunctions, extendControllerFunctions, extendMiddlewareFunctions, extendRoutesFunctions);
+    appGenerator.call(h, extendAppFunctions, extendControllerFunctions);
   }
 
   function buildTelnet(h) {
