@@ -24,9 +24,10 @@ describe('HuntJS resists when we want to extend it\' core in strange way', funct
       'encrypt', 'decrypt',
       'sessionStorage',
       'on', 'off', 'once', 'emit', 'many', 'onAny', 'offAny', 'removeListener'
-    ].map(function (name) {
+    ]
+      .map(function (name) {
         (function () {
-          Hunt.extendCore(('' + name), 'someStupidValueToIrritateCoreExtender');
+          Hunt.extendCore(name, 'someStupidValueToIrritateCoreExtender');
           console.log('Exception not thrown for "' + name + '"');
         }).should.throw('Unable to extend Hunt core. Field "' + name + '" already occupied!');
       });
@@ -43,7 +44,7 @@ describe('HuntJS resists when we want to extend it\' core in strange way', funct
 
     (function () {
       Hunt.extendCore(function () {
-
+        console.log('Do you wanna eat meat?');
       }, 'lalala');
     }).should.throw(/^Unable\sto\sinject/);
 
