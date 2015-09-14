@@ -1,8 +1,8 @@
 'use strict';
 /*jshint expr: true*/
-var hunt = require('./../index.js'),
-  should = require('should');
+var hunt = require('./../index.js');
 
+require('should');
 
 describe('HuntJS', function () {
   it('should be a function', function () {

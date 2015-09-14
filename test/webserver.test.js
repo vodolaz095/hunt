@@ -547,17 +547,16 @@ describe('HuntJS builds single threaded webserver', function () {
       var r, b;
       before(function (done) {
         request({
-            method: 'PUT',
-            url: 'http://localhost:' + port + '/huntKey',
-            form: {
-              'huntKey': user.huntKey
-            }
-          }, function (err, response, body) {
-            r = response;
-            b = body;
-            done(err);
+          method: 'PUT',
+          url: 'http://localhost:' + port + '/huntKey',
+          form: {
+            'huntKey': user.huntKey
           }
-        );
+        }, function (err, response, body) {
+          r = response;
+          b = body;
+          done(err);
+        });
       });
 
       it('and authorize user needed', function () {
@@ -575,17 +574,16 @@ describe('HuntJS builds single threaded webserver', function () {
       var r, b;
       before(function (done) {
         request({
-            method: 'DELETE',
-            url: 'http://localhost:' + port + '/huntKey',
-            form: {
-              'huntKey': user.huntKey
-            }
-          }, function (err, response, body) {
-            r = response;
-            b = body;
-            done(err);
+          method: 'DELETE',
+          url: 'http://localhost:' + port + '/huntKey',
+          form: {
+            'huntKey': user.huntKey
           }
-        );
+        }, function (err, response, body) {
+          r = response;
+          b = body;
+          done(err);
+        });
       });
 
       it('and authorize user needed', function () {
@@ -665,17 +663,16 @@ describe('HuntJS builds single threaded webserver', function () {
       var r, b;
       before(function (done) {
         request({
-            method: 'PUT',
-            url: 'http://localhost:' + port + '/huntKey',
-            form: {
-              'huntKey': 'iWannaEatMeat'
-            }
-          }, function (err, response, body) {
-            r = response;
-            b = body;
-            done(err);
+          method: 'PUT',
+          url: 'http://localhost:' + port + '/huntKey',
+          form: {
+            'huntKey': 'iWannaEatMeat'
           }
-        );
+        }, function (err, response, body) {
+          r = response;
+          b = body;
+          done(err);
+        });
       });
 
       it('and fails to authorize user', function () {
@@ -689,17 +686,16 @@ describe('HuntJS builds single threaded webserver', function () {
       var r, b;
       before(function (done) {
         request({
-            method: 'DELETE',
-            url: 'http://localhost:' + port + '/huntKey',
-            form: {
-              'huntKey': 'iWannaEatMeat'
-            }
-          }, function (err, response, body) {
-            r = response;
-            b = body;
-            done(err);
+          method: 'DELETE',
+          url: 'http://localhost:' + port + '/huntKey',
+          form: {
+            'huntKey': 'iWannaEatMeat'
           }
-        );
+        }, function (err, response, body) {
+          r = response;
+          b = body;
+          done(err);
+        });
       });
 
       it('and fails to authorize user', function () {
@@ -774,7 +770,7 @@ describe('HuntJS builds single threaded webserver', function () {
         done();
       });
 
-      request.get('http://localhost:' + port + '/error/throw?a=b', function (err, response, body) {
+      request.get('http://localhost:' + port + '/error/throw?a=b', function (err, response) {
         if (err) {
           done(err);
         } else {
@@ -798,7 +794,7 @@ describe('HuntJS builds single threaded webserver', function () {
         done();
       });
 
-      request.get('http://localhost:' + port + '/error/domain?a=b', function (err, response, body) {
+      request.get('http://localhost:' + port + '/error/domain?a=b', function (err, response) {
         if (err) {
           done(err);
         } else {
