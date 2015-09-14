@@ -15,6 +15,9 @@ describe('HuntJS application can run webserver', function () {
   before(function (done) {
     hunt = Hunt({
       'port': 2998,
+      'huntKey': true,
+      'huntKeyHeader': true,
+      'disableCsrf': true,
       'views': __dirname + '/views'
     });
     hunt.on('start', function (payload) {
@@ -31,6 +34,26 @@ describe('HuntJS application can run webserver', function () {
     hunt.extendApp(function (core) {
       core.app.set('someVar', core.someVar);
     });
+
+//setting controller for testing caching
+    hunt.extendController('/1sec', function (core, router) {
+      router.use('/', Hunt.cachingMiddleware(1000));
+      router.all('*', function (req, res) {
+        res.send('' + Date.now());
+      });
+    });
+
+//setting route for testing huntKey
+    hunt.extendController('/huntKey', function (core, router) {
+      router.all('*', function (req, res) {
+        if (req.user) {
+          res.status(200).send(req.user.id);
+        } else {
+          res.status(403).send('Forbidden');
+        }
+      });
+    });
+
 //setting controller for testing template engines of hogan.js
     hunt.extendController('/hogan', function (core, router) {
       router.get('/', function (req, res) {
@@ -61,9 +84,15 @@ describe('HuntJS application can run webserver', function () {
         });
       });
     });
+    hunt.extendController('/jade', function (core, router) {
+      router.get('/', function (req, res) {
+        var users = [{'name': 'Anatolij Ostroumov', 'email': 'ostroumov095@gmail.com'}];
+        res.render('users.jade', {'users': users});
+      });
+    });
+
+    hunt.startWebServer();
   });
-
-
   after(function (done) {
     hunt.stop();
     done();
@@ -112,8 +141,69 @@ describe('HuntJS application can run webserver', function () {
     });
   });
 
+  describe('caching middleware', function () {
+    it('ignores POST, PUT, DELETE requests', function (done) {
+      async.parallel({
+        'PUT': function (cb) {
+          request({'method': 'PUT', 'url': 'http://localhost:' + port + '/1sec'}, function (error, response, body) {
+            cb(error, body);
+          });
+        },
+        'POST': function (cb) {
+          request({'method': 'POST', 'url': 'http://localhost:' + port + '/1sec'}, function (error, response, body) {
+            cb(error, body);
+          });
+        },
+        'DELETE': function (cb) {
+          request({'method': 'DELETE', 'url': 'http://localhost:' + port + '/1sec'}, function (error, response, body) {
+            cb(error, body);
+          });
+        }
+      }, function (error, obj) {
+        if (error) {
+          done(error);
+        } else {
+          Math.abs(parseInt(obj.PUT, 10) - parseInt(obj.POST, 10)).should.be.below(1000);
+          Math.abs(parseInt(obj.PUT, 10) - parseInt(obj.DELETE, 10)).should.be.below(1000);
+          done();
+        }
+      });
+    });
 
-  describe('testing hogan.js templating engine', function () {
+    it('works ok for 1 sec', function (done) {
+      async.parallel({
+        'now': function (cb) {
+          request({'method': 'GET', 'url': 'http://localhost:' + port + '/1sec'}, function (error, response, body) {
+            cb(error, body);
+          });
+        },
+        '1sec': function (cb) {
+          setTimeout(function () {
+            request({'method': 'GET', 'url': 'http://localhost:' + port + '/1sec'}, function (error, response, body) {
+              cb(error, body);
+            });
+          }, 500);
+        },
+        '2sec': function (cb) {
+          setTimeout(function () {
+            request({'method': 'GET', 'url': 'http://localhost:' + port + '/1sec'}, function (error, response, body) {
+              cb(error, body);
+            });
+          }, 1500);
+        }
+      }, function (error, obj) {
+        if (error) {
+          done(error);
+        } else {
+          obj.now.should.be.equal(obj['1sec']);
+          Math.abs(parseInt(obj['1sec'], 10) - parseInt(obj['2sec'], 10)).should.be.above(1000);
+          done();
+        }
+      });
+    });
+  });
+
+  describe('hogan.js templating engine', function () {
     describe('it can be used by Hunt.app.render', function () {
       var pagesRendered;
       before(function (done) {
@@ -204,5 +294,271 @@ describe('HuntJS application can run webserver', function () {
     });
   });
 
+  describe('jade templating engine', function () {
+    var whatWeNeed = '<!DOCTYPE html><html><head><title>Jade Example</title></head><body><h1>Users</h1><div id=\"users\"><div class=\"user\"><h2>Anatolij Ostroumov</h2><div class=\"email\">ostroumov095@gmail.com</div></div></div></body></html>';
 
+    it('exposes the hunt.app.render function', function () {
+      hunt.app.render.should.be.a.Function;
+    });
+
+    it('renders what we need via hunt.app.render', function (done) {
+      var users = [{'name': 'Anatolij Ostroumov', 'email': 'ostroumov095@gmail.com'}];
+      hunt.app.render('users.jade', {'users': users}, function (err, html) {
+        if (err) {
+          done(err);
+        } else {
+          html.should.be.equal(whatWeNeed);
+          done();
+        }
+      });
+    });
+
+    it('renders what we need for webserver', function (done) {
+      request.get('http://localhost:' + port + '/', function (err, res, body) {
+        if (err) {
+          done(err);
+        } else {
+          body.should.be.equal(whatWeNeed);
+          done(null);
+        }
+      });
+    });
+
+  });
+
+  describe('huntKey', function () {
+    var user;
+    before(function (done) {
+      Hunt.model.User.create({}, function (err, userCreated) {
+        user = userCreated;
+        done(err);
+      });
+    });
+
+    describe('works for GET request with valid huntKey', function () {
+      var r, b;
+      before(function (done) {
+        request.get('http://localhost:' + port + '/huntKey?huntKey=' + user.huntKey, function (err, response, body) {
+          r = response;
+          b = body;
+          done(err);
+        });
+      });
+
+      it('and authorize user needed', function () {
+        r.statusCode.should.be.equal(200);
+        b.should.be.eql(user.id);
+      });
+
+      it('sets the cache-control:private header', function () {
+        r.headers['cache-control'].should.be.equal('private');
+      });
+    });
+
+    describe('works for POST request with valid huntKey', function () {
+      var r, b;
+      before(function (done) {
+        request.post('http://localhost:' + port + '/huntKey', {form: {'huntKey': user.huntKey}}, function (err, response, body) {
+          r = response;
+          b = body;
+          done(err);
+        });
+      });
+
+      it('and authorize user needed', function () {
+        r.statusCode.should.be.equal(200);
+        b.should.be.eql(user.id);
+      });
+
+      it('sets the cache-control:private header', function () {
+        r.headers['cache-control'].should.be.equal('private');
+      });
+    });
+
+    describe('works for PUT request with valid huntKey', function () {
+      var r, b;
+      before(function (done) {
+        request({
+            method: 'PUT',
+            url: 'http://localhost:' + port + '/huntKey',
+            form: {
+              'huntKey': user.huntKey
+            }
+          }, function (err, response, body) {
+            r = response;
+            b = body;
+            done(err);
+          }
+        );
+      });
+
+      it('and authorize user needed', function () {
+        r.statusCode.should.be.equal(200);
+        b.should.be.eql(user.id);
+      });
+
+      it('sets the cache-control:private header', function () {
+        r.headers['cache-control'].should.be.equal('private');
+      });
+    });
+
+    describe('works for DELETE request with valid huntKey', function () {
+      var r, b;
+      before(function (done) {
+        request({
+            method: 'DELETE',
+            url: 'http://localhost:' + port + '/huntKey',
+            form: {
+              'huntKey': user.huntKey
+            }
+          }, function (err, response, body) {
+            r = response;
+            b = body;
+            done(err);
+          }
+        );
+      });
+
+      it('and authorize user needed', function () {
+        r.statusCode.should.be.equal(200);
+        b.should.be.eql(user.id);
+      });
+
+      it('sets the cache-control:private header', function () {
+        r.headers['cache-control'].should.be.equal('private');
+      });
+    });
+
+
+    describe('works for custom header with valid huntKey', function () {
+      var r, b;
+      before(function (done) {
+        request({
+          method: 'GET',
+          url: 'http://localhost:' + port + '/huntKey',
+          headers: {
+            'huntKey': user.huntKey
+          }
+        }, function (err, response, body) {
+          r = response;
+          b = body;
+          done(err);
+        });
+      });
+
+      it('and authorize user needed', function () {
+        r.statusCode.should.be.equal(200);
+        b.should.be.eql(user.id);
+      });
+
+      it('sets the cache-control:private header', function () {
+        r.headers['cache-control'].should.be.equal('private');
+      });
+    });
+
+    describe('NOT works for GET request with invalid huntKey', function () {
+      var r, b;
+      before(function (done) {
+        request.get('http://localhost:' + port + '/huntKey?huntkey=iWannaEatMeat', function (err, response, body) {
+          r = response;
+          b = body;
+          done(err);
+        });
+      });
+
+      it('and fails to authorize user', function () {
+        r.statusCode.should.be.equal(403);
+        b.should.be.eql('Forbidden');
+      });
+    });
+
+    describe('NOT works for POST request with invalid huntKey', function () {
+      var r, b;
+      before(function (done) {
+        request.post('http://localhost:' + port + '/huntKey', {form: {'huntkey': 'iWannaEatMeat'}}, function (err, response, body) {
+          r = response;
+          b = body;
+          done(err);
+        });
+      });
+
+      it('and fails to authorize user', function () {
+        r.statusCode.should.be.equal(403);
+        b.should.be.eql('Forbidden');
+      });
+    });
+
+    describe('NOT works for PUT request with invalid huntKey', function () {
+      var r, b;
+      before(function (done) {
+        request({
+            method: 'PUT',
+            url: 'http://localhost:' + port + '/huntKey',
+            form: {
+              'huntKey': 'iWannaEatMeat'
+            }
+          }, function (err, response, body) {
+            r = response;
+            b = body;
+            done(err);
+          }
+        );
+      });
+
+      it('and fails to authorize user', function () {
+        r.statusCode.should.be.equal(403);
+        b.should.be.eql('Forbidden');
+      });
+    });
+
+    describe('NOT works for DELETE request with invalid huntKey', function () {
+      var r, b;
+      before(function (done) {
+        request({
+            method: 'DELETE',
+            url: 'http://localhost:' + port + '/huntKey',
+            form: {
+              'huntKey': 'iWannaEatMeat'
+            }
+          }, function (err, response, body) {
+            r = response;
+            b = body;
+            done(err);
+          }
+        );
+      });
+
+      it('and fails to authorize user', function () {
+        r.statusCode.should.be.equal(403);
+        b.should.be.eql('Forbidden');
+      });
+    });
+
+
+    describe('NOT works for custom header with invalid huntKey', function () {
+      var r, b;
+      before(function (done) {
+        request({
+          method: 'GET',
+          url: 'http://localhost:' + port + '/huntKey',
+          headers: {
+            'huntKey': 'iWannaEatMeat'
+          }
+        }, function (err, response, body) {
+          r = response;
+          b = body;
+          done(err);
+        });
+      });
+
+      it('and fails to authorize user', function () {
+        r.statusCode.should.be.equal(403);
+        b.should.be.eql('Forbidden');
+      });
+    });
+
+    after(function (done) {
+      Hunt.model.user.remove({'_id': user._id}, done);
+    });
+  });
 });
