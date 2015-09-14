@@ -19,7 +19,7 @@ describe('Local strategy test', function () {
     Hunt = hunt({
       'port': port,
       'disableCsrf': true,
-      'views': __dirname + '/hogan-views',
+      'views': __dirname + '/views/hogan-views',
       'passport': {
         'local': true,
         'signUpByEmail': true,
