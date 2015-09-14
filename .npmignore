@@ -17,6 +17,7 @@ tutorials/
 jshint.xml
 .jshintrc
 .gitignore
+.npmignore
 .travis.yml
 apiary.apib
 jslint.conf

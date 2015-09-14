@@ -1,3 +1,4 @@
+'use strict';
 angular.module('huntApp', ['ngRoute', 'ngResource'])
   .config(['$routeProvider',
     function ($routeProvider) {
@@ -42,7 +43,7 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
       return $resource('/api/v1/' + modelName + '/:id', {'id': '@id'}, {
         'query': {
           'method': 'GET',
-          'transformResponse': function (data, headers, code) {
+          'transformResponse': function (data) {
             var wrappedResult = angular.fromJson(data);
             wrappedResult.data.$metadata = wrappedResult.metadata || {};
             return wrappedResult.data;
@@ -168,27 +169,26 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
     $scope.responses = [];
 
     async.forever(function (next) {
-        if ($scope.responses.length < 10) {
-          setTimeout(function () {
-            $http.get('/time')
-              .success(function (data, status) {
-                $scope.responses.push({'data': data, 'status': status});
-                next();
-              })
-              .error(function (data, status) {
-                next(new Error('Error getting /time endpoint'));
-              });
-          }, 1000);
-        } else {
-          setTimeout(next, 1000);
-        }
-      },
-      function (error) {
-        throw error;
-      });
-
+      if ($scope.responses.length < 10) {
+        setTimeout(function () {
+          $http.get('/time')
+            .success(function (data, status) {
+              $scope.responses.push({'data': data, 'status': status});
+              next();
+            })
+            .error(function (data, status) {
+              next(new Error('Error getting /time endpoint'));
+            });
+        }, 1000);
+      } else {
+        setTimeout(next, 1000);
+      }
+    }, function (error) {
+      throw error;
+    });
   }])
   .controller('crudController', ['$scope', 'socket', 'trophy', '$http', function ($scope, socket, trophy, $http) {
+    var i;
     $scope.trophies = [];
     $scope.codeSampleForCRUD = 'lalala';
     trophy.query(function (trophies) {
@@ -200,7 +200,7 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
         $scope.codeSampleForCRUD = data;
       })
       .error(function (data, status) {
-        throw new Error('Error getting example code for `Trophy` model')
+        throw new Error('Error getting example code for `Trophy` model');
       });
 
     $scope.update = function (t) {
@@ -209,8 +209,8 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
 
     socket.on('trophySaved', function (data) {
       if (data.trophySaved) {
-        for (var i = 0; i < $scope.trophies.length; i++) {
-          if ($scope.trophies[i].id == data.trophySaved.id) {
+        for (i = 0; i < $scope.trophies.length; i = i + 1) {
+          if ($scope.trophies[i].id === data.trophySaved.id) {
             $scope.trophies[i].name = data.trophySaved.name;
             $scope.trophies[i].priority = data.trophySaved.priority;
             $scope.trophies[i].scored = data.trophySaved.scored;
@@ -228,7 +228,7 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
     $scope.startPinging = function () {
       $scope.pingerAnswer = 'Starting to ping...';
       socket.emit('pingerUrl', $scope.pingerUrl, function () {
-        //event is send!
+        $scope.pingerAnswer = 'Starting to ping.....';
       });
     };
     socket.on('pingerAnswer', function (value) {
@@ -237,15 +237,13 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
     $scope.sioMessage = '';
     $scope.sendSioMessage = function () {
       socket.emit('message', $scope.sioMessage, function () {
-        //event is send
+        $scope.sioMessage = '';
       });
-      $scope.sioMessage = '';
     };
     socket.on('httpSuccess', function (data) {
       if (data.httpSuccess) {
         $scope.recentVisits.push(data.httpSuccess);
       }
     });
-  }])
-;
+  }]);
 
