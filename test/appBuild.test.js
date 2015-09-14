@@ -51,10 +51,10 @@ describe('HuntJS resists when we want to extend it\' core in strange way', funct
 });
 
 describe('HuntJS builds clustered background application', function () {
-  it('will be tested... somehow');
+  it('will be tested soon!');
 });
 
 describe('HuntJS builds clustered webserver application', function () {
-  it('will be tested... somehow');
+  it('will be tested soon!');
 });
 
