@@ -12,6 +12,7 @@ describe('HuntJS application can run webserver', function () {
   var
     hunt,
     startEvent;
+
   before(function (done) {
     hunt = Hunt({
       'port': 2998,
@@ -33,11 +34,12 @@ describe('HuntJS application can run webserver', function () {
 //setting app value
     hunt.extendApp(function (core) {
       core.app.set('someVar', core.someVar);
+      core.app.locals.viewEngine = 'hogan';//http://expressjs.com/api.html#app.locals
     });
 
 //setting controller for testing caching
     hunt.extendController('/1sec', function (core, router) {
-      router.use('/', Hunt.cachingMiddleware(1000));
+      router.use('/', hunt.cachingMiddleware(1000));
       router.all('*', function (req, res) {
         res.send('' + Date.now());
       });
@@ -87,7 +89,7 @@ describe('HuntJS application can run webserver', function () {
     hunt.extendController('/jade', function (core, router) {
       router.get('/', function (req, res) {
         var users = [{'name': 'Anatolij Ostroumov', 'email': 'ostroumov095@gmail.com'}];
-        res.render('users.jade', {'users': users});
+        res.render('jade/users.jade', {'users': users});
       });
     });
 
@@ -106,7 +108,7 @@ describe('HuntJS application can run webserver', function () {
     hunt.someVar.should.be.equal(14);
   });
   it('have core extended properly with function ', function () {
-    hunt.someFunc().should.be.equal(14);
+    hunt.someFunc.should.be.equal(14);
   });
   it('have express value set properly', function () {
     hunt.app.get('someVar').should.be.equal(14);
@@ -204,7 +206,7 @@ describe('HuntJS application can run webserver', function () {
   });
 
   describe('hogan.js templating engine', function () {
-    describe('it can be used by Hunt.app.render', function () {
+    describe('it can be used by hunt.app.render', function () {
       var pagesRendered;
       before(function (done) {
         async.parallel({
@@ -218,7 +220,11 @@ describe('HuntJS application can run webserver', function () {
             hunt.app.render('hogan/index', {text: 'index', layout: 'hogan/layout2'}, cb);
           },
           'withPartials': function (cb) {
-            hunt.app.render('hogan/index', {text: 'index', partials: {testPartial: 'hogan/_partial'}}, cb);
+            hunt.app.render('hogan/index', {
+              text: 'index',
+              layout: 'hogan/layout',
+              partials: {testPartial: 'hogan/_partial'}
+            }, cb);
           }
         }, function (err, object) {
           if (err) {
@@ -228,7 +234,7 @@ describe('HuntJS application can run webserver', function () {
           done();
         });
       });
-      it('exposes the Hunt.app.render function', function () {
+      it('exposes the hunt.app.render function', function () {
         hunt.app.render.should.be.a.Function;
       });
 
@@ -251,22 +257,22 @@ describe('HuntJS application can run webserver', function () {
       before(function (done) {
         async.parallel({
           'default': function (cb) {
-            request.get('http://localhost:' + port + '/', function (err, res, body) {
+            request.get('http://localhost:' + port + '/hogan', function (err, res, body) {
               cb(err, body);
             });
           },
           'withoutLayout': function (cb) {
-            request.get('http://localhost:' + port + '/withOutLayout', function (err, res, body) {
+            request.get('http://localhost:' + port + '/hogan/withOutLayout', function (err, res, body) {
               cb(err, body);
             });
           },
           'withLayout2': function (cb) {
-            request.get('http://localhost:' + port + '/withLayout2', function (err, res, body) {
+            request.get('http://localhost:' + port + '/hogan/withLayout2', function (err, res, body) {
               cb(err, body);
             });
           },
           'withPartials': function (cb) {
-            request.get('http://localhost:' + port + '/withPartials', function (err, res, body) {
+            request.get('http://localhost:' + port + '/hogan/withPartials', function (err, res, body) {
               cb(err, body);
             });
           }
@@ -303,7 +309,7 @@ describe('HuntJS application can run webserver', function () {
 
     it('renders what we need via hunt.app.render', function (done) {
       var users = [{'name': 'Anatolij Ostroumov', 'email': 'ostroumov095@gmail.com'}];
-      hunt.app.render('users.jade', {'users': users}, function (err, html) {
+      hunt.app.render('jade/users.jade', {'users': users}, function (err, html) {
         if (err) {
           done(err);
         } else {
@@ -314,7 +320,7 @@ describe('HuntJS application can run webserver', function () {
     });
 
     it('renders what we need for webserver', function (done) {
-      request.get('http://localhost:' + port + '/', function (err, res, body) {
+      request.get('http://localhost:' + port + '/jade', function (err, res, body) {
         if (err) {
           done(err);
         } else {
@@ -323,13 +329,12 @@ describe('HuntJS application can run webserver', function () {
         }
       });
     });
-
   });
 
   describe('huntKey', function () {
     var user;
     before(function (done) {
-      Hunt.model.User.create({}, function (err, userCreated) {
+      hunt.model.User.create({}, function (err, userCreated) {
         user = userCreated;
         done(err);
       });
@@ -558,7 +563,7 @@ describe('HuntJS application can run webserver', function () {
     });
 
     after(function (done) {
-      Hunt.model.user.remove({'_id': user._id}, done);
+      hunt.model.user.remove({'_id': user._id}, done);
     });
   });
 });
