@@ -7,7 +7,7 @@ var
   port = 2998;
 
 
-describe('HuntJS application can run webserver', function () {
+describe('HuntJS builds single threaded webserver', function () {
   var
     hunt,
     startEvent;
@@ -95,13 +95,24 @@ describe('HuntJS application can run webserver', function () {
         });
       });
     });
+//setting controller to test jade templating engine
     hunt.extendController('/jade', function (core, router) {
       router.get('/', function (req, res) {
         var users = [{'name': 'Anatolij Ostroumov', 'email': 'ostroumov095@gmail.com'}];
         res.render('jade/users.jade', {'users': users});
       });
     });
-
+//setting controller to test error catching
+    hunt.extendController('/error', function (core, router) {
+      router.get('/throw', function () {
+        throw new Error('Something is wrong... Please, wipe your spectacles with alcohol or spirit and carefully kick PC with hammer 3 times.');
+      });
+      router.get('/domain', function () {
+        (function () {
+          throw new Error('Catch this!');
+        }());
+      });
+    });
     hunt.startWebServer();
   });
   after(function (done) {
@@ -727,14 +738,14 @@ describe('HuntJS application can run webserver', function () {
     });
   });
 
-  describe('serving static files', function(){
-    it('returns file contents', function(done){
+  describe('serving static files', function () {
+    it('returns file contents', function (done) {
       request.get('http://localhost:' + port + '/a.txt', function (err, response, body) {
-        if(err){
+        if (err) {
           done(err);
         } else {
           response.statusCode.should.be.equal(200);
-          response.headers['x-powered-by'].should.be.equal('Hunt v'+hunt.version);
+          response.headers['x-powered-by'].should.be.equal('Hunt v' + hunt.version);
           response.headers['accept-ranges'].should.be.equal('bytes');
           response.headers['cache-control'].should.be.equal('public, max-age=0');
           response.headers['content-type'].should.be.equal('text/plain; charset=UTF-8');
@@ -743,6 +754,55 @@ describe('HuntJS application can run webserver', function () {
           response.headers.vary.should.be.equal('Accept-Encoding');
           body.should.be.equal('lalala');
           done();
+        }
+      });
+    });
+  });
+  describe('error catching middleware', function () {
+    it('works for simple `throw new Error()`', function (done) {
+      hunt.once('http:error', function (error) {
+        error.error.should.be.equal('Something is wrong... Please, wipe your spectacles with alcohol or spirit and carefully kick PC with hammer 3 times.');
+        error.errorStack.should.be.a.String;
+        error.startTime.should.be.a.Date;
+        error.duration.should.be.a.Number;
+        error.statusCode.should.be.equal(500);
+        error.method.should.be.equal('GET');
+        error.query.a.should.be.equal('b');
+        error.uri.should.be.equal('/error/throw?a=b');
+        error.ip.should.be.equal('127.0.0.1');
+        should.not.exist(error.user);
+        done();
+      });
+
+      request.get('http://localhost:' + port + '/error/throw?a=b', function (err, response, body) {
+        if (err) {
+          done(err);
+        } else {
+          response.statusCode.should.be.equal(500);
+        }
+      });
+    });
+
+    it('works for domains', function (done) {
+      hunt.once('http:error', function (error) {
+        error.error.should.be.equal('Catch this!');
+        error.errorStack.should.be.a.String;
+        error.startTime.should.be.a.Date;
+        error.duration.should.be.a.Number;
+        error.statusCode.should.be.equal(500);
+        error.method.should.be.equal('GET');
+        error.query.a.should.be.equal('b');
+        error.uri.should.be.equal('/error/domain?a=b');
+        error.ip.should.be.equal('127.0.0.1');
+        should.not.exist(error.user);
+        done();
+      });
+
+      request.get('http://localhost:' + port + '/error/domain?a=b', function (err, response, body) {
+        if (err) {
+          done(err);
+        } else {
+          response.statusCode.should.be.equal(500);
         }
       });
     });
