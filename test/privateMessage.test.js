@@ -219,7 +219,7 @@ describe('Private messages', function () {
           });
 
           request({
-              'url': 'http://localhost:' + port + '/api/dialog/' + User2.id,
+              'url': 'http://localhost:' + port + '/api/v1/dialog/' + User2.id,
               'method': 'POST',
               'json': {
                 'huntKey': User1.huntKey, //authorize as User1
@@ -258,7 +258,7 @@ describe('Private messages', function () {
         var response, body;
         before(function (done) {
           request({
-              'url': 'http://localhost:' + port + '/api/dialog?huntKey=' + User2.huntKey,
+              'url': 'http://localhost:' + port + '/api/v1/dialog?huntKey=' + User2.huntKey,
               'method': 'GET'
             },
             function (err, r, b) {
@@ -294,7 +294,7 @@ describe('Private messages', function () {
         var response, body;
         before(function (done) {
           request({
-              'url': 'http://localhost:' + port + '/api/dialog/' + User1.id + '?huntKey=' + User2.huntKey,
+              'url': 'http://localhost:' + port + '/api/v1/dialog/' + User1.id + '?huntKey=' + User2.huntKey,
               'method': 'GET'
             },
             function (err, r, b) {
