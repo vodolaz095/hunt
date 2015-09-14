@@ -897,7 +897,7 @@ function Hunt(config) {
 /**
  * @method Hunt#many
  * @param {string} eventName
- * @param {integer} howManyTimesToFire
+ * @param {Number} howManyTimesToFire
  * @param {function} listener
  * @returns {Hunt}
  * @see Hunt#once
