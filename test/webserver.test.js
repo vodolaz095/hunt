@@ -1,7 +1,6 @@
 'use strict';
 /*jshint expr: true*/
 var
-  Hunt = require('./../index.js'),
   should = require('should'),
   async = require('async'),
   request = require('request'),
@@ -14,7 +13,7 @@ describe('HuntJS application can run webserver', function () {
     startEvent;
 
   before(function (done) {
-    hunt = Hunt({
+    hunt = require('./../index.js')({
       'port': 2998,
       'huntKey': true,
       'huntKeyHeader': true,
@@ -46,7 +45,7 @@ describe('HuntJS application can run webserver', function () {
     hunt.extendController('/1sec', function (core, router) {
       router.use('/', hunt.cachingMiddleware(1000));
       router.all('*', function (req, res) {
-        res.send('' + Date.now());
+        res.status(200).send(Date.now().toString());
       });
     });
 
@@ -172,7 +171,7 @@ describe('HuntJS application can run webserver', function () {
       });
     });
   });
-//*/
+
   describe('#rack', function () {
     var hash1, hash2, hash3;
 

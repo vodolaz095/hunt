@@ -1,7 +1,6 @@
 'use strict';
 /*jshint expr: true*/
 var
-  Hunt = require('./../index.js'),
   should = require('should');
 
 
@@ -11,7 +10,7 @@ describe('HuntJS builds single threaded background application', function () {
     startEvent;
 
   before(function (done) {
-    hunt = Hunt({
+    hunt = require('./../index.js')({
       'port': 2998,
       'huntKey': true,
       'huntKeyHeader': true,

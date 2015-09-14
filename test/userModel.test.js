@@ -16,6 +16,12 @@ describe('Hunt.model.User() test', function () {
   });
 
   describe('Testing Hunt mongoose model of users as Active Record collection', function () {
+    it('is a function', function () {
+      Hunt.model.User.should.be.a.Function;
+      Hunt.model.Users.should.be.a.Function;
+      Hunt.model.user.should.be.a.Function;
+      Hunt.model.users.should.be.a.Function;
+    });
     it('exposes function @find', function () {
       Hunt.model.User.find.should.be.a.Function;
     });

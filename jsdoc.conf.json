@@ -6,7 +6,6 @@
     "include": [
       "README.md",
       "index.js",
-      "lib/api/",
       "lib/datastore",
       "lib/exportModel",
       "lib/exportModel/toRest",
