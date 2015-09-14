@@ -44,7 +44,7 @@
     <option newcap="false" />
     <option noarg="true" />
     <option nocomma="false" />
-    <option node="false" />
+    <option node="true" />
     <option noempty="true" />
     <option nomen="false" />
     <option nonbsp="false" />

@@ -28,10 +28,13 @@ describe('Testing REST api', function () {
       'disableCsrf': true,
       'huntKeyHeader': true
     });
-
     Hunt.extendModel('Article', model);
 
     Hunt.exportModelToRest({'ownerId': 'author', 'modelName': 'Article', 'methods': ['doSmth'], 'statics': 'doSmth'});
+
+    (function () {
+      Hunt.exportModelToRest({'ownerId': 'author', 'modelName': 'Planet', 'methods': ['doSmth'], 'statics': 'doSmth'});
+    }).should.throw('Hunt.exportModelToRest() - modelName is not defined or corresponding model (Planet) does not exist!');
 
     Hunt.once('start', function (payload) {
       payload.type.should.be.equal('webserver');

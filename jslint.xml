@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JSLintConfiguration">
+    <option ass="true" />
     <option devel="true" />
     <option indent="2" />
     <option maxerr="50" />
     <option node="true" />
-    <option mocha="true" />
+    <option nomen="true" />
+    <option predef="describe, before, after, it," />
+    <option unparam="true" />
   </component>
 </project>
-

@@ -149,6 +149,9 @@ describe('HuntJS builds single threaded webserver', function () {
   });
 
   describe('#app is an expressjs application', function () {
+    it('is a function', function () {
+      hunt.app.should.be.a.Function;
+    });
     it('is expressjs instance');
     it('have express value set properly', function () {
       hunt.app.get('someVar').should.be.equal(14);
