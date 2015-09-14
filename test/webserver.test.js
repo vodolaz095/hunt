@@ -18,6 +18,7 @@ describe('HuntJS application can run webserver', function () {
       'huntKey': true,
       'huntKeyHeader': true,
       'disableCsrf': true,
+      'public': __dirname + '/public',
       'views': __dirname + '/views'
     });
     hunt.on('start', function (payload) {
@@ -710,6 +711,27 @@ describe('HuntJS application can run webserver', function () {
 
     after(function (done) {
       hunt.model.user.remove({'_id': user._id}, done);
+    });
+  });
+
+  describe('serving static files', function(){
+    it('returns file contents', function(done){
+      request.get('http://localhost:' + port + '/a.txt', function (err, response, body) {
+        if(err){
+          done(err);
+        } else {
+          response.statusCode.should.be.equal(200);
+          response.headers['x-powered-by'].should.be.equal('Hunt v'+hunt.version);
+          response.headers['accept-ranges'].should.be.equal('bytes');
+          response.headers['cache-control'].should.be.equal('public, max-age=0');
+          response.headers['content-type'].should.be.equal('text/plain; charset=UTF-8');
+          response.headers['content-length'].should.be.equal('6');
+          response.headers['last-modified'].should.be.equal('Mon, 14 Sep 2015 17:44:53 GMT');
+          response.headers.vary.should.be.equal('Accept-Encoding');
+          body.should.be.equal('lalala');
+          done();
+        }
+      });
     });
   });
 });
