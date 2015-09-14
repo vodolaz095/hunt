@@ -19,7 +19,7 @@ Hunt.extendTelnet('dotest', function (core, client, payload) {
 });
 
 
-describe('Hunt builds telnet server application', function () {
+describe('HuntJS builds telnet server application', function () {
   var startParameters;
   before(function (done) {
     Hunt.on('start', function (parameters) {

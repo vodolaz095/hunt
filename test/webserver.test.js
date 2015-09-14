@@ -31,6 +31,11 @@ describe('HuntJS application can run webserver', function () {
     hunt.extendCore('someFunc', function (core) {
       return core.someVar;
     });
+    hunt.extendCore('someFuncRet', function (core) {
+      return function () {
+        return core.someVar;
+      };
+    });
 //setting app value
     hunt.extendApp(function (core) {
       core.app.set('someVar', core.someVar);
@@ -74,14 +79,15 @@ describe('HuntJS application can run webserver', function () {
 
       router.get('/withLayout2', function (req, res) {
         res.render('hogan/index', {
-          'layout': 'layout2',
+          'layout': 'hogan/layout2',
           'text': 'index'
         });
       });
 
       router.get('/withPartials', function (req, res) {
         res.render('hogan/index', {
-          'partials': {testPartial: '_partial'},
+          'layout': 'hogan/layout',
+          'partials': {testPartial: 'hogan/_partial'},
           'text': 'index'
         });
       });
@@ -100,50 +106,148 @@ describe('HuntJS application can run webserver', function () {
     done();
   });
 
-  it('emits proper `start` event', function () {
-    startEvent.should.be.eql({'type': 'webserver', 'port': hunt.config.port, 'address': hunt.config.address});
-  });
-
-  it('have core extended properly with primitive value', function () {
-    hunt.someVar.should.be.equal(14);
-  });
-  it('have core extended properly with function ', function () {
-    hunt.someFunc.should.be.equal(14);
-  });
-  it('have express value set properly', function () {
-    hunt.app.get('someVar').should.be.equal(14);
-  });
-
-  it('have redisClient', function () {
-    hunt.redisClient.should.be.an.Object;
-  });
-
-  it('have createRedisClient', function () {
-    hunt.createRedisClient.should.be.an.Function;
-  });
-
-  it('have models', function () {
-    hunt.model.should.be.an.Object;
-  });
-
-  it('have User and Message models that looks like mongoose orm model', function () {
-    ['User', 'Users', 'users', 'user', 'message', 'messages', 'Message'].map(function (name) {
-      //maybe we need to extend this test in future
-      hunt.model[name].should.be.a.Function;
-      hunt.model[name].create.should.be.a.Function;
-      hunt.model[name].find.should.be.a.Function;
-      hunt.model[name].findOne.should.be.a.Function;
-      hunt.model[name].remove.should.be.a.Function;
-      hunt.model[name].findOneAndRemove.should.be.a.Function;
-      hunt.model[name].findOneAndUpdate.should.be.a.Function;
-      if (['User', 'Users', 'users', 'user'].indexOf(name) !== -1) {
-        hunt.model[name].findOneByHuntKey.should.be.a.Function;
-      }
-      hunt.model[name].findById.should.be.a.Function;
+  describe('`start` event', function () {
+    it('has proper `type`', function () {
+      startEvent.type.should.be.equal('webserver');
+    });
+    it('has proper `port`', function () {
+      startEvent.port.should.be.equal(hunt.config.port);
+    });
+    it('has proper `address`', function () {
+      startEvent.address.should.be.equal(hunt.config.address);
     });
   });
 
-  describe('caching middleware', function () {
+  describe('core is extended properly with', function () {
+    it('primitive value', function () {
+      hunt.someVar.should.be.equal(14);
+    });
+    it('function returned value', function () {
+      hunt.someFunc.should.be.equal(14);
+    });
+    it('function', function () {
+      var
+        a = hunt.someFuncRet,
+        r = a();
+      a.should.be.a.Function();
+      r.should.be.equal(14);
+    });
+  });
+
+  describe('#app is an expressjs application', function () {
+    it('is expressjs instance');
+    it('have express value set properly', function () {
+      hunt.app.get('someVar').should.be.equal(14);
+    });
+  });
+
+  describe('and interacts with redis', function () {
+    it('#redisClient is a redis client object', function () {
+      hunt.redisClient.should.be.an.Object;
+    });
+
+    it('#createRedisClient is a function', function () {
+      hunt.createRedisClient.should.be.an.Function;
+    });
+  });
+
+  describe('#models', function () {
+    it('to be a dictionary', function () {
+      hunt.model.should.be.an.Object;
+    });
+    it('of User and Message that looks like mongoose orm model', function () {
+      ['User', 'Users', 'users', 'user', 'message', 'messages', 'Message'].map(function (name) {
+        //maybe we need to extend this test in future
+        hunt.model[name].should.be.a.Function;
+        hunt.model[name].create.should.be.a.Function;
+        hunt.model[name].find.should.be.a.Function;
+        hunt.model[name].findOne.should.be.a.Function;
+        hunt.model[name].remove.should.be.a.Function;
+        hunt.model[name].findOneAndRemove.should.be.a.Function;
+        hunt.model[name].findOneAndUpdate.should.be.a.Function;
+        if (['User', 'Users', 'users', 'user'].indexOf(name) !== -1) {
+          hunt.model[name].findOneByHuntKey.should.be.a.Function;
+        }
+        hunt.model[name].findById.should.be.a.Function;
+      });
+    });
+  });
+
+  describe('and is working as native event emitter', function () {
+    var error,
+      message;
+    before(function (done) {
+      hunt.on('error', function (err) {
+        error = err;
+        done();
+      });
+
+      hunt.on('ping', function (msg) {
+        message = msg;
+        done();
+      });
+
+      setTimeout(function () {
+        hunt.emit('ping', 'pong');
+      }, 100);
+
+    });
+    it('#emit exists', function () {
+      hunt.emit.should.be.type('function');
+    });
+    it('#on exists', function () {
+      hunt.on.should.be.type('function');
+    });
+    it('#on works', function () {
+      should.not.exist(error);
+      message.should.be.equal('pong');
+    });
+  });
+
+  describe('and is working as eventEmitter2', function () {
+    var error,
+      name,
+      message;
+    before(function (done) {
+
+      hunt.on('error', function (err) {
+        error = err;
+        done();
+      });
+
+      hunt.on('ping:*', function (msg) {
+        console.log(this.event);
+        name = this.event.join(':');
+        message = msg;
+        done();
+      });
+
+      setTimeout(function () {
+        hunt.emit(['ping', 'event2'], 'pong');
+        //hunt.emit('ping.event2', 'pong');
+      }, 100);
+
+    });
+
+    it('event have proper name', function () {
+      name.should.be.equal('ping:event2');
+    });
+
+    it('event have proper payload', function () {
+      message.should.be.equal('pong');
+    });
+
+    it('emits and catches events by itself', function () {
+      should.not.exist(error);
+      message.should.be.equal('pong');
+    });
+  });
+
+  describe('#cachingMiddleware', function () {
+    it('is a function', function () {
+      hunt.cachingMiddleware.should.be.a.Function;
+    });
+
     it('ignores POST, PUT, DELETE requests', function (done) {
       async.parallel({
         'PUT': function (cb) {
@@ -331,7 +435,7 @@ describe('HuntJS application can run webserver', function () {
     });
   });
 
-  describe('huntKey', function () {
+  describe('API authorization via huntKey', function () {
     var user;
     before(function (done) {
       hunt.model.User.create({}, function (err, userCreated) {

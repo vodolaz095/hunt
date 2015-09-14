@@ -1,18 +1,16 @@
 'use strict';
 /*jshint expr: true*/
 var hunt = require('./../index.js'),
-  should = require('should'),
-  async = require('async'),
-  request = require('request');
+  should = require('should');
 
 
-describe('Hunt', function () {
+describe('HuntJS', function () {
   it('should be a function', function () {
     hunt.should.have.type('function');
   });
 });
 
-describe('Hunt resists when we want to extend it\' core in strange way', function () {
+describe('HuntJS resists when we want to extend it\' core in strange way', function () {
   var Hunt = hunt();
   it('should throw error for every one of protected names we want to override by Hunt.extendCore', function () {
     [
@@ -52,8 +50,7 @@ describe('Hunt resists when we want to extend it\' core in strange way', functio
   });
 });
 
-
-describe('Hunt builds single threaded background application', function () {
+describe('HuntJS builds single threaded background application', function () {
 
   var Hunt = hunt(),
     startedType;
@@ -165,196 +162,89 @@ describe('Hunt builds single threaded background application', function () {
       Hunt.decrypt(Hunt.encrypt('daiMne3Ryblya')).should.be.equal('daiMne3Ryblya');
     });
   });
-});
-/*/
-describe('Hunt builds single threaded webserver application', function () {
-  var
-    port = 2999,
-    Hunt = hunt({ 'port' : port }),
-    startedType,
-    response1,
-    response2,
-    response3;
 
-  after(function (done) {
-    Hunt.stop();
-    done();
-  });
-
-  Hunt.extendCore('someVar', 42);
-  Hunt.extendCore('someFunc', function (core) {
-    return core.someVar;
-  });
-  Hunt.extendApp(function (core) {
-    core.app.set('someVar', core.someVar);
-  });
-  Hunt.extendMiddleware(function (core) {
-    return function (req, res, next) {
-      res.setHeader('globMiddleware', core.someVar);
-      next();
-    };
-  });
-  Hunt.extendMiddleware('production', function (core) {
-    return function (req, res, next) {
-      res.setHeader('prodMiddleware', core.someVar);
-      next();
-    };
-  });
-  Hunt.extendMiddleware('development', function (core) {
-    return function (req, res, next) {
-      res.setHeader('devMiddleware', core.someVar);
-      next();
-    };
-  });
-  Hunt.extendMiddleware('development', '/somePath', function (core) {
-    return function (req, res, next) {
-      res.setHeader('devMiddleware1', core.someVar);
-      next();
-    };
-  });
-  Hunt.extendMiddleware('production', '/somePath', function (core) {
-    return function (req, res, next) {
-      res.setHeader('devMiddleware2', core.someVar);
-      next();
-    };
-  });
-  Hunt.extendRoutes(function (core) {
-    core.app.get('/', function (req, res) {
-      res.status(403).send('OK');
-    });
-    core.app.get('/somePath', function (req, res) {
-      res.status(404).send('somePath');
-    });
-  });
-  Hunt.extendController('/controller', function (core, router) {
-    router.get('/', function (req, res) {
-      res.send('Hello?');
-    });
-  });
-
-
-  describe('Hunt emit events of `start`', function () {
-    var httpEvent1;
+  describe('native event emitter test', function () {
+    var error,
+      message;
     before(function (done) {
-      Hunt.on('start', function (type) {
-        startedType = type;
-        async.series([
-          function (cb) {
-            Hunt.once('http:*', function (evnt) {
-              httpEvent1 = evnt;
-            });
-            request.get('http://localhost:' + port + '/', function (err, response) {
-              response1 = response;
-              cb(err, response);
-            });
-          },
-          function (cb) {
-            request.get('http://localhost:' + port + '/somePath', function (err, response) {
-              response2 = response;
-              cb(err, response);
-            });
-          },
-          function (cb) {
-            request.get('http://localhost:' + port + '/controller', function (err, response) {
-              response3 = response;
-              cb(err, response);
-            });
-          }
-        ], done);
+
+      Hunt.on('error', function (err) {
+        error = err;
+        done();
       });
 
-      Hunt.startWebServer();
-    });
-
-    it('emits proper `start` event', function () {
-      startedType.should.be.eql({ 'type' : 'webserver', 'port' : Hunt.config.port, 'address' : Hunt.config.address });
-    });
-
-    it('emits proper `http:success` event for route /', function () {
-      //httpEvent1.should.be.equal(1);
-      httpEvent1.startTime.should.be.instanceOf(Date);
-      httpEvent1.duration.should.be.below(100);
-      httpEvent1.statusCode.should.be.equal(403);
-      httpEvent1.method.should.be.equal('GET');
-      httpEvent1.ip.should.be.equal('127.0.0.1');
-      httpEvent1.uri.should.be.equal('/');
-      should.not.exist(httpEvent1.user);
-    });
-
-    it('has proper response for case 1', function () {
-      response1.statusCode.should.be.equal(403);
-      response1.body.should.be.equal('OK');
-    });
-    it('has proper response for case 2', function () {
-      response2.statusCode.should.be.equal(404);
-      response2.body.should.be.equal('somePath');
-    });
-
-    it('has proper response for case 3', function () {
-      response3.statusCode.should.be.equal(200);
-      response3.body.should.be.equal('Hello?');
-    });
-  });
-
-
-  describe('Hunt internals', function () {
-    it('have redisClient', function () {
-      Hunt.redisClient.should.be.an.Object;
-    });
-    it('have createRedisClient', function () {
-      Hunt.createRedisClient.should.be.an.Function;
-    });
-    it('have models', function () {
-      Hunt.model.should.be.an.Object;
-    });
-
-    it('have User and Message models that looks like mongoose orm model', function () {
-      ['User', 'Users', 'users', 'user', 'message', 'messages', 'Message'].map(function (name) {
-        //maybe we need to extend this test in future
-        Hunt.model[name].should.be.a.Function;
-        Hunt.model[name].create.should.be.a.Function;
-        Hunt.model[name].find.should.be.a.Function;
-        Hunt.model[name].findOne.should.be.a.Function;
-        Hunt.model[name].remove.should.be.a.Function;
-        Hunt.model[name].findOneAndRemove.should.be.a.Function;
-        Hunt.model[name].findOneAndUpdate.should.be.a.Function;
-        if (['User', 'Users', 'users', 'user'].indexOf(name) !== -1) {
-          Hunt.model[name].findOneByHuntKey.should.be.a.Function;
-        }
-        Hunt.model[name].findById.should.be.a.Function;
+      Hunt.on('ping', function (msg) {
+        message = msg;
+        done();
       });
+
+      setTimeout(function () {
+        Hunt.emit('ping', 'pong');
+      }, 100);
+
+    });
+
+    it('can emit and listen to events', function () {
+      Hunt.emit.should.be.type('function');
+      Hunt.on.should.be.type('function');
+    });
+
+    it('emits and catches events by itself', function () {
+      should.not.exist(error);
+      message.should.be.equal('pong');
+    });
+  });
+  describe('eventEmitter2 test', function () {
+    var error,
+      name,
+      message;
+    before(function (done) {
+
+      Hunt.on('error', function (err) {
+        error = err;
+        done();
+      });
+
+      Hunt.on('ping:*', function (msg) {
+        console.log(this.event);
+        name = this.event.join(':');
+        message = msg;
+        done();
+      });
+
+      setTimeout(function () {
+        Hunt.emit(['ping', 'event2'], 'pong');
+        //Hunt.emit('ping.event2', 'pong');
+      }, 100);
+
+    });
+
+    it('event have proper name', function () {
+      name.should.be.equal('ping:event2');
+    });
+
+    it('event have proper payload', function () {
+      message.should.be.equal('pong');
+    });
+
+    it('can emit and listen to events', function () {
+      Hunt.emit.should.be.type('function');
+      Hunt.on.should.be.type('function');
+    });
+
+    it('emits and catches events by itself', function () {
+      should.not.exist(error);
+      message.should.be.equal('pong');
     });
   });
 
-  describe('it starts web server', function () {
-    it('responds on / properly with respect to routes and middlewares', function () {
-      response1.body.should.be.equal('OK');
-      response1.headers.globmiddleware.should.be.equal('42');
-      if (Hunt.config.env === 'development') {
-        response1.headers.devmiddleware.should.be.equal('42');
-      }
-      response1.headers['x-powered-by'].should.be.equal('Hunt v' + Hunt.version);
-      should.not.exist(response1.headers.prodMiddleware);
-      should.not.exist(response1.headers.devMiddleware1);
-    });
-    it('responds on /somePath properly with respect to routes and middlewares', function () {
-      response2.body.should.be.equal('somePath');
-      response2.headers.globmiddleware.should.be.equal('42');
-      if (Hunt.config.env === 'development') {
-        response2.headers.devmiddleware.should.be.equal('42');
-        response2.headers.devmiddleware1.should.be.equal('42');
-      }
-      response2.headers['x-powered-by'].should.be.equal('Hunt v' + Hunt.version);
-      should.not.exist(response1.headers.prodMiddleware);
-    });
-  });
 });
-//*/
-describe('Hunt builds clustered background application', function () {
+
+describe('HuntJS builds clustered background application', function () {
   it('will be tested... somehow');
 });
 
-describe('Hunt builds clustered webserver application', function () {
+describe('HuntJS builds clustered webserver application', function () {
   it('will be tested... somehow');
 });
 

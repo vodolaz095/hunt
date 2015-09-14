@@ -53,7 +53,6 @@ describe('Testing Hunt event emitting system', function () {
       message.should.be.equal('pong');
     });
   });
-//*/
   describe('eventEmitter2 test', function () {
     var error,
       name,
@@ -97,5 +96,5 @@ describe('Testing Hunt event emitting system', function () {
       message.should.be.equal('pong');
     });
   });
-//*/
+
 });
