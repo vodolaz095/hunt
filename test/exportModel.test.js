@@ -45,73 +45,70 @@ describe('Testing REST api', function () {
   describe('for nobody', function () {
     it('returns unauthorized for GET /', function (done) {
       request({
-          'method': 'GET',
-          'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article',
-          'json': true
-        },
-        function (error, response, body) {
-          if (error) {
-            done(error);
-          } else {
-            response.statusCode.should.be.equal(401);
-            body.status.should.be.equal('Error');
-            body.errors.should.be.an.Array;
-            body.errors.length.should.be.equal(1);
-            body.errors[0].code.should.be.equal(401);
-            body.errors[0].message.should.be.equal('Authorization required!');
-            done();
-          }
-        });
+        'method': 'GET',
+        'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article',
+        'json': true
+      }, function (error, response, body) {
+        if (error) {
+          done(error);
+        } else {
+          response.statusCode.should.be.equal(401);
+          body.status.should.be.equal('Error');
+          body.errors.should.be.an.Array;
+          body.errors.length.should.be.equal(1);
+          body.errors[0].code.should.be.equal(401);
+          body.errors[0].message.should.be.equal('Authorization required!');
+          done();
+        }
+      });
     });
 
     it('returns `This API endpoint do not exists!` for some stupid requests', function (done) {
       request({
-          'method': 'POST',
-          'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/someStupidApiEndpointThatDoNotExists',
-          'form': {
-            'name': 'Da book',
-            'content': 'some content'
-          },
-          'json': true
+        'method': 'POST',
+        'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/someStupidApiEndpointThatDoNotExists',
+        'form': {
+          'name': 'Da book',
+          'content': 'some content'
         },
-        function (error, response, body) {
-          if (error) {
-            done(error);
-          } else {
-            response.statusCode.should.be.equal(404);
-            body.status.should.be.equal('Error');
-            body.errors.should.be.an.Array;
-            body.errors.length.should.be.equal(1);
-            body.errors[0].code.should.be.equal(404);
-            body.errors[0].message.should.be.equal('This API endpoint does not exist!');
-            done();
-          }
-        });
+        'json': true
+      }, function (error, response, body) {
+        if (error) {
+          done(error);
+        } else {
+          response.statusCode.should.be.equal(404);
+          body.status.should.be.equal('Error');
+          body.errors.should.be.an.Array;
+          body.errors.length.should.be.equal(1);
+          body.errors[0].code.should.be.equal(404);
+          body.errors[0].message.should.be.equal('This API endpoint does not exist!');
+          done();
+        }
+      });
     });
 
     it('returns unauthorized for POST /', function (done) {
       request({
-          'method': 'POST',
-          'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article',
-          'form': {
-            'name': 'Da book',
-            'content': 'some content'
-          },
-          'json': true
+        'method': 'POST',
+        'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article',
+        'form': {
+          'name': 'Da book',
+          'content': 'some content'
         },
-        function (error, response, body) {
-          if (error) {
-            done(error);
-          } else {
-            response.statusCode.should.be.equal(401);
-            body.status.should.be.equal('Error');
-            body.errors.should.be.an.Array;
-            body.errors.length.should.be.equal(1);
-            body.errors[0].code.should.be.equal(401);
-            body.errors[0].message.should.be.equal('Authorization required!');
-            done();
-          }
-        });
+        'json': true
+      }, function (error, response, body) {
+        if (error) {
+          done(error);
+        } else {
+          response.statusCode.should.be.equal(401);
+          body.status.should.be.equal('Error');
+          body.errors.should.be.an.Array;
+          body.errors.length.should.be.equal(1);
+          body.errors[0].code.should.be.equal(401);
+          body.errors[0].message.should.be.equal('Authorization required!');
+          done();
+        }
+      });
     });
 
 

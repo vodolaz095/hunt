@@ -118,14 +118,14 @@ describe('HuntJS application can run webserver', function () {
     });
   });
 
-  describe('core is extended properly with', function () {
-    it('primitive value', function () {
+  describe('#extendCore', function () {
+    it('works with primitive value', function () {
       hunt.someVar.should.be.equal(14);
     });
-    it('function returned value', function () {
+    it('works with function returned value', function () {
       hunt.someFunc.should.be.equal(14);
     });
-    it('function', function () {
+    it('works with function', function () {
       var
         a = hunt.someFuncRet,
         r = a();
@@ -172,6 +172,51 @@ describe('HuntJS application can run webserver', function () {
       });
     });
   });
+//*/
+  describe('#rack', function () {
+    var hash1, hash2, hash3;
+
+    it('is a function', function () {
+      hunt.rack.should.be.a.Function;
+    });
+    it('returns random hash', function () {
+      hash1 = hunt.rack();
+      hash2 = hunt.rack();
+      hash3 = hunt.rack();
+
+      hash1.should.be.a.String;
+      hash2.should.be.a.String;
+      hash3.should.be.a.String;
+    });
+
+    it('returns different hashes', function () {
+      hash1.should.not.be.eql(hash2);
+    });
+    it('returns more different hashes', function () {
+      hash1.should.not.be.eql(hash3);
+    });
+  });
+
+  describe('#encrypt', function () {
+    it('is a function', function () {
+      hunt.encrypt.should.be.a.Function;
+    });
+    it('works for defined secret', function () {
+      hunt.encrypt('daiMne3Ryblya', 'lalala').should.be.equal('936129d16f1c66a5116e4df797c1eba8');
+    });
+  });
+
+  describe('#decrypt', function () {
+    it('is a function', function () {
+      hunt.decrypt.should.be.a.Function;
+    });
+    it('works for defined secret', function () {
+      hunt.decrypt('936129d16f1c66a5116e4df797c1eba8', 'lalala').should.be.equal('daiMne3Ryblya');
+    });
+    it('works somehow for secret value from config', function () {
+      hunt.decrypt(hunt.encrypt('daiMne3Ryblya')).should.be.equal('daiMne3Ryblya');
+    });
+  });
 
   describe('and is working as native event emitter', function () {
     var error,
@@ -216,7 +261,6 @@ describe('HuntJS application can run webserver', function () {
       });
 
       hunt.on('ping:*', function (msg) {
-        console.log(this.event);
         name = this.event.join(':');
         message = msg;
         done();
@@ -224,7 +268,6 @@ describe('HuntJS application can run webserver', function () {
 
       setTimeout(function () {
         hunt.emit(['ping', 'event2'], 'pong');
-        //hunt.emit('ping.event2', 'pong');
       }, 100);
 
     });

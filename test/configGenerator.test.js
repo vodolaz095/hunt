@@ -4,7 +4,7 @@ var configGenerator = require('./../lib/misc/config.js'),
   should = require('should'),
   url = require('url');
 
-describe('Testing configGenerator', function () {
+describe('configGenerator', function () {
 
   describe('it should return proper object for empty config', function () {
     var config = configGenerator();

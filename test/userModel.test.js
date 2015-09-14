@@ -6,7 +6,7 @@ var should = require('should'),
   hunt = require('./../index.js'),
   Hunt;
 
-describe('Users model', function () {
+describe('Hunt.model.User() test', function () {
   before(function (done) {
     Hunt = hunt();
     Hunt.once('start', function () {
