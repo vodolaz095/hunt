@@ -1,3 +1,9 @@
+# v0.5.0
+Deprecated `hunt.extendRoutes` and `hunt.extendMiddleware` - we have `hunt.extendController` instread.
+Refactored usage of `passport.js` via `express.router`
+More recent dependencies
+Greatly improved unit test structure.
+
 # v0.4.18
 Fix issue with `connect-flash` middleware not working.
 Event emitted on OAuth authorization is more useful.

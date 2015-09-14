@@ -80,7 +80,7 @@
     "passport-twitter": "1.0.3",
     "passport-vkontakte": "0.4.0",
     "passport-yahoo": "0.3.0",
-    "passport.socketio": "3.5.1",
+    "passport.socketio": "3.6.1",
     "q":"1.4.1",
     "rai": "0.1.12",
     "redis": "0.12.1",

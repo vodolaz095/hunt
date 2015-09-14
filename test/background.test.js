@@ -92,7 +92,7 @@ describe('HuntJS builds single threaded background application', function () {
       });
     });
   });
-//*/
+
   describe('#rack', function () {
     var hash1, hash2, hash3;
 
