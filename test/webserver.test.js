@@ -54,7 +54,10 @@ describe('HuntJS application can run webserver', function () {
     hunt.extendController('/huntKey', function (core, router) {
       router.all('*', function (req, res) {
         if (req.user) {
-          res.status(200).send(req.user.id);
+          res
+            .set('user-id', req.user.id)
+            .status(200)
+            .send(req.user.id);
         } else {
           res.status(403).send('Forbidden');
         }
@@ -499,6 +502,7 @@ describe('HuntJS application can run webserver', function () {
 
       it('and authorize user needed', function () {
         r.statusCode.should.be.equal(200);
+        r.headers['user-id'].should.be.equal(user.id);
         b.should.be.eql(user.id);
       });
 
@@ -519,6 +523,7 @@ describe('HuntJS application can run webserver', function () {
 
       it('and authorize user needed', function () {
         r.statusCode.should.be.equal(200);
+        r.headers['user-id'].should.be.equal(user.id);
         b.should.be.eql(user.id);
       });
 
@@ -546,6 +551,7 @@ describe('HuntJS application can run webserver', function () {
 
       it('and authorize user needed', function () {
         r.statusCode.should.be.equal(200);
+        r.headers['user-id'].should.be.equal(user.id);
         b.should.be.eql(user.id);
       });
 
@@ -573,6 +579,7 @@ describe('HuntJS application can run webserver', function () {
 
       it('and authorize user needed', function () {
         r.statusCode.should.be.equal(200);
+        r.headers['user-id'].should.be.equal(user.id);
         b.should.be.eql(user.id);
       });
 
@@ -600,6 +607,7 @@ describe('HuntJS application can run webserver', function () {
 
       it('and authorize user needed', function () {
         r.statusCode.should.be.equal(200);
+        r.headers['user-id'].should.be.equal(user.id);
         b.should.be.eql(user.id);
       });
 
@@ -620,6 +628,7 @@ describe('HuntJS application can run webserver', function () {
 
       it('and fails to authorize user', function () {
         r.statusCode.should.be.equal(403);
+        should.not.exist(r.headers['user-id']);
         b.should.be.eql('Forbidden');
       });
     });
@@ -636,6 +645,7 @@ describe('HuntJS application can run webserver', function () {
 
       it('and fails to authorize user', function () {
         r.statusCode.should.be.equal(403);
+        should.not.exist(r.headers['user-id']);
         b.should.be.eql('Forbidden');
       });
     });
@@ -659,6 +669,7 @@ describe('HuntJS application can run webserver', function () {
 
       it('and fails to authorize user', function () {
         r.statusCode.should.be.equal(403);
+        should.not.exist(r.headers['user-id']);
         b.should.be.eql('Forbidden');
       });
     });
@@ -682,6 +693,7 @@ describe('HuntJS application can run webserver', function () {
 
       it('and fails to authorize user', function () {
         r.statusCode.should.be.equal(403);
+        should.not.exist(r.headers['user-id']);
         b.should.be.eql('Forbidden');
       });
     });
@@ -705,6 +717,7 @@ describe('HuntJS application can run webserver', function () {
 
       it('and fails to authorize user', function () {
         r.statusCode.should.be.equal(403);
+        should.not.exist(r.headers['user-id']);
         b.should.be.eql('Forbidden');
       });
     });

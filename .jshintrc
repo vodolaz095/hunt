@@ -20,6 +20,8 @@
   "smarttabs": true,
   "predef": [
     "exports",
-    "module"
+    "module",
+    "describe",
+    "it"
   ]
 }
