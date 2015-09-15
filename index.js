@@ -870,6 +870,8 @@ function Hunt(config) {
     }
     throw new Error('This configuration requires more workers, than allowed by `config.maxWorkers`! ');
   };
+  //todo - i'm not sure about this
+  //util.inherits(this, EventEmitter);
 }
 
 /**
