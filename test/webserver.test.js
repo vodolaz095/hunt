@@ -169,7 +169,6 @@ describe('HuntJS builds single threaded webserver', function () {
 
     it('#redisClient profiling works', function (done) {
       hunt.once(['profiling', 'redis', 'info'], function (event) {
-        console.log('Profiling redis', event);
         event.startedAt.should.be.a.Date;
         event.finishedAt.should.be.a.Date;
         event.duration.should.be.a.Number;
