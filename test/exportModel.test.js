@@ -603,19 +603,11 @@ describe('Testing REST api', function () {
     });
 
     it('Updates content by PATCH /:id', function (done) {
-      Hunt.on('REST:*', function(evnt){
-        console.log(this.event, evnt);
-      });
-
-      Hunt.on(['REST','*'], function(evnt){
-        console.log(this.event, evnt);
-      });
-
-      Hunt.once([ 'REST', 'Article', 'UPDATE', articleId ], function(evnt){
-        evnt.path.content.should.be.equal('some extra new content');
+      Hunt.once(['REST', 'Article', 'UPDATE', articleId], function (evnt) {
         evnt.ip.should.be.equal('127.0.0.1');
         evnt.patch.content.new.should.be.equal('some new content');
         evnt.user.root.should.be.true;
+        evnt.patch.content.old.should.be.a.String;
         done();
       });
 
@@ -657,10 +649,10 @@ describe('Testing REST api', function () {
     });
 
     it('Updates content by POST /:id', function (done) {
-      Hunt.once('REST:Article:UPDATE:'+articleId, function(evnt){
-        evnt.path.content.should.be.equal('some extra new content');
+      Hunt.once('REST:Article:UPDATE:' + articleId, function (evnt) {
         evnt.ip.should.be.equal('127.0.0.1');
-        evnt.patch.content.new.should.be.equal('some new content');
+        evnt.patch.content.new.should.be.equal('some extra new content');
+        evnt.patch.content.old.should.be.a.String;
         evnt.user.root.should.be.true;
         done();
       });
@@ -682,34 +674,33 @@ describe('Testing REST api', function () {
           body.code.should.be.equal(200);
           body.status.should.be.equal('Updated');
           request({
-              'method': 'GET',
-              'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-              'headers': {'huntKey': rootKey},
-              'json': true
-            },
-            function (error, response, body) {
-              if (error) {
-                done(error);
-              } else {
-                response.statusCode.should.be.equal(200);
-                body.code.should.be.equal(200);
-                body.status.should.be.equal('Ok');
-                body.data.name.should.be.equal(bookName);
-                body.data.content.should.be.equal('some extra new content');
-                body.data.id.should.be.a.equal(articleId);
-                body.data.author.id.should.be.a.String;
-              }
-            });
+            'method': 'GET',
+            'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
+            'headers': {'huntKey': rootKey},
+            'json': true
+          }, function (error, response, body) {
+            if (error) {
+              done(error);
+            } else {
+              response.statusCode.should.be.equal(200);
+              body.code.should.be.equal(200);
+              body.status.should.be.equal('Ok');
+              body.data.name.should.be.equal(bookName);
+              body.data.content.should.be.equal('some extra new content');
+              body.data.id.should.be.a.equal(articleId);
+              body.data.author.id.should.be.a.String;
+            }
+          });
         }
       });
     });
 
     it('Updates content by PUT /:id', function (done) {
-      Hunt.once('REST:Article:UPDATE:'+articleId, function(evnt){
-        evnt.path.content.should.be.equal('some extra new content');
+      Hunt.once('REST:Article:UPDATE:' + articleId, function (evnt) {
         evnt.ip.should.be.equal('127.0.0.1');
         evnt.patch.content.new.should.be.equal('some new content');
         evnt.user.root.should.be.true;
+        evnt.patch.content.old.should.be.a.String;
         done();
       });
 
@@ -776,9 +767,7 @@ describe('Testing REST api', function () {
     });
 
     it('Allows to call existent static method', function (done) {
-
-
-      Hunt.once('REST:Article:CALL_STATIC:doSmth', function(evnt){
+      Hunt.once('REST:Article:CALL_STATIC:doSmth', function (evnt) {
         evnt.ip.should.be.equal('127.0.0.1');
         evnt.payload.payload.should.be.equal('Da book');
         evnt.user.root.should.be.true;
@@ -786,24 +775,23 @@ describe('Testing REST api', function () {
       });
 
       request({
-          'method': 'POST',
-          'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/method',
-          'headers': {'huntKey': rootKey},
-          'form': {
-            'method': 'doSmth',
-            'payload': 'Da book'
-          },
-          'json': true
+        'method': 'POST',
+        'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/method',
+        'headers': {'huntKey': rootKey},
+        'form': {
+          'method': 'doSmth',
+          'payload': 'Da book'
         },
-        function (error, response, body) {
-          if (error) {
-            done(error);
-          } else {
-            response.statusCode.should.be.equal(202);
-            body.body.payload.should.be.equal('Da book');
-            body.user.id.should.be.a.String;
-          }
-        });
+        'json': true
+      }, function (error, response, body) {
+        if (error) {
+          done(error);
+        } else {
+          response.statusCode.should.be.equal(202);
+          body.body.payload.should.be.equal('Da book');
+          body.user.id.should.be.a.String;
+        }
+      });
     });
 
     it('Disallows to call non existent static method', function (done) {
@@ -832,7 +820,7 @@ describe('Testing REST api', function () {
     });
 
     it('Allows to call existent instance method', function (done) {
-      Hunt.once('REST:Article:CALL_METHOD:doSmth:'+articleId, function(evnt){
+      Hunt.once('REST:Article:CALL_METHOD:doSmth:' + articleId, function (evnt) {
         evnt.ip.should.be.equal('127.0.0.1');
         evnt.payload.payload.should.be.equal('Da book');
         evnt.user.root.should.be.true;

@@ -1044,6 +1044,10 @@ function Hunt(config) {
 
 util.inherits(Hunt, EventEmitter);
 
+Hunt.prototype.huntEmit = function(eventName, payload){
+  return this.emit(eventName, payload);
+};
+
 /**
  * @method Hunt#stop
  * @description

@@ -11,10 +11,6 @@ describe('HuntJS builds single threaded background application', function () {
 
   before(function (done) {
     hunt = require('./../index.js')({
-      'port': 2998,
-      'huntKey': true,
-      'huntKeyHeader': true,
-      'disableCsrf': true,
       'views': __dirname + '/views'
     });
     hunt.on('start', function (payload) {
@@ -68,6 +64,30 @@ describe('HuntJS builds single threaded background application', function () {
 
     it('#createRedisClient is a function', function () {
       hunt.createRedisClient.should.be.an.Function;
+    });
+
+    it('#redisClient profiling works', function (done) {
+      hunt.once(['profiling', 'redis', 'info'], function (event) {
+        console.log('Profiling redis', event);
+        event.startedAt.should.be.a.Date;
+        event.finishedAt.should.be.a.Date;
+        event.duration.should.be.a.Number;
+        (event.duration >= 0).should.be.true;
+        event.driver.should.be.equal('redis');
+        event.command.should.be.equal('info');
+        event.query.should.be.equal('info ');
+        should.not.exist(event.error);
+        event.result.should.be.a.String;
+        done();
+      });
+
+      hunt.redisClient.info(function (error, info) {
+        if (error) {
+          done(error);
+        } else {
+          console.log('Redis info');
+        }
+      });
     });
   });
 
