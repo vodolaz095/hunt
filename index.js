@@ -43,6 +43,13 @@ require('colors');
  * @fires Hunt#profiling:mongoose:*
  * @fires Hunt#profiling:sequilize:*
  *
+ * @fires Hunt#REST:collectionName:CREATE:itemCreatedId
+ * @fires Hunt#REST:collectionName:UPDATE:itemId
+ * @fires Hunt#REST:collectionName:DELETE:itemId
+ * @fires Hunt#REST:collectionName:CALL_METHOD:methodName:itemId
+ * @fires Hunt#REST:collectionName:CALL_METHOD:methodName:itemId
+ *
+ *
  * @example
  * var hunt = require('hunt')({
  *  'port': 3000
