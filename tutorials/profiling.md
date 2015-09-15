@@ -2,12 +2,14 @@ There is a way to profile database interactions in Huntjs by observing events em
 `profiling:*`
 
 
-##Events and namespaces
+***Events and namespaces***
+
 HuntJS uses the [Event Emitter2](https://www.npmjs.org/package/eventemitter2) to help catching the event needed.
 You can see broad description of [this in tutorial of events](/documentation/tutorial-events.html)
 
 
-##Profiling the redis database
+***Profiling the redis database***
+
 There are events emitted on every redis command. Namespace is `profiling:redis:*` with namespaces consisted of redis command names and arguments' values
 
 ```javascript
@@ -36,7 +38,7 @@ There are events emitted on every redis command. Namespace is `profiling:redis:*
 ```
 
 
-##Profiling the Mongo database
+***Profiling the Mongo database***
 
 ```javascript
 
@@ -62,5 +64,6 @@ There are events emitted on every redis command. Namespace is `profiling:redis:*
 
 ```
 
-##Profiling the Sequilize
+***Profiling the Sequilize***
+
 Will be done shortly

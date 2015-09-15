@@ -69,7 +69,7 @@ var config = {
 //    'FACEBOOK_CLIENT_ID': '1415057178733225',
 //    'FACEBOOK_CLIENT_SECRET': 'SECRETSECRET'
   },
-  'huntKey': false, //disallow huntKey authorization by GET query field and POST,PUT,DELETE body parameter. Default is false - denied
+  'huntKey': true, //disallow huntKey authorization by GET query field and POST,PUT,DELETE body parameter. Default is false - denied
   'huntKeyHeader': true, //allow huntKey authorization by header. Default is false - denied
   'io': true, //enable socket.io support
   'dialog': true,//enable dialogs api on /api/dialog
@@ -228,6 +228,18 @@ hunt.extendController('/', function (core, router) {
       res.redirect('/');
     }
   });
+
+  /*
+   * Route for user to see his/her profile too
+   */
+  router.get('/api/v1/myself', function (req, res) {
+    if (req.user) {
+      res.json({'user':req.user.toString()});
+    } else {
+      res.sendStatus(403);
+    }
+  });
+
 
   /*
    * Form where user can reset password
