@@ -56,9 +56,9 @@ require('colors');
  */
 function Hunt(config) {
   EventEmitter.call(this, {
-    wildcard : true,
-    delimiter : ':',
-    maxListeners : 20
+    wildcard: true,
+    delimiter: ':',
+    maxListeners: 20
   });
 
 //http://www.crockford.com/javascript/private.html
@@ -372,13 +372,13 @@ function Hunt(config) {
       if (environmentToUse) {
         for (j = 0; j < environmentToUse.length; j = j + 1) {
           extendAppFunctions.push({
-            'environment' : environmentToUse[j],
-            'settingsFunction' : settingsFunction
+            'environment': environmentToUse[j],
+            'settingsFunction': settingsFunction
           });
         }
       } else {
         extendAppFunctions.push({
-          'settingsFunction' : settingsFunction
+          'settingsFunction': settingsFunction
         });
       }
     } else {
@@ -420,8 +420,8 @@ function Hunt(config) {
     }
     if (typeof settingsFunction === 'function' && typeof mountPoint === 'string') {
       extendControllerFunctions.push({
-        'mountPoint' : mountPoint,
-        'settingsFunction' : settingsFunction
+        'mountPoint': mountPoint,
+        'settingsFunction': settingsFunction
       });
     } else {
       throw new Error('Wrong argument for Hunt.extendController(mountPoint,function(core, router){...});');
@@ -582,7 +582,7 @@ function Hunt(config) {
      * @type {object}
      * @property {string} type - with a value of string of 'background'
      */
-    this.emit('start', { 'type' : 'background' });
+    this.emit('start', {'type': 'background'});
     console.log(('Started Hunt as background service with PID#' + process.pid + '!').green);
   };
 
@@ -622,7 +622,7 @@ function Hunt(config) {
        * @property {number} port - with a value of port this application listens to
        * @property {string} address - with a value of address application is bound to
        */
-      h.emit('start', { 'type' : 'webserver', 'port' : p, 'address' : address });
+      h.emit('start', {'type': 'webserver', 'port': p, 'address': address});
       console.log(('Started Hunt as web server on port ' + p + ' with PID#' + process.pid + '!').green);
       prepared = true;
     });
@@ -678,7 +678,7 @@ function Hunt(config) {
        * @property {string} port - with a value of string of port number
        * @property {string} address - with a value of address application is bound to
        */
-      thishunt.emit('start', { 'type' : 'telnet', 'port' : p, 'address' : address });
+      thishunt.emit('start', {'type': 'telnet', 'port': p, 'address': address});
       console.log(('Started Hunt as telnet server on ' + address + ':' + p + '!').green);
     });
     return this;
@@ -708,7 +708,7 @@ function Hunt(config) {
     var p = port || this.config.port,
       m = maxProcesses || 'max';
 
-    return this.startCluster({ 'port' : p, 'web' : m, 'telnet' : 0, 'background' : 0 });
+    return this.startCluster({'port': p, 'web': m, 'telnet': 0, 'background': 0});
   };
 
   /**
@@ -733,7 +733,7 @@ function Hunt(config) {
     var p = port || this.config.port,
       m = maxProcesses || 'max';
 
-    return this.startCluster({ 'port' : p, 'web' : 0, 'telnet' : m, 'background' : 0 });
+    return this.startCluster({'port': p, 'web': 0, 'telnet': m, 'background': 0});
   };
 
   /**
@@ -755,7 +755,7 @@ function Hunt(config) {
    */
   this.startBackGroundCluster = function (maxProcesses) {
     console.log(('Trying to start Hunt as background cluster service...').magenta);
-    return this.startCluster({ 'web' : 0, 'telnet' : 0, 'background' : maxProcesses });
+    return this.startCluster({'web': 0, 'telnet': 0, 'background': maxProcesses});
   };
 
   /**
@@ -870,8 +870,6 @@ function Hunt(config) {
     }
     throw new Error('This configuration requires more workers, than allowed by `config.maxWorkers`! ');
   };
-  //todo - i'm not sure about this
-  //util.inherits(this, EventEmitter);
 }
 
 /**
@@ -1044,9 +1042,18 @@ function Hunt(config) {
 
 util.inherits(Hunt, EventEmitter);
 
-Hunt.prototype.huntEmit = function(eventName, payload){
+Hunt.prototype.huntEmit = function (eventName, payload) {
   return this.emit(eventName, payload);
 };
+
+Hunt.prototype.huntOn = function (eventName, handler) {
+  return this.on(eventName, handler);
+};
+
+Hunt.prototype.huntOnce = function (eventName, handler) {
+  return this.once(eventName, handler);
+};
+
 
 /**
  * @method Hunt#stop
@@ -1144,9 +1151,9 @@ Hunt.prototype.loadModelsFromDirectory = function (dirname) {
       model.mountPoints.map(function (mp) {
         console.log('Exporting model `' + model.modelName + '` on ' + mp);
         h.exportModelToRest({
-          'mountPoint' : mp,
-          'modelName' : model.modelName,
-          'ownerId' : model.ownerId
+          'mountPoint': mp,
+          'modelName': model.modelName,
+          'ownerId': model.ownerId
         });
       });
     }

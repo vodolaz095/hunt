@@ -54,8 +54,18 @@ describe('Hunt.model.User() test', function () {
     });
 
     describe('finders', function () {
-      var usersFound;
+      var
+        eventEmitted,
+        usersFound;
       before(function (done) {
+        Hunt.huntOnce(['profiling', 'mongoose', '*'], function (event) {
+          eventEmitted = event;
+        });
+
+        Hunt.huntOnce('profiling:mongoose:*', function (event) {
+          eventEmitted = event;
+        });
+
         Hunt.model.User.create({
           'email': 'ostroumov4@teksi.ru',
           'huntKey': 'vseBydetHorosho'
@@ -86,6 +96,18 @@ describe('Hunt.model.User() test', function () {
       it('we created correct user to be sure', function () {
         usersFound.created.email.should.be.equal('ostroumov4@teksi.ru');
         usersFound.created.huntKey.should.be.equal('vseBydetHorosho');
+      });
+
+      it('properly emits event for creating first user', function () {
+        console.log(eventEmitted);
+        eventEmitted.startedAt.should.be.a.Date;
+        eventEmitted.finishedAt.should.be.a.Date;
+        (eventEmitted.duration >= 0).should.be.true;
+        eventEmitted.driver.should.be.equal('mongoose');
+        eventEmitted.database.should.be.a.String;
+        eventEmitted.collection.should.be.equal('users');
+        eventEmitted.command.should.be.equal('create');
+        should.not.exist(eventEmitted.error);
       });
 
       it('@findOneByHuntKey works', function () {

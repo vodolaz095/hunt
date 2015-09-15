@@ -67,7 +67,7 @@ describe('HuntJS builds single threaded background application', function () {
     });
 
     it('#redisClient profiling works', function (done) {
-      hunt.once(['profiling', 'redis', 'info'], function (event) {
+      hunt.once(['profiling', 'redis', '*'], function (event) {
         event.startedAt.should.be.a.Date;
         event.finishedAt.should.be.a.Date;
         event.duration.should.be.a.Number;
@@ -85,6 +85,7 @@ describe('HuntJS builds single threaded background application', function () {
           done(error);
         } else {
           console.log('Redis info');
+          info.should.be.a.String;
         }
       });
     });

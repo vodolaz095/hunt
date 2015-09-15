@@ -95,6 +95,7 @@ describe('HuntJS builds telnet server application', function () {
         if (error) {
           done(error);
         } else {
+          info.should.be.a.String;
           console.log('Redis info');
         }
       });
