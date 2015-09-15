@@ -749,7 +749,7 @@ describe('HuntJS builds single threaded webserver', function () {
           response.headers['cache-control'].should.be.equal('public, max-age=0');
           response.headers['content-type'].should.be.equal('text/plain; charset=UTF-8');
           response.headers['content-length'].should.be.equal('6');
-          response.headers['last-modified'].should.be.equal('Mon, 14 Sep 2015 17:44:53 GMT');
+          response.headers['last-modified'].should.be.a.Date;
           response.headers.vary.should.be.equal('Accept-Encoding');
           body.should.be.equal('lalala');
           done();

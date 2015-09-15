@@ -596,16 +596,31 @@ describe('Testing REST api', function () {
           body.data.name.should.be.equal(bookName);
           body.data.content.should.be.equal('some content');
           body.data.id.should.be.a.equal(articleId);
-          console.log('author', body.data.author);
           body.data.author.id.should.be.a.String;
           done();
         }
       });
     });
 
-    it('Updates content by PUT /:id', function (done) {
+    it('Updates content by PATCH /:id', function (done) {
+      Hunt.on('REST:*', function(evnt){
+        console.log(this.event, evnt);
+      });
+
+      Hunt.on(['REST','*'], function(evnt){
+        console.log(this.event, evnt);
+      });
+
+      Hunt.once([ 'REST', 'Article', 'UPDATE', articleId ], function(evnt){
+        evnt.path.content.should.be.equal('some extra new content');
+        evnt.ip.should.be.equal('127.0.0.1');
+        evnt.patch.content.new.should.be.equal('some new content');
+        evnt.user.root.should.be.true;
+        done();
+      });
+
       request({
-        'method': 'PUT',
+        'method': 'PATCH',
         'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
         'headers': {'huntKey': rootKey},
         'form': {
@@ -635,7 +650,6 @@ describe('Testing REST api', function () {
               body.data.content.should.be.equal('some new content');
               body.data.id.should.be.a.equal(articleId);
               body.data.author.id.should.be.a.String;
-              done();
             }
           });
         }
@@ -643,6 +657,15 @@ describe('Testing REST api', function () {
     });
 
     it('Updates content by POST /:id', function (done) {
+      Hunt.once('REST:Article:UPDATE:'+articleId, function(evnt){
+        evnt.path.content.should.be.equal('some extra new content');
+        evnt.ip.should.be.equal('127.0.0.1');
+        evnt.patch.content.new.should.be.equal('some new content');
+        evnt.user.root.should.be.true;
+        done();
+      });
+
+
       request({
         'method': 'POST',
         'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
@@ -675,13 +698,57 @@ describe('Testing REST api', function () {
                 body.data.content.should.be.equal('some extra new content');
                 body.data.id.should.be.a.equal(articleId);
                 body.data.author.id.should.be.a.String;
-                done();
               }
             });
         }
       });
     });
 
+    it('Updates content by PUT /:id', function (done) {
+      Hunt.once('REST:Article:UPDATE:'+articleId, function(evnt){
+        evnt.path.content.should.be.equal('some extra new content');
+        evnt.ip.should.be.equal('127.0.0.1');
+        evnt.patch.content.new.should.be.equal('some new content');
+        evnt.user.root.should.be.true;
+        done();
+      });
+
+      request({
+        'method': 'PUT',
+        'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
+        'headers': {'huntKey': rootKey},
+        'form': {
+          'content': 'some new content'
+        },
+        'json': true
+      }, function (error, response, body) {
+        if (error) {
+          done(error);
+        } else {
+          response.statusCode.should.be.equal(200);
+          body.code.should.be.equal(200);
+          body.status.should.be.equal('Updated');
+          request({
+            'method': 'GET',
+            'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
+            'headers': {'huntKey': rootKey},
+            'json': true
+          }, function (error, response, body) {
+            if (error) {
+              done(error);
+            } else {
+              response.statusCode.should.be.equal(200);
+              body.code.should.be.equal(200);
+              body.status.should.be.equal('Ok');
+              body.data.name.should.be.equal(bookName);
+              body.data.content.should.be.equal('some new content');
+              body.data.id.should.be.a.equal(articleId);
+              body.data.author.id.should.be.a.String;
+            }
+          });
+        }
+      });
+    });
 
     it('returns `This API endpoint do not exists!` for some stupid requests', function (done) {
       request({
@@ -709,13 +776,22 @@ describe('Testing REST api', function () {
     });
 
     it('Allows to call existent static method', function (done) {
+
+
+      Hunt.once('REST:Article:CALL_STATIC:doSmth', function(evnt){
+        evnt.ip.should.be.equal('127.0.0.1');
+        evnt.payload.payload.should.be.equal('Da book');
+        evnt.user.root.should.be.true;
+        done();
+      });
+
       request({
           'method': 'POST',
           'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/method',
           'headers': {'huntKey': rootKey},
           'form': {
             'method': 'doSmth',
-            'payload': 'Da book',
+            'payload': 'Da book'
           },
           'json': true
         },
@@ -726,7 +802,6 @@ describe('Testing REST api', function () {
             response.statusCode.should.be.equal(202);
             body.body.payload.should.be.equal('Da book');
             body.user.id.should.be.a.String;
-            done();
           }
         });
     });
@@ -757,6 +832,13 @@ describe('Testing REST api', function () {
     });
 
     it('Allows to call existent instance method', function (done) {
+      Hunt.once('REST:Article:CALL_METHOD:doSmth:'+articleId, function(evnt){
+        evnt.ip.should.be.equal('127.0.0.1');
+        evnt.payload.payload.should.be.equal('Da book');
+        evnt.user.root.should.be.true;
+        done();
+      });
+
       request({
         'method': 'POST',
         'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId + '/method',
@@ -774,7 +856,6 @@ describe('Testing REST api', function () {
           body.body.payload.should.be.equal('Da book');
           body.user.id.should.be.a.String;
           body.article._id.should.be.equal(articleId);
-          done();
         }
       });
     });
