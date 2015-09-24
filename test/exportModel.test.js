@@ -253,6 +253,18 @@ describe('Testing REST api', function () {
     });
 
     it('returns article needed for GET /:id', function (done) {
+      Hunt.once(['REST', 'Article', 'READ', articleId], function (evnt) {
+        evnt.ip.should.be.equal('127.0.0.1');
+        evnt.user.root.should.be.true;
+        evnt.modelName.should.be.equal('Article');
+        evnt.fieldsReadable.should.be.an.Array;
+        evnt.fieldsReadable.should.containEql('id');
+        evnt.fieldsReadable.should.containEql('content');
+        evnt.fieldsReadable.should.containEql('name');
+        done();
+      });
+
+
       request({
         'method': 'GET',
         'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
@@ -268,7 +280,6 @@ describe('Testing REST api', function () {
           body.data.content.should.be.equal('some content');
           body.data.id.should.be.a.equal(articleId);
           should.not.exists(body.data.author);
-          done();
         }
       });
     });
@@ -290,23 +301,22 @@ describe('Testing REST api', function () {
           body.code.should.be.equal(200);
           body.status.should.be.equal('Updated');
           request({
-              'method': 'GET',
-              'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-              'headers': {'huntKey': rootKey},
-              'json': true
-            },
-            function (error, response, body) {
-              if (error) {
-                done(error);
-              } else {
-                response.statusCode.should.be.equal(200);
-                body.status.should.be.equal('Ok');
-                body.data.name.should.be.equal(bookName);
-                body.data.content.should.be.equal('some new content');
-                body.data.id.should.be.a.equal(articleId);
-                done();
-              }
-            });
+            'method': 'GET',
+            'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
+            'headers': {'huntKey': rootKey},
+            'json': true
+          }, function (error, response, body) {
+            if (error) {
+              done(error);
+            } else {
+              response.statusCode.should.be.equal(200);
+              body.status.should.be.equal('Ok');
+              body.data.name.should.be.equal(bookName);
+              body.data.content.should.be.equal('some new content');
+              body.data.id.should.be.a.equal(articleId);
+              done();
+            }
+          });
         }
       });
     });
@@ -328,23 +338,22 @@ describe('Testing REST api', function () {
           body.code.should.be.equal(200);
           body.status.should.be.equal('Updated');
           request({
-              'method': 'GET',
-              'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-              'headers': {'huntKey': rootKey},
-              'json': true
-            },
-            function (error, response, body) {
-              if (error) {
-                done(error);
-              } else {
-                response.statusCode.should.be.equal(200);
-                body.status.should.be.equal('Ok');
-                body.data.name.should.be.equal(bookName);
-                body.data.content.should.be.equal('some extra new content');
-                body.data.id.should.be.a.equal(articleId);
-                done();
-              }
-            });
+            'method': 'GET',
+            'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
+            'headers': {'huntKey': rootKey},
+            'json': true
+          }, function (error, response, body) {
+            if (error) {
+              done(error);
+            } else {
+              response.statusCode.should.be.equal(200);
+              body.status.should.be.equal('Ok');
+              body.data.name.should.be.equal(bookName);
+              body.data.content.should.be.equal('some extra new content');
+              body.data.id.should.be.a.equal(articleId);
+              done();
+            }
+          });
         }
       });
     });
@@ -911,24 +920,23 @@ describe('Testing REST api', function () {
           response.statusCode.should.be.equal(200);
           body.status.should.be.equal('Deleted');
           request({
-              'method': 'GET',
-              'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-              'headers': {'huntKey': rootKey},
-              'json': true
-            },
-            function (error, response, body) {
-              if (error) {
-                done(error);
-              } else {
-                response.statusCode.should.be.equal(404);
-                body.status.should.be.equal('Error');
-                body.errors.should.be.an.Array;
-                body.errors.length.should.be.equal(1);
-                body.errors[0].code.should.be.equal(404);
-                body.errors[0].message.should.be.equal('Not found!');
-                done();
-              }
-            });
+            'method': 'GET',
+            'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
+            'headers': {'huntKey': rootKey},
+            'json': true
+          }, function (error, response, body) {
+            if (error) {
+              done(error);
+            } else {
+              response.statusCode.should.be.equal(404);
+              body.status.should.be.equal('Error');
+              body.errors.should.be.an.Array;
+              body.errors.length.should.be.equal(1);
+              body.errors[0].code.should.be.equal(404);
+              body.errors[0].message.should.be.equal('Not found!');
+              done();
+            }
+          });
         }
       });
     });

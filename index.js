@@ -44,6 +44,7 @@ require('colors');
  * @fires Hunt#profiling:sequilize:*
  *
  * @fires Hunt#REST:collectionName:CREATE:itemCreatedId
+ * @fires Hunt#REST:collectionName:READ:itemId
  * @fires Hunt#REST:collectionName:UPDATE:itemId
  * @fires Hunt#REST:collectionName:DELETE:itemId
  * @fires Hunt#REST:collectionName:CALL_METHOD:methodName:itemId

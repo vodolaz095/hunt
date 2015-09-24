@@ -1,7 +1,8 @@
 # v0.5.0
 Deprecated `hunt.extendRoutes` and `hunt.extendMiddleware` - we have `hunt.extendController` instread.
-Refactored usage of `passport.js` via `express.router`
-More recent dependencies
+Refactored usage of `passport.js` via `express.router`.
+More recent dependencies. Memleaks with loose connection sockets fixed.
+Events are emmited on objects manipulated by means of `exportModel`.
 Greatly improved unit test structure.
 
 # v0.4.18
