@@ -861,7 +861,7 @@ describe('HuntJS builds single threaded webserver', function () {
     });
 
     it('client allows to send events', function(done){
-      hunt.on('message:sio', function(event){
+      hunt.once('message:sio', function(event){
         event.message.should.be.equal('hello');
         should.not.exist(event.user);
         done();
@@ -870,7 +870,7 @@ describe('HuntJS builds single threaded webserver', function () {
     });
 
     it('client allows to emit events', function(done){
-      hunt.on('message:sio', function(event){
+      hunt.once('message:sio', function(event){
         event.message.should.be.equal('hello');
         should.not.exist(event.user);
         done();
