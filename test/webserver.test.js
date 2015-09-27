@@ -18,11 +18,15 @@ describe('HuntJS builds single threaded webserver', function () {
       'huntKey': true,
       'huntKeyHeader': true,
       'disableCsrf': true,
+      'io': true,
       'public': __dirname + '/public',
       'views': __dirname + '/views'
     });
     hunt.on('start', function (payload) {
       startEvent = payload;
+      setInterval(function () {
+        hunt.emit('broadcast', {'type': 'currentTime', 'time': Date.now()}); //to be broadcasted by socket.io
+      }, 500);
       done();
     });
 //setting core value
@@ -829,5 +833,50 @@ describe('HuntJS builds single threaded webserver', function () {
         }
       });
     });
+  });
+
+
+  describe('socket.io works', function () {
+    var
+      socket,
+      event,
+      connected;
+    before(function (done) {
+      socket = require('socket.io-client')('http://localhost:'+port);
+      socket.on('connect', function(){
+        connected = true;
+      });
+      socket.once('broadcast', function(data){
+        event = data;
+        done();
+      });
+    });
+    it('client emits connected event to client', function(){
+      connected.should.be.true;
+    });
+    it('client recieves events', function () {
+      event.type.should.be.equal('currentTime');
+      event.time.should.be.a.Number;
+      (Date.now() - event.time).should.be.below(5000);
+    });
+
+    it('client allows to send events', function(done){
+      hunt.on('message:sio', function(event){
+        event.message.should.be.equal('hello');
+        should.not.exist(event.user);
+        done();
+      });
+      socket.send('hello');
+    });
+
+    it('client allows to emit events', function(done){
+      hunt.on('message:sio', function(event){
+        event.message.should.be.equal('hello');
+        should.not.exist(event.user);
+        done();
+      });
+      socket.emit('message','hello');
+    });
+
   });
 });
