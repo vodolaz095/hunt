@@ -48,13 +48,13 @@
   "license": "MIT",
   "dependencies": {
     "async": "1.4.2",
-    "body-parser": "1.13.3",
+    "body-parser": "1.14.0",
     "colors": "1.1.2",
     "compression": "1.5.2",
     "connect-flash": "0.1.1",
     "connect-multiparty": "2.0.0",
-    "connect-redis": "2.5.0",
-    "cookie-parser": "1.3.5",
+    "connect-redis": "2.5.1",
+    "cookie-parser": "1.4.0",
     "csurf": "1.8.3",
     "errorhandler": "1.4.2",
     "eventemitter2": "0.4.14",
@@ -64,13 +64,13 @@
     "hogan-express": "0.5.2",
     "jade": "1.11.0",
     "method-override": "2.3.5",
-    "mongoose": "4.1.5",
+    "mongoose": "4.1.8",
     "morgan": "1.6.1",
     "nodemailer": "1.4.0",
     "nodemailer-html-to-text": "1.0.2",
     "passport": "0.3.0",
     "passport-facebook": "2.0.0",
-    "passport-github": "0.1.5",
+    "passport-github": "1.0.0",
     "passport-google-oauth": "0.2.0",
     "passport-local": "1.0.0",
     "passport-steam": "0.1.6",
@@ -78,25 +78,25 @@
     "passport-vkontakte": "0.4.0",
     "q":"1.4.1",
     "rai": "0.1.12",
-    "redis": "0.12.1",
-    "request": "2.61.0",
+    "redis": "2.0.1",
+    "request": "2.64.0",
     "response-time": "2.3.1",
     "serve-favicon": "2.3.0",
-    "socket.io": "1.3.6",
+    "socket.io": "1.3.7",
     "socket.io-redis":"0.1.4",
     "swig": "1.4.2",
-    "validator": "4.0.5"
+    "validator": "4.0.6"
   },
   "optionalDependencies": {
-    "hiredis": "0.4.0"
+    "hiredis": "0.4.1"
   },
   "devDependencies": {
-    "istanbul": "0.3.18",
-    "mocha": "2.2.5",
+    "istanbul": "0.3.21",
+    "mocha": "2.3.3",
     "jsdoc": "3.3.2",
     "jslint":"0.9.3",
     "jshint":"2.8.0",
-    "should": "7.0.4",
-    "socket.io-client":"1.3.6"
+    "should": "7.1.0",
+    "socket.io-client":"1.3.7"
   }
 }
