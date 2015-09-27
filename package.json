@@ -66,7 +66,7 @@
     "method-override": "2.3.5",
     "mongoose": "4.1.8",
     "morgan": "1.6.1",
-    "nodemailer": "1.4.0",
+    "nodemailer": "1.5.0",
     "nodemailer-html-to-text": "1.0.2",
     "passport": "0.3.0",
     "passport-facebook": "2.0.0",
@@ -93,7 +93,7 @@
   "devDependencies": {
     "istanbul": "0.3.21",
     "mocha": "2.3.3",
-    "jsdoc": "3.3.2",
+    "jsdoc": "3.3.3",
     "jslint":"0.9.3",
     "jshint":"2.8.0",
     "should": "7.1.0",
