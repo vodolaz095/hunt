@@ -1,7 +1,8 @@
 # v0.5.1
 Fix issue with socket.io malfunction when we try to avoid using websockets.
 Deprecate `hash` strategy - it is a part of local strategy now.
-Unit tests for socket.io
+Unit tests for socket.io.
+Remove old passport strategies for paypal, intuit and yahoo - they do not work due to authorization provider changes.
 
 # v0.5.0
 Deprecated `hunt.extendRoutes` and `hunt.extendMiddleware` - we have `hunt.extendController` instread.
