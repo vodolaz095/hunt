@@ -1,3 +1,6 @@
+# v0.5.2
+Fix rare issue for malfomed session information in redis database.
+
 # v0.5.1
 Fix issue with socket.io malfunction when we try to avoid using websockets.
 Deprecate `hash` strategy - it is a part of local strategy now.
