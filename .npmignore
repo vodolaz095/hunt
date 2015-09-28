@@ -15,7 +15,9 @@ tutorials/
 
 # Distribution files
 jshint.xml
+.jshintignore
 .jshintrc
+
 .gitignore
 .npmignore
 .travis.yml
