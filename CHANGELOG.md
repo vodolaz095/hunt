@@ -1,5 +1,8 @@
+# v0.5.3
+Newer dependencies. 
+
 # v0.5.2
-Fix rare issue for malfomed session information in redis database.
+Fix rare issue for malformed session information in redis database.
 
 # v0.5.1
 Fix issue with socket.io malfunction when we try to avoid using websockets.
