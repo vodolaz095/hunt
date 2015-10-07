@@ -1,3 +1,7 @@
+# v0.5.4
+Prevent possible memleak in `hunt.mulpipart` middleware.
+Newer dependencies.
+
 # v0.5.3
 Newer dependencies. 
 
