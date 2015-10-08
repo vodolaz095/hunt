@@ -2,7 +2,7 @@ module.exports = exports = function (core) {
   var TrophySchema = new core.mongoose.Schema({
     'name': {type: String, unique: true, index: true, required: true},
     'scored': {type: Boolean, default: false},
-    'priority': Number,
+    'priority': {type: Number, min:0, max:100},
     'author': {type: core.mongoose.Schema.Types.ObjectId, ref: 'User', index: true, required: true}
   });
 
