@@ -1,3 +1,8 @@
+# v0.6.0
+Usage of long time support NodeJS version of 4.2.1 and NPM of 2.14.7
+Newer dependencies for this NodeJS version.
+Support of older nodejs version will be deprecated.
+
 # v0.5.4
 Prevent possible memleak in `hunt.mulpipart` middleware.
 Newer dependencies.

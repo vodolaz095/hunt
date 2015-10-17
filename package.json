@@ -1,6 +1,6 @@
 {
   "name": "hunt",
-  "version": "0.5.4",
+  "version": "0.6.0",
   "description": "High level nodejs framework build on top of expressjs, mongoose, sequilize, socketio and passportjs",
   "main": "index.js",
   "engines": {
@@ -88,7 +88,7 @@
     "validator": "4.1.0"
   },
   "optionalDependencies": {
-    "hiredis": "0.4.0"
+    "hiredis": "0.4.1"
   },
   "devDependencies": {
     "istanbul": "0.4.0",
