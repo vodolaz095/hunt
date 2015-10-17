@@ -4,8 +4,8 @@
   "description": "High level nodejs framework build on top of expressjs, mongoose, sequilize, socketio and passportjs",
   "main": "index.js",
   "engines": {
-    "node": "0.10.36",
-    "npm": ">=2.14.6"
+    "node": ">=4.2.1",
+    "npm": ">=2.14.7"
   },
   "os": [ "linux", "darwin" ],
   "scripts": {
@@ -70,7 +70,7 @@
     "nodemailer-html-to-text": "1.0.2",
     "passport": "0.3.0",
     "passport-facebook": "2.0.0",
-    "passport-github": "1.5.0",
+    "passport-github": "1.0.0",
     "passport-google-oauth": "0.2.0",
     "passport-local": "1.0.0",
     "passport-steam": "0.1.6",
