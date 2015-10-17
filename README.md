@@ -2,7 +2,7 @@ HuntJS
 ====================
 
 [![NPM version](https://badge.fury.io/js/hunt.svg)](http://badge.fury.io/js/hunt)
-[![Build Status](https://drone.io/bitbucket.org/vodolaz095/hunt/status.png)](https://drone.io/bitbucket.org/vodolaz095/hunt/latest)
+[![Codacy Badge](https://api.codacy.com/project/badge/319951b59f4d40afa336a76934443cd6)](https://www.codacy.com/app/ostroumov095/hunt)
 [![Build Status](https://travis-ci.org/vodolaz095/hunt.png?branch=master)](https://travis-ci.org/vodolaz095/hunt)
 [![Stories in Ready](https://badge.waffle.io/vodolaz095/hunt.png?label=ready&title=Ready)](https://waffle.io/vodolaz095/hunt)
 [![Dependency Status](https://gemnasium.com/vodolaz095/hunt.svg)](https://gemnasium.com/vodolaz095/hunt)

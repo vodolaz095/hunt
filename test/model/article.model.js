@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = exports = function (core) {
   var ArticleSchema = new core.mongoose.Schema({
     'name': { type: String, unique: true },
@@ -69,7 +71,7 @@ module.exports = exports = function (core) {
 //root can list all documents and all document fields, with populating author
         callback(null, true, ['name', 'content', 'owner']);
       } else {
-        callback(null, this.author == user.id, ['name', 'content']);
+        callback(null, (this.author.equals(user.id)), ['name', 'content']);
 //non root user can edit `name` and `content` of
 //documents, where he/she is an owner
       }
@@ -79,12 +81,11 @@ module.exports = exports = function (core) {
   };
 
   ArticleSchema.methods.canDelete = function (user, callback) {
-    var document = this;
     if (user) {
       if (user.root) {
         callback(null, true); //root can delete every document
       } else {
-        callback(null, document.author == user.id);
+        callback(null, (this.author.equals(user.id)));
 //non root user can delete documents, where he/she is an owner
       }
     } else {
