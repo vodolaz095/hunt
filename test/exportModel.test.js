@@ -63,7 +63,7 @@ describe('Testing REST api', function () {
       });
     });
 
-    it('returns `This API endpoint do not exists!` for some stupid requests', function (done) {
+    it('returns `Not Implemented` for some stupid requests', function (done) {
       request({
         'method': 'POST',
         'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/someStupidApiEndpointThatDoNotExists',
@@ -76,9 +76,9 @@ describe('Testing REST api', function () {
         if (error) {
           done(error);
         } else {
-          response.statusCode.should.be.equal(404);
+          response.statusCode.should.be.equal(501);
           body.status.should.be.equal('Error');
-          body.message.should.be.equal('This API endpoint does not exist!');
+          body.message.should.be.equal('Not Implemented');
           done();
         }
       });
@@ -364,7 +364,7 @@ describe('Testing REST api', function () {
       });
     });
 
-    it('returns `This API endpoint do not exists!` for some stupid requests', function (done) {
+    it('returns `Not Implemented` for some stupid requests', function (done) {
       request({
         'method': 'POST',
         'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/someStupidApiEndpointThatDoNotExists',
@@ -378,10 +378,10 @@ describe('Testing REST api', function () {
         if (error) {
           done(error);
         } else {
-          response.statusCode.should.be.equal(404);
+          response.statusCode.should.be.equal(501);
           body.status.should.be.equal('Error');
-          body.code.should.be.equal(404);
-          body.message.should.be.equal('This API endpoint does not exist!');
+          body.code.should.be.equal(501);
+          body.message.should.be.equal('Not Implemented');
           done();
         }
       });
@@ -721,7 +721,7 @@ describe('Testing REST api', function () {
       });
     });
 
-    it('returns `This API endpoint do not exists!` for some stupid requests', function (done) {
+    it('returns `Not Implemented` for some stupid requests', function (done) {
       request({
         'method': 'POST',
         'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/someStupidApiEndpointThatDoNotExists',
@@ -735,10 +735,10 @@ describe('Testing REST api', function () {
         if (error) {
           done(error);
         } else {
-          response.statusCode.should.be.equal(404);
+          response.statusCode.should.be.equal(501);
           body.status.should.be.equal('Error');
-          body.code.should.be.equal(404);
-          body.message.should.be.equal('This API endpoint does not exist!');
+          body.code.should.be.equal(501);
+          body.message.should.be.equal('Not Implemented');
           done();
         }
       });
