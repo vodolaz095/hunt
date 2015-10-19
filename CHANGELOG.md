@@ -1,3 +1,6 @@
+# v0.6.1
+Typo in error reporter fixed.
+
 # v0.6.0
 Usage of long time support NodeJS version of 4.2.1 and NPM of 2.14.7
 Newer dependencies for this NodeJS version.

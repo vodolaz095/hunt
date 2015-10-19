@@ -32,13 +32,7 @@ var config = {
     'resetPassword': true, //allow user to reset password for account
 
 //authorization by Steam openid account, GET /auth/steam
-    'steam': true,
-//authorization by Paypal openid account, GET /auth/paypal
-    'paypal': true,
-//authorization by Intuit openid account, GET /auth/intuit
-    'intuit': true,
-//authorization by Yahoo openid account, GET /auth/yahoo
-    'yahoo': true
+    'steam': true
 
 // Google OAuth2 Strategy
 //    'GOOGLE_CLIENT_ID': '323040484611-82ju1isetg8dkbvgb.apps.googleusercontent.com',
@@ -271,7 +265,7 @@ hunt.extendController('/', function (core, router) {
    * route to throw some stupid error,
    * that will be catch by error reporter middleware and will not stop the process
    */
-  router.get('/error', function () {
+  router.all('/error', function () {
     throw new Error('Something is wrong... Please, wipe your spectacles with alcohol or spirit and carefully kick PC with hammer 3 times.');
   });
 
@@ -280,7 +274,7 @@ hunt.extendController('/', function (core, router) {
    *  that cannot be catch by error reporter middleware, but will be catch by
    *  *domain* and will not stop the process.
    */
-  router.get('/baderror', function () {
+  router.all('/baderror', function () {
     (function () {
       throw new Error('Catch this!');
     }());
