@@ -57,10 +57,7 @@ describe('Testing REST api', function () {
         } else {
           response.statusCode.should.be.equal(401);
           body.status.should.be.equal('Error');
-          body.errors.should.be.an.Array;
-          body.errors.length.should.be.equal(1);
-          body.errors[0].code.should.be.equal(401);
-          body.errors[0].message.should.be.equal('Authorization required!');
+          body.message.should.be.equal('Unauthorized');
           done();
         }
       });
@@ -81,10 +78,7 @@ describe('Testing REST api', function () {
         } else {
           response.statusCode.should.be.equal(404);
           body.status.should.be.equal('Error');
-          body.errors.should.be.an.Array;
-          body.errors.length.should.be.equal(1);
-          body.errors[0].code.should.be.equal(404);
-          body.errors[0].message.should.be.equal('This API endpoint does not exist!');
+          body.message.should.be.equal('This API endpoint does not exist!');
           done();
         }
       });
@@ -105,10 +99,7 @@ describe('Testing REST api', function () {
         } else {
           response.statusCode.should.be.equal(401);
           body.status.should.be.equal('Error');
-          body.errors.should.be.an.Array;
-          body.errors.length.should.be.equal(1);
-          body.errors[0].code.should.be.equal(401);
-          body.errors[0].message.should.be.equal('Authorization required!');
+          body.message.should.be.equal('Unauthorized');
           done();
         }
       });
@@ -151,10 +142,7 @@ describe('Testing REST api', function () {
         } else {
           response.statusCode.should.be.equal(404);
           body.status.should.be.equal('Error');
-          body.errors.should.be.an.Array;
-          body.errors.length.should.be.equal(1);
-          body.errors[0].code.should.be.equal(404);
-          body.errors[0].message.should.be.equal('Unknown static method!');
+          body.message.should.be.equal('Unknown static method!');
           done();
         }
       });
@@ -175,10 +163,7 @@ describe('Testing REST api', function () {
         } else {
           response.statusCode.should.be.equal(401);
           body.status.should.be.equal('Error');
-          body.errors.should.be.an.Array;
-          body.errors.length.should.be.equal(1);
-          body.errors[0].code.should.be.equal(401);
-          body.errors[0].message.should.be.equal('Authorization required!');
+          body.message.should.be.equal('Unauthorized');
           done();
         }
       });
@@ -195,10 +180,7 @@ describe('Testing REST api', function () {
         } else {
           response.statusCode.should.be.equal(401);
           body.status.should.be.equal('Error');
-          body.errors.should.be.an.Array;
-          body.errors.length.should.be.equal(1);
-          body.errors[0].code.should.be.equal(401);
-          body.errors[0].message.should.be.equal('Authorization required!');
+          body.message.should.be.equal('Unauthorized');
           done();
         }
       });
@@ -321,7 +303,46 @@ describe('Testing REST api', function () {
       });
     });
 
-    it('Updates content by POST /:id', function (done) {
+    it('Creates content with predefined ID by POST /:id', function (done) {
+      request({
+        'method': 'POST',
+        'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/561cb1003a95770500845521',
+        'headers': {'huntKey': rootKey},
+        'form': {
+          'name':'some new book',
+          'content': 'some new content'
+        },
+        'json': true
+      }, function (error, response, body) {
+        if (error) {
+          done(error);
+        } else {
+          response.statusCode.should.be.equal(201);
+          body.code.should.be.equal(201);
+          body.status.should.be.equal('Created');
+          body.id.should.be.equal('561cb1003a95770500845521');
+          request({
+            'method': 'GET',
+            'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/561cb1003a95770500845521',
+            'headers': {'huntKey': rootKey},
+            'json': true
+          }, function (error, response, body) {
+            if (error) {
+              done(error);
+            } else {
+              response.statusCode.should.be.equal(200);
+              body.status.should.be.equal('Ok');
+              body.data.name.should.be.equal('some new book');
+              body.data.content.should.be.equal('some new content');
+              body.data.id.should.be.a.equal('561cb1003a95770500845521');
+              Hunt.model.Article.remove({'_id':'561cb1003a95770500845521'}, done);
+            }
+          });
+        }
+      });
+    });
+
+    it('Fails to updates content by POST /:id because of conflict', function (done) {
       request({
         'method': 'POST',
         'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
@@ -334,26 +355,11 @@ describe('Testing REST api', function () {
         if (error) {
           done(error);
         } else {
-          response.statusCode.should.be.equal(200);
-          body.code.should.be.equal(200);
-          body.status.should.be.equal('Updated');
-          request({
-            'method': 'GET',
-            'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-            'headers': {'huntKey': rootKey},
-            'json': true
-          }, function (error, response, body) {
-            if (error) {
-              done(error);
-            } else {
-              response.statusCode.should.be.equal(200);
-              body.status.should.be.equal('Ok');
-              body.data.name.should.be.equal(bookName);
-              body.data.content.should.be.equal('some extra new content');
-              body.data.id.should.be.a.equal(articleId);
-              done();
-            }
-          });
+          response.statusCode.should.be.equal(409);
+          body.code.should.be.equal(409);
+          body.status.should.be.equal('Error');
+          body.message.should.be.equal('Conflict');
+          done();
         }
       });
     });
@@ -374,10 +380,8 @@ describe('Testing REST api', function () {
         } else {
           response.statusCode.should.be.equal(404);
           body.status.should.be.equal('Error');
-          body.errors.should.be.an.Array;
-          body.errors.length.should.be.equal(1);
-          body.errors[0].code.should.be.equal(404);
-          body.errors[0].message.should.be.equal('This API endpoint does not exist!');
+          body.code.should.be.equal(404);
+          body.message.should.be.equal('This API endpoint does not exist!');
           done();
         }
       });
@@ -421,10 +425,8 @@ describe('Testing REST api', function () {
         } else {
           response.statusCode.should.be.equal(404);
           body.status.should.be.equal('Error');
-          body.errors.should.be.an.Array;
-          body.errors.length.should.be.equal(1);
-          body.errors[0].code.should.be.equal(404);
-          body.errors[0].message.should.be.equal('Unknown static method!');
+          body.code.should.be.equal(404);
+          body.message.should.be.equal('Unknown static method!');
           done();
         }
       });
@@ -469,10 +471,8 @@ describe('Testing REST api', function () {
         } else {
           response.statusCode.should.be.equal(404);
           body.status.should.be.equal('Error');
-          body.errors.should.be.an.Array;
-          body.errors.length.should.be.equal(1);
-          body.errors[0].code.should.be.equal(404);
-          body.errors[0].message.should.be.equal('Not found!');
+          body.code.should.be.equal(404);
+          body.message.should.be.equal('Not Found');
           done();
         }
       });
@@ -494,10 +494,8 @@ describe('Testing REST api', function () {
         } else {
           response.statusCode.should.be.equal(404);
           body.status.should.be.equal('Error');
-          body.errors.should.be.an.Array;
-          body.errors.length.should.be.equal(1);
-          body.errors[0].code.should.be.equal(404);
-          body.errors[0].message.should.be.equal('Unknown instance method!');
+          body.code.should.be.equal(404);
+          body.message.should.be.equal('Unknown instance method!');
           done();
         }
       });
@@ -526,10 +524,8 @@ describe('Testing REST api', function () {
             } else {
               response.statusCode.should.be.equal(404);
               body.status.should.be.equal('Error');
-              body.errors.should.be.an.Array;
-              body.errors.length.should.be.equal(1);
-              body.errors[0].code.should.be.equal(404);
-              body.errors[0].message.should.be.equal('Not found!');
+              body.code.should.be.equal(404);
+              body.message.should.be.equal('Not Found');
               done();
             }
           });
@@ -657,16 +653,7 @@ describe('Testing REST api', function () {
       });
     });
 
-    it('Updates content by POST /:id', function (done) {
-      Hunt.once('REST:Article:UPDATE:' + articleId, function (evnt) {
-        evnt.ip.should.be.equal('127.0.0.1');
-        evnt.patch.content.new.should.be.equal('some extra new content');
-        evnt.patch.content.old.should.be.a.String;
-        evnt.user.root.should.be.true;
-        done();
-      });
-
-
+    it('Recieves conflict error for updating content by POST /:id', function (done) {
       request({
         'method': 'POST',
         'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
@@ -679,27 +666,11 @@ describe('Testing REST api', function () {
         if (error) {
           done(error);
         } else {
-          response.statusCode.should.be.equal(200);
-          body.code.should.be.equal(200);
-          body.status.should.be.equal('Updated');
-          request({
-            'method': 'GET',
-            'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
-            'headers': {'huntKey': rootKey},
-            'json': true
-          }, function (error, response, body) {
-            if (error) {
-              done(error);
-            } else {
-              response.statusCode.should.be.equal(200);
-              body.code.should.be.equal(200);
-              body.status.should.be.equal('Ok');
-              body.data.name.should.be.equal(bookName);
-              body.data.content.should.be.equal('some extra new content');
-              body.data.id.should.be.a.equal(articleId);
-              body.data.author.id.should.be.a.String;
-            }
-          });
+          response.statusCode.should.be.equal(409);
+          body.status.should.be.equal('Error');
+          body.code.should.be.equal(409);
+          body.message.should.be.equal('Conflict');
+          done();
         }
       });
     });
@@ -766,10 +737,8 @@ describe('Testing REST api', function () {
         } else {
           response.statusCode.should.be.equal(404);
           body.status.should.be.equal('Error');
-          body.errors.should.be.an.Array;
-          body.errors.length.should.be.equal(1);
-          body.errors[0].code.should.be.equal(404);
-          body.errors[0].message.should.be.equal('This API endpoint does not exist!');
+          body.code.should.be.equal(404);
+          body.message.should.be.equal('This API endpoint does not exist!');
           done();
         }
       });
@@ -819,10 +788,8 @@ describe('Testing REST api', function () {
         } else {
           response.statusCode.should.be.equal(404);
           body.status.should.be.equal('Error');
-          body.errors.should.be.an.Array;
-          body.errors.length.should.be.equal(1);
-          body.errors[0].code.should.be.equal(404);
-          body.errors[0].message.should.be.equal('Unknown static method!');
+          body.code.should.be.equal(404);
+          body.message.should.be.equal('Unknown static method!');
           done();
         }
       });
@@ -873,10 +840,8 @@ describe('Testing REST api', function () {
         } else {
           response.statusCode.should.be.equal(404);
           body.status.should.be.equal('Error');
-          body.errors.should.be.an.Array;
-          body.errors.length.should.be.equal(1);
-          body.errors[0].code.should.be.equal(404);
-          body.errors[0].message.should.be.equal('Unknown instance method!');
+          body.code.should.be.equal(404);
+          body.message.should.be.equal('Unknown instance method!');
           done();
         }
       });
@@ -898,10 +863,8 @@ describe('Testing REST api', function () {
         } else {
           response.statusCode.should.be.equal(404);
           body.status.should.be.equal('Error');
-          body.errors.should.be.an.Array;
-          body.errors.length.should.be.equal(1);
-          body.errors[0].code.should.be.equal(404);
-          body.errors[0].message.should.be.equal('Not found!');
+          body.code.should.be.equal(404);
+          body.message.should.be.equal('Not Found');
           done();
         }
       });
@@ -930,10 +893,8 @@ describe('Testing REST api', function () {
             } else {
               response.statusCode.should.be.equal(404);
               body.status.should.be.equal('Error');
-              body.errors.should.be.an.Array;
-              body.errors.length.should.be.equal(1);
-              body.errors[0].code.should.be.equal(404);
-              body.errors[0].message.should.be.equal('Not found!');
+              body.code.should.be.equal(404);
+              body.message.should.be.equal('Not Found');
               done();
             }
           });
