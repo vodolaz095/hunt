@@ -395,6 +395,10 @@ function profilingListener(payload) {
 //hunt.onAny(profilingListener);
 hunt.on('start', profilingListener);
 
+//listening on REST interface events
+hunt.on(['REST:*'], profilingListener);
+
+
 /*
  * Starting cluster of webserveres
  * We start 2 worker processes and 1 master process

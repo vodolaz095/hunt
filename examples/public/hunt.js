@@ -1,4 +1,5 @@
 'use strict';
+/*global angular, io, window, $, async*/
 angular.module('huntApp', ['ngRoute', 'ngResource'])
   .config(['$routeProvider',
     function ($routeProvider) {
@@ -60,7 +61,7 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
           'method': 'GET',
           'transformResponse': function (data) {
             var wrappedResult = angular.fromJson(data);
-            if (typeof(wrappedResult.data) == 'undefined') {
+            if (typeof(wrappedResult.data) === 'undefined') {
               wrappedResult.data = {};
             }
             wrappedResult.data.$metadata = wrappedResult.metadata;
@@ -82,7 +83,7 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
           'isArray': false
         },
         'save': {
-          'method': 'PUT',
+          'method': 'PATCH',
           'transformResponse': function (data) {
             return angular.fromJson(data).data;
           },
@@ -153,16 +154,16 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
   }])
 
   .controller('mainController', ['$scope', function ($scope) {
-    //do something? Or not?
+    $scope.controller = 'mainController';
   }])
   .controller('clusterController', ['$scope', function ($scope) {
-    //do something? Or not?
+    $scope.controller = 'clusterController';
   }])
   .controller('loginController', ['$scope', function ($scope) {
-    //do something? Or not?
+    $scope.controller = 'loginController';
   }])
   .controller('profileController', ['$scope', function ($scope) {
-    //do something? Or not?
+    $scope.controller = 'profileController';
   }])
 
   .controller('cacheController', ['$scope', '$http', function ($scope, $http) {
@@ -176,7 +177,7 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
               $scope.responses.push({'data': data, 'status': status});
               next();
             })
-            .error(function (data, status) {
+            .error(function () {
               next(new Error('Error getting /time endpoint'));
             });
         }, 1000);
@@ -196,10 +197,10 @@ angular.module('huntApp', ['ngRoute', 'ngResource'])
     });
 
     $http.get('https://raw.githubusercontent.com/vodolaz095/hunt/master/examples/models/trophy.model.js')
-      .success(function (data, status) {
+      .success(function (data) {
         $scope.codeSampleForCRUD = data;
       })
-      .error(function (data, status) {
+      .error(function () {
         throw new Error('Error getting example code for `Trophy` model');
       });
 

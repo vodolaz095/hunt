@@ -272,6 +272,7 @@ describe('Testing REST api', function () {
         'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
         'headers': {'huntKey': rootKey},
         'form': {
+          'name': 'fresh book name',
           'content': 'some new content'
         },
         'json': true
@@ -293,7 +294,7 @@ describe('Testing REST api', function () {
             } else {
               response.statusCode.should.be.equal(200);
               body.status.should.be.equal('Ok');
-              body.data.name.should.be.equal(bookName);
+              body.data.name.should.be.equal('fresh book name');
               body.data.content.should.be.equal('some new content');
               body.data.id.should.be.a.equal(articleId);
               done();
@@ -309,7 +310,7 @@ describe('Testing REST api', function () {
         'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/561cb1003a95770500845521',
         'headers': {'huntKey': rootKey},
         'form': {
-          'name':'some new book',
+          'name': 'some new book',
           'content': 'some new content'
         },
         'json': true
@@ -335,7 +336,7 @@ describe('Testing REST api', function () {
               body.data.name.should.be.equal('some new book');
               body.data.content.should.be.equal('some new content');
               body.data.id.should.be.a.equal('561cb1003a95770500845521');
-              Hunt.model.Article.remove({'_id':'561cb1003a95770500845521'}, done);
+              Hunt.model.Article.remove({'_id': '561cb1003a95770500845521'}, done);
             }
           });
         }
@@ -689,6 +690,7 @@ describe('Testing REST api', function () {
         'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
         'headers': {'huntKey': rootKey},
         'form': {
+          'name': bookName,
           'content': 'some new content'
         },
         'json': true

@@ -1,3 +1,6 @@
+# v0.6.2
+More consistent error messages and REST api behaviour.
+
 # v0.6.1
 Typo in error reporter fixed.
 
