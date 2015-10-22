@@ -1,5 +1,7 @@
 'use strict';
 /*global angular, io, window, $, async*/
+
+var huntErrors = [];
 angular
   .module('angular-hunt', ['ngResource'])
   .factory('huntSocketIo', ['$rootScope', function ($rootScope) {
@@ -233,16 +235,20 @@ angular
       });
     };
   }])
-  .controller('notificationController', ['$scope', '$rootScope', 'huntSocketIo', function ($scope, $rootScope, socket) {
+  .controller('notificationController', ['$scope', 'huntSocketIo', function ($scope, socket) {
+    var le;
     $scope.flash = {
       'success': [],
       'info': [],
       'error': []
     };
     $scope.clock = '';
-    $rootScope.addError = function (error) {
-      $scope.flash.error.push(error);
-    };
+    setInterval(function () {
+      le = huntErrors.pop();
+      if (le !== undefined) {
+        $scope.flash.error.push(le);
+      }
+    }, 100);
 
     socket.on('notify:flash_success', function (data) {
       $scope.flash.success.push(data);
@@ -259,12 +265,14 @@ angular
       }
     });
   }])
-  .factory('$exceptionHandler', function ($rootScope) {
+  .
+  factory('$exceptionHandler', function () {
     return function errorCatcherHandler(exception, cause) {
-      console.error('stack', exception.stack);
-      console.log('exception', exception);
-      console.log('cause', cause);
+      //console.error('stack', exception.stack);
+      console.log(cause + ':' + exception.message);
       //$rootScope.addError(exception.message);
+      huntErrors.push(exception.message);
+
     };
   })
   //.config(function ($provide) {
