@@ -1,5 +1,6 @@
 # v0.6.2
 More consistent error messages and REST api behaviour.
+Hunt#md5, Hunt#sha512 methods
 
 # v0.6.1
 Typo in error reporter fixed.

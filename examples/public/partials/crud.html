@@ -8,13 +8,15 @@
     <table class="table-responsive table-hover col-sm-12" border="1">
         <thead>
         <tr>
-            <th class="col-sm-3">Name <input type="text" ng-model="nameFilter" placeholder="filter"></th>
+            <th class="col-sm-1">#</th>
+            <th class="col-sm-2">Name <input type="text" ng-model="nameFilter" placeholder="filter"></th>
             <th class="col-sm-3">Priority</th>
             <th class="col-sm-3">Scored</th>
         </tr>
         </thead>
         <tbody ng-repeat="trophy in trophies  | filter:nameFilter | orderBy:'-priority'">
         <tr>
+            <td><button ng-click="fetchTrophy(trophy)">{{ trophy.id }}</button></td>
             <td><input class="col-sm-12" type="text" ng-change="update(trophy)" ng-model="trophy.name"></td>
             <td><input class="col-sm-12" type="number" ng-change="update(trophy)" ng-model="trophy.priority"></td>
             <td>
@@ -23,6 +25,15 @@
             </td>
         </tr>
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2"><input placeholder="Your name, please!" ng-model="newTrophyName" class="col-sm-12" type="text"></td>
+                <td><input placeholder="1" ng-model="newTrophyPriority" class="col-sm-12" type="text"></td>
+                <td align="center">
+                    <button ng-click="createTrophy()" type="button" class="btn btn-success">Enter the Hunt</button>
+                </td>
+            </tr>
+        </tfoot>
     </table>
     <p>It is done like this by providing a thick model (see
         <a href="https://github.com/vodolaz095/hunt/blob/master/examples/models/trophy.model.js">source</a>):</p>

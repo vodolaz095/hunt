@@ -205,6 +205,8 @@ function Hunt(config) {
   this.mongoose = {};
   this.io = {};
   this.sessionStorage = true;
+  this.md5 = crypt.md5;
+  this.sha512 = crypt.sha512;
 
   this.encrypt = function (text, secret) {
     secret = secret || this.config.secret;
@@ -215,6 +217,7 @@ function Hunt(config) {
     secret = secret || this.config.secret;
     return crypt.decrypt(text, secret);
   };
+
 
   redisGenerator(this);
 

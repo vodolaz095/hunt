@@ -88,20 +88,20 @@ hunt.extendModel('Trophy', require('./models/trophy.model.js'));
 hunt.extendApp(function (core) {
 //loading client side javascripts/css from public cdns
 
-  core.app.locals.css.push({'href': '//yandex.st/bootstrap/3.1.1/css/bootstrap.min.css', 'media': 'screen'});
-  core.app.locals.javascripts.push({'url': '//yandex.st/jquery/2.0.3/jquery.min.js'});
-  core.app.locals.javascripts.push({'url': '//yandex.st/bootstrap/3.1.1/js/bootstrap.min.js'});
-  core.app.locals.javascripts.push({'url': '//cdnjs.cloudflare.com/ajax/libs/async/0.9.0/async.js'});
-  core.app.locals.javascripts.push({'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js'});
-  core.app.locals.javascripts.push({'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-route.min.js'});
-  core.app.locals.javascripts.push({'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-resource.min.js'});
+  core.app.locals.css.push({'href': '//yandex.st/bootstrap/3.3.4/css/bootstrap.min.css', 'media': 'screen'});
+  core.app.locals.javascripts.push({'url': '//yandex.st/jquery/2.1.4/jquery.min.js'});
+  core.app.locals.javascripts.push({'url': '//yandex.st/bootstrap/3.3.4/js/bootstrap.min.js'});
+  core.app.locals.javascripts.push({'url': '//cdnjs.cloudflare.com/ajax/libs/async/1.4.2/async.js'});
+  core.app.locals.javascripts.push({'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js'});
+  core.app.locals.javascripts.push({'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js'});
+  core.app.locals.javascripts.push({'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-resource.min.js'});
 
 // we set server side template engine delimiters to be
 // different from the ones used by AngularJS
   core.app.locals.delimiters = '[[ ]]';
 
-  core.app.locals.javascripts.push({'url': '/hunt.js'});
-
+  core.app.locals.javascripts.push({'url': '/hunt.ng.js'});
+  core.app.locals.javascripts.push({'url': '/app.ng.js'});
   /*
    * Setting up menu - one of many possible approaches
    */
@@ -228,7 +228,7 @@ hunt.extendController('/', function (core, router) {
    */
   router.get('/api/v1/myself', function (req, res) {
     if (req.user) {
-      res.json({'user':req.user.toString()});
+      res.json({'user': req.user.toString()});
     } else {
       res.sendStatus(403);
     }
@@ -349,11 +349,13 @@ hunt.once('start', function (startParameters) {
   switch (startParameters.type) {
   case 'webserver':
 //if application is started as background service, it do not have socket.io support
-    hunt.io.sockets.on('connection', function (socket) {
-      socket.on('pingerUrl', function (payload) {
-        pinger(payload, socket);
+    if (hunt.config.io.enabled) {
+      hunt.io.on('connection', function (socket) {
+        socket.on('pingerUrl', function (payload) {
+          pinger(payload, socket);
+        });
       });
-    });
+    }
     setInterval(function () {
       hunt.emit('broadcast', {'type': 'currentTime', 'time': Date.now()}); //to be broadcasted by socket.io
     }, 500);
@@ -362,7 +364,7 @@ hunt.once('start', function (startParameters) {
     populateDb(hunt);
     setInterval(function () {
       populateDb(hunt);
-    }, 60 * 1000);
+    }, 60 * 5000);
     break;
   default:
     console.log('We started application as ', startParameters.type);

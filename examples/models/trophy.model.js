@@ -24,14 +24,14 @@ module.exports = exports = function (core) {
 // {} is filter used for getting list of documents, for example
 // {} - all, {'scored':true } - for only scored, and so on
   TrophySchema.statics.listFilter = function (user, callback) {
-    callback(null, {}, ['id', 'name', 'scored', 'priority']);
+    callback(null, {}, ['id', 'name', 'scored', 'priority','$subscribeToken']);
   };
 
 //ACL check for readable fields in this current document
 // `true` means everybody can read 'id', 'name', 'scored', 'priority'
 //and the `author` field is populated
   TrophySchema.methods.canRead = function (user, callback) {
-    callback(null, true, ['id', 'name', 'scored', 'priority'], ['author']);
+    callback(null, true, ['id', 'name', 'scored', 'priority','$subscribeToken'], ['author']);
   };
 
 //ACL check for ability to update some fields in this current document
@@ -45,19 +45,6 @@ module.exports = exports = function (core) {
   TrophySchema.methods.canDelete = function (user, callback) {
     callback(null, !!user);
   };
-
-//after saving every document changes to database, we broadcast changes to all users
-  TrophySchema.post('save', function (documentSaved) {
-    core.emit('broadcast', {
-      'type': 'trophySaved',
-      'trophySaved': {
-        'id': documentSaved.id,
-        'name': documentSaved.name,
-        'scored': documentSaved.scored,
-        'priority': documentSaved.priority
-      }
-    });
-  });
 
 //this step is very important - bind mongoose model to current mongo database connection
 //and assign it to collection
