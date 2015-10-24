@@ -71,27 +71,26 @@ angular
       Model.find = function (parameters, callback) {
         return $http.get(prefix + modelName + '?' + encodeQueryData(parameters))
           .then(function (response) {
-            switch (response.status) {
-            case 200:
-              var ret = response.data.data.map(function (m) {
-                var a = new Model();
-                Object.keys(m).map(function (k) {
-                  if (m.hasOwnProperty(k)) {
-                    a[k] = m[k];
-                  }
-                });
-                return a.$subscribe();
-              });
-              ret.$code = 200;
-              ret.$status = response.data.status;
-              ret.$metadata = response.data.metadata;
-              if (typeof callback === 'function') {
-                callback(ret);
-              }
-              return ret;
-            default:
+            if (response.status !== 200) {
               throw new Error('HuntModel:' + response.status + ':' + response.data.message);
             }
+
+            var ret = response.data.data.map(function (m) {
+              var a = new Model();
+              Object.keys(m).map(function (k) {
+                if (m.hasOwnProperty(k)) {
+                  a[k] = m[k];
+                }
+              });
+              return a.$subscribe();
+            });
+            ret.$code = 200;
+            ret.$status = response.data.status;
+            ret.$metadata = response.data.metadata;
+            if (typeof callback === 'function') {
+              callback(ret);
+            }
+            return ret;
           });
       };
       /**
@@ -121,25 +120,23 @@ angular
       Model.findById = function (id, callback) {
         return $http.get(prefix + modelName + '/' + id)
           .then(function (response) {
-            switch (response.status) {
-            case 200:
-              var ret = new Model();
-              ret.$code = 200;
-              ret.$status = response.data.status;
-              ret.$metadata = response.data.metadata;
-              Object.keys(response.data.data).map(function (k) {
-                if (response.data.data.hasOwnProperty(k)) {
-                  ret[k] = response.data.data[k];
-                }
-              });
-              ret.$subscribe();
-              if (typeof callback === 'function') {
-                callback(ret);
-              }
-              return ret;
-            default:
+            if (response.status !== 200) {
               throw new Error('HuntModel:' + response.status + ':' + response.data.message);
             }
+            var ret = new Model();
+            ret.$code = 200;
+            ret.$status = response.data.status;
+            ret.$metadata = response.data.metadata;
+            Object.keys(response.data.data).map(function (k) {
+              if (response.data.data.hasOwnProperty(k)) {
+                ret[k] = response.data.data[k];
+              }
+            });
+            ret.$subscribe();
+            if (typeof callback === 'function') {
+              callback(ret);
+            }
+            return ret;
           });
       };
 
@@ -159,10 +156,9 @@ angular
         var t = this;
         return $http.post(prefix + modelName, parameters).then(function (response) {
           if (response.status === 201) {
-            return t.findById(response.data.id, callback);
-          } else {
             throw new Error('HuntModel:' + response.status + ':' + response.data.message);
           }
+          return t.findById(response.data.id, callback);
         });
       };
 
@@ -181,34 +177,31 @@ angular
       Model.findOne = function (parameters, callback) {
         return $http.get(prefix + modelName + '?' + encodeQueryData(parameters))
           .then(function (response) {
-            switch (response.status) {
-            case 200:
-              var ret;
-              if (response.data.data && response.data.data[0]) {
-                ret = new Model();
-                ret.$code = 200;
-                ret.$status = response.data.status;
-                ret.$metadata = response.data.metadata;
-                Object.keys(response.data.data[0]).map(function (k) {
-                  if (response.data.data.hasOwnProperty(k)) {
-                    ret[k] = response.data.data[k];
-                  }
-                });
-                ret.$subscribe();
-                if (typeof callback === 'function') {
-                  callback(ret);
-                }
-                return ret;
-              } else {
-                ret = {};
-                ret.$code = 200;
-                ret.$status = response.data.status;
-                ret.$metadata = response.data.metadata;
-                return ret;
-              }
-              break;
-            default:
+            if (response.status === 201) {
               throw new Error('HuntModel:' + response.status + ':' + response.data.message);
+            }
+            var ret;
+            if (response.data.data && response.data.data[0]) {
+              ret = new Model();
+              ret.$code = 200;
+              ret.$status = response.data.status;
+              ret.$metadata = response.data.metadata;
+              Object.keys(response.data.data[0]).map(function (k) {
+                if (response.data.data.hasOwnProperty(k)) {
+                  ret[k] = response.data.data[k];
+                }
+              });
+              ret.$subscribe();
+              if (typeof callback === 'function') {
+                callback(ret);
+              }
+              return ret;
+            } else {
+              ret = {};
+              ret.$code = 200;
+              ret.$status = response.data.status;
+              ret.$metadata = response.data.metadata;
+              return ret;
             }
           });
       };
@@ -276,8 +269,28 @@ angular
        * Returns promise resolved with this object.
        * @returns {Promise}
        */
-      Model.prototype.$ngChange = function () {
-        return this.$save();
+      Model.prototype.$ngChange = function (fieldName, newValue, oldValue) {
+///http://stackoverflow.com/a/32534720/1885921
+        var t = this;
+        //console.log(fieldName);
+        //console.log('New', newValue);
+        //console.log('Old', oldValue);
+        t.$saving = true;
+        t.$desubscribe();
+        return t.$save()
+          .then(function () {
+            t.$saving = false;
+          })
+          .catch(function (error) {
+            if (error.status === 400) {
+              t.$saving = false;
+              t[fieldName] = oldValue;
+              t.$subscribe();
+            } else {
+              throw error;
+            }
+
+          });
       };
       /**
        * @name AngularHuntModel#$watch
@@ -301,7 +314,7 @@ angular
           $scope.$watchGroup(fields, function (n, o) {
             t.$saving = true;
             t
-              .$unsubscribe()
+              .$desubscribe()
               .$save()
               .then(function () {
                 t.$subscribe();
@@ -340,7 +353,7 @@ angular
         return t;
       };
 
-      Model.prototype.$unsubscribe = function () {
+      Model.prototype.$desubscribe = function () {
         var t = this;
         if (t.$subscribeToken) {
           t.$subscribed = false;
@@ -382,17 +395,16 @@ angular
         $scope.clock = new Date(data.time).toLocaleTimeString();
       }
     });
-  }]);
-//.
-//factory('$exceptionHandler', function () {
-//  return function errorCatcherHandler(exception, cause) {
-//    //console.error('stack', exception.stack);
-//    console.log(cause + ':' + exception.message);
-//    //$rootScope.addError(exception.message);
-//    huntErrors.push(exception.message);
-//
-//  };
-//})
+  }])
+  .factory('$exceptionHandler', function () {
+    return function errorCatcherHandler(exception, cause) {
+      //console.error('stack', exception.stack);
+      console.log(cause + ':' + exception.message);
+      //$rootScope.addError(exception.message);
+      huntErrors.push(exception.message);
+
+    };
+  })
 //.config(function ($provide) {
 //  $provide.decorator('$exceptionHandler', function ($delegate, $injector) {
 //    return function (exception, cause) {
@@ -403,4 +415,4 @@ angular
 //    };
 //  });
 //})
-
+;

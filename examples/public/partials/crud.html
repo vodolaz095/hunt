@@ -21,14 +21,18 @@
                 <span ng-show="trophy.$saving"><img src="/ajax-loader.gif">Saving...</span>
             </td>
             <td>
-                <input class="col-sm-12" type="text" ng-change="trophy.$ngChange()" ng-model="trophy.name">
+                <input class="col-sm-12" type="text"
+                       ng-change="trophy.$ngChange('name',trophy.name, '{{ trophy.name }}')"
+                       ng-model="trophy.name">
             </td>
             <td>
-                <input class="col-sm-12" type="number" ng-change="trophy.$ngChange()" ng-model="trophy.priority">
+                <input class="col-sm-12" type="number"
+                       ng-change="trophy.$ngChange('priority',trophy.priority, '{{ trophy.priority }}')"
+                       ng-model="trophy.priority">
             </td>
             <td>
                 <input class="col-sm-12" type="checkbox"
-                       ng-change="trophy.$ngChange()" value="true"
+                       ng-change="trophy.$ngChange('scored',trophy.scored, '{{ trophy.scored }}')" value="true"
                        ng-model="trophy.scored">
             </td>
         </tr>
