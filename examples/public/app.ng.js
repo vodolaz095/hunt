@@ -1,5 +1,5 @@
 'use strict';
-/*global angular, io, window, $, async*/
+/*global angular, async*/
 angular.module('huntApp', ['ngRoute', 'angular-hunt'])
   .config(['$routeProvider',
     function ($routeProvider) {
@@ -40,7 +40,7 @@ angular.module('huntApp', ['ngRoute', 'angular-hunt'])
           redirectTo: '/'
         });
     }])
-  .factory('trophy', ['huntModel2', function (huntModel) {
+  .factory('trophy', ['huntModel', function (huntModel) {
     return huntModel('trophy');
   }])
 

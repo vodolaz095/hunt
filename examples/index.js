@@ -19,6 +19,7 @@ var config = {
   //'uploadFiles': false, // do not allow upload of files by HTTP-POST
   //'enableMongoose' : true,
   //'enableMongooseUsers' : true,
+  'usersApi': true,
   //'disableCsrf': true,
   //for password strategies
   'passport': {
