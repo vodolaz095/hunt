@@ -47,25 +47,27 @@ angular
         return ret.join('&');
       }
 
-
+      /**
+       * @class AngularHuntModel
+       * @constructor
+       */
       function Model() {
+        this.$saving = false;
+        this.$subscribed = false;
+        this.$validationErrors = [];
       }
-      Model.prototype.$subscribe = function () {
-        var t = this;
-        if (t.$subscribeToken) {
-          huntSocketIo.on(t.$subscribeToken.toString(), function (data) {
-            if (data.delete === 'delete') {
-              t.$deleted = true;
-            }
-            if (data.patch) {
-              Object.keys(data.patch).map(function (p) {
-                t[p] = data.patch[p].new;
-              });
-            }
-          });
-        }
-        return t;
-      };
+
+      /**
+       * @name AngularHuntModel.find
+       * @param {object} parameters - query parameters to be used
+       * @param {function} callback - optional callback(groupOfObjectsFound)
+       * @description
+       * Find group of entities filtered by query dictionary
+       * Returns promise resolved with this object group.
+       * Optionally calls a callback
+       * @see AngularHuntModel.query
+       * @returns {Promise}
+       */
       Model.find = function (parameters, callback) {
         return $http.get(prefix + modelName + '?' + encodeQueryData(parameters))
           .then(function (response) {
@@ -92,8 +94,30 @@ angular
             }
           });
       };
+      /**
+       * @name AngularHuntModel.query
+       * @param {object} parameters - query parameters to be used
+       * @param {function} callback - optional callback(groupOfObjectsFound)
+       * @description
+       * Find group of entities filtered by query dictionary
+       * Returns promise resolved with this object group.
+       * Optionally calls a callback
+       * @see AngularHuntModel.find
+       * @returns {Promise}
+       */
       Model.query = Model.find;
 
+      /**
+       * @name AngularHuntModel.findById
+       * @param {string} id - server side generated object uid
+       * @param {function} callback - optional callback
+       * @description
+       * Find entity with this id
+       * Returns promise resolved with this object.
+       * Optionally calls a callback
+       * @see AngularHuntModel.find
+       * @returns {Promise}
+       */
       Model.findById = function (id, callback) {
         return $http.get(prefix + modelName + '/' + id)
           .then(function (response) {
@@ -118,6 +142,19 @@ angular
             }
           });
       };
+
+      /**
+       * @name AngularHuntModel.create
+       * @param {obj} parameters - dictionary of setters of object to be created
+       * @param {function} callback - optional callback(object)
+       * @description
+       * Tries to create object with parameters.
+       * Returns promise resolved with this object.
+       * Optionally calls a callback
+       * @see AngularHuntModel.create
+       * @returns {Promise}
+       */
+
       Model.create = function (parameters, callback) {
         var t = this;
         return $http.post(prefix + modelName, parameters).then(function (response) {
@@ -128,6 +165,18 @@ angular
           }
         });
       };
+
+      /**
+       * @name AngularHuntModel.findOne
+       * @param {object} parameters - query parameters to be used
+       * @param {function} callback - optional callback(objectFound)
+       * @description
+       * Find first one of group of entities filtered by query dictionary
+       * Returns promise resolved with this object.
+       * Optionally calls a callback
+       * @see AngularHuntModel.get
+       * @returns {Promise}
+       */
 
       Model.findOne = function (parameters, callback) {
         return $http.get(prefix + modelName + '?' + encodeQueryData(parameters))
@@ -163,29 +212,142 @@ angular
             }
           });
       };
+      /**
+       * @name AngularHuntModel.get
+       * @param {object} parameters - query parameters to be used
+       * @param {function} callback - optional callback(objectFound)
+       * @description
+       * Find first one of group of entities filtered by query dictionary
+       * Returns promise resolved with this object.
+       * Optionally calls a callback
+       * @see AngularHuntModel.findOne
+       * @returns {Promise}
+       */
       Model.get = Model.findOne;
 
-
-      Model.prototype.$save = function () {
+      /**
+       * @name AngularHuntModel#$save
+       * @description
+       * Saves object instance to backend.
+       * Returns promise resolved with this object.
+       * Optionally calls a callback
+       * @returns {Promise}
+       */
+      Model.prototype.$save = function (callback) {
+        var t = this;
+        t.$saving = true;
         return $http.patch(prefix + modelName + '/' + this.id, this)
-          .then(function (response) {
-            if (response.status !== 200) {
-              throw new Error('HuntModel:' + response.status + ':' + response.data.message);
+          .then(function () {
+            t.$saving = false;
+            if (typeof callback === 'function') {
+              callback(t);
+            }
+            return t;
+          }, function (errorRes) {
+            if (errorRes.status === 400) {
+              t.$saving = false;
+              t.$validationErrors = errorRes.data.validationErrors;
+            } else {
+              throw new Error('HuntModel:' + errorRes.status + ':' + errorRes.data.message);
             }
           });
       };
+      /**
+       * @name AngularHuntModel#$remove
+       * @description
+       * Saves object instance to backend.
+       * Returns promise resolved with this object.
+       * Optionally calls a callback
+       * @returns {Promise}
+       */
       Model.prototype.$remove = function () {
+        var t = this;
+        t.$saving = true;
         return $http.delete(prefix + modelName, {})
-          .then(function (response) {
-            if (response.status !== 200) {
-              throw new Error('HuntModel:' + response.status + ':' + response.data.message);
-            }
+          .then(function () {
+            t.$saving = false;
+            t.$deleted = true;
           });
+      };
+      /**
+       * @name AngularHuntModel#$ngChange
+       * @description
+       * Monitors object changing and saves object instance to backend.
+       * Returns promise resolved with this object.
+       * @returns {Promise}
+       */
+      Model.prototype.$ngChange = function () {
+        return this.$save();
+      };
+      /**
+       * @name AngularHuntModel#$watch
+       * @params {object} $scope
+       * @description
+       * Monitors object changing and saves object instance to backend.
+       * Returns promise resolved with this object.
+       * @returns {Promise}
+       */
+      Model.prototype.$watch = function ($scope, item) {
+        var
+          t = this;
+
+        if (t.$metadata.canWrite === true) {
+          var
+            i,
+            fields = t.$metadata.fieldsWritable.map(function (fw) {
+              return item + '.' + fw;
+            });
+          $scope.$watchGroup(fields, function (n, o) {
+            t.$saving = true;
+            t
+              .$unsubscribe()
+              .$save()
+              .then(function () {
+                t.$subscribe();
+                t.$saving = false;
+              }, function (error) {
+                console.log(error);
+                console.log(o);
+                for (i = 0; i <= t.$metadata.fieldsWritable.length; i = i + 1) {
+                  t[t.$metadata.fieldsWritable[i]] = o[i];
+                }
+                console.log(t);
+                t.$saving = false;
+                t.$subscribe();
+                //throw error;
+              });
+          });
+        }
       };
 
-      Model.prototype.$watch = function (n, o) {
-        console.log(n, o);
+      Model.prototype.$subscribe = function () {
+        var t = this;
+        if (t.$subscribeToken) {
+          t.$subscribed = true;
+          huntSocketIo.on(t.$subscribeToken.toString(), function (data) {
+            if (data.delete === 'delete') {
+              t.$deleted = true;
+            }
+            if (data.patch) {
+              Object.keys(data.patch).map(function (p) {
+                t[p] = data.patch[p].new;
+              });
+            }
+          });
+        }
+        return t;
       };
+
+      Model.prototype.$unsubscribe = function () {
+        var t = this;
+        if (t.$subscribeToken) {
+          t.$subscribed = false;
+          //todo
+          //huntSocketIo.removeListener(t.$subscribeToken.toString());
+        }
+        return t;
+      };
+
       return Model;
     };
   }])

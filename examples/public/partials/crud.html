@@ -8,31 +8,40 @@
     <table class="table-responsive table-hover col-sm-12" border="1">
         <thead>
         <tr>
-            <th class="col-sm-1">#</th>
-            <th class="col-sm-2">Name <input type="text" ng-model="nameFilter" placeholder="filter"></th>
-            <th class="col-sm-3">Priority</th>
-            <th class="col-sm-3">Scored</th>
+            <th class="col-sm-3">#</th>
+            <th class="col-sm-3">Name <input type="text" ng-model="nameFilter" placeholder="filter"></th>
+            <th class="col-sm-1">Priority</th>
+            <th class="col-sm-1">Scored</th>
         </tr>
         </thead>
         <tbody ng-repeat="trophy in trophies  | filter:nameFilter | orderBy:'-priority'">
         <tr ng-if="!trophy.$deleted">
-            <td><a href="/#/crud/{{ trophy.id }}">{{ trophy.id }}</a></td>
-            <td><input class="col-sm-12" type="text" ng-change="trophy.$save()" ng-model="trophy.name"></td>
-            <td><input class="col-sm-12" type="number" ng-change="trophy.$save()" ng-model="trophy.priority"></td>
+            <td ng-class="{active:trophy.$saving}">
+                <a href="/#/crud/{{ trophy.id }}">{{ trophy.id }}</a>
+                <span ng-show="trophy.$saving"><img src="/ajax-loader.gif">Saving...</span>
+            </td>
             <td>
-                <input class="col-sm-12" type="checkbox" ng-change="trophy.$save()" value="true"
+                <input class="col-sm-12" type="text" ng-change="trophy.$ngChange()" ng-model="trophy.name">
+            </td>
+            <td>
+                <input class="col-sm-12" type="number" ng-change="trophy.$ngChange()" ng-model="trophy.priority">
+            </td>
+            <td>
+                <input class="col-sm-12" type="checkbox"
+                       ng-change="trophy.$ngChange()" value="true"
                        ng-model="trophy.scored">
             </td>
         </tr>
         </tbody>
         <tfoot>
-            <tr>
-                <td colspan="2"><input placeholder="Your name, please!" ng-model="newTrophyName" class="col-sm-12" type="text"></td>
-                <td><input placeholder="1" ng-model="newTrophyPriority" class="col-sm-12" type="text"></td>
-                <td align="center">
-                    <button ng-click="createTrophy()" type="button" class="btn btn-success">Enter the Hunt</button>
-                </td>
-            </tr>
+        <tr>
+            <td colspan="2"><input placeholder="Your name, please!" ng-model="newTrophyName" class="col-sm-12"
+                                   type="text"></td>
+            <td><input placeholder="1" ng-model="newTrophyPriority" class="col-sm-12" type="text"></td>
+            <td align="center">
+                <button ng-click="createTrophy()" type="button" class="btn btn-success">Enter the Hunt</button>
+            </td>
+        </tr>
         </tfoot>
     </table>
     <p>It is done like this by providing a thick model (see

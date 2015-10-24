@@ -110,6 +110,7 @@ angular.module('huntApp', ['ngRoute', 'angular-hunt'])
       .findById($routeParams.id)
       .then(function (item) {
         $scope.item = item;
+        item.$watch($scope, 'item');
       }).catch(function () {
         $location.path('/crud');
       });
