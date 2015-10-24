@@ -244,13 +244,13 @@ angular
             }
             return t;
           }, function (errorRes) {
+            t.$saving = false;
             if (errorRes.status === 400) {
-              t.$saving = false;
               t.$validationErrors = errorRes.data.validationErrors;
-            } else {
-              throw new Error('HuntModel:' + errorRes.status + ':' + errorRes.data.message);
             }
-          });
+            throw errorRes;
+          })
+          ;
       };
       /**
        * @name AngularHuntModel#$remove
@@ -284,6 +284,7 @@ angular
        * @params {object} $scope
        * @description
        * Monitors object changing and saves object instance to backend.
+       * If validation errors happens on saving object, the object is reverted to previous state.
        * Returns promise resolved with this object.
        * @returns {Promise}
        */
@@ -305,16 +306,17 @@ angular
               .then(function () {
                 t.$subscribe();
                 t.$saving = false;
-              }, function (error) {
-                console.log(error);
-                console.log(o);
-                for (i = 0; i <= t.$metadata.fieldsWritable.length; i = i + 1) {
-                  t[t.$metadata.fieldsWritable[i]] = o[i];
+              })
+              .catch(function (error) {
+                if (error.status === 400) {
+                  for (i = 0; i <= t.$metadata.fieldsWritable.length; i = i + 1) {
+                    t[t.$metadata.fieldsWritable[i]] = o[i];
+                  }
+                  t.$saving = false;
+                  t.$subscribe();
+                } else {
+                  throw error;
                 }
-                console.log(t);
-                t.$saving = false;
-                t.$subscribe();
-                //throw error;
               });
           });
         }
@@ -351,69 +353,6 @@ angular
       return Model;
     };
   }])
-  .factory('huntModel', ['$resource', function ($resource) {
-    return function (modelName) {
-      //https://stackoverflow.com/questions/13269882/angularjs-resource-restful-example
-      //https://stackoverflow.com/questions/16387202/angularjs-resource-query-result-array-as-a-property
-      //http://jsfiddle.net/wortzwei/bez79/
-      return $resource('/api/v1/' + modelName + '/:id', {'id': '@id'}, {
-        'query': {
-          'method': 'GET',
-          'transformResponse': function (data) {
-            var wrappedResult = angular.fromJson(data);
-            wrappedResult.data.$metadata = wrappedResult.metadata || {};
-            return wrappedResult.data;
-          },
-          'isArray': true,
-          'interceptor': {
-            response: function (response) {
-              response.resource.$metadata = response.data.$metadata;
-              return response.resource;
-            }
-          }
-        },
-        'get': {
-          'method': 'GET',
-          'transformResponse': function (data) {
-            var wrappedResult = angular.fromJson(data);
-            if (typeof(wrappedResult.data) === 'undefined') {
-              wrappedResult.data = {};
-            }
-            wrappedResult.data.$metadata = wrappedResult.metadata;
-            return wrappedResult.data;
-          },
-          'interceptor': {
-            response: function (response) {
-              response.resource.$metadata = response.data.$metadata;
-              return response.resource;
-            }
-          },
-          'isArray': false
-        },
-        'create': {
-          'method': 'POST',
-          'transformResponse': function (data) {
-            return angular.fromJson(data).data;
-          },
-          'isArray': false
-        },
-        'save': {
-          'method': 'PATCH',
-          'transformResponse': function (data) {
-            return angular.fromJson(data).data;
-          },
-          'isArray': false
-        },
-        'delete': { //http://stackoverflow.com/questions/16167463/angular-js-delete-resource-with-parameter
-          'method': 'DELETE',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          params: {id: '@id'}
-        }
-      });
-    };
-  }])
   .controller('notificationController', ['$scope', 'huntSocketIo', function ($scope, socket) {
     var le;
     $scope.flash = {
@@ -443,25 +382,25 @@ angular
         $scope.clock = new Date(data.time).toLocaleTimeString();
       }
     });
-  }])
-  .
-  factory('$exceptionHandler', function () {
-    return function errorCatcherHandler(exception, cause) {
-      //console.error('stack', exception.stack);
-      console.log(cause + ':' + exception.message);
-      //$rootScope.addError(exception.message);
-      huntErrors.push(exception.message);
+  }]);
+//.
+//factory('$exceptionHandler', function () {
+//  return function errorCatcherHandler(exception, cause) {
+//    //console.error('stack', exception.stack);
+//    console.log(cause + ':' + exception.message);
+//    //$rootScope.addError(exception.message);
+//    huntErrors.push(exception.message);
+//
+//  };
+//})
+//.config(function ($provide) {
+//  $provide.decorator('$exceptionHandler', function ($delegate, $injector) {
+//    return function (exception, cause) {
+//      var $rootScope = $injector.get('$rootScope');
+//      $rootScope.addError({message: 'Exception', 'reason': exception, 'cause': cause});
+//      console.log('Exception', exception, 'cause', cause);
+//      $delegate(exception, cause);
+//    };
+//  });
+//})
 
-    };
-  })
-  //.config(function ($provide) {
-  //  $provide.decorator('$exceptionHandler', function ($delegate, $injector) {
-  //    return function (exception, cause) {
-  //      var $rootScope = $injector.get('$rootScope');
-  //      $rootScope.addError({message: 'Exception', 'reason': exception, 'cause': cause});
-  //      console.log('Exception', exception, 'cause', cause);
-  //      $delegate(exception, cause);
-  //    };
-  //  });
-  //})
-;
