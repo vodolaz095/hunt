@@ -15,12 +15,12 @@
         </tr>
         </thead>
         <tbody ng-repeat="trophy in trophies  | filter:nameFilter | orderBy:'-priority'">
-        <tr>
-            <td><button ng-click="fetchTrophy(trophy)">{{ trophy.id }}</button></td>
-            <td><input class="col-sm-12" type="text" ng-change="update(trophy)" ng-model="trophy.name"></td>
-            <td><input class="col-sm-12" type="number" ng-change="update(trophy)" ng-model="trophy.priority"></td>
+        <tr ng-if="!trophy.$deleted">
+            <td><a href="/#/crud/{{ trophy.id }}">{{ trophy.id }}</a></td>
+            <td><input class="col-sm-12" type="text" ng-change="trophy.$save()" ng-model="trophy.name"></td>
+            <td><input class="col-sm-12" type="number" ng-change="trophy.$save()" ng-model="trophy.priority"></td>
             <td>
-                <input class="col-sm-12" type="checkbox" ng-change="update(trophy)" value="true"
+                <input class="col-sm-12" type="checkbox" ng-change="trophy.$save()" value="true"
                        ng-model="trophy.scored">
             </td>
         </tr>

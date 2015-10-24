@@ -14,7 +14,7 @@
     "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha",
     "install":"./postinstall.sh",
     "jslint":" ./node_modules/.bin/jslint **/* --config jslint.conf",
-    "jshint":"./node_modules/.bin/jshint --verbose -c .jshintrc **/*.js"
+    "jshint":"./node_modules/.bin/jshint --verbose --show-non-errors -c .jshintrc **/*.js"
   },
   "repository": {
     "type": "git",

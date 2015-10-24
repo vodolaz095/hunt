@@ -50,8 +50,23 @@ angular
 
       function Model() {
       }
-
-      Model.find = function (parameters) {
+      Model.prototype.$subscribe = function () {
+        var t = this;
+        if (t.$subscribeToken) {
+          huntSocketIo.on(t.$subscribeToken.toString(), function (data) {
+            if (data.delete === 'delete') {
+              t.$deleted = true;
+            }
+            if (data.patch) {
+              Object.keys(data.patch).map(function (p) {
+                t[p] = data.patch[p].new;
+              });
+            }
+          });
+        }
+        return t;
+      };
+      Model.find = function (parameters, callback) {
         return $http.get(prefix + modelName + '?' + encodeQueryData(parameters))
           .then(function (response) {
             switch (response.status) {
@@ -68,6 +83,9 @@ angular
               ret.$code = 200;
               ret.$status = response.data.status;
               ret.$metadata = response.data.metadata;
+              if (typeof callback === 'function') {
+                callback(ret);
+              }
               return ret;
             default:
               throw new Error('HuntModel:' + response.status + ':' + response.data.message);
@@ -76,14 +94,12 @@ angular
       };
       Model.query = Model.find;
 
-      Model.findById = function (id) {
-        console.log(prefix + modelName + '/' + id);
+      Model.findById = function (id, callback) {
         return $http.get(prefix + modelName + '/' + id)
           .then(function (response) {
             switch (response.status) {
             case 200:
               var ret = new Model();
-              console.log(response);
               ret.$code = 200;
               ret.$status = response.data.status;
               ret.$metadata = response.data.metadata;
@@ -92,41 +108,56 @@ angular
                   ret[k] = response.data.data[k];
                 }
               });
-              return ret.$subscribe();
+              ret.$subscribe();
+              if (typeof callback === 'function') {
+                callback(ret);
+              }
+              return ret;
             default:
               throw new Error('HuntModel:' + response.status + ':' + response.data.message);
             }
           });
       };
-      Model.create = function (parameters) {
+      Model.create = function (parameters, callback) {
         var t = this;
         return $http.post(prefix + modelName, parameters).then(function (response) {
           if (response.status === 201) {
-            return t.findById(response.data.id);
+            return t.findById(response.data.id, callback);
           } else {
             throw new Error('HuntModel:' + response.status + ':' + response.data.message);
           }
         });
       };
 
-      Model.findOne = function (parameters) {
+      Model.findOne = function (parameters, callback) {
         return $http.get(prefix + modelName + '?' + encodeQueryData(parameters))
           .then(function (response) {
-            switch (response.code) {
+            switch (response.status) {
             case 200:
-              var ret = response.data.data.map(function (m) {
-                var a = new Model();
-                Object.keys(m).map(function (k) {
-                  if (m.hasOwnProperty(k)) {
-                    a[k] = m[k];
+              var ret;
+              if (response.data.data && response.data.data[0]) {
+                ret = new Model();
+                ret.$code = 200;
+                ret.$status = response.data.status;
+                ret.$metadata = response.data.metadata;
+                Object.keys(response.data.data[0]).map(function (k) {
+                  if (response.data.data.hasOwnProperty(k)) {
+                    ret[k] = response.data.data[k];
                   }
                 });
-                return a.$subscribe();
-              });
-              ret.$code = 200;
-              ret.$status = response.data.status;
-              ret.$metadata = response.data.metadata;
-              return ret[0];
+                ret.$subscribe();
+                if (typeof callback === 'function') {
+                  callback(ret);
+                }
+                return ret;
+              } else {
+                ret = {};
+                ret.$code = 200;
+                ret.$status = response.data.status;
+                ret.$metadata = response.data.metadata;
+                return ret;
+              }
+              break;
             default:
               throw new Error('HuntModel:' + response.status + ':' + response.data.message);
             }
@@ -151,24 +182,10 @@ angular
             }
           });
       };
-      Model.prototype.$subscribe = function () {
-        var t = this;
-        if (t.$subscribeToken) {
-          huntSocketIo.on(t.$subscribeToken.toString(), function (data) {
-            if (data.delete === 'delete') {
-              //todo
-              console.log('delete object somehow?');
-            }
-            if (data.patch) {
-              Object.keys(data.patch).map(function (p) {
-                t[p] = data.patch[p].new;
-              });
-            }
-          });
-        }
-        return t;
-      };
 
+      Model.prototype.$watch = function (n, o) {
+        console.log(n, o);
+      };
       return Model;
     };
   }])

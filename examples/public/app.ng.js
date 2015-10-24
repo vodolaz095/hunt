@@ -12,6 +12,10 @@ angular.module('huntApp', ['ngRoute', 'angular-hunt'])
           templateUrl: '/partials/crud.html',
           controller: 'crudController'
         })
+        .when('/crud/:id', {
+          templateUrl: '/partials/crudItem.html',
+          controller: 'crudItemController'
+        })
         .when('/cache', {
           templateUrl: '/partials/cache.html',
           controller: 'cacheController'
@@ -90,15 +94,6 @@ angular.module('huntApp', ['ngRoute', 'angular-hunt'])
         throw new Error('Error getting example code for `Trophy` model');
       });
 
-    $scope.update = function (t) {
-      return t.$save();
-    };
-    $scope.fetchTrophy = function (t) {
-      throw new Error('bam');
-      //trophy.findById(t.id).then(function (t) {
-      //  console.log(t);
-      //});
-    };
     $scope.createTrophy = function () {
       trophy.create({
         'name': $scope.newTrophyName,
@@ -106,14 +101,19 @@ angular.module('huntApp', ['ngRoute', 'angular-hunt'])
       }).then(function (trophyCreated) {
         $scope.newTrophyName = null;
         $scope.newTrophyScore = null;
-        console.log('Trophy created');
-        console.log(trophyCreated);
         $scope.trophies.push(trophyCreated);
       });
     };
-
   }])
-
+  .controller('crudItemController', ['$scope', 'trophy', '$routeParams', '$location', function ($scope, trophy, $routeParams, $location) {
+    trophy
+      .findById($routeParams.id)
+      .then(function (item) {
+        $scope.item = item;
+      }).catch(function () {
+        $location.path('/crud');
+      });
+  }])
   .controller('eventsController', ['$scope', 'huntSocketIo', function ($scope, socket) {
     $scope.recentVisits = [];
     $scope.pingerAnswer = 'Ready to ping!';
