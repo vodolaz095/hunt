@@ -1,0 +1,12 @@
+.git/
+.idea/
+*.geany
+.DS_Store
+
+node_modules/
+
+tutorials/Changelog.md
+tutorials/test.md
+
+examples/public/coverage
+examples/public/documentation
