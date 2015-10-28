@@ -2,7 +2,7 @@ FROM fedora:22
 
 # Install dependencies
 RUN dnf upgrade -y
-RUN dnf install -y gcc-c++ make dnf-plugins-core redis mongodb mongodb-server
+RUN dnf install -y gcc-c++ make dnf-plugins-core redis mongodb mongodb-server krb5-devel krb5-libs
 
 # Enable copr repo with more recent nodejs versions
 RUN dnf -y copr enable nibbler/nodejs
