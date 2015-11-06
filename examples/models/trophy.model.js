@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = exports = function (core) {
   var TrophySchema = new core.mongoose.Schema({
     'name': {type: String, unique: true, index: true, required: true},

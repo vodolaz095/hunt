@@ -1,8 +1,10 @@
-var request = require('http').request,
-  url = require('url');
+'use strict'
 
 //socket.io listener to issue ping requests
 
+var
+  request = require('http').request,
+  url = require('url');
 
 function isUrl(payload) {
   if (typeof payload === 'string') {

@@ -1,9 +1,11 @@
 # v0.6.2
 More consistent error messages and REST api behaviour.
-Hunt#md5, Hunt#sha512 methods
+Hunt#md5, Hunt#sha512 methods.
+Tested on NodeJS of 5.0.0 version.
+Official dockerfile provided
 
 # v0.6.1
-Typo in error reporter fixed.
+Typo in default error reporter fixed.
 
 # v0.6.0
 Usage of long time support NodeJS version of 4.2.1 and NPM of 2.14.7

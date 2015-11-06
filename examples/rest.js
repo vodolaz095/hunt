@@ -1,3 +1,5 @@
+'use strict';
+
 var hunt = require('./../index.js')({
   'port': 3000,
   'mongoUrl': 'mongo://localhost/hunt_dev',
