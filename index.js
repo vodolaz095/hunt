@@ -516,6 +516,7 @@ function Hunt(config) {
         });
       }
     });
+    return this;
   };
 
   /**
@@ -586,7 +587,7 @@ function Hunt(config) {
    */
   this.startBackGround = function () {
     console.log('Trying to start Hunt as background service...'.magenta);
-    buildExpressApp(this);
+    buildExpressApp(this); //it is required for using templating system and `views` directory via `hunt.app.render()`
     prepared = true;
     /**
      * Emitted when Hunt is started as background process
@@ -860,7 +861,7 @@ function Hunt(config) {
         cluster.on('exit', function (worker) {
           var exitCode = worker.process.exitCode;
           console.log(('Cluster : Worker #' + worker.process.pid + ' died (' + exitCode + ')! Trying to spawn spare one...').red);
-          cluster.fork();
+          cluster.fork().send('be_webserver'); //todo process case for telnet server! 
         });
         this.startBackGround(); // the master process is ran as background application
         return true;
@@ -1128,6 +1129,7 @@ Hunt.prototype.loadControllersFromDirectory = function (dirname) {
       h.extendController(ctrl.mountpoint, ctrl.handler);
     }
   });
+  return this;
 };
 
 /**
@@ -1177,6 +1179,7 @@ Hunt.prototype.loadModelsFromDirectory = function (dirname) {
       });
     }
   });
+  return this;
 };
 
 /**
