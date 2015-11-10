@@ -2,7 +2,8 @@
 More consistent error messages and REST api behaviour.
 Hunt#md5, Hunt#sha512 methods.
 Tested on NodeJS of 5.0.0 version.
-Official dockerfile provided
+Official dockerfile provided.
+Fix bug with cluster not making child process do things.
 
 # v0.6.1
 Typo in default error reporter fixed.
