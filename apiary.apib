@@ -688,6 +688,14 @@ Delete trophy
                "status": "Deleted"
              }
 
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
 + Response 403
 
             {
@@ -1234,7 +1242,22 @@ List all messages accessible by this user. Usually the ones, where he/she is sen
             }
 
 ### POST
-Creates new message
+Creates new message. In `to` we need to provide valid user id.
+
++ Request (application/json)
+
+            {
+              "to":"56435beda9c62b730b28f339",
+              "message":"Hello!"
+            }
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
 
 
 ## Resource Message's entity [/api/v1/message/{messageId}]
@@ -1243,12 +1266,165 @@ Creates new message
     + messageId (string) ... Server-generated unique string.
 
 ### GET
+Get one of messages defined by id
 
 ### POST
+Create message with predefined id.
 
 ### PUT
+Update message with defined id. Currently only the content of message can be updated
+
++ Request (application/x-www-form-urlencoded)
+
+            message=test123
+
+
++ Request (application/json)
+
+            {
+              "message":"test123"
+            }
+
++ Response 200
+
+            {
+              "status": "Updated",
+              "code": 200,
+              "patch": {
+                "message": {
+                  "new": "test123",
+                  "old": "the code is red"
+                }
+              }
+            }
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
+
+
++ Response 404
+
+            {
+              "status": "Error",
+              "code": 404,
+              "message": "Not Found"
+            }
+
 
 ### PATCH
+Update message with defined id. Currently only the content of message can be updated
+
++ Request (application/x-www-form-urlencoded)
+
+            message=test123
+
+
++ Request (application/json)
+
+            {
+              "message":"test123"
+            }
+
++ Response 200
+
+            {
+              "status": "Updated",
+              "code": 200,
+              "patch": {
+                "message": {
+                  "new": "test123",
+                  "old": "the code is red"
+                }
+              }
+            }
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
+
+
++ Response 404
+
+            {
+              "status": "Error",
+              "code": 404,
+              "message": "Not Found"
+            }
+
 
 ### DELETE
+Delete message with defined id.
 
++ Response 200
+
+             {
+               "code": 200,
+               "status": "Deleted"
+             }
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
+
+
++ Response 404
+
+            {
+              "status": "Error",
+              "code": 404,
+              "message": "Not Found"
+            }
+
+
+## Group Dialog API
+
+### GET /api/dialog
+Show recent messages received by current user
+
+## Resource Dialog with one of users [/api/dialog/{userId}]
++ Parameters
+
+    + userId (string) ... Server-generated unique string.
+
+### GET
+Show dialog with corresponding user
+
+### POST
+Send message to user defined by id.
