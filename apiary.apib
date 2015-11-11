@@ -315,231 +315,134 @@ Perform authorization by username(email) and password
 
             Location: /auth/success?strategy=local
 
++ Request (application/json)
+
+        {
+            "username":"myLogin",
+            "password":"myPassword"
+        }
+
++ Response 200
++ Response 403
++ Response 404
+
 
 
 
 # Group Exported REST api for trophies (from example application)
 
+## Resource Trophies collection [/api/v1/trophy]
 
+### GET
 List all trophies
-GET /api/v1/trophy
-< 200
-< Content-Type: application/json; charset=utf-8
-{
-    "status": "Ok",
-    "data": [
-        {
-            "id": "540df2392b99869ffb00004b",
-            "name": "Anna Goncalves",
-            "scored": false,
-            "priority": 0
-        },
-        {
-            "id": "540df21a2b9986796e000074",
-            "name": "Billy Sole",
-            "scored": true,
-            "priority": 6
-        },
-        {
-            "id": "540df1ed2b9986796e000069",
-            "name": "George Dillon",
-            "scored": true,
-            "priority": 9
-        },
-        {
-            "id": "540df1bb2b99862276000054",
-            "name": "Rick Hawkins",
-            "scored": true,
-            "priority": 8
-        },
-        {
-            "id": "540df10a2b99869186000043",
-            "name": "Blain Cooper",
-            "scored": true,
-            "priority": 8
-        },
-        {
-            "id": "540df0b82b9986c9b8000042",
-            "name": "Alan Schaefer",
-            "scored": false,
-            "priority": 10
-        }
-    ],
-    "metadata": {
-        "modelName": "Trophy",
-        "fieldsAccessible": [
-            "id",
-            "name",
-            "scored",
-            "priority"
-        ],
-        "page": 1,
-        "itemsPerPage": 10,
-        "numberOfPages": 1,
-        "count": 6,
-        "sort":"_id",
-        "filter":{ }
-    }
-}
 
++ Response 200 (application/json; charset=utf-8)
 
-Filter all trophies to be scored
-GET /api/v1/trophy?scored=false
-< 200
-< Content-Type: application/json; charset=utf-8
-{
-    "status": "Ok",
-    "metadata": {
-        "modelName": "Trophy",
-        "fieldsAccessible": [
-            "id",
-            "name",
-            "scored",
-            "priority"
-        ],
-        "page": 1,
-        "itemsPerPage": 10,
-        "numberOfPages": 1,
-        "count": 2,
-        "sort":"_id",
-        "filter":{ "scored":true }
-    },
-    "data": [
-        {
-            "id": "540df2392b99869ffb00004b",
-            "name": "Anna Goncalves",
-            "scored": false,
-            "priority": 0
-        },
-        {
-            "id": "540df0b82b9986c9b8000042",
-            "name": "Alan Schaefer",
-            "scored": false,
-            "priority": 10
-        }
-    ]
-}
+            {
+                "status": "Ok",
+                "data": [
+                    {
+                        "id": "540df2392b99869ffb00004b",
+                        "name": "Anna Goncalves",
+                        "scored": false,
+                        "priority": 0
+                    },
+                    {
+                        "id": "540df21a2b9986796e000074",
+                        "name": "Billy Sole",
+                        "scored": true,
+                        "priority": 6
+                    },
+                    {
+                        "id": "540df1ed2b9986796e000069",
+                        "name": "George Dillon",
+                        "scored": true,
+                        "priority": 9
+                    },
+                    {
+                        "id": "540df1bb2b99862276000054",
+                        "name": "Rick Hawkins",
+                        "scored": true,
+                        "priority": 8
+                    },
+                    {
+                        "id": "540df10a2b99869186000043",
+                        "name": "Blain Cooper",
+                        "scored": true,
+                        "priority": 8
+                    },
+                    {
+                        "id": "540df0b82b9986c9b8000042",
+                        "name": "Alan Schaefer",
+                        "scored": false,
+                        "priority": 10
+                    }
+                ],
+                "metadata": {
+                    "modelName": "Trophy",
+                    "fieldsAccessible": [
+                        "id",
+                        "name",
+                        "scored",
+                        "priority"
+                    ],
+                    "page": 1,
+                    "itemsPerPage": 10,
+                    "numberOfPages": 1,
+                    "count": 6,
+                    "sort":"_id",
+                    "filter":{ }
+                }
+            }
 
-
-List one trophy
-GET /api/v1/trophy/540df2392b99869ffb00004b
-< 200
-< Content-Type: application/json; charset=utf-8
-{
-    "status":"Ok",
-    "data": {
-        "id":"540df2392b99869ffb00004b",
-        "name":"Anna Goncalves",
-        "scored":false,
-        "priority":0
-    }
-}
-+++++
-< 404
-< Content-Type: application/json; charset=utf-8
-{
-    "status":"Error",
-    "errors":[
-        {
-            "code":404,
-            "message":"Not found!"
-        }
-    ]
-}
-
-
+### POST
 Create trophy
-POST /api/v1/trophy
-> Content-Type: application/json; charset=utf-8
+
 {
     "name":"Anna Goncalves",
     "scored":false,
     "priority":0
 }
-< 201
-< Content-Type: application/json; charset=utf-8
-< Location: /api/v1/trophy/540df2392b99869ffb00004b
-{
-    "status":"Ok",
-    "data": {
-        "id":"540df2392b99869ffb00004b",
-        "name":"Anna Goncalves",
-        "scored":false,
-        "priority":0
-    }
-}
 
+## Resource Trophy entity [/api/v1/trophy/{trophyId}]
 
-Update one trophy via POST request (default angular $resource $save behaviour)
-POST /api/v1/trophy
-> Content-Type: application/json; charset=utf-8
-{
-    "id": "540df2392b99869ffb00004b",
-    "name":"Anna Goncalves",
-    "scored":false,
-    "priority":0
-}
-< 200
-< Content-Type: application/json; charset=utf-8
-{
-    "status":"Ok",
-    "data": {
-        "id":"540df2392b99869ffb00004b",
-        "name":"Anna Goncalves",
-        "scored":false,
-        "priority":0
-    }
-}
-+++++
-< 404
-< Content-Type: application/json; charset=utf-8
-{
-    "status":"Error",
-    "errors":[
-        {
-            "code":404,
-            "message":"Not found!"
-        }
-    ]
-}
++ Parameters
 
+    + trophyId (string) ... Server-generated unique string.
 
-Update one trophy via PUT request (default REST behaviour)
-PUT /api/v1/trophy/540df2392b99869ffb00004b
-> Content-Type: application/json; charset=utf-8
-{
-    "name":"Anna Goncalves",
-    "scored":false,
-    "priority":0
-}
-< 200
-< Content-Type: application/json; charset=utf-8
-{
-    "status":"Ok",
-    "data": {
-        "id":"540df2392b99869ffb00004b",
-        "name":"Anna Goncalves",
-        "scored":false,
-        "priority":0
-    }
-}
-+++++
-< 404
-< Content-Type: application/json; charset=utf-8
-{
-    "status":"Error",
-    "errors":[
-        {
-            "code":404,
-            "message":"Not found!"
-        }
-    ]
-}
+### GET
+List one trophy
 
+Response 200
+Response 403
+Response 404
 
+### POST
+Create trophy with id defined
+
+Response 201
+Response 403
+Response 409
+
+### PATCH
+Update trophy
+
+Response 200
+Response 403
+Response 404
+
+### PUT
+Update trophy
+
+Response 200
+Response 403
+Response 404
+
+### DELETE
 Delete trophy
-DELETE /api/v1/trophy/540df2392b99869ffb00004b
-< 200
-{
-    "status": "deleted"
-}
+Response 200
+
+             {"code": 200, "status": "Deleted"}
+
+Response 403
+Response 404
