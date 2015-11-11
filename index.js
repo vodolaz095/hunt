@@ -837,18 +837,18 @@ function Hunt(config) {
 
         console.log(('Cluster : Master PID#' + process.pid + ' is online!').green);
 // Fork workers.
-        for (i = 0; i <= runtimeConfig.web; i = i + 1) {
+        for (i = 0; i < runtimeConfig.web; i = i + 1) {
           worker = cluster.fork();
           worker.send('be_webserver');
           console.log(('Cluster : Spawning web server worker #' + i + ' with PID#' + worker.process.pid + '...').yellow);
         }
 
-        for (i = 0; i <= runtimeConfig.background; i = i + 1) {
+        for (i = 0; i < runtimeConfig.background; i = i + 1) {
           worker = cluster.fork();
           worker.send('be_background');
           console.log(('Cluster : Spawning background worker #' + i + ' with PID#' + worker.process.pid + '...').yellow);
         }
-        for (i = 0; i <= runtimeConfig.telnet; i = i + 1) {
+        for (i = 0; i < runtimeConfig.telnet; i = i + 1) {
           worker = cluster.fork();
           worker.send('be_telnet');
           console.log(('Cluster : Spawning telnet server worker #' + i + ' with PID#' + worker.process.pid + '...').yellow);

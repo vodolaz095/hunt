@@ -398,11 +398,47 @@ List all trophies
 ### POST
 Create trophy
 
-{
-    "name":"Anna Goncalves",
-    "scored":false,
-    "priority":0
-}
++ Request  (application/json)
+
+    {
+        "name":"Anna Goncalves",
+        "scored":false,
+        "priority":0
+    }
+
++ Response 201
+
+    + Headers
+
+        Location: /api/v1/trophy/557caf8ee7c36e8011b92ea7
+
+    + Body
+
+            {
+              "status": "Created",
+              "code": 201,
+              "location": "/api/v1/trophy/557caf8ee7c36e8011b92ea7",
+              "id": "557caf8ee7c36e8011b92ea7"
+            }
+
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
+
 
 ## Resource Trophy entity [/api/v1/trophy/{trophyId}]
 
@@ -413,36 +449,371 @@ Create trophy
 ### GET
 List one trophy
 
-Response 200
-Response 403
-Response 404
++ Response 200
+
+            {
+              "status": "Ok",
+              "code": 200,
+              "metadata": {
+                "modelName": "Trophy",
+                "canRead": true,
+                "fieldsReadable": [
+                  "id",
+                  "name",
+                  "scored",
+                  "priority",
+                  "$subscribeToken",
+                  "author"
+                ],
+                "canWrite": true,
+                "fieldsWritable": [
+                  "name",
+                  "scored",
+                  "priority"
+                ],
+                "canDelete": false
+              },
+              "data": {
+                "id": "557caf8ee7c36e8011b92ea7",
+                "name": "Alan Schaefer",
+                "scored": false,
+                "priority": 10,
+                "$subscribeToken": "Trophy_557caf8ee7c36e8011b92ea7_fa11c3cf77f04363a45050484bd2caae",
+                "author": {
+                  "id": "55b0c81ee523c6a60c4325ad",
+                  "name": {},
+                  "displayName": "Gamemaster",
+                  "gravatar": "https://secure.gravatar.com/avatar/0e8ddc2770e6eebc8ac5053f3d873ae5.jpg?s=80&d=wavatar&r=g",
+                  "gravatar30": "https://secure.gravatar.com/avatar/0e8ddc2770e6eebc8ac5053f3d873ae5.jpg?s=30&d=wavatar&r=g",
+                  "gravatar50": "https://secure.gravatar.com/avatar/0e8ddc2770e6eebc8ac5053f3d873ae5.jpg?s=50&d=wavatar&r=g",
+                  "gravatar80": "https://secure.gravatar.com/avatar/0e8ddc2770e6eebc8ac5053f3d873ae5.jpg?s=80&d=wavatar&r=g",
+                  "gravatar100": "https://secure.gravatar.com/avatar/0e8ddc2770e6eebc8ac5053f3d873ae5.jpg?s=100&d=wavatar&r=g",
+                  "isBanned": false,
+                  "root": false,
+                  "online": false
+                }
+              }
+            }
+
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Unauthorized"
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
+
+
++ Response 404
+
+            {
+              "status": "Error",
+              "code": 404,
+              "message": "Not Found"
+            }
 
 ### POST
-Create trophy with id defined
+Create trophy with id defined.
 
-Response 201
-Response 403
-Response 409
++ Request  (application/json)
+
+    {
+        "id":"557caf8ee7c36e8011b92ea7",
+        "name":"Anna Goncalves",
+        "scored":false,
+        "priority":0
+    }
+
+
+
++ Response 201
+
+    + Headers
+
+        Location: /api/v1/trophy/557caf8ee7c36e8011b92ea7
+
+    + Body
+
+            {
+              "status": "Created",
+              "code": 201,
+              "location": "/api/v1/trophy/557caf8ee7c36e8011b92ea7",
+              "id": "557caf8ee7c36e8011b92ea7"
+            }
+
++ Response 400
+
+            {
+              "status": "Error",
+              "code": 400,
+              "message": "Bad Request",
+              "validationErrors": [
+                {
+                  "message": "Path `name` is required.",
+                  "field": "name"
+                }
+              ]
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
+
++ Response 409
+
+            {
+              "status": "Error",
+              "code": 409,
+              "message": "Conflict"
+            }
+
 
 ### PATCH
-Update trophy
+Update trophy. Patch behaviour is used - if the setter field is undefined, the previous values are used.
 
-Response 200
-Response 403
-Response 404
++ Request  (application/json)
+
+        {
+            "priority": 11
+        }
+
++ Response 200 (application/json)
+
+            {
+              "status": "Updated",
+              "code": 200,
+              "patch": {
+                "priority": {
+                  "new": "11",
+                  "old": 10
+                }
+              }
+            }
+
++ Response 400
+
+            {
+              "status": "Error",
+              "code": 400,
+              "message": "Bad Request",
+              "validationErrors": [
+                {
+                  "message": "Path `name` is required.",
+                  "field": "name"
+                }
+              ]
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
+
+
++ Response 404
+
+            {
+              "status": "Error",
+              "code": 404,
+              "message": "Not Found"
+            }
+
 
 ### PUT
-Update trophy
+Update trophy. Put behaviour is used - all fields updated with values given and the undefined ones - with undefined values.
 
-Response 200
-Response 403
-Response 404
++ Request  (application/json)
+
+        {
+            "name": "Anna"
+        }
+
++ Response 200
+
+            {
+              "status": "Updated",
+              "code": 200,
+              "patch": {
+                "name": {
+                  "new": "Anna",
+                  "old": "Anna Goncalves"
+                },
+                "scored": {
+                  "old": false
+                },
+                "priority": {
+                  "old": 10
+                }
+              }
+            }
+
++ Response 400
+
+            {
+              "status": "Error",
+              "code": 400,
+              "message": "Bad Request",
+              "validationErrors": [
+                {
+                  "message": "Path `name` is required.",
+                  "field": "name"
+                }
+              ]
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
+
+
++ Response 404
+
+            {
+              "status": "Error",
+              "code": 404,
+              "message": "Not Found"
+            }
+
 
 ### DELETE
 Delete trophy
-Response 200
 
-             {"code": 200, "status": "Deleted"}
++ Response 200
 
-Response 403
-Response 404
+             {
+               "code": 200,
+               "status": "Deleted"
+             }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
+
+
++ Response 404
+
+            {
+              "status": "Error",
+              "code": 404,
+              "message": "Not Found"
+            }
+
+# Group Users API
+
+## Resource Users' collection [/api/v1/user/{userId}]
+
+### GET
+List all users, filtering can be applied
+
++ Response 200
+
+            {
+              "metadata": {
+                "modelName": "User",
+                "fieldsReadable": [
+                  "_id",
+                  "id",
+                  "accountVerified",
+                  "lastSeenOnline",
+                  "name",
+                  "familyName",
+                  "middleName",
+                  "givenName",
+                  "displayName",
+                  "roles",
+                  "root",
+                  "isBanned",
+                  "$subscribeToken",
+                  "isOnline",
+                  "lastSeenOnlineAgo",
+                  "lastSeenOnline"
+                ],
+                "filter": {
+                  "accountVerified": true
+                },
+                "page": 1,
+                "sort": "-_id",
+                "itemsPerPage": 10,
+                "numberOfPages": 1,
+                "count": 1
+              },
+              "data": [
+                {
+                  "_id": "55b0c81ee523c6a60c4325ad",
+                  "id": "55b0c81ee523c6a60c4325ad",
+                  "accountVerified": true,
+                  "name": {},
+                  "familyName": null,
+                  "middleName": null,
+                  "givenName": null,
+                  "displayName": "Gamemaster",
+                  "root": false,
+                  "isBanned": false,
+                  "$subscribeToken": "User_55b0c81ee523c6a60c4325ad_8565313eb2bc0eb297ca7105a36117ca",
+                  "isOnline": false,
+                  "lastSeenOnlineAgo": 315360000000
+                }
+              ],
+              "code": 200,
+              "status": "Ok"
+            }
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
+
+### POST
+Create user account, only usable to `root` users.
+
+
+
+
+## Resource User's entity [/api/v1/user/{userId}]
+
+### GET
+
+### POST
+
+### PUT
+
+### PATCH
+
+### DELETE
+
+

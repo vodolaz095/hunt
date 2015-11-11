@@ -20,7 +20,7 @@ var config = {
   //'enableMongoose' : true,
   //'enableMongooseUsers' : true,
   'usersApi': true,
-  //'disableCsrf': true,
+  'disableCsrf': true,
   //for password strategies
   'passport': {
 //    'sessionExpireAfterSeconds':180,
