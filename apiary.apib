@@ -1173,3 +1173,82 @@ Get my profile, redirects to my profile
               "code": 401,
               "message": "Unauthorized"
             }
+
+# Group Messages
+
+
+## Resource Messages' collection [/api/v1/message]
+
+### GET
+List all messages accessible by this user. Usually the ones, where he/she is sender or receiver.
+
++ Response 200
+
+            {
+              "data": [],
+              "metadata": {
+                "modelName": "Message",
+                "fieldsReadable": [
+                  "_id",
+                  "id",
+                  "to",
+                  "from",
+                  "createdAt",
+                  "message",
+                  "ago"
+                ],
+                "filter": {
+                  "$or": [
+                    {
+                      "to": "56435beda9c62b730b28f339"
+                    },
+                    {
+                      "from": "56435beda9c62b730b28f339"
+                    }
+                  ]
+                },
+                "page": 1,
+                "sort": "-_id",
+                "itemsPerPage": 10,
+                "numberOfPages": 1,
+                "count": 0
+              },
+              "code": 200,
+              "status": "Ok"
+            }
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
+
+### POST
+Creates new message
+
+
+## Resource Message's entity [/api/v1/message/{messageId}]
++ Parameters
+
+    + messageId (string) ... Server-generated unique string.
+
+### GET
+
+### POST
+
+### PUT
+
+### PATCH
+
+### DELETE
+
