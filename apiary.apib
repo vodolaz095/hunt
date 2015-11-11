@@ -278,25 +278,6 @@ Performing logout - clearing session, revoking authorization for current user.
 
 Perform authorization by username(email) and password
 
-+ Request (application/x-www-form-urlencoded)
-
-        {
-            "username":"myLogin",
-            "password":"myPassword"
-        }
-
-+ Response 302
-
-    + Headers
-
-            Location: /auth/success?strategy=local
-
-+ Response 302
-
-    + Headers
-
-            Location: /auth/failure?strategy=local
-
 ### GET
 Static login page with different authorization options
 
@@ -307,10 +288,7 @@ Perform authorization by username(email) and password
 
 + Request (application/x-www-form-urlencoded)
 
-        {
-            "username":"myLogin",
-            "password":"myPassword"
-        }
+        username=myLogin&password=myPassword
 
 + Response 302
 
@@ -326,7 +304,11 @@ Perform authorization by username(email) and password
         }
 
 + Response 200
+
+
 + Response 403
+
+
 + Response 404
 
 
