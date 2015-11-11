@@ -1,6 +1,9 @@
 FORMAT: 1A
 HOST: http://huntjs.herokuapp.com/
 
+# Huntjs
+Documentation on authorization API and exported models.
+
 # Group Authorization result endpoints
 Endpoints used for authorization. Mainly they are not single page application compatible.
 Because the oAuth ones do 302 redirects to other domain, and this domain makes redirects back.
@@ -57,7 +60,7 @@ Perform authorization by means of Facebook OAuth. This endpoint redirects to Fac
 
 + Response 302
 
-### GET /auth/facebook
+### GET /auth/facebook/callback
 Perform authorization by means of Facebook OAuth. This endpoint receives redirect from Facebook authorization page.
 
 + Response 302
@@ -74,7 +77,7 @@ Perform authorization by means of Twitter OAuth. This endpoint redirects to Twit
 
 + Response 302
 
-### GET /auth/twitter
+### GET /auth/twitter/callback
 Perform authorization by means of Twitter OAuth. This endpoint receives redirect from Twitter authorization page.
 
 + Response 302
@@ -91,7 +94,7 @@ Perform authorization by means of Steam OpenId. This endpoint redirects to Steam
 
 + Response 302
 
-### GET /auth/steam
+### GET /auth/steam/callback
 Perform authorization by means of Steam OpenIdh. This endpoint receives redirect from Steam OpenId authorization page.
 
 + Response 302
@@ -329,7 +332,7 @@ Perform authorization by username(email) and password
 
 
 
-# Group Exported REST api for trophies (from example application)
+# Group Exported REST api for trophies from example application
 
 ## Resource Trophies collection [/api/v1/trophy]
 
@@ -400,17 +403,17 @@ Create trophy
 
 + Request  (application/json)
 
-    {
-        "name":"Anna Goncalves",
-        "scored":false,
-        "priority":0
-    }
+        {
+            "name":"Anna Goncalves",
+            "scored":false,
+            "priority":0
+        }
 
 + Response 201
 
     + Headers
 
-        Location: /api/v1/trophy/557caf8ee7c36e8011b92ea7
+            Location: /api/v1/trophy/557caf8ee7c36e8011b92ea7
 
     + Body
 
@@ -526,20 +529,18 @@ Create trophy with id defined.
 
 + Request  (application/json)
 
-    {
-        "id":"557caf8ee7c36e8011b92ea7",
-        "name":"Anna Goncalves",
-        "scored":false,
-        "priority":0
-    }
-
-
+        {
+            "id":"557caf8ee7c36e8011b92ea7",
+            "name":"Anna Goncalves",
+            "scored":false,
+            "priority":0
+        }
 
 + Response 201
 
     + Headers
 
-        Location: /api/v1/trophy/557caf8ee7c36e8011b92ea7
+            Location: /api/v1/trophy/557caf8ee7c36e8011b92ea7
 
     + Body
 
@@ -724,7 +725,7 @@ Delete trophy
 
 # Group Users API
 
-## Resource Users' collection [/api/v1/user/{userId}]
+## Resource Users' collection [/api/v1/user]
 
 ### GET
 List all users, filtering can be applied
@@ -801,19 +802,392 @@ List all users, filtering can be applied
 ### POST
 Create user account, only usable to `root` users.
 
++ Request (application/json)
 
+            {
+              "email":"somebody@example.org",
+              "huntKey":""
+            }
+
++ Response 201
+
+    + Headers
+
+            Location: /api/v1/user/557caf8ee7c36e8011b92ea7
+
+    + Body
+
+            {
+              "status": "Created",
+              "code": 201,
+              "location": "/api/v1/user/557caf8ee7c36e8011b92ea7",
+              "id": "557caf8ee7c36e8011b92ea7"
+            }
+
+
++ Response 400
+
+            {
+              "status": "Error",
+              "code": 400,
+              "message": "Bad Request",
+              "validationErrors": [
+                {
+                  "message": "Path `huntKey` is required.",
+                  "field": "huntKey"
+                }
+              ]
+            }
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
 
 
 ## Resource User's entity [/api/v1/user/{userId}]
 
++ Parameters
+
+    + userId (string) ... Server-generated unique string.
+
 ### GET
+List one user
+
++ Response 200
+
+            {
+              "status": "Ok",
+              "code": 200,
+              "metadata": {
+                "modelName": "User",
+                "canRead": true,
+                "fieldsReadable": [
+                  "_id",
+                  "id",
+                  "accountVerified",
+                  "lastSeenOnline",
+                  "name",
+                  "familyName",
+                  "middleName",
+                  "givenName",
+                  "displayName",
+                  "roles",
+                  "root",
+                  "isBanned",
+                  "$subscribeToken",
+                  "isOnline",
+                  "lastSeenOnlineAgo",
+                  "lastSeenOnline"
+                ],
+                "canWrite": false,
+                "fieldsWritable": [],
+                "canDelete": false
+              },
+              "data": {
+                "_id": "55b0c81ee523c6a60c4325ad",
+                "id": "55b0c81ee523c6a60c4325ad",
+                "accountVerified": true,
+                "name": {},
+                "familyName": null,
+                "middleName": null,
+                "givenName": null,
+                "displayName": "Gamemaster",
+                "root": false,
+                "isBanned": false,
+                "$subscribeToken": "User_55b0c81ee523c6a60c4325ad_8565313eb2bc0eb297ca7105a36117ca",
+                "isOnline": false,
+                "lastSeenOnlineAgo": 315360000000
+              }
+            }
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
 
 ### POST
+Create user with predefined id. Only usable by `root` users
+
++ Request (application/json)
+
+            {
+              "id":"557caf8ee7c36e8011b92ea7",
+              "email":"somebody@example.org",
+              "huntKey":""
+            }
+
++ Response 201
+
+    + Headers
+
+            Location: /api/v1/user/557caf8ee7c36e8011b92ea7
+
+    + Body
+
+            {
+              "status": "Created",
+              "code": 201,
+              "location": "/api/v1/user/557caf8ee7c36e8011b92ea7",
+              "id": "557caf8ee7c36e8011b92ea7"
+            }
+
+
++ Response 400
+
+            {
+              "status": "Error",
+              "code": 400,
+              "message": "Bad Request",
+              "validationErrors": [
+                {
+                  "message": "Path `huntKey` is required.",
+                  "field": "huntKey"
+                }
+              ]
+            }
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
+
++ Response 409
+
+            {
+              "status": "Error",
+              "code": 409,
+              "message": "Conflict"
+            }
 
 ### PUT
+Update user. Put behaviour is used - all fields updated with values given and the undefined ones - with undefined values.
+
++ Request  (application/json)
+
+        {
+          "displayName":"myDisplayName",
+          "familyName":"myFamilyName",
+          "middleName":"myMiddleName",
+          "givenName":"myGivenName",
+          "password":"12345678",
+          "email":"myEmail@example.org",
+        }
+
++ Response 200
+
+        {
+          "status": "Updated",
+          "code": 200,
+          "patch": {
+            "displayName": {
+              "new":"myDisplayName",
+              "old": "ostroumov095"
+            },
+            "familyName": {
+              "new":"myFamilyName",
+              "old": null
+            },
+            "middleName": {
+              "new":"myMiddleName",
+              "old": null
+            },
+            "givenName": {
+              "new":"myGivenName",
+              "old": null
+            },
+            "password": {
+              "new": "lalala"
+            },
+            "email": {
+              "new":"myEmail@example.org",
+              "old": "ostroumov095@gmail.com"
+            }
+          }
+        }
+
++ Response 400
+
+            {
+              "status": "Error",
+              "code": 400,
+              "message": "Bad Request",
+              "validationErrors": [
+                {
+                  "message": "Path `name` is required.",
+                  "field": "name"
+                }
+              ]
+            }
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
+
+
++ Response 404
+
+            {
+              "status": "Error",
+              "code": 404,
+              "message": "Not Found"
+            }
 
 ### PATCH
+Update user. Patch behaviour is used - if the setter field is undefined, the previous values are used.
+
++ Request  (application/json)
+
+        {
+          "password":"12345678"
+        }
+
++ Response 200
+
+        {
+          "status": "Updated",
+          "code": 200,
+          "patch": {
+            "password": {
+              "new": "lalala"
+            }
+          }
+        }
+
++ Response 400
+
+            {
+              "status": "Error",
+              "code": 400,
+              "message": "Bad Request",
+              "validationErrors": [
+                {
+                  "message": "Path `huntKey` is required.",
+                  "field": "huntKey"
+                }
+              ]
+            }
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
+
+
++ Response 404
+
+            {
+              "status": "Error",
+              "code": 404,
+              "message": "Not Found"
+            }
+
 
 ### DELETE
+Delete users account. Can be done by `root` user only.
+
++ Response 200
+
+            {
+              "status":"Deleted",
+              "code": 200
+            }
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
 
 
++ Response 404
+
+            {
+              "status": "Error",
+              "code": 404,
+              "message": "Not Found"
+            }
+
+## GET /api/v1/user/myself
+Get my profile, redirects to my profile
+
++ Response 302
+
+    + Headers
+
+            Location: /api/v1/user/56435beda9c62b730b28f339
+
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
