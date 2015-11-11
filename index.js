@@ -1,17 +1,19 @@
 'use strict';
 
 var
-  assert = require('assert'),
-  EventEmitter = require('eventemitter2').EventEmitter2,
-  fs = require('fs'),
-  path = require('path'),
-  util = require('util'),
   appGenerator = require('./lib/http/expressApp.js'),
+  assert = require('assert'),
   configGenerator = require('./lib/misc/config.js'),
   crypt = require('./lib/misc/crypt.js'),
+  EventEmitter = require('eventemitter2').EventEmitter2,
+  fs = require('fs'),
+  glob = require('glob'),
   mongooseGenerator = require('./lib/datastore/mongooseModels.js'),
   nodemailerListener = require('./lib/nodemailer.js'),
-  redisGenerator = require('./lib/datastore/redisClient.js');
+  path = require('path'),
+  redisGenerator = require('./lib/datastore/redisClient.js'),
+  util = require('util');
+
 
 require('colors');
 /**
@@ -332,7 +334,7 @@ function Hunt(config) {
    * @see Hunt#app
    * @description
    * Set expressJS application parameters - template engine, variables, locals
-   * {@link http://expressjs.com/api.html#app.engine| template engines},
+   * {@link http://expressjs.com/api.html#app.engine | template engines},
    * {@link http://expressjs.com/api.html#app.locals | locals} and
    * {@link http://expressjs.com/api.html#app-settings | other}
    * settings.
@@ -464,7 +466,6 @@ function Hunt(config) {
    * @tutorial telnetApplication
    * @returns {Hunt} hunt object
    */
-
   this.extendTelnet = function (command, callback) {
     command = command.toLowerCase();
     if (extendTelnetFunctions[command] === undefined) {
@@ -474,6 +475,7 @@ function Hunt(config) {
     }
     return this;
   };
+
   /**
    * @method Hunt#onSocketIoEvent
    * @param {string} eventName
@@ -514,6 +516,7 @@ function Hunt(config) {
         });
       }
     });
+    return this;
   };
 
   /**
@@ -534,7 +537,8 @@ function Hunt(config) {
    */
   (function (h) {
     if (h.config.enableMongoose && h.config.enableMongooseUsers) {
-      var mongooseUsers = require('./lib/models/user.mongoose.js'),
+      var
+        mongooseUsers = require('./lib/models/user.mongoose.js'),
         mongooseMessages = require('./lib/models/message.mongoose.js');
 //user model
       h.extendModel('User', mongooseUsers);
@@ -583,7 +587,7 @@ function Hunt(config) {
    */
   this.startBackGround = function () {
     console.log('Trying to start Hunt as background service...'.magenta);
-    buildExpressApp(this);
+    buildExpressApp(this); //it is required for using templating system and `views` directory via `hunt.app.render()`
     prepared = true;
     /**
      * Emitted when Hunt is started as background process
@@ -595,6 +599,7 @@ function Hunt(config) {
      */
     this.emit('start', {'type': 'background'});
     console.log(('Started Hunt as background service with PID#' + process.pid + '!').green);
+    return this;
   };
 
 
@@ -616,7 +621,8 @@ function Hunt(config) {
    *
    */
   this.startWebServer = function (port, address) {
-    var p = port || this.config.port,
+    var
+      p = port || this.config.port,
       h = this;
     address = address || this.config.address || '0.0.0.0';
     console.log(('Trying to start Hunt as web server on ' + address + ':' + p + '...').magenta);
@@ -637,6 +643,7 @@ function Hunt(config) {
       console.log(('Started Hunt as web server on port ' + p + ' with PID#' + process.pid + '!').green);
       prepared = true;
     });
+    return this;
   };
 
   /**
@@ -716,7 +723,8 @@ function Hunt(config) {
    *
    */
   this.startWebCluster = function (port, maxProcesses) {
-    var p = port || this.config.port,
+    var
+      p = port || this.config.port,
       m = maxProcesses || 'max';
 
     return this.startCluster({'port': p, 'web': m, 'telnet': 0, 'background': 0});
@@ -741,7 +749,8 @@ function Hunt(config) {
    *
    */
   this.startTelnetCluster = function (port, maxProcesses) {
-    var p = port || this.config.port,
+    var
+      p = port || this.config.port,
       m = maxProcesses || 'max';
 
     return this.startCluster({'port': p, 'web': 0, 'telnet': m, 'background': 0});
@@ -788,7 +797,7 @@ function Hunt(config) {
    *     Hunt.startCluster({ 'telnet':max, 'port':25 });
    *     Hunt.startCluster({ 'web':'max', 'telnet':'max' }); //i strongly do not recommend doing this!
    *
-   *
+   * @todo - make unit tests
    */
   this.startCluster = function (parameters) {
 
@@ -852,7 +861,7 @@ function Hunt(config) {
         cluster.on('exit', function (worker) {
           var exitCode = worker.process.exitCode;
           console.log(('Cluster : Worker #' + worker.process.pid + ' died (' + exitCode + ')! Trying to spawn spare one...').red);
-          cluster.fork();
+          cluster.fork().send('be_webserver'); //todo process case for telnet server! 
         });
         this.startBackGround(); // the master process is ran as background application
         return true;
@@ -1120,6 +1129,7 @@ Hunt.prototype.loadControllersFromDirectory = function (dirname) {
       h.extendController(ctrl.mountpoint, ctrl.handler);
     }
   });
+  return this;
 };
 
 /**
@@ -1169,7 +1179,39 @@ Hunt.prototype.loadModelsFromDirectory = function (dirname) {
       });
     }
   });
+  return this;
 };
+
+/**
+ * @method Hunt#injectCssFromDirectory
+ * @param {String} arrayOfPatterns - array of patterns for css files to load.
+ * @description
+ * Automatically load css files from directory and load in `hunt.app.locals.css`
+ * @example
+ */
+Hunt.prototype.injectCssFromDirectory = function (arrayOfPatterns){
+  var dicOfCss = {};
+  arrayOfPatterns.map(function(p){
+    glob.sync(p).map(function(f){
+      dicOfCss[f]=true;
+    });
+  });
+  this.app.locals.css = Object.keys(dicOfCss).map(function(k){
+    return {'href':'','media':'display'};
+  });
+  return this;
+}
+
+Hunt.prototype.injectJsFromDirectory = function (arrayOfPatterns){
+  var dicOfJs = {};
+  arrayOfPatterns.map(function(p){
+    glob.sync(p).map(function(f){
+      dicOfJs[f]=true;
+    });
+  });
+  this.app.locals.javascripts = Object.keys(dicOfJs);
+  return this;
+}
 
 
 /**
