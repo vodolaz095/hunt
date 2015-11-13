@@ -547,7 +547,7 @@ function Hunt(config) {
       h.model.users = h.model.User;
 //sanity checks on model of User
       [
-        'findOneByHuntKey', 'findOneByEmail', 'findOneFuzzy', 'findById', 'find',
+        'findOneByHuntKey', 'findOneByEmailOrUsername', 'findOneFuzzy', 'findById', 'find',
         'signUp', 'signIn', 'findOneByHuntKeyAndVerifyEmail', 'findOneByHuntKeyAndResetPassword',
         'processOAuthProfile'
       ]
@@ -1188,6 +1188,8 @@ Hunt.prototype.loadModelsFromDirectory = function (dirname) {
  * @description
  * Automatically load css files from directory and load in `hunt.app.locals.css`
  * @example
+ *
+ * Hunt.injectCssFromDirectory(["public/custom/*.css","public/vendor/*.css"])
  */
 Hunt.prototype.injectCssFromDirectory = function (arrayOfPatterns){
   var dicOfCss = {};
@@ -1197,10 +1199,10 @@ Hunt.prototype.injectCssFromDirectory = function (arrayOfPatterns){
     });
   });
   this.app.locals.css = Object.keys(dicOfCss).map(function(k){
-    return {'href':'','media':'display'};
+    return {'href':k,'media':'display'};
   });
   return this;
-}
+};
 
 Hunt.prototype.injectJsFromDirectory = function (arrayOfPatterns){
   var dicOfJs = {};
@@ -1211,7 +1213,7 @@ Hunt.prototype.injectJsFromDirectory = function (arrayOfPatterns){
   });
   this.app.locals.javascripts = Object.keys(dicOfJs);
   return this;
-}
+};
 
 
 /**
