@@ -688,6 +688,14 @@ Delete trophy
                "status": "Deleted"
              }
 
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
 + Response 403
 
             {
@@ -1185,7 +1193,6 @@ List all messages accessible by this user. Usually the ones, where he/she is sen
 + Response 200
 
             {
-              "data": [],
               "metadata": {
                 "modelName": "Message",
                 "fieldsReadable": [
@@ -1200,10 +1207,10 @@ List all messages accessible by this user. Usually the ones, where he/she is sen
                 "filter": {
                   "$or": [
                     {
-                      "to": "56435beda9c62b730b28f339"
+                      "to": "564379a5132a4ccc326dd92a"
                     },
                     {
-                      "from": "56435beda9c62b730b28f339"
+                      "from": "564379a5132a4ccc326dd92a"
                     }
                   ]
                 },
@@ -1211,8 +1218,43 @@ List all messages accessible by this user. Usually the ones, where he/she is sen
                 "sort": "-_id",
                 "itemsPerPage": 10,
                 "numberOfPages": 1,
-                "count": 0
+                "count": 1
               },
+              "data": [
+                {
+                  "_id": "56437a6a132a4ccc326dd92d",
+                  "id": "56437a6a132a4ccc326dd92d",
+                  "to": {
+                    "id": "55b0c81ee523c6a60c4325ad",
+                    "name": {},
+                    "displayName": "Gamemaster",
+                    "gravatar": "https://secure.gravatar.com/avatar/0e8ddc2770e6eebc8ac5053f3d873ae5.jpg?s=80&d=wavatar&r=g",
+                    "gravatar30": "https://secure.gravatar.com/avatar/0e8ddc2770e6eebc8ac5053f3d873ae5.jpg?s=30&d=wavatar&r=g",
+                    "gravatar50": "https://secure.gravatar.com/avatar/0e8ddc2770e6eebc8ac5053f3d873ae5.jpg?s=50&d=wavatar&r=g",
+                    "gravatar80": "https://secure.gravatar.com/avatar/0e8ddc2770e6eebc8ac5053f3d873ae5.jpg?s=80&d=wavatar&r=g",
+                    "gravatar100": "https://secure.gravatar.com/avatar/0e8ddc2770e6eebc8ac5053f3d873ae5.jpg?s=100&d=wavatar&r=g",
+                    "isBanned": false,
+                    "root": false,
+                    "online": false
+                  },
+                  "from": {
+                    "id": "564379a5132a4ccc326dd92a",
+                    "name": {},
+                    "displayName": "ostroumov095",
+                    "gravatar": "https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=80&d=wavatar&r=g",
+                    "gravatar30": "https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=30&d=wavatar&r=g",
+                    "gravatar50": "https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=50&d=wavatar&r=g",
+                    "gravatar80": "https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=80&d=wavatar&r=g",
+                    "gravatar100": "https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=100&d=wavatar&r=g",
+                    "isBanned": false,
+                    "root": false,
+                    "online": true
+                  },
+                  "createdAt": "2015-11-11T17:27:06.999Z",
+                  "message": "hello",
+                  "ago": 12
+                }
+              ],
               "code": 200,
               "status": "Ok"
             }
@@ -1234,7 +1276,59 @@ List all messages accessible by this user. Usually the ones, where he/she is sen
             }
 
 ### POST
-Creates new message
+Creates new message. In `to` we need to provide valid user id.
+
++ Request (application/json)
+
+            {
+              "to":"557caf811b92ea7ee7c36e80",
+              "message":"deadbeaf"
+            }
+
++ Request (application/x-www-form-urlencoded)
+
+              to=557caf811b92ea7ee7c36e80&message=deadbeaf
+
++ Response 201
+
+    + Headers
+
+            Location: /api/v1/message/557caf8ee7c36e8011b92ea7
+
+    + Body
+
+            {
+              "status": "Created",
+              "code": 201,
+              "location": "/api/v1/message/557caf8ee7c36e8011b92ea7",
+              "id": "557caf8ee7c36e8011b92ea7"
+            }
+
+
++ Response 400
+
+            {
+              "status": "Error",
+              "code": 400,
+              "message": "Bad Request",
+              "validationErrors": [
+                {
+                  "message": "Path `to` is required.",
+                  "field": "to"
+                }
+              ]
+            }
+
+
+
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
 
 
 ## Resource Message's entity [/api/v1/message/{messageId}]
@@ -1243,12 +1337,311 @@ Creates new message
     + messageId (string) ... Server-generated unique string.
 
 ### GET
+Get one of messages defined by id
+
++ Response 200
+
+            {
+              "status": "Ok",
+              "code": 200,
+              "metadata": {
+                "modelName": "Message",
+                "canRead": true,
+                "fieldsReadable": [
+                  "_id",
+                  "id",
+                  "to",
+                  "from",
+                  "createdAt",
+                  "message",
+                  "ago",
+                  "to",
+                  "from"
+                ],
+                "canWrite": true,
+                "fieldsWritable": [
+                  "message"
+                ],
+                "canDelete": false
+              },
+              "data": {
+                "_id": "56437a6a132a4ccc326dd92d",
+                "id": "56437a6a132a4ccc326dd92d",
+                "to": {
+                  "id": "55b0c81ee523c6a60c4325ad",
+                  "name": {},
+                  "displayName": "Gamemaster",
+                  "gravatar": "https://secure.gravatar.com/avatar/0e8ddc2770e6eebc8ac5053f3d873ae5.jpg?s=80&d=wavatar&r=g",
+                  "gravatar30": "https://secure.gravatar.com/avatar/0e8ddc2770e6eebc8ac5053f3d873ae5.jpg?s=30&d=wavatar&r=g",
+                  "gravatar50": "https://secure.gravatar.com/avatar/0e8ddc2770e6eebc8ac5053f3d873ae5.jpg?s=50&d=wavatar&r=g",
+                  "gravatar80": "https://secure.gravatar.com/avatar/0e8ddc2770e6eebc8ac5053f3d873ae5.jpg?s=80&d=wavatar&r=g",
+                  "gravatar100": "https://secure.gravatar.com/avatar/0e8ddc2770e6eebc8ac5053f3d873ae5.jpg?s=100&d=wavatar&r=g",
+                  "isBanned": false,
+                  "root": false,
+                  "online": false
+                },
+                "from": {
+                  "id": "564379a5132a4ccc326dd92a",
+                  "name": {},
+                  "displayName": "ostroumov095",
+                  "gravatar": "https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=80&d=wavatar&r=g",
+                  "gravatar30": "https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=30&d=wavatar&r=g",
+                  "gravatar50": "https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=50&d=wavatar&r=g",
+                  "gravatar80": "https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=80&d=wavatar&r=g",
+                  "gravatar100": "https://secure.gravatar.com/avatar/02ba513b62ef9f2f7798b9bac1ccf822.jpg?s=100&d=wavatar&r=g",
+                  "isBanned": false,
+                  "root": false,
+                  "online": true
+                },
+                "createdAt": "2015-11-11T17:27:06.999Z",
+                "message": "hello",
+                "ago": 166,
+                "$subscribeToken": "Message_56437a6a132a4ccc326dd92d_676910c0f8c4fc2dcea07c7ce296853f"
+              }
+            }
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
+
+
++ Response 404
+
+            {
+              "status": "Error",
+              "code": 404,
+              "message": "Not Found"
+            }
+
 
 ### POST
+Create message with predefined id.
+
++ Request (application/json)
+
+            {
+              "id":"557caf8ee7c36e8011b92ea7",
+              "to":"557caf811b92ea7ee7c36e80",
+              "message":"deadbeaf"
+            }
+
++ Request (application/x-www-form-urlencoded)
+
+              id=557caf8ee7c36e8011b92ea7&to=557caf811b92ea7ee7c36e80&message=deadbeaf
+
++ Response 201
+
+    + Headers
+
+            Location: /api/v1/message/557caf8ee7c36e8011b92ea7
+
+    + Body
+
+            {
+              "status": "Created",
+              "code": 201,
+              "location": "/api/v1/message/557caf8ee7c36e8011b92ea7",
+              "id": "557caf8ee7c36e8011b92ea7"
+            }
+
+
++ Response 400
+
+            {
+              "status": "Error",
+              "code": 400,
+              "message": "Bad Request",
+              "validationErrors": [
+                {
+                  "message": "Path `to` is required.",
+                  "field": "to"
+                }
+              ]
+            }
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
++ Response 409
+
+            {
+              "status": "Error",
+              "code": 409,
+              "message": "Conflict"
+            }
+
 
 ### PUT
+Update message with defined id. Currently only the content of message can be updated
+
++ Request (application/x-www-form-urlencoded)
+
+            message=test123
+
+
++ Request (application/json)
+
+            {
+              "message":"test123"
+            }
+
++ Response 200
+
+            {
+              "status": "Updated",
+              "code": 200,
+              "patch": {
+                "message": {
+                  "new": "test123",
+                  "old": "the code is red"
+                }
+              }
+            }
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
+
+
++ Response 404
+
+            {
+              "status": "Error",
+              "code": 404,
+              "message": "Not Found"
+            }
+
 
 ### PATCH
+Update message with defined id. Currently only the content of message can be updated
+
++ Request (application/x-www-form-urlencoded)
+
+            message=test123
+
+
++ Request (application/json)
+
+            {
+              "message":"test123"
+            }
+
++ Response 200
+
+            {
+              "status": "Updated",
+              "code": 200,
+              "patch": {
+                "message": {
+                  "new": "test123",
+                  "old": "the code is red"
+                }
+              }
+            }
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
+
+
++ Response 404
+
+            {
+              "status": "Error",
+              "code": 404,
+              "message": "Not Found"
+            }
+
 
 ### DELETE
+Delete message with defined id.
 
++ Response 200
+
+             {
+               "code": 200,
+               "status": "Deleted"
+             }
+
++ Response 401
+
+            {
+              "status": "Error",
+              "code": 401,
+              "message": "Unauthorized"
+            }
+
++ Response 403
+
+            {
+              "status": "Error",
+              "code": 403,
+              "message": "Forbidden"
+            }
+
+
++ Response 404
+
+            {
+              "status": "Error",
+              "code": 404,
+              "message": "Not Found"
+            }
+
+
+## Group Dialog API
+
+### GET /api/dialog
+Show recent messages received by current user
+
+## Resource Dialog with one of users [/api/dialog/{userId}]
++ Parameters
+
+    + userId (string) ... Server-generated unique string.
+
+### GET
+Show dialog with corresponding user
+
+### POST
+Send message to user defined by id.
