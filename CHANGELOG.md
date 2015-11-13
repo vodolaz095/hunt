@@ -2,8 +2,14 @@
 More consistent error messages and REST api behaviour.
 Hunt#md5, Hunt#sha512 methods.
 Tested on NodeJS of 5.0.0 version.
-Official dockerfile provided.
+Official `Dockerfile` provided.
 Fix bug with cluster not making child process do things.
+Added `canCreate` and `fieldsWritable` to display possibility of creating new entities for current user
+in `exportModel` query method.
+Refactoring of authorization controller.
+Added `remember me` behaviour for signing in.
+Improve `hunt.model.User.signup(username,email,password,callback)` function to also work with username
+Newer dependencies. 
 
 # v0.6.1
 Typo in default error reporter fixed.

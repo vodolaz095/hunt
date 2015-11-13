@@ -99,19 +99,19 @@ describe('Hunt.model.User() test', function () {
       });
 
       it('properly emits event for creating first user');
-/*
-      it('properly emits event for creating first user', function () {
-        console.log(eventEmitted);
-        eventEmitted.startedAt.should.be.a.Date;
-        eventEmitted.finishedAt.should.be.a.Date;
-        (eventEmitted.duration >= 0).should.be.true;
-        eventEmitted.driver.should.be.equal('mongoose');
-        eventEmitted.database.should.be.a.String;
-        eventEmitted.collection.should.be.equal('users');
-        eventEmitted.command.should.be.equal('create');
-        should.not.exist(eventEmitted.error);
-      });
-*/
+      /*
+       it('properly emits event for creating first user', function () {
+       console.log(eventEmitted);
+       eventEmitted.startedAt.should.be.a.Date;
+       eventEmitted.finishedAt.should.be.a.Date;
+       (eventEmitted.duration >= 0).should.be.true;
+       eventEmitted.driver.should.be.equal('mongoose');
+       eventEmitted.database.should.be.a.String;
+       eventEmitted.collection.should.be.equal('users');
+       eventEmitted.command.should.be.equal('create');
+       should.not.exist(eventEmitted.error);
+       });
+       */
       it('@findOneByHuntKey works', function () {
         usersFound.created._id.should.eql(usersFound.byHuntKey._id);
       });
@@ -129,7 +129,7 @@ describe('Hunt.model.User() test', function () {
     describe('@signUp', function () {
       var user;
       before(function (done) {
-        Hunt.model.User.signUp('johndoe@example.org', 'waterfall', function (err, userCreated) {
+        Hunt.model.User.signUp('johndoe', 'johndoe@example.org', 'waterfall', function (err, userCreated) {
           if (err) {
             throw err;
           }
@@ -138,8 +138,17 @@ describe('Hunt.model.User() test', function () {
         });
       });
 
+      it('creates user with desired username', function () {
+        user.username.should.be.equal('johndoe');
+      });
+
       it('creates user with desired email', function () {
         user.email.should.be.equal('johndoe@example.org');
+      });
+
+      it('creates user with desired keychain', function () {
+        user.keychain.username.should.be.equal('johndoe');
+        user.keychain.email.should.be.equal('johndoe@example.org');
       });
 
       it('creates user with LOOOONG salt and password', function () {
