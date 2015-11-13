@@ -28,8 +28,8 @@ describe('Hunt.model.User() test', function () {
     it('exposes function @findOne', function () {
       Hunt.model.User.findOne.should.be.a.Function;
     });
-    it('exposes function @findOneByEmail', function () {
-      Hunt.model.User.findOneByEmail.should.be.a.Function;
+    it('exposes function @findOneByEmailOrUsername', function () {
+      Hunt.model.User.findOneByEmailOrUsername.should.be.a.Function;
     });
     it('exposes function @findOneByHuntKey', function () {
       Hunt.model.User.findOneByHuntKey.should.be.a.Function;
@@ -75,7 +75,7 @@ describe('Hunt.model.User() test', function () {
           }
           async.parallel({
             'byEmail': function (cb) {
-              Hunt.model.User.findOneByEmail('ostroumov4@teksi.ru', cb);
+              Hunt.model.User.findOneByEmailOrUsername('ostroumov4@teksi.ru', cb);
             },
             'byHuntKey': function (cb) {
               Hunt.model.User.findOneByHuntKey('vseBydetHorosho', cb);
@@ -116,7 +116,7 @@ describe('Hunt.model.User() test', function () {
         usersFound.created._id.should.eql(usersFound.byHuntKey._id);
       });
 
-      it('@findOneByEmail works for Email', function () {
+      it('@findOneByEmailOrUsername works for Email', function () {
         usersFound.created._id.should.eql(usersFound.byEmail._id);
       });
 
@@ -689,7 +689,7 @@ describe('Hunt.model.User() test', function () {
               throw err2;
             }
             newhuntKey = huntKeySet;
-            Hunt.model.User.findOneByEmail('ostroumov_3@teksi.ru', function (err3, userFound) {
+            Hunt.model.User.findOneByEmailOrUsername('ostroumov_3@teksi.ru', function (err3, userFound) {
               if (err3) {
                 throw err3;
               }

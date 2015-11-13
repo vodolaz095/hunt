@@ -26,11 +26,14 @@ var config = {
 //    'sessionExpireAfterSeconds':180,
     'local': true, //authorization by username/email and password, POST to /auth/login
     'signUpByEmail': true, //user can signup by making POST /auth/signhup with email and password
-    'verifyEmail': true, //user have to follow link in email address
+
+    'verifyEmail': true, //user have to follow link in email address after signing in
     'verifyEmailTemplate': 'email/verifyEmail', //template for verifying email message
+
+    'resetPassword': true, //allow user to reset password for account
     'resetPasswordEmailTemplate': 'email/resetEmail', //template for email used for reseting password
     'resetPasswordPageTemplate': 'cabinet/resetPasswordStage2',
-    'resetPassword': true, //allow user to reset password for account
+
 
 //authorization by Steam openid account, GET /auth/steam
     'steam': true
