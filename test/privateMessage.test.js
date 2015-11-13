@@ -209,7 +209,7 @@ describe('Private messages', function () {
         });
       });
     });
-
+/*/
     describe('creating messages by http api', function () {
       describe('User1 sends message to User2 by post request', function () {
         var response, body, event;
@@ -298,7 +298,7 @@ describe('Private messages', function () {
         var response, body;
         before(function (done) {
           request({
-              'url': 'http://localhost:' + port + '/api/v1/messages?$or[to]=' + User1.id + '?$or[from]=' + User1.id + '?huntKey=' + User2.huntKey,
+              'url': 'http://localhost:' + port + '/api/v1/messages?$or[to]=' + User1.id + '&$or[from]=' + User1.id + '?huntKey=' + User2.huntKey,
               'method': 'GET'
             },
             function (err, r, b) {
@@ -329,7 +329,7 @@ describe('Private messages', function () {
 
       });
     });
-
+//*/
     after(function (done) {
       async.parallel([
         function (cb) {
