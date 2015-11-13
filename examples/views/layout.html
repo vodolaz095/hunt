@@ -37,7 +37,7 @@
                     <li><a href="/#/login">Sign up or sign in</a></li>
                     [[/myself]]
                     [[#myself]]
-                    <li><a href="/#/profile"><img width="10" height="10" src="[[gravatar]]"/>[[displayName]]</a></li>
+                    <li><a href="/#/profile"><img width="10" height="10" src="[[gravatar]]"/>[[toString]]</a></li>
                     <li><a href="/auth/logout">LogOut</a></li>
                     [[/myself]]
                     <li><a href="/#/events" title="This is clock, we have websockets support!">{{ clock }}</a></li>
@@ -50,21 +50,21 @@
     [[#error]]
     <div class="alert alert-danger alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        [[error]]
+        [[.]]
     </div>
     [[/error]]
 
     [[#success]]
     <div class="alert alert-success alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        [[success]]
+        [[.]]
     </div>
     [[/success]]
 
     [[#info]]
     <div class="alert alert-info alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        [[info]]
+        [[.]]
     </div>
     [[/info]]
 
