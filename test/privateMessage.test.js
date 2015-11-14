@@ -62,7 +62,6 @@ describe('Private messages', function () {
               if (err) {
                 throw err;
               }
-              console.log(messageCreated);
               messageCreated.to.equals(User2._id).should.be.true;
               messageCreated.from.equals(User1.id).should.be.true;
             });
@@ -288,7 +287,6 @@ describe('Private messages', function () {
 
         it('he receives proper response for it', function () {
           response.statusCode.should.be.equal(200);
-          console.log(body);
           var messages = body.data;
           messages.should.be.instanceOf(Array);
           messages.length.should.be.equal(3);
