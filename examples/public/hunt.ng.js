@@ -462,8 +462,11 @@ angular
     socket.on('notify:flash_error', function (data) {
       $scope.flash.error.push(data);
     });
-    socket.on('user:notify:pm', function(data){
-      console.log(data);
+    socket.on('notify:pm:in', function(data){
+      console.log('Incoming private message',data);
+    });
+    socket.on('notify:pm:out', function(data){
+      console.log('Outgoing private message', data);
     });
 
     socket.on('currentTime', function (data) {
