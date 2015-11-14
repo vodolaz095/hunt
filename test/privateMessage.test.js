@@ -179,42 +179,13 @@ describe('Private messages', function () {
 
         });
       });
-
-      describe('getDialog for user object', function () {
-        var recentMessages, errF;
-        before(function (done) {
-          User2.getDialog(User1, 100, 0, function (err, messages) {
-            errF = err;
-            recentMessages = messages;
-            done();
-          });
-        });
-
-        it('fires callback without error', function () {
-          should.not.exist(errF);
-        });
-
-        it('fires callback with recent messages', function () {
-          recentMessages.should.be.instanceOf(Array);
-          recentMessages.length.should.be.equal(2);
-
-          recentMessages[1].message.should.be.equal('test1');
-          recentMessages[1].to._id.should.be.eql(User2._id);
-          recentMessages[1].from._id.should.be.eql(User1._id);
-
-          recentMessages[0].message.should.be.equal('test2');
-          recentMessages[0].to._id.should.be.eql(User2._id);
-          recentMessages[0].from._id.should.be.eql(User1._id);
-
-        });
-      });
     });
-/*/
+//*/
     describe('creating messages by http api', function () {
       describe('User1 sends message to User2 by post request', function () {
         var response, body, event;
         before(function (done) {
-          Hunt.once('user:notify:pm', function (m) {
+          Hunt.once('user:notify:sio', function (m) {
             event = m;
             setTimeout(done, 1000);
           });
@@ -223,7 +194,7 @@ describe('Private messages', function () {
               'url': 'http://localhost:' + port + '/api/v1/message',
               'method': 'POST',
               'json': true,
-              'headers':{
+              'headers': {
                 'huntKey': User1.huntKey //authorize as User1
               },
               'form': {
@@ -248,13 +219,13 @@ describe('Private messages', function () {
           should.exist(event);
         });
         it('event have correct "from" field', function () {
-          event.from._id.should.be.eql(User1._id);
+          event.message.from._id.should.be.eql(User1._id);
         });
         it('event have correct "user" field', function () {
           event.user._id.should.be.eql(User2._id);
         });
         it('event have proper contents', function () {
-          event.message.should.be.equal('test3');
+          event.message.message.should.be.equal('test3');
         });
       });
 
@@ -298,7 +269,11 @@ describe('Private messages', function () {
         var response, body;
         before(function (done) {
           request({
-              'url': 'http://localhost:' + port + '/api/v1/messages?$or[to]=' + User1.id + '&$or[from]=' + User1.id + '?huntKey=' + User2.huntKey,
+              'url': 'http://localhost:' + port + '/api/v1/messages',
+              'headers': {
+                'huntKey': User2.huntKey
+              },
+              'json': true,
               'method': 'GET'
             },
             function (err, r, b) {
@@ -313,7 +288,8 @@ describe('Private messages', function () {
 
         it('he receives proper response for it', function () {
           response.statusCode.should.be.equal(200);
-          var messages = JSON.parse(body);
+          console.log(body);
+          var messages = body.data;
           messages.should.be.instanceOf(Array);
           messages.length.should.be.equal(3);
 
