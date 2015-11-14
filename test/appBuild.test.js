@@ -10,7 +10,7 @@ describe('HuntJS', function () {
   });
 });
 
-describe('HuntJS resists when we want to extend it\' core in strange way', function () {
+describe('HuntJS resists when we want to extend it\'s core in strange way', function () {
   var Hunt = hunt();
   it('should throw error for every one of protected names we want to override by Hunt.extendCore', function () {
     [
