@@ -12,12 +12,12 @@ if [ -f herokurules.txt ]; then
 
 # Generate coverage report
   echo "We are generating coverage report..."
-  #./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha
+  ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha
   echo "We have generated coverage report!"
 
 # Generate test report
   echo "We are generating test report..."
-  #./node_modules/.bin/mocha -G --reporter markdown > tutorials/test.md
+  ./node_modules/.bin/mocha -G --reporter markdown > tutorials/test.md
   echo "We have generated test report!"
 
 # Generate documentation
