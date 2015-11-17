@@ -3,8 +3,26 @@
     <a ng-repeat="user in users"
        href="/#/dialog/{{ user.id }}"
        ng-class="{'label label-primary':!user.isOnline,'label label-success':!!user.isOnline}">
+        <img ng-src="{{ user.gravatar30 }}" class="img-circle">
         {{ user.displayName }}
     </a>
 </div>
-<h1>Inbox messages:</h1>
 <hr>
+<h1>Inbox messages:</h1>
+
+<div ng-repeat="message in messages" class="clearfix">
+    <div ng-if="!message.$isMine">
+        <div class="pull-left">
+            <div class="well well-sm">
+                <a href="/#/dialog/{{ message.from.id }}">
+                    <img class="img-circle pull-right" ng-src="{{ message.from.gravatar30 }}"/>
+                </a>
+
+
+                <p>{{ message.message }}</p>
+
+                <p><sub>{{ message.createdAt | date : 'medium' }}</sub></p>
+            </div>
+        </div>
+    </div>
+</div>
