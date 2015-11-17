@@ -192,7 +192,7 @@ hunt.extendController('/', function (core, router) {
    */
   router.post('/notify_me', function (req, res) {
     if (req.user && req.user.email) {
-      req.user.notifyByEmail({'template': 'email/hello', 'layout': false});
+      req.user.notifyByEmail({'template': 'email/hello', 'subject': 'Hello from HuntJS!', 'layout': false});
       req.flash('success', 'Check our INBOX, please!');
       res.redirect('/#/profile');
     } else {
@@ -206,7 +206,7 @@ hunt.extendController('/', function (core, router) {
    */
   router.get('/auth/login', function (req, res) {
     if (req.user) {
-      res.redirect('/profile');
+      res.redirect('/');
     } else {
       res.render('cabinet/login', {
         'layout': false
@@ -227,24 +227,13 @@ hunt.extendController('/', function (core, router) {
     }
   });
 
-  /*
-   * Route for user to see his/her profile too
-   */
-  router.get('/api/v1/myself', function (req, res) {
-    if (req.user) {
-      res.json({'user': req.user.toString()});
-    } else {
-      res.sendStatus(403);
-    }
-  });
-
 
   /*
    * Form where user can reset password
    */
   router.get('/auth/resetPassword', function (req, res) {
     if (req.user) {
-      res.redirect('/profile');
+      res.redirect('/');
     } else {
       res.render('cabinet/resetPasswordStage1', {
         'title': 'Reset password for account',
