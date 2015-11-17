@@ -47,18 +47,30 @@ angular
     return function (modelName, prefix) {
       prefix = prefix || '/api/v1/';
 
-      function encodeQueryData(data) {
-        data = data || {};
-        var
-          d,
-          ret = [];
-        for (d in data) {
-          if (data.hasOwnProperty(d)) {
-            ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
+//http://stackoverflow.com/a/1714899/1885921
+      function encodeQueryData(obj, prefix) {
+        var str = [];
+        for (var p in obj) {
+          if (obj.hasOwnProperty(p)) {
+            var k = prefix ? prefix + '[' + p + ']' : p, v = obj[p];
+            str.push(typeof v == 'object' ? encodeQueryData(v, k) : encodeURIComponent(k) + "=" + encodeURIComponent(v));
           }
         }
-        return ret.join('&');
+        return str.join('&');
       }
+
+      //function encodeQueryData(data) {
+      //  data = data || {};
+      //  var
+      //    d,
+      //    ret = [];
+      //  for (d in data) {
+      //    if (data.hasOwnProperty(d)) {
+      //      ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
+      //    }
+      //  }
+      //  return ret.join('&');
+      //}
 
       /**
        * @class AngularHuntModel
@@ -428,6 +440,8 @@ angular
               var
                 toId = to.id || to,
                 myId = this.id;
+
+
               page = page || 1;
               itemsPerPage = itemsPerPage || 10;
               return Message.find({
@@ -436,8 +450,9 @@ angular
                 'page': page,
                 'itemsPerPage': itemsPerPage
               }, callback);
-            };
 
+
+            };
             ret.logout = function (callback) {
               return $http.post('/auth/logout').then(function () {
                 if (typeof callback === 'function') {
