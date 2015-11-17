@@ -10,7 +10,7 @@ var
 
 //default values are commented out
 var config = {
-  //'secret' : 'someLongAndHardStringToMakeHackersSadAndEldersHappy', //populated from environment
+  'secret': 'someLongAndHardStringToMakeHackersSadAndEldersHappy', //populated from environment
   //'port' : 3000,
   //'env' : 'production',
   //'hostUrl': 'http://huntdemo.herokuapp.com/', //populated from environment
@@ -367,8 +367,8 @@ hunt.once('start', function (startParameters) {
   case 'background':
     populateDb(hunt);
     setInterval(function () {
-      populateDb(hunt);
-    }, 60 * 5000);
+      //populateDb(hunt);
+    }, 15 * 60 * 1000);
     break;
   default:
     console.log('We started application as ', startParameters.type);
@@ -402,8 +402,34 @@ function profilingListener(payload) {
 hunt.on('start', profilingListener);
 
 //listening on REST interface events
-hunt.on(['REST:*'], profilingListener);
+hunt.on(['REST', '*'], profilingListener);
 
+
+//making Gamemaster answering on private message
+
+hunt.on(['REST', 'Message', 'CREATE', '*'], function (messageObj) {
+  console.log('Private message', this.event, messageObj);
+
+  if (messageObj.document.to === '55b0c81ee523c6a60c4325ad') {
+    console.log('Gamemaster is thinking!');
+    setTimeout(function () {
+      hunt.model.Message.create({
+        'to': messageObj.document.from,
+        'from': '55b0c81ee523c6a60c4325ad',
+        'message': [
+          'On your message "',
+          messageObj.document.message,
+          '" I can answer only this: "Grrrrrr!"'
+        ].join('')
+      }, function (error, messageCreated) {
+        if (error) {
+          throw error
+        }
+        console.log(messageCreated)
+      });
+    }, 1000);
+  }
+});
 
 /*
  * Starting cluster of webserveres
