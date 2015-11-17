@@ -14,7 +14,7 @@
             <th class="col-sm-1">Scored</th>
         </tr>
         </thead>
-        <tbody ng-repeat="trophy in trophies  | filter:nameFilter | orderBy:'-priority'">
+        <tbody ng-repeat="trophy in trophies  | filter:nameFilter | orderBy:'+name'">
         <tr ng-if="!trophy.$deleted">
             <td ng-class="{active:trophy.$saving}">
                 <a href="/#/crud/{{ trophy.id }}">{{ trophy.id }}</a>

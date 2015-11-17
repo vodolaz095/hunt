@@ -93,7 +93,7 @@ angular.module('huntApp', ['ngRoute', 'angular-hunt'])
   .controller('crudController', ['$scope', 'huntSocketIo', 'trophy', '$http', function ($scope, socket, trophy, $http) {
     $scope.trophies = [];
     $scope.codeSampleForCRUD = 'lalala';
-    trophy.query().then(function (trophies) {
+    trophy.query({'sort':'name'}).then(function (trophies) {
       $scope.trophies = trophies;
     });
 
