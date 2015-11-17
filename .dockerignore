@@ -4,6 +4,8 @@
 .DS_Store
 
 node_modules/
+bower_components/
+examples/public/dist/
 
 tutorials/Changelog.md
 tutorials/test.md

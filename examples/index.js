@@ -90,25 +90,22 @@ hunt.extendModel('Trophy', require('./models/trophy.model.js'));
 
 
 hunt.extendApp(function (core) {
-//loading client side javascripts/css from public cdns
-
-  core.app.locals.css.push({'href': '//yandex.st/bootstrap/3.3.4/css/bootstrap.min.css', 'media': 'screen'});
-  core.app.locals.javascripts.push({'url': '//yandex.st/jquery/2.1.4/jquery.min.js'});
-  core.app.locals.javascripts.push({'url': '//yandex.st/bootstrap/3.3.4/js/bootstrap.min.js'});
-  core.app.locals.javascripts.push({'url': '//cdnjs.cloudflare.com/ajax/libs/async/1.4.2/async.js'});
-  core.app.locals.javascripts.push({'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js'});
-  core.app.locals.javascripts.push({'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js'});
-  core.app.locals.javascripts.push({'url': '//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-resource.min.js'});
-
 // we set server side template engine delimiters to be
 // different from the ones used by AngularJS
   core.app.locals.delimiters = '[[ ]]';
 
-  core.app.locals.javascripts.push({'url': '/hunt.ng.js'});
-  core.app.locals.javascripts.push({'url': '/app.ng.js'});
-  /*
-   * Setting up menu - one of many possible approaches
-   */
+//loading bower components
+  core.app.locals.javascripts.push({'url': '/dist/vendor.min.js'});
+  core.app.locals.css.push({'href': '/dist/huntjs.min.css', 'media': 'screen'});
+
+  if (core.config.env === 'production') {
+//loading custom scripts
+    core.app.locals.javascripts.push({'url': '/dist/huntjs.min.js'});
+  } else {
+    core.app.locals.javascripts.push({'url': '/hunt.ng.js'});
+    core.app.locals.javascripts.push({'url': '/app.ng.js'});
+  }
+//Setting up menu - one of many possible approaches
   core.app.locals.menu = [
     {'url': '/documentation', 'name': 'Documentation'},
     {'url': 'http://docs.huntjs.apiary.io/', 'name': 'API'},

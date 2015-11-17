@@ -6,15 +6,16 @@
     "include": [
       "README.md",
       "index.js",
-      "lib/datastore",
-      "lib/exportModel",
-      "lib/exportModel/toRest",
-      "lib/http",
-      "lib/misc",
-      "lib/telnet",
+      "lib/datastore/",
+      "lib/exportModel/",
+      "lib/exportModel/toRest/",
+      "lib/http/",
+      "lib/misc/",
+      "lib/telnet/",
       "lib/models/",
       "lib/passportStrategies/",
-      "lib/templateEngines/"
+      "lib/templateEngines/",
+      "examples/public/hunt.ng.js"
     ],
     "includePattern": ".+\\.js(doc)?$",
     "excludePattern": "(^|\\/|\\\\)_"

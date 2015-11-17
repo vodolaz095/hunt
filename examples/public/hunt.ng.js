@@ -3,7 +3,7 @@
 
 var huntErrors = [];
 angular
-  .module('angular-hunt', ['ngResource'])
+  .module('angular-hunt',[])
   .factory('huntSocketIo', ['$rootScope', function ($rootScope) {
     var socket = io();
     $(window).on('beforeunload', function () {
@@ -59,22 +59,11 @@ angular
         return str.join('&');
       }
 
-      //function encodeQueryData(data) {
-      //  data = data || {};
-      //  var
-      //    d,
-      //    ret = [];
-      //  for (d in data) {
-      //    if (data.hasOwnProperty(d)) {
-      //      ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
-      //    }
-      //  }
-      //  return ret.join('&');
-      //}
-
       /**
        * @class AngularHuntModel
        * @constructor
+       * @classdesc
+       * Object to utilize exportModelToRest in AngularJS application
        */
       function Model() {
         this.$saving = false;
@@ -245,6 +234,7 @@ angular
 
       /**
        * @name AngularHuntModel#$save
+       * @param {function} callback - optional callback
        * @description
        * Saves object instance to backend.
        * Returns promise resolved with this object.
@@ -272,23 +262,30 @@ angular
       };
       /**
        * @name AngularHuntModel#$remove
+       * @param {function} callback - optional callback
        * @description
-       * Saves object instance to backend.
-       * Returns promise resolved with this object.
+       * Deletes object instance to backend.
+       * Returns promise resolved when object is deleted.
        * Optionally calls a callback
        * @returns {Promise}
        */
-      Model.prototype.$remove = function () {
+      Model.prototype.$remove = function (callback) {
         var t = this;
         t.$saving = true;
         return $http.delete(prefix + modelName, {})
           .then(function () {
             t.$saving = false;
             t.$deleted = true;
+            if (typeof callback === 'function') {
+              callback(t);
+            }
           });
       };
       /**
        * @name AngularHuntModel#$ngChange
+       * @param {string} fieldName
+       * @param {object} newValue
+       * @param {object} oldValue
        * @description
        * Monitors object changing and saves object instance to backend.
        * Returns promise resolved with this object.
@@ -319,7 +316,8 @@ angular
       };
       /**
        * @name AngularHuntModel#$watch
-       * @params {object} $scope
+       * @param {object} $scope - angularjs $scope to bind to
+       * @param {object} item - object instance to be watched
        * @description
        * Monitors object changing and saves object instance to backend.
        * If validation errors happens on saving object, the object is reverted to previous state.
@@ -360,6 +358,12 @@ angular
         }
       };
 
+      /**
+       * @name AngularHuntModel#$subscribe
+       * @description
+       * Subscribe to socket.io notifications on object state change
+       * @returns {AngularHuntModel}
+       */
       Model.prototype.$subscribe = function () {
         var t = this;
         if (t.$subscribeToken) {
@@ -377,6 +381,13 @@ angular
         }
         return t;
       };
+
+      /**
+       * @name AngularHuntModel#$desubscribe
+       * @description
+       * Removes subscription on socket.io events
+       * @returns {AngularHuntModel}
+       */
 
       Model.prototype.$desubscribe = function () {
         var t = this;

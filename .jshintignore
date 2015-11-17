@@ -1,3 +1,5 @@
 node_modules/
+examples/public/dist/
 examples/public/coverage/
 examples/public/documentation/scripts/
+bower_components/

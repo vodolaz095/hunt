@@ -10,21 +10,27 @@
 examples/
 test/
 node_modules/
-Procfile
 tutorials/
+bower_components/
 
-# Distribution files
-jshint.xml
+# Dot files
 .jshintignore
 .jshintrc
-
 .gitignore
 .npmignore
 .travis.yml
+.dockerignore
+.istanbul.yml
+
+# Distribution files
+Dockerfile
+Procfile
+jshint.xml
+bower.json
+gulpfile.js
 apiary.apib
 jslint.conf
 jslint.xml
-.istanbul.yml
 jsdoc.conf.json
 
 # To disable continious integration in production use
