@@ -399,7 +399,7 @@ hunt.on(['REST', '*'], profilingListener);
 hunt.on(['REST', 'Message', 'CREATE', '*'], function (messageObj) {
   console.log('Private message', this.event, messageObj);
 
-  if (messageObj.document.to == '55b0c81ee523c6a60c4325ad') {
+  if (messageObj.document.to.equals('55b0c81ee523c6a60c4325ad')) {
     console.log('Gamekeeper is thinking!');
     setTimeout(function () {
       hunt.model.Message.create({
