@@ -1,0 +1,10 @@
+<h1>Users here:</h1>
+<div>
+    <a ng-repeat="user in users"
+       href="/#/dialog/{{ user.id }}"
+       ng-class="{'label label-primary':!user.isOnline,'label label-success':!!user.isOnline}">
+        {{ user.displayName }}
+    </a>
+</div>
+<h1>Inbox messages:</h1>
+<hr>

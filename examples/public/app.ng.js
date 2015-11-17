@@ -32,6 +32,14 @@ angular.module('huntApp', ['ngRoute', 'angular-hunt'])
           templateUrl: '/profile', // pss! this is server side generated code :-)
           controller: 'profileController'
         })
+        .when('/inbox', {
+          templateUrl: '/partials/inbox.html',
+          controller: 'inboxController'
+        })
+        .when('/dialog/:id', {
+          templateUrl: '/partials/dialog.html',
+          controller: 'dialogController'
+        })
         .when('/', {
           templateUrl: '/partials/main.html',
           controller: 'mainController'
@@ -79,6 +87,9 @@ angular.module('huntApp', ['ngRoute', 'angular-hunt'])
       throw error;
     });
   }])
+
+
+  // Code for crud example
   .controller('crudController', ['$scope', 'huntSocketIo', 'trophy', '$http', function ($scope, socket, trophy, $http) {
     $scope.trophies = [];
     $scope.codeSampleForCRUD = 'lalala';
@@ -112,9 +123,12 @@ angular.module('huntApp', ['ngRoute', 'angular-hunt'])
         $scope.item = item;
         item.$watch($scope, 'item');
       }).catch(function () {
-        $location.path('/crud');
-      });
+      $location.path('/crud');
+    });
   }])
+
+
+  //code for events exampple
   .controller('eventsController', ['$scope', 'huntSocketIo', function ($scope, socket) {
     $scope.recentVisits = [];
     $scope.pingerAnswer = 'Ready to ping!';
@@ -140,5 +154,58 @@ angular.module('huntApp', ['ngRoute', 'angular-hunt'])
         $scope.recentVisits.push(data.httpSuccess);
       }
     });
-  }]);
+  }])
+
+
+  //code for private messages example
+  .controller('inboxController', ['$scope', 'huntSocketIo', 'huntUser', 'huntMyself', '$location', function ($scope, huntSocketIo, User, myself, $location) {
+    $scope.page = 1;
+
+    $scope.users = User.find()
+      .then(function (usersFound) {
+        $scope.users = usersFound;
+      });
+
+    myself()
+      .then(function (i) {
+        return i.inbox($scope.page, 100);
+      }, function (error) {
+        console.error(error);
+        $location.path('/login');
+      })
+      .then(function (messages) {
+        $scope.messages = messages;
+      });
+
+  }])
+  .controller('dialogController', [
+    '$scope', 'huntSocketIo', 'huntUser', 'huntMyself', '$routeParams', '$location', '$route', '$q',
+    function ($scope, huntSocketIo, User, myself, $routeParams, $location, $route, $q) {
+      $scope.page = 1;
+
+      $q.all([
+        myself().then(function (i) {
+          return i.getDialog($routeParams.id, $scope.page, 100);
+        }).then(function (messages) {
+          $scope.messages = messages;
+        }),
+        User.findById($routeParams.id)
+          .then(function (to) {
+            $scope.to = to;
+            $scope.sendMessage = function (message) {
+              return to.sendMessage(message)
+                .then(function () {
+                  $route.reload();
+                });
+            };
+          })
+      ]).then(function (o) {
+        console.log('loaded', o);
+      }, function (error) {
+        console.log(error);
+        $location.path('/login');
+      });
+    }])
+
+;
 

@@ -30,14 +30,14 @@ angular
       }
     };
   }])
-  .directive('stringToNumber', function() { //https://docs.angularjs.org/error/ngModel/numfmt?p0=10
+  .directive('stringToNumber', function () { //https://docs.angularjs.org/error/ngModel/numfmt?p0=10
     return {
       require: 'ngModel',
-      link: function(scope, element, attrs, ngModel) {
-        ngModel.$parsers.push(function(value) {
+      link: function (scope, element, attrs, ngModel) {
+        ngModel.$parsers.push(function (value) {
           return '' + value;
         });
-        ngModel.$formatters.push(function(value) {
+        ngModel.$formatters.push(function (value) {
           return parseFloat(value, 10);
         });
       }
@@ -168,7 +168,7 @@ angular
       Model.create = function (parameters, callback) {
         var t = this;
         return $http.post(prefix + modelName, parameters).then(function (response) {
-          if (response.status === 201) {
+          if (response.status !== 201) {
             throw new Error('HuntModel:' + response.status + ':' + response.data.message);
           }
           return t.findById(response.data.id, callback);
@@ -384,7 +384,14 @@ angular
   }])
   .factory('huntUser', ['huntModel', '$http', 'huntMessage', function (huntModel, $http, huntMessage) {
     var User = huntModel('user');
-    User.myself = function (callback) {
+    User.prototype.sendMessage = function (message, callback) {
+      return huntMessage.create({'to': this.id, 'message': message.toString().trim()}, callback);
+    };
+    return User;
+  }])
+  .factory('huntMyself', ['$http', 'huntUser', 'huntMessage', function ($http, User, Message) {
+    function Myself(callback) {
+      var t = this;
       return $http.get('/api/v1/users/myself')
         .then(function (response) {
           if (response.status !== 200) {
@@ -397,46 +404,53 @@ angular
           Object.keys(response.data.data).map(function (k) {
             if (response.data.data.hasOwnProperty(k)) {
               ret[k] = response.data.data[k];
+              t[k] = response.data.data[k];
             }
           });
           ret.$subscribe();
           if (typeof callback === 'function') {
             callback(ret);
           }
+
+          ret.inbox = function (page, itemsPerPage, callback) {
+            page = page || 1;
+            itemsPerPage = itemsPerPage || 10;
+            return Message.find({
+              'sort': '-_id',
+              'page': page,
+              'itemsPerPage': itemsPerPage
+            }, callback);
+          };
+
+          ret.getDialog = function (to, page, itemsPerPage, callback) {
+            var
+              toId = to.id || to,
+              myId = this.id;
+            page = page || 1;
+            itemsPerPage = itemsPerPage || 10;
+            return Message.find({
+              '$or': [{'to': toId, 'from': myId}, {'from': toId, 'to': myId}],
+              'sort': '+_id',
+              'page': page,
+              'itemsPerPage': itemsPerPage
+            }, callback);
+          };
+
+          ret.logout = function (callback) {
+            return $http.post('/auth/logout').then(function () {
+              if (typeof callback === 'function') {
+                callback();
+              }
+            });
+          };
+
           return ret;
         });
-    };
-    User.prototype.inbox = function (page, itemsPerPage, callback) {
-      var myId = this.id;
-      page = page || 1;
-      itemsPerPage = itemsPerPage || 10;
-      return huntMessage.find({
-        '$or': [{'to': myId}, {'from': myId}],
-        'sort': '-_id',
-        'page': page,
-        'itemsPerPage': itemsPerPage
-      }, callback);
-    };
+    }
 
-    User.prototype.getDialog = function (to, page, itemsPerPage, callback) {
-      var
-        toId = to.id || to,
-        myId = this.id;
-      page = page || 1;
-      itemsPerPage = itemsPerPage || 10;
-      return huntMessage.find({
-        '$or': [{'to': toId, 'from': myId}, {'from': toId, 'to': myId}],
-        'sort': '-_id',
-        'page': page,
-        'itemsPerPage': itemsPerPage
-      }, callback);
-
+    return function (callback) {
+      return new Myself(callback);
     };
-    User.prototype.sendMessage = function (to, message, callback) {
-      var toId = to.id || to;
-      return huntMessage.create({'to': toId, 'message': message.toString().trim()}, callback);
-    };
-    return User;
   }])
   .controller('notificationController', ['$scope', 'huntSocketIo', function ($scope, socket) {
     var le;
@@ -462,10 +476,10 @@ angular
     socket.on('notify:flash_error', function (data) {
       $scope.flash.error.push(data);
     });
-    socket.on('notify:pm:in', function(data){
-      console.log('Incoming private message',data);
+    socket.on('notify:pm:in', function (data) {
+      console.log('Incoming private message', data);
     });
-    socket.on('notify:pm:out', function(data){
+    socket.on('notify:pm:out', function (data) {
       console.log('Outgoing private message', data);
     });
 
