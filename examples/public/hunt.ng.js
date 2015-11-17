@@ -389,69 +389,71 @@ angular
     };
     return User;
   }])
-  .factory('huntMyself', ['$http', 'huntUser', 'huntMessage', function ($http, User, Message) {
-    function Myself(callback) {
-      var t = this;
-      return $http.get('/api/v1/users/myself')
-        .then(function (response) {
-          if (response.status !== 200) {
-            throw new Error('HuntModel:' + response.status + ':' + response.data.message);
-          }
-          var ret = new User();
-          ret.$code = 200;
-          ret.$status = response.data.status;
-          ret.$metadata = response.data.metadata;
-          Object.keys(response.data.data).map(function (k) {
-            if (response.data.data.hasOwnProperty(k)) {
-              ret[k] = response.data.data[k];
-              t[k] = response.data.data[k];
+  .factory('huntMyself', [
+    '$http', 'huntUser', 'huntMessage', 'huntSocketIo',
+    function ($http, User, Message, huntSocketIo) {
+      function Myself(callback) {
+        var t = this;
+        return $http.get('/api/v1/users/myself')
+          .then(function (response) {
+            if (response.status !== 200) {
+              throw new Error('HuntModel:' + response.status + ':' + response.data.message);
             }
-          });
-          ret.$subscribe();
-          if (typeof callback === 'function') {
-            callback(ret);
-          }
-
-          ret.inbox = function (page, itemsPerPage, callback) {
-            page = page || 1;
-            itemsPerPage = itemsPerPage || 10;
-            return Message.find({
-              'sort': '-_id',
-              'page': page,
-              'itemsPerPage': itemsPerPage
-            }, callback);
-          };
-
-          ret.getDialog = function (to, page, itemsPerPage, callback) {
-            var
-              toId = to.id || to,
-              myId = this.id;
-            page = page || 1;
-            itemsPerPage = itemsPerPage || 10;
-            return Message.find({
-              '$or': [{'to': toId, 'from': myId}, {'from': toId, 'to': myId}],
-              'sort': '+_id',
-              'page': page,
-              'itemsPerPage': itemsPerPage
-            }, callback);
-          };
-
-          ret.logout = function (callback) {
-            return $http.post('/auth/logout').then(function () {
-              if (typeof callback === 'function') {
-                callback();
+            var ret = new User();
+            ret.$code = 200;
+            ret.$status = response.data.status;
+            ret.$metadata = response.data.metadata;
+            Object.keys(response.data.data).map(function (k) {
+              if (response.data.data.hasOwnProperty(k)) {
+                ret[k] = response.data.data[k];
+                t[k] = response.data.data[k];
               }
             });
-          };
+            ret.$subscribe();
+            if (typeof callback === 'function') {
+              callback(ret);
+            }
 
-          return ret;
-        });
-    }
+            ret.inbox = function (page, itemsPerPage, callback) {
+              page = page || 1;
+              itemsPerPage = itemsPerPage || 10;
+              return Message.find({
+                'sort': '-_id',
+                'page': page,
+                'itemsPerPage': itemsPerPage
+              }, callback);
+            };
 
-    return function (callback) {
-      return new Myself(callback);
-    };
-  }])
+            ret.getDialog = function (to, page, itemsPerPage, callback) {
+              var
+                toId = to.id || to,
+                myId = this.id;
+              page = page || 1;
+              itemsPerPage = itemsPerPage || 10;
+              return Message.find({
+                '$or': [{'to': toId, 'from': myId}, {'from': toId, 'to': myId}],
+                'sort': '+_id',
+                'page': page,
+                'itemsPerPage': itemsPerPage
+              }, callback);
+            };
+
+            ret.logout = function (callback) {
+              return $http.post('/auth/logout').then(function () {
+                if (typeof callback === 'function') {
+                  callback();
+                }
+              });
+            };
+
+            return ret;
+          });
+      }
+
+      return function (callback) {
+        return new Myself(callback);
+      };
+    }])
   .controller('notificationController', ['$scope', 'huntSocketIo', function ($scope, socket) {
     var le;
     $scope.flash = {

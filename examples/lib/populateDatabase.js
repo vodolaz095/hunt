@@ -52,7 +52,7 @@ module.exports = exports = function (hunt) {
     function (cb) {
       hunt.model.User.create({
         '_id': '55b0c81ee523c6a60c4325ad',
-        'displayName': 'Gamemaster',
+        'displayName': 'Gamekeeper',
         'root': false,
         'accountVerified': true,
         'huntKey': 'i_am_game_master_grr'
@@ -60,7 +60,7 @@ module.exports = exports = function (hunt) {
         if (error) {
           cb(error);
         } else {
-          console.log('Gamemaster created with ' + userCreated.huntKey);
+          console.log('Gamekeeper created with ' + userCreated.huntKey);
           gameMasterId = userCreated.id;
           cb(null);
         }

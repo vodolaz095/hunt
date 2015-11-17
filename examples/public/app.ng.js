@@ -182,6 +182,12 @@ angular.module('huntApp', ['ngRoute', 'angular-hunt'])
     '$scope', 'huntSocketIo', 'huntUser', 'huntMyself', '$routeParams', '$location', '$route', '$q',
     function ($scope, huntSocketIo, User, myself, $routeParams, $location, $route, $q) {
       $scope.page = 1;
+      $scope.messages = [];
+
+//Process socket.io notifications
+      function processNewMessage(data) {
+        $scope.messages.push(data.message);
+      }
 
       $q.all([
         myself().then(function (i) {
@@ -195,12 +201,13 @@ angular.module('huntApp', ['ngRoute', 'angular-hunt'])
             $scope.sendMessage = function (message) {
               return to.sendMessage(message)
                 .then(function () {
-                  $route.reload();
+                  $scope.message = '';
                 });
             };
           })
-      ]).then(function (o) {
-        console.log('loaded', o);
+      ]).then(function () {
+        huntSocketIo.on('notify:pm:in', processNewMessage);
+        huntSocketIo.on('notify:pm:out', processNewMessage);
       }, function (error) {
         console.log(error);
         $location.path('/login');

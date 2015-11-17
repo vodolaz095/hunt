@@ -111,11 +111,11 @@ hunt.extendApp(function (core) {
    */
   core.app.locals.menu = [
     {'url': '/documentation', 'name': 'Documentation'},
-    {'url': 'http://docs.huntjs.apiary.io/', 'name': 'API Blueprint'},
-    {'url': '/#/events', 'name': 'Events Demo'},
-    {'url': '/#/crud', 'name': 'CRUD Demo'},
-    {'url': '/#/cache', 'name': 'Caching Demo'},
-    {'url': '/#/cluster', 'name': 'Invincibility Demo'}
+    {'url': 'http://docs.huntjs.apiary.io/', 'name': 'API'},
+    {'url': '/#/events', 'name': 'Events'},
+    {'url': '/#/crud', 'name': 'CRUD'},
+    {'url': '/#/cache', 'name': 'Caching'},
+    {'url': '/#/cluster', 'name': 'Cluster'}
   ];
 });
 
@@ -367,7 +367,7 @@ hunt.once('start', function (startParameters) {
   case 'background':
     populateDb(hunt);
     setInterval(function () {
-      //populateDb(hunt);
+      populateDb(hunt);
     }, 15 * 60 * 1000);
     break;
   default:
@@ -410,22 +410,22 @@ hunt.on(['REST', '*'], profilingListener);
 hunt.on(['REST', 'Message', 'CREATE', '*'], function (messageObj) {
   console.log('Private message', this.event, messageObj);
 
-  if (messageObj.document.to === '55b0c81ee523c6a60c4325ad') {
-    console.log('Gamemaster is thinking!');
+  if (messageObj.document.to == '55b0c81ee523c6a60c4325ad') {
+    console.log('Gamekeeper is thinking!');
     setTimeout(function () {
       hunt.model.Message.create({
         'to': messageObj.document.from,
         'from': '55b0c81ee523c6a60c4325ad',
         'message': [
-          'On your message "',
+          'On your message \"',
           messageObj.document.message,
-          '" I can answer only this: "Grrrrrr!"'
+          '\" I can answer only this: Grrrrrr!'
         ].join('')
       }, function (error, messageCreated) {
         if (error) {
-          throw error
+          throw error;
         }
-        console.log(messageCreated)
+        console.log(messageCreated);
       });
     }, 1000);
   }
