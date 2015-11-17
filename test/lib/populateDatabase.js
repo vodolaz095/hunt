@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 module.exports = exports = function (core, done) {
   done = done || function (err) {

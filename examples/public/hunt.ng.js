@@ -53,7 +53,7 @@ angular
         for (var p in obj) {
           if (obj.hasOwnProperty(p)) {
             var k = prefix ? prefix + '[' + p + ']' : p, v = obj[p];
-            str.push(typeof v == 'object' ? encodeQueryData(v, k) : encodeURIComponent(k) + "=" + encodeURIComponent(v));
+            str.push(typeof v === 'object' ? encodeQueryData(v, k) : encodeURIComponent(k) + '=' + encodeURIComponent(v));
           }
         }
         return str.join('&');
@@ -402,8 +402,8 @@ angular
     return User;
   }])
   .factory('huntMyself', [
-    '$http', 'huntUser', 'huntMessage', 'huntSocketIo',
-    function ($http, User, Message, huntSocketIo) {
+    '$http', 'huntUser', 'huntMessage',
+    function ($http, User, Message) {
       function Myself(callback) {
         var t = this;
         return $http.get('/api/v1/users/myself')

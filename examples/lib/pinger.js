@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 //socket.io listener to issue ping requests
 
