@@ -715,7 +715,6 @@ describe('Testing REST api', function () {
               body.data.name.should.be.equal(bookName);
               body.data.content.should.be.equal('some new content');
               body.data.id.should.be.a.equal(articleId);
-              body.data.author.id.should.be.a.String;
             }
           });
         }
