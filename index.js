@@ -1,6 +1,7 @@
 'use strict';
 
 var
+  winston = require('winston'),
   appGenerator = require('./lib/http/expressApp.js'),
   assert = require('assert'),
   configGenerator = require('./lib/misc/config.js'),
@@ -586,7 +587,7 @@ function Hunt(config) {
    *
    */
   this.startBackGround = function () {
-    console.log('Trying to start Hunt as background service...'.magenta);
+    winston.verbose('Trying to start Hunt as background service...');
     buildExpressApp(this); //it is required for using templating system and `views` directory via `hunt.app.render()`
     prepared = true;
     /**
@@ -598,7 +599,7 @@ function Hunt(config) {
      * @property {string} type - with a value of string of 'background'
      */
     this.emit('start', {'type': 'background'});
-    console.log(('Started Hunt as background service with PID#' + process.pid + '!').green);
+    winston.verbose('Started Hunt as background service with PID#%d!', process.pid);
     return this;
   };
 
@@ -625,7 +626,7 @@ function Hunt(config) {
       p = port || this.config.port,
       h = this;
     address = address || this.config.address || '0.0.0.0';
-    console.log(('Trying to start Hunt as web server on ' + address + ':' + p + '...').magenta);
+    winston.verbose('Trying to start Hunt as web server on %s:%s...', address, p);
     buildExpressApp(this);
     this.httpServer.listen(p, address, function () {
       /**
@@ -640,7 +641,7 @@ function Hunt(config) {
        * @property {string} address - with a value of address application is bound to
        */
       h.emit('start', {'type': 'webserver', 'port': p, 'address': address});
-      console.log(('Started Hunt as web server on port ' + p + ' with PID#' + process.pid + '!').green);
+      winston.verbose('Started Hunt as web server on %s:%s with PID#%s', address, p, process.pid);
       prepared = true;
     });
     return this;
@@ -672,8 +673,7 @@ function Hunt(config) {
       telnetServer = new RAIServer(this.config.telnetServer);
 
     address = address || this.config.address || '0.0.0.0';
-    console.log(('Trying to start Hunt as telnet server on port ' + p + '...').magenta);
-
+    winston.verbose('Trying to start Hunt as telnet server on %s:%s...', address, p);
     prepared = true;
 
     telnetServer.on('connect', this.telnetHandler);
@@ -697,7 +697,7 @@ function Hunt(config) {
        * @property {string} address - with a value of address application is bound to
        */
       thishunt.emit('start', {'type': 'telnet', 'port': p, 'address': address});
-      console.log(('Started Hunt as telnet server on ' + address + ':' + p + '!').green);
+      winston.verbose('Started Hunt as web server on %s:%s with PID#%s', address, p, process.pid);
     });
     return this;
   };
@@ -774,7 +774,7 @@ function Hunt(config) {
    *
    */
   this.startBackGroundCluster = function (maxProcesses) {
-    console.log(('Trying to start Hunt as background cluster service...').magenta);
+    winston.verbose('Trying to start Hunt as background cluster service...');
     return this.startCluster({'web': 0, 'telnet': 0, 'background': maxProcesses});
   };
 
@@ -1092,7 +1092,7 @@ Hunt.prototype.stop = function () {
   //if (this.sequelize) {
   //do disconnection to SQL database
   //}
-  console.log('Hunt is stopped!'.green + '\n');
+  winston.verbose('Hunt process %d is stopped!', process.pid);
 };
 
 /**
@@ -1125,7 +1125,7 @@ Hunt.prototype.loadControllersFromDirectory = function (dirname) {
       var
         filepath = path.resolve('./' + path.join(dirname, ctrlFileName)),
         ctrl = require(filepath);
-      console.log('Mounting controller `' + ctrlFileName + '` on ' + ctrl.mountpoint);
+      winston.silly('Mounting controller `%s` on `%s`', ctrlFileName, ctrl.mountpoint);
       h.extendController(ctrl.mountpoint, ctrl.handler);
     }
   });
@@ -1166,11 +1166,11 @@ Hunt.prototype.loadModelsFromDirectory = function (dirname) {
       filepath = path.resolve('./' + path.join(dirname, modelFileName)),
       model = require(filepath);
 
-    console.log('Loading model `' + modelFileName + '` into ' + model.modelName);
+    winston.silly('Loading model `%s` into `%s`', modelFileName, model.modelName);
     h.extendModel(model.modelName, model.init);
     if (model.exportModel === true) {
       model.mountPoints.map(function (mp) {
-        console.log('Exporting model `' + model.modelName + '` on ' + mp);
+        winston.silly('Exporting model `%s` on `%s`', model.modelName, mp);
         h.exportModelToRest({
           'mountPoint': mp,
           'modelName': model.modelName,
@@ -1191,24 +1191,24 @@ Hunt.prototype.loadModelsFromDirectory = function (dirname) {
  *
  * Hunt.injectCssFromDirectory(["public/custom/*.css","public/vendor/*.css"])
  */
-Hunt.prototype.injectCssFromDirectory = function (arrayOfPatterns){
+Hunt.prototype.injectCssFromDirectory = function (arrayOfPatterns) {
   var dicOfCss = {};
-  arrayOfPatterns.map(function(p){
-    glob.sync(p).map(function(f){
-      dicOfCss[f]=true;
+  arrayOfPatterns.map(function (p) {
+    glob.sync(p).map(function (f) {
+      dicOfCss[f] = true;
     });
   });
-  this.app.locals.css = Object.keys(dicOfCss).map(function(k){
-    return {'href':k,'media':'display'};
+  this.app.locals.css = Object.keys(dicOfCss).map(function (k) {
+    return {'href': k, 'media': 'display'};
   });
   return this;
 };
 
-Hunt.prototype.injectJsFromDirectory = function (arrayOfPatterns){
+Hunt.prototype.injectJsFromDirectory = function (arrayOfPatterns) {
   var dicOfJs = {};
-  arrayOfPatterns.map(function(p){
-    glob.sync(p).map(function(f){
-      dicOfJs[f]=true;
+  arrayOfPatterns.map(function (p) {
+    glob.sync(p).map(function (f) {
+      dicOfJs[f] = true;
     });
   });
   this.app.locals.javascripts = Object.keys(dicOfJs);

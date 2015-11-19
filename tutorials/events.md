@@ -142,7 +142,7 @@ hunt.on(['REST', 'Message', 'CREATE', '*'], function (messageObj) {
 
 - silly: debug information is shown
 - debug: events are emitted on each http request
-- verbose: users getting read access on entities
-- info: users signing in, signing up, performing update/delete actions on entities 
+- verbose: process is started, users getting read access on entities
+- info: users signing in, signing up, performing update/delete actions on entities, email notification send
 - warn: bad configuration options
 - error: webprocess and any thrown errors, that required process to be restarted 
