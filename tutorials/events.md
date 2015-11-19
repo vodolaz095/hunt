@@ -1,4 +1,4 @@
-HuntJS applicaton instance is [native nodejs event emitter](http://nodejs.org/api/events.html), 
+HuntJS application instance is [native nodejs event emitter](http://nodejs.org/api/events.html), 
 extended by [EventEmitter2](https://www.npmjs.org/package/eventemitter2).
 
 When an EventEmitter instance experiences an error, the typical action is to emit an error event.
@@ -102,3 +102,47 @@ web application.
       .startWebServer();
 
 ```
+
+
+*** Utilizing events ***
+
+This is one of possible methods to make Gamekeeper bot echoing back private messages.
+Messages are created via REST interface.
+
+```
+//making Gamekeeper answering on private message
+
+hunt.on(['REST', 'Message', 'CREATE', '*'], function (messageObj) {
+  console.log('Private message', this.event, messageObj);
+
+  if (messageObj.document.to.equals('55b0c81ee523c6a60c4325ad')) {
+    console.log('Gamekeeper is thinking!');
+    setTimeout(function () {
+      hunt.model.Message.create({
+        'to': messageObj.document.from,
+        'from': '55b0c81ee523c6a60c4325ad',
+        'message': [
+          'On your message \"',
+          messageObj.document.message,
+          '\" I can answer only this: Grrrrrr!'
+        ].join('')
+      }, function (error, messageCreated) {
+        if (error) {
+          throw error;
+        }
+        console.log(messageCreated);
+      });
+    }, 1000);
+  }
+});
+```
+
+
+*** Log levels of events ***
+
+- silly: debug information is shown
+- debug: events are emitted on each http request
+- verbose: users getting read access on entities
+- info: users signing in, signing up, performing update/delete actions on entities 
+- warn: bad configuration options
+- error: webprocess and any thrown errors, that required process to be restarted 
