@@ -1,6 +1,8 @@
 'use strict';
 /*jshint expr: true*/
-var should = require('should'),
+var
+  winston = require('winston'),
+  should = require('should'),
   request = require('request'),
   async = require('async'),
   hunt = require('./../index.js'),
@@ -8,6 +10,7 @@ var should = require('should'),
   huntKey,
   port = 3373;
 
+winston.level = 'error';
 
 describe('Local strategy test', function () {
   this.timeout(5000);
@@ -155,11 +158,10 @@ describe('Local strategy test', function () {
       request({
         'method': 'GET',
         'url': 'http://localhost:' + port + '/auth/confirm/' + welcomeLink
-      }, function (err, response, body) {
+      }, function (err) {
         if (err) {
           done(err);
         } else {
-          console.log(body);
           Hunt.model.User.findOneByHuntKey(huntKey, function (err1, userFound) {
             if (err1) {
               done(err1);

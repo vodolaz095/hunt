@@ -1,10 +1,14 @@
 'use strict';
 /*jshint expr: true*/
-var should = require('should'),
+var
+  winston = require('winston'),
+  should = require('should'),
   async = require('async'),
   testId = Date.now(),
   hunt = require('./../index.js'),
   Hunt;
+
+winston.level = 'error';
 
 describe('Hunt.model.User() test', function () {
   before(function (done) {

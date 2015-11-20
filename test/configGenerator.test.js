@@ -1,8 +1,12 @@
 'use strict';
 /*jshint expr: true*/
-var configGenerator = require('./../lib/misc/config.js'),
+var
+  winston = require('winston'),
+  configGenerator = require('./../lib/misc/config.js'),
   should = require('should'),
   url = require('url');
+
+winston.level = 'error';
 
 describe('configGenerator', function () {
 

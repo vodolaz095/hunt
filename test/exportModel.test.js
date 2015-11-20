@@ -1,11 +1,15 @@
 'use strict';
 /*jshint expr: true*/
-var hunt = require('./../index.js'),
+var
+  winston = require('winston'),
+  hunt = require('./../index.js'),
   model = require('./model/article.model.js'),
   populateDb = require('./lib/populateDatabase.js'),
   should = require('should'),
   Hunt,
   request = require('request');
+
+winston.level = 'error';
 
 function isArticleForUser(a) {
   a.id.should.be.a.String;
@@ -653,7 +657,7 @@ describe('Testing REST api', function () {
       });
     });
 
-    it('Recieves conflict error for updating content by POST /:id', function (done) {
+    it('Receives conflict error for updating content by POST /:id', function (done) {
       request({
         'method': 'POST',
         'url': 'http://localhost:' + Hunt.config.port + '/api/v1/article/' + articleId,
@@ -796,7 +800,7 @@ describe('Testing REST api', function () {
     });
 
     it('Allows to call existent instance method', function (done) {
-      Hunt.once('REST:Article:CALL_METHOD:doSmth:' + articleId, function (evnt) {
+      Hunt.once('REST:Article:CALL_METHOD:' + articleId + ':doSmth', function (evnt) {
         evnt.ip.should.be.equal('127.0.0.1');
         evnt.payload.payload.should.be.equal('Da book');
         evnt.user.root.should.be.true;

@@ -1,5 +1,8 @@
 'use strict';
 
+var
+  util = require('util');
+
 module.exports = exports = function (core) {
   var TrophySchema = new core.mongoose.Schema({
     'name': {type: String, unique: true, index: true, required: true},
@@ -53,6 +56,10 @@ module.exports = exports = function (core) {
 //false means the trophy  cannot be deleted via REST api
   TrophySchema.methods.canDelete = function (user, callback) {
     callback(null, user && user._id.equals(this.author._id || this.author));
+  };
+
+  TrophySchema.methods.toString = function () {
+    return util.format('%s (%d) - %s', this.name, this.priority, this.scored ? 'scored' : 'loose');
   };
 
 //this step is very important - bind mongoose model to current mongo database connection

@@ -1,11 +1,15 @@
 'use strict';
 /*jshint expr: true*/
-var should = require('should'),
+var
+  winston = require('winston'),
+  should = require('should'),
   async = require('async'),
   request = require('request'),
   hunt = require('./../index.js'),
   port = 3374,
   Hunt;
+
+winston.level = 'error';
 
 describe('Private messages', function () {
   before(function (done) {

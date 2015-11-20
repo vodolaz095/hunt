@@ -1,7 +1,11 @@
 'use strict';
 /*jshint expr: true*/
 var
-  should = require('should');
+  should = require('should'),
+  winston = require('winston');
+
+
+winston.level = 'error';
 
 
 describe('HuntJS builds single threaded background application', function () {
@@ -84,7 +88,6 @@ describe('HuntJS builds single threaded background application', function () {
         if (error) {
           done(error);
         } else {
-          console.log('Redis info');
           info.should.be.a.String;
         }
       });

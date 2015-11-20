@@ -1,6 +1,10 @@
 'use strict';
 /*jshint expr: true*/
-var hunt = require('./../index.js');
+var
+  winston = require('winston'),
+  hunt = require('./../index.js');
+
+winston.remove(winston.transports.Console);
 
 require('should');
 

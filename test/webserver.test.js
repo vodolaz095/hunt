@@ -1,11 +1,13 @@
 'use strict';
 /*jshint expr: true*/
 var
+  winston = require('winston'),
   should = require('should'),
   async = require('async'),
   request = require('request'),
   port = 2998;
 
+winston.level = 'error';
 
 describe('HuntJS builds single threaded webserver', function () {
   var
@@ -189,7 +191,6 @@ describe('HuntJS builds single threaded webserver', function () {
         if (error) {
           done(error);
         } else {
-          console.log('Redis info');
           info.should.be.a.String;
         }
       });

@@ -49,13 +49,5 @@ module.exports = exports = function (core, done) {
         'author': '54a6168aa027eb0326220518'
       }, cb);
     }
-  ], function (error) {
-    if (error) {
-      throw error;
-    } else {
-      console.log('Access API as ROOT\n http://localhost:3000/api/v1/article?huntKey=i_am_root');
-      console.log('Access API as LIMITED\n user http://localhost:3000/api/v1/article?huntKey=i_am_prep');
-      done(null);
-    }
-  });
+  ], done);
 };

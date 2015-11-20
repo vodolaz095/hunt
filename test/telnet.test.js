@@ -1,9 +1,11 @@
 'use strict';
 /*jshint expr: true*/
 var
+  winston = require('winston'),
   should = require('should'),
   net = require('net');
 
+winston.level = 'error';
 
 describe('HuntJS builds telnet server application', function () {
   var
@@ -96,7 +98,6 @@ describe('HuntJS builds telnet server application', function () {
           done(error);
         } else {
           info.should.be.a.String;
-          console.log('Redis info');
         }
       });
     });
@@ -240,10 +241,10 @@ describe('HuntJS builds telnet server application', function () {
   describe('telnet server', function () {
     it('start listening on port defined', function (done) {
       var client = net.connect(3023, function () { //'connect' listener
-        client.on('data', function (data) {
-          console.log(data.toString());
+        client.once('data', function (data) {
+          data.should.be.a.String;
+          done();
         });
-        done();
       });
     });
     it('responds with proper data');
