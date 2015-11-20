@@ -1,6 +1,8 @@
 'use strict';
 
-var preys = [
+var
+  winston = require('winston'),
+  preys = [
   {
     '_id': '557caf8ee7c36e8011b92ea7',
     'name': 'Alan Schaefer',
@@ -44,23 +46,19 @@ module.exports = exports = function (hunt) {
   var gameMasterId;
   hunt.async.series([
     function (cb) {
-      hunt.model.Trophy.remove({}, cb);
-    },
-    function (cb) {
-      hunt.model.User.remove({ 'huntKey': 'i_am_game_master_grr' }, cb);
-    },
-    function (cb) {
-      hunt.model.User.create({
+      hunt.model.User.findOneAndUpdate({'_id': '55b0c81ee523c6a60c4325ad'}, {
         '_id': '55b0c81ee523c6a60c4325ad',
         'displayName': 'Gamekeeper',
         'root': false,
         'accountVerified': true,
         'huntKey': 'i_am_game_master_grr'
+      }, {
+        'upsert': true
       }, function (error, userCreated) {
         if (error) {
           cb(error);
         } else {
-          console.log('Gamekeeper created with ' + userCreated.huntKey);
+          winston.info('Gamekeeper created with %s', userCreated.huntKey);
           gameMasterId = userCreated.id;
           cb(null);
         }
@@ -69,7 +67,14 @@ module.exports = exports = function (hunt) {
     function (cb) {
       hunt.async.map(preys, function (prey, clb) {
         prey.author = gameMasterId;
-        hunt.model.Trophy.create(prey, clb);
+        hunt.model.Trophy.findOneAndUpdate({'_id': prey._id}, prey, {'upsert': true}, function (error, trophyUpdated) {
+          if (error) {
+            clb(error);
+          } else {
+            winston.info('Trophy updated - %s %s', trophyUpdated.id, trophyUpdated.toString());
+            clb();
+          }
+        });
       }, cb);
     }
   ], function (error) {
