@@ -55,7 +55,6 @@
   "dependencies": {
     "async": "1.5.0",
     "body-parser": "1.14.1",
-    "colors": "1.1.2",
     "compression": "1.6.0",
     "connect-flash": "0.1.1",
     "connect-multiparty": "2.0.0",
@@ -73,7 +72,6 @@
     "kerberos": "0.0.17",
     "method-override": "2.3.5",
     "mongoose": "4.2.6",
-    "morgan": "1.6.1",
     "nodemailer": "1.10.0",
     "nodemailer-html-to-text": "1.0.2",
     "passport": "0.3.0",

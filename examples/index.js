@@ -5,6 +5,7 @@
 'use strict';
 
 var
+  winston = require('winston'),
   populateDb = require('./lib/populateDatabase.js'),
   pinger = require('./lib/pinger.js');
 
@@ -430,3 +431,11 @@ if (hunt.startCluster({'web': 1})) { // Hunt#startCluster returns true for MASTE
 } else {
   console.log('We have started child process #' + process.pid);
 }
+
+//Set logging levels
+//winston.level = 'silly';
+//winston.level = 'debug';
+//winston.level = 'verbose';
+winston.level = 'info';
+//winston.level = 'warn';
+//winston.level = 'error';

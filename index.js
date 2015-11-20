@@ -15,8 +15,9 @@ var
   redisGenerator = require('./lib/datastore/redisClient.js'),
   util = require('util');
 
+winston.filters = winston.filters || [];
+winston.rewriters = winston.rewriters || [];
 
-require('colors');
 /**
  * @class Hunt
  * @param {config} config - dictionary of configuration parameters
@@ -599,7 +600,7 @@ function Hunt(config) {
      * @property {string} type - with a value of string of 'background'
      */
     this.emit('start', {'type': 'background'});
-    winston.verbose('Started Hunt as background service with PID#%d!', process.pid);
+    winston.info('Started Hunt as background service with PID#%d!', process.pid);
     return this;
   };
 
@@ -641,7 +642,7 @@ function Hunt(config) {
        * @property {string} address - with a value of address application is bound to
        */
       h.emit('start', {'type': 'webserver', 'port': p, 'address': address});
-      winston.verbose('Started Hunt as web server on %s:%s with PID#%s', address, p, process.pid);
+      winston.info('Started Hunt as web server on %s:%s with PID#%s', address, p, process.pid);
       prepared = true;
     });
     return this;
@@ -697,7 +698,7 @@ function Hunt(config) {
        * @property {string} address - with a value of address application is bound to
        */
       thishunt.emit('start', {'type': 'telnet', 'port': p, 'address': address});
-      winston.verbose('Started Hunt as web server on %s:%s with PID#%s', address, p, process.pid);
+      winston.info('Started Hunt as web server on %s:%s with PID#%s', address, p, process.pid);
     });
     return this;
   };
@@ -828,39 +829,39 @@ function Hunt(config) {
     if ((runtimeConfig.web + runtimeConfig.background + runtimeConfig.telnet) <= maxWorkers) {
 
       if (cluster.isMaster) {
-        console.log(('Cluster : We have ' + numCPUs + ' CPU cores present. We can use ' + maxWorkers + ' of them.').bold.green);
-        console.log(('Cluster : We need to spawn ' + runtimeConfig.web + ' web server processes!').magenta);
-        console.log(('Cluster : We need to spawn ' + runtimeConfig.background + ' background processes!').magenta);
-        console.log(('Cluster : We need to spawn ' + runtimeConfig.telnet + ' telnet server processes!').magenta);
-        console.log(('Cluster : Also we need to spawn 1 background processes to rule them all!').magenta);
-        console.log(('Cluster : Starting spawning processes...').magenta);
+        winston.silly('Cluster : We have %d CPU cores present. We can use %d of them.', numCPUs, maxWorkers);
+        winston.silly('Cluster : We need to spawn %d web server processes!', runtimeConfig.web);
+        winston.silly('Cluster : We need to spawn %d background processes!', runtimeConfig.background);
+        winston.silly('Cluster : We need to spawn %d telnet server processes!', runtimeConfig.telnet);
+        winston.silly('Cluster : Also we need to spawn 1 background processes to rule them all!');
+        winston.silly('Cluster : Starting spawning processes...');
 
-        console.log(('Cluster : Master PID#' + process.pid + ' is online!').green);
+        winston.info('Cluster : Master PID#%d is online!',process.pid);
 // Fork workers.
         for (i = 0; i < runtimeConfig.web; i = i + 1) {
           worker = cluster.fork();
           worker.send('be_webserver');
-          console.log(('Cluster : Spawning web server worker #' + i + ' with PID#' + worker.process.pid + '...').yellow);
+          winston.silly('Cluster : Spawning web server worker #%d with PID#%d...', i, worker.process.pid);
         }
 
         for (i = 0; i < runtimeConfig.background; i = i + 1) {
           worker = cluster.fork();
           worker.send('be_background');
-          console.log(('Cluster : Spawning background worker #' + i + ' with PID#' + worker.process.pid + '...').yellow);
+          winston.silly('Cluster : Spawning background worker #%d with PID#%d...', i, worker.process.pid);
         }
         for (i = 0; i < runtimeConfig.telnet; i = i + 1) {
           worker = cluster.fork();
           worker.send('be_telnet');
-          console.log(('Cluster : Spawning telnet server worker #' + i + ' with PID#' + worker.process.pid + '...').yellow);
+          winston.silly('Cluster : Spawning telnet server worker #%d with PID#%d...', i, worker.process.pid);
         }
 
         cluster.on('online', function (worker) {
-          console.log(('Cluster : Worker PID#' + worker.process.pid + ' is online!').green);
+          winston.info('Cluster : Worker PID#%d is online!',worker.process.pid);
         });
 
         cluster.on('exit', function (worker) {
           var exitCode = worker.process.exitCode;
-          console.log(('Cluster : Worker #' + worker.process.pid + ' died (' + exitCode + ')! Trying to spawn spare one...').red);
+          winston.warn('Cluster : Worker PID#%d died with exit code %d! ! Trying to spawn spare one...',worker.process.pid, exitCode);
           cluster.fork().send('be_webserver'); //todo process case for telnet server! 
         });
         this.startBackGround(); // the master process is ran as background application
