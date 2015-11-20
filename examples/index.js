@@ -9,6 +9,7 @@ var
   populateDb = require('./lib/populateDatabase.js'),
   pinger = require('./lib/pinger.js');
 
+winston.cli();
 //default values are commented out
 var config = {
   'secret': 'someLongAndHardStringToMakeHackersSadAndEldersHappy', //populated from environment
@@ -316,7 +317,6 @@ hunt.on('http:success', function (httpSuccess) {
     httpSuccess.body.password = '************'; //because we do not want to stream passwords!
   }
   hunt.emit('broadcast', {'type': 'httpSuccess', 'httpSuccess': httpSuccess});
-//  console.log(httpSuccess);
 });
 
 //event that is emitted on any error thrown in any of controllers
@@ -355,10 +355,10 @@ hunt.once('start', function (startParameters) {
     populateDb(hunt);
     setInterval(function () {
       populateDb(hunt);
-    }, 15 * 60 * 1000);
+    }, 60 * 1000);
     break;
   default:
-    console.log('We started application as ', startParameters.type);
+    winston.info('We started application as %s', startParameters.type);
   }
 });
 
@@ -366,7 +366,7 @@ hunt.once('start', function (startParameters) {
  * Listening to socket.io events, emitted by client
  */
 hunt.on('message:sio', function (event) {
-  console.log('We received socket.io event!', event);
+  winston.info('We received socket.io event!', event);
 });
 
 /*
@@ -375,7 +375,7 @@ hunt.on('message:sio', function (event) {
 function profilingListener(payload) {
   /* jshint -W040*/
   var e = this.event;
-  console.log('>>>PROFILING', e, payload, '<<<');
+  winston.info('PROFILING %s %s', e, JSON.stringify(payload));
   /* jshint +W040*/
 }
 //various means to perform it:
@@ -395,10 +395,7 @@ hunt.on(['REST', '*'], profilingListener);
 //making Gamemaster answering on private message
 
 hunt.on(['REST', 'Message', 'CREATE', '*'], function (messageObj) {
-  console.log('Private message', this.event, messageObj);
-
   if (messageObj.document.to.equals('55b0c81ee523c6a60c4325ad')) {
-    console.log('Gamekeeper is thinking!');
     setTimeout(function () {
       hunt.model.Message.create({
         'to': messageObj.document.from,
@@ -408,11 +405,10 @@ hunt.on(['REST', 'Message', 'CREATE', '*'], function (messageObj) {
           messageObj.document.message,
           '\" I can answer only this: Grrrrrr!'
         ].join('')
-      }, function (error, messageCreated) {
+      }, function (error) {
         if (error) {
           throw error;
         }
-        console.log(messageCreated);
       });
     }, 1000);
   }
@@ -427,9 +423,9 @@ hunt.on(['REST', 'Message', 'CREATE', '*'], function (messageObj) {
  * we recommend 1 process per CPU core
  */
 if (hunt.startCluster({'web': 1})) { // Hunt#startCluster returns true for MASTER process
-  console.log('We have started master process #' + process.pid);
+  winston.info('We have started master process #%s', process.pid);
 } else {
-  console.log('We have started child process #' + process.pid);
+  winston.info('We have started child process #%s', process.pid);
 }
 
 //Set logging levels
