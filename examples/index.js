@@ -9,7 +9,15 @@ var
   populateDb = require('./lib/populateDatabase.js'),
   pinger = require('./lib/pinger.js');
 
+//Set logging levels
 winston.cli();
+//winston.level = 'silly';
+//winston.level = 'debug';
+//winston.level = 'verbose';
+winston.level = 'info';
+//winston.level = 'warn';
+//winston.level = 'error';
+
 //default values are commented out
 var config = {
   'secret': 'someLongAndHardStringToMakeHackersSadAndEldersHappy', //populated from environment
@@ -428,10 +436,3 @@ if (hunt.startCluster({'web': 1})) { // Hunt#startCluster returns true for MASTE
   winston.info('We have started child process #%s', process.pid);
 }
 
-//Set logging levels
-//winston.level = 'silly';
-//winston.level = 'debug';
-//winston.level = 'verbose';
-winston.level = 'info';
-//winston.level = 'warn';
-//winston.level = 'error';
