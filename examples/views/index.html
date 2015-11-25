@@ -1,5 +1,134 @@
-<div ng-view></div>
-<noscript>
-    <h1>Error!</h1>
-    <p>Enable javascript in your browser to see the demo!</p>
-</noscript>
+<div class="col-sm-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                Introduction
+            </h4>
+        </div>
+        <div class="panel-body">
+            <p>
+                <a href="http://badge.fury.io/js/hunt">
+                    <img src="https://badge.fury.io/js/hunt.svg" alt="NPM version">
+                </a>
+                <a href="https://www.codacy.com/app/ostroumov095/hunt">
+                    <img style="max-width:100%;"
+                         data-canonical-src="https://api.codacy.com/project/badge/319951b59f4d40afa336a76934443cd6"
+                         alt="Codacy Badge"
+                         src="https://camo.githubusercontent.com/f9c7bb479d1929412d94a9e59252399656366258/68747470733a2f2f6170692e636f646163792e636f6d2f70726f6a6563742f62616467652f3331393935316235396634643430616661333336613736393334343433636436">
+                </a>
+                <a href="https://travis-ci.org/vodolaz095/hunt">
+                    <img src="https://travis-ci.org/vodolaz095/hunt.png?branch=master" alt="Build Status">
+                </a>
+                <a href="https://waffle.io/vodolaz095/hunt">
+                    <img src="https://badge.waffle.io/vodolaz095/hunt.png?label=ready&amp;title=Ready"
+                         alt="Stories in Ready">
+                </a>
+                <a href="https://gemnasium.com/vodolaz095/hunt">
+                    <img src="https://gemnasium.com/vodolaz095/hunt.svg" alt="Dependency Status">
+                </a>
+                <a href="https://gitter.im/vodolaz095/hunt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
+                    <img src="https://badges.gitter.im/Join Chat.svg" alt="Join developer's chat">
+                </a>
+            </p>
+
+            <p>HuntJS is a MIT licensed nodejs framework used for rapid prototyping and developing multipage and
+                single page (working as backend) web applications, RESTfull APIs, telnet compatible servers (pop3,
+                imap,
+                smtp)
+                and background services.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                Shameless advertisement
+            </h4>
+        </div>
+        <div class="panel-body">
+            <p>
+                You can hire the author of this package by Odesk
+                <a class="btn btn-success" href="https://www.odesk.com/users/~0120ba573d09c66c51">
+                    https://www.odesk.com/users/~0120ba573d09c66c51
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+<div class="col-sm-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                Hello world example!
+            </h4>
+        </div>
+        <div class="panel-body">
+                <pre>
+require('hunt')({
+  'port': 3000
+})
+.extendController('/', function (core, router) {
+  router.get('/', function (req, res) {
+    res.send('Hello, world!');
+  });
+})
+.startWebServer(); </pre>
+        </div>
+    </div>
+</div>
+<div class="col-sm-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                Tutorials and documentation
+            </h4>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li><a href="/documentation/tutorial-hello.html">Hello, world</a></li>
+                <li><a href="/documentation/tutorial-authorization.html">Authorization</a></li>
+                <li><a href="/documentation/tutorial-events.html">Events</a></li>
+                <li><a href="/documentation/tutorial-profiling.html">Database profiling</a></li>
+                <li><a href="/documentation/tutorial-modelToRest.html">Exporting mongoose models to REST
+                    interface</a>
+                </li>
+                <li><a href="/documentation/tutorial-telnetApplication.html">Telnet application</a></li>
+                <li><a href="/documentation/tutorial-webapplication.html">Web application</a></li>
+                <li><a href="/documentation/">API Documentation</a></li>
+                <li><a href="/documentation/tutorial-Changelog.html">Changelog</a></li>
+                <li><a href="/documentation/tutorial-ServerConfig.html">Deployment tips and tricks</a></li>
+                <li><a href="https://github.com/vodolaz095/hunt/tree/master/examples/">More examples</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                System requirements
+            </h4>
+        </div>
+        <div class="panel-body">
+            <p>Mandatory dependencies:</p>
+            <ul>
+                <li><a href="http://distrowatch.com/dwres.php?resource=major">Linux</a>
+                    - this is your problem, if you
+                    want to build this package on other operating systems. But i have reports that HuntJs works on
+                    MacOs
+                </li>
+                <li><a href="http://nodejs.org/download/">NodeJS</a> >= v0.10.26</li>
+                <li><a href="http://redis.io/download/">Redis</a> >= v2.6.16 - needed for web applications</li>
+            </ul>
+            <p>Optional dependencies:</p>
+            <ul>
+                <li><a href="http://www.mongodb.org/downloads"> Mongo >= 2.4.6 (optional)</a></li>
+                <li><a href="https://dev.mysql.com/downloads/mysql/">MySQL >= v5.6.16 (optional)</a></li>
+                <li><a href="http://www.postgresql.org/download/">PostgreSQL >= v9.2 (optional)</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+

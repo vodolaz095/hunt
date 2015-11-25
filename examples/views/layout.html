@@ -46,29 +46,32 @@
             </div>
         </nav>
     </div>
-    [[#flash]]
+    <noscript>
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            Error! Enable javascript in your browser to see the demo!
+        </div>
+    </noscript>
 
+    [[#flash]]
     [[#error]]
     <div class="alert alert-danger alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         [[.]]
     </div>
     [[/error]]
-
     [[#success]]
     <div class="alert alert-success alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         [[.]]
     </div>
     [[/success]]
-
     [[#info]]
     <div class="alert alert-info alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         [[.]]
     </div>
     [[/info]]
-
     [[/flash]]
 
     <div ng-cloak>
@@ -85,16 +88,17 @@
             {{ flashInfo }}
         </div>
     </div>
-
-
 </div>
+
 <article class="container">
     <div class="row">
-        <div class="col-md-12">
-            <!-- YIELD START -->
-            [[& yield ]]
-            <!-- YIELD STOP -->
-        </div>
+            <div ng-view>
+<!-- YIELD START -->
+
+                [[& yield ]]
+
+<!-- YIELD STOP -->
+            </div>
     </div>
 </article>
 

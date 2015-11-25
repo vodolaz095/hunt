@@ -158,7 +158,8 @@ hunt.extendController('/', function (core, router) {
   router.get('/', function (req, res) {
     res.render('index', {
       'title': 'HuntJS V' + core.version + ' demo',
-      'description': 'mix expressjs, mongoose, sequilize, socketio and passportjs'
+      'description': 'Event driven framework for building clustered applications',
+      'layout': req.query.noLayout !== undefined ? false : 'layout'
     });
   });
 

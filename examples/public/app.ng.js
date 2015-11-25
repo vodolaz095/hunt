@@ -42,7 +42,7 @@
             controller: 'dialogController'
           })
           .when('/', {
-            templateUrl: '/partials/main.html',
+            templateUrl: '/?noLayout=true',
             controller: 'mainController'
           })
           .otherwise({
