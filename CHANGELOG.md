@@ -9,6 +9,7 @@ in `exportModel` query method.
 Refactoring of authorization controller.
 Added `remember me` behaviour for signing in.
 Improve `hunt.model.User.signup(username,email,password,callback)` function to also work with username
+Each webserver process with socket.io enabled now uses 2 redis connections instead of 3.
 Newer dependencies. 
 
 # v0.6.1
