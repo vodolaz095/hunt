@@ -264,7 +264,7 @@ describe('Testing REST api', function () {
           body.data.name.should.be.equal(bookName);
           body.data.content.should.be.equal('some content');
           body.data.id.should.be.a.equal(articleId);
-          should.not.exists(body.data.author);
+          body.data.author.id.should.be.equal('54a6168aa027eb0326220518');
         }
       });
     });
