@@ -1204,7 +1204,15 @@ Hunt.prototype.injectCssFromDirectory = function (arrayOfPatterns) {
   });
   return this;
 };
-
+/**
+ * @method Hunt#injectJsFromDirectory
+ * @param {String} arrayOfPatterns - array of patterns for css files to load.
+ * @description
+ * Automatically load client side javascript files from directory and load in `hunt.app.locals.javascripts`
+ * @example
+ *
+ * Hunt.injectJsFromDirectory(["public/custom/*.js","public/vendor/*.js"])
+ */
 Hunt.prototype.injectJsFromDirectory = function (arrayOfPatterns) {
   var dicOfJs = {};
   arrayOfPatterns.map(function (p) {
@@ -1216,6 +1224,10 @@ Hunt.prototype.injectJsFromDirectory = function (arrayOfPatterns) {
   return this;
 };
 
+process.on('uncaughtException', function (error) {
+  winston.error(error);
+  process.exit(1);
+});
 
 /**
  * HuntJS framework module
