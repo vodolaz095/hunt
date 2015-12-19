@@ -29,3 +29,8 @@ docs:
 	node node_modules/jsdoc/jsdoc.js -c jsdoc.conf.json --pedantic -u tutorials/
 
 
+clean: clear
+
+clear: clearDocs
+	rm node_modules/ -rf
+	rm bower_components/ -rf

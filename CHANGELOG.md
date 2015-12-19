@@ -1,3 +1,9 @@
+# v0.6.3
+Newer dependencies. 
+Use winston for reporting errors instead of email.
+Typo fixed for accidently logging huntKeys.
+Tested on NodeJS of 5.1.0 version.
+
 # v0.6.2
 More consistent error messages and REST api behaviour.
 Hunt#md5, Hunt#sha512 methods.

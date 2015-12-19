@@ -59,7 +59,8 @@
     <p>This message will be shown on console of application's server.</p>
 <pre>
     //in client side code
-    var socket = io.connect('');
+    var socket = io();
+    io.send('Hello!');
     io.emit('message', 'Hello!');
 </pre>
 

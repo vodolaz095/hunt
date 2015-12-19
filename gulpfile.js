@@ -2,6 +2,7 @@
 
 var
   gulp = require('gulp'),
+  less = require('gulp-less'),
   bower = require('gulp-bower'),
   gulpFilter = require('gulp-filter'),
   minifycss = require('gulp-minify-css'),
@@ -12,7 +13,7 @@ var
   order = require('gulp-order'),
   del = require('del'),
   jsFilter = gulpFilter('*.js'),
-  cssFilter = gulpFilter('*.css'),
+  cssFilter = gulpFilter('*.less'),
   dest = 'examples/public/dist';
 
 gulp.task('clean', function (cb) {
@@ -36,7 +37,8 @@ gulp.task('vendor-js', function () {
 gulp.task('vendor-css', function () {
   return gulp.src(mainBowerFiles())
     .pipe(cssFilter)
-    .pipe(concat('huntjs.css'))
+    .pipe(less())
+    .pipe(concat('vendor.css'))
     .pipe(gulp.dest(dest))
     .pipe(minifycss())
     .pipe(rename({suffix: '.min'}))
@@ -58,16 +60,19 @@ gulp.task('scripts', function () {
 
 ////http://stackoverflow.com/questions/26273358/gulp-minify-all-css-files-to-a-single-file
 gulp.task('styles', function () {
-//  gulp.src(['public/**/*.css'])
-//    .pipe(styl({compress: true}))
-//    .pipe(gulp.dest('minify'));
+  gulp.src(['public/**/*.css'])
+    .pipe(concat('huntjs.css'))
+    .pipe(gulp.dest(dest))
+    .pipe(minifycss())
+    .pipe(rename({suffix: '.min'}))
+    .pipe(gulp.dest(dest));
 });
 
-gulp.task('vendor', ['bower'], function(){
+gulp.task('vendor', ['bower'], function () {
   gulp.start('vendor-js', 'vendor-css');
 });
 
-gulp.task('default', ['clean'], function(){
+gulp.task('default', ['clean'], function () {
   gulp.start('vendor', 'scripts', 'styles');
 });
 

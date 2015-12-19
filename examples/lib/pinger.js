@@ -22,7 +22,6 @@ function isUrl(payload) {
 module.exports = exports = function (payload, socket) {
   var a = isUrl(payload);
   if (a) {
-    console.log('Pinging ' + a.hostname);
     socket.emit('pingerAnswer', 'Trying to ping ' + a.href + '...');
     var req = request({'method': 'HEAD', 'hostname': a.hostname, 'port': a.port || 80 }, function (response) {
       socket.emit('pingerAnswer', a.href + ' - statusCode ' + response.statusCode);

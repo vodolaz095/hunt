@@ -106,7 +106,7 @@ hunt.extendApp(function (core) {
 
 //loading bower components
   core.app.locals.javascripts.push({'url': '/dist/vendor.min.js'});
-  core.app.locals.css.push({'href': '/dist/huntjs.min.css', 'media': 'screen'});
+  core.app.locals.css.push({'href': '/dist/vendor.min.css', 'media': 'screen'});
 
   if (core.config.env === 'production') {
 //loading custom scripts
