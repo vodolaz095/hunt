@@ -410,6 +410,9 @@
       User.prototype.sendMessage = function (message, callback) {
         return huntMessage.create({'to': this.id, 'message': message.toString().trim()}, callback);
       };
+      User.prototype.setPassword = function (password) {
+        return $http.patch('/api/v1/users/' + this.id, {'password': password});
+      };
       return User;
     }])
     .factory('huntMyself', ['$http', 'huntUser', 'huntMessage', function ($http, User, Message) {
