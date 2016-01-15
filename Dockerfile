@@ -12,6 +12,9 @@ RUN dnf install -y gcc-c++ make dnf-plugins-core krb5-libs krb5-devel
 RUN dnf -y copr enable nibbler/nodejs
 RUN dnf -y install git nodejs nodejs-devel npm
 
+# Clean cache
+RUN dnf -y clean all
+
 # Listen on 3000 port
 ENV PORT=3000
 EXPOSE 3000
