@@ -105,15 +105,15 @@ hunt.extendApp(function (core) {
   core.app.locals.delimiters = '[[ ]]';
 
 //loading bower components
-  core.app.locals.javascripts.push({'url': '/dist/vendor.min.js'});
-  core.app.locals.css.push({'href': '/dist/vendor.min.css', 'media': 'screen'});
+  core.app.locals.javascripts.push('/dist/vendor.min.js');
+  core.app.locals.css.push('/dist/vendor.min.css');
 
   if (core.config.env === 'production') {
 //loading custom scripts
-    core.app.locals.javascripts.push({'url': '/dist/huntjs.min.js'});
+    core.app.locals.javascripts.push('/dist/huntjs.min.js');
   } else {
-    core.app.locals.javascripts.push({'url': '/hunt.ng.js'});
-    core.app.locals.javascripts.push({'url': '/app.ng.js'});
+    core.app.locals.javascripts.push('/hunt.ng.js');
+    core.app.locals.javascripts.push('/app.ng.js');
   }
 //Setting up menu - one of many possible approaches
   core.app.locals.menu = [

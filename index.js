@@ -836,7 +836,7 @@ function Hunt(config) {
         winston.silly('Cluster : Also we need to spawn 1 background processes to rule them all!');
         winston.silly('Cluster : Starting spawning processes...');
 
-        winston.info('Cluster : Master PID#%d is online!',process.pid);
+        winston.info('Cluster : Master PID#%d is online!', process.pid);
 // Fork workers.
         for (i = 0; i < runtimeConfig.web; i = i + 1) {
           worker = cluster.fork();
@@ -856,12 +856,12 @@ function Hunt(config) {
         }
 
         cluster.on('online', function (worker) {
-          winston.info('Cluster : Worker PID#%d is online!',worker.process.pid);
+          winston.info('Cluster : Worker PID#%d is online!', worker.process.pid);
         });
 
         cluster.on('exit', function (worker) {
           var exitCode = worker.process.exitCode;
-          winston.warn('Cluster : Worker PID#%d died with exit code %d! ! Trying to spawn spare one...',worker.process.pid, exitCode);
+          winston.warn('Cluster : Worker PID#%d died with exit code %d! ! Trying to spawn spare one...', worker.process.pid, exitCode);
           cluster.fork().send('be_webserver'); //todo process case for telnet server! 
         });
         this.startBackGround(); // the master process is ran as background application
@@ -1193,15 +1193,24 @@ Hunt.prototype.loadModelsFromDirectory = function (dirname) {
  * Hunt.injectCssFromDirectory(["public/custom/*.css","public/vendor/*.css"])
  */
 Hunt.prototype.injectCssFromDirectory = function (arrayOfPatterns) {
-  var dicOfCss = {};
+  var
+    t = this,
+    dicOfCss = {};
   arrayOfPatterns.map(function (p) {
     glob.sync(p).map(function (f) {
       dicOfCss[f] = true;
     });
   });
-  this.app.locals.css = Object.keys(dicOfCss).map(function (k) {
-    return {'href': k, 'media': 'display'};
+  t.once('start', function (payload) {
+    if (payload.type === 'webserver') {
+      t.app.locals.css = Object.keys(dicOfCss).map(function (k) {
+        k = '/'+path.relative(t.config.public, k);
+        winston.silly('Using CSS from %s',k);
+        return k;
+      });
+    }
   });
+
   return this;
 };
 /**
@@ -1214,14 +1223,24 @@ Hunt.prototype.injectCssFromDirectory = function (arrayOfPatterns) {
  * Hunt.injectJsFromDirectory(["public/custom/*.js","public/vendor/*.js"])
  */
 Hunt.prototype.injectJsFromDirectory = function (arrayOfPatterns) {
-  var dicOfJs = {};
+  var
+    dicOfJs = {},
+    t = this;
   arrayOfPatterns.map(function (p) {
     glob.sync(p).map(function (f) {
       dicOfJs[f] = true;
     });
   });
-  this.app.locals.javascripts = Object.keys(dicOfJs);
-  return this;
+  t.once('start', function (payload) {
+    if (payload.type === 'webserver') {
+      t.app.locals.javascripts = Object.keys(dicOfJs).map(function(k){
+        k = path.relative(t.config.public, k);
+        winston.silly('Using client side js from %s',k);
+        return '/'+k;
+      });
+    }
+  });
+  return t;
 };
 
 process.on('uncaughtException', function (error) {
