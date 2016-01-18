@@ -1,3 +1,6 @@
+# v0.6.5
+Newer dependencies. Improved Dockerfile.
+
 # v0.6.4
 Optimize function for signing in / signing up via oAuth providers - proper event name for creating new profile,
 
