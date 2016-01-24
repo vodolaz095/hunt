@@ -37,10 +37,10 @@ var
 
 //populating the trophies' collection in database
 module.exports = exports = function (hunt) {
-  var gameMasterId;
+  var gameMasterId = '55b0c81ee523c6a60c4325ad';
   hunt.async.series([
     function (cb) {
-      hunt.model.User.findOneAndUpdate({'_id': '55b0c81ee523c6a60c4325ad'}, {
+      hunt.model.User.findOneAndUpdate({'_id': gameMasterId}, {
         'displayName': 'Gamekeeper',
         'root': false,
         'accountVerified': true,
@@ -51,8 +51,7 @@ module.exports = exports = function (hunt) {
         if (error) {
           cb(error);
         } else {
-          winston.info('Gamekeeper created with %s', userCreated.huntKey);
-          gameMasterId = userCreated.id;
+          winston.info('Gamekeeper created with %s', gameMasterId);
           cb(null);
         }
       });

@@ -1,3 +1,8 @@
+# 0.6.6
+Added `bodyParserLimit` with default value of 100kb to config object - see 
+[body-parser documentation](https://www.npmjs.com/package/body-parser#limit)
+for details.
+
 # v0.6.5
 Newer dependencies. Improved Dockerfile.
 
