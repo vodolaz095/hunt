@@ -320,6 +320,18 @@ hunt.exportModelToRest({
   'ownerId': 'author'
 });
 
+
+/*
+ * Exporting Planet model as REST interface
+ */
+
+
+hunt.exportModelToRest({
+  'mountPount': '/api/v1/planet',
+  'modelName': 'Planet',
+  'ownerId': 'author'
+});
+
 /*
  * Exporting User model as REST interface
  */
@@ -455,6 +467,8 @@ hunt.on(['REST', 'Message', 'CREATE', '*'], function (messageObj) {
  * and what port to use (from config or process.env.PORT or default - 3000)
  * we recommend 1 process per CPU core
  */
+
+//hunt.startWebServer();
 if (hunt.startCluster({'web': 1})) { // Hunt#startCluster returns true for MASTER process
   winston.info('We have started master process #%s', process.pid);
 } else {

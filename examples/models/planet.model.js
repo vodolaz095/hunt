@@ -6,6 +6,7 @@ var
 module.exports = exports = function (core) {
   var PlanetSchema = core.sequelize.define('Planet', {
       name: core.Sequelize.STRING,
+      author: core.Sequelize.STRING,
       huntingAllowed: core.Sequelize.BOOLEAN
     },
     {

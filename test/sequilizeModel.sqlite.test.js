@@ -2,9 +2,9 @@
 var
   hunt = require('./../index.js'),
   PlanetModel = require('./../examples/models/planet.model.js'),
-  should = require('should'),
-  async = require('async'),
   Hunt;
+
+require('should');
 
 describe('Sequilize test for SQLite database model', function () {
   this.timeout(10000);
