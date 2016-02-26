@@ -1,6 +1,7 @@
 'use strict';
 
 var
+  async = require('async'),
   winston = require('winston'),
   appGenerator = require('./lib/http/expressApp.js'),
   assert = require('assert'),
@@ -10,6 +11,7 @@ var
   fs = require('fs'),
   glob = require('glob'),
   mongooseGenerator = require('./lib/datastore/mongooseModels.js'),
+  sequilizeGenerator = require('./lib/datastore/sequelizeModels.js'),
   nodemailerListener = require('./lib/nodemailer.js'),
   path = require('path'),
   redisGenerator = require('./lib/datastore/redisClient.js'),
@@ -159,7 +161,7 @@ function Hunt(config) {
    * Embedded {@link https://www.npmjs.org/package/async | npm module of async} of 1.2.1 version for better workflow
    */
   this.extendCore('async', function () {
-    return require('async');
+    return async;
   });
 
   /**
@@ -227,6 +229,9 @@ function Hunt(config) {
 
   if (this.config.enableMongoose) {
     mongooseGenerator(this);
+  }
+  if (this.config.enableSequilize){
+    sequilizeGenerator(this);
   }
 
   /**
@@ -1083,17 +1088,20 @@ Hunt.prototype.huntOnce = function (eventName, handler) {
  */
 Hunt.prototype.stop = function () {
   if (this.redisClient) {
-    this.redisClient.end();
+    this.redisClient.quit();
   }
 
   if (this.mongoose && this.mongoose.connection) {
     this.mongoose.connection.close();
     this.mongoose.disconnect();
   }
-  //if (this.sequelize) {
-  //do disconnection to SQL database
-  //}
-  winston.verbose('Hunt process %d is stopped!', process.pid);
+  if (this.sequelize) {
+    //this.sequelize.close();
+  }
+  setTimeout(function(){
+    winston.verbose('Hunt process %d is stopped!', process.pid);
+    process.exit();
+  }, 100)
 };
 
 /**

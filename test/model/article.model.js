@@ -93,5 +93,7 @@ module.exports = exports = function (core) {
     }
   };
 
-  return core.mongoConnection.model('Article', ArticleSchema);
+  var Article = core.mongoConnection.model('Article', ArticleSchema);
+  Article.type = 'mongoose';
+  return Article;
 };

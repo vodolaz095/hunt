@@ -6,15 +6,16 @@
 
 var
   winston = require('winston'),
-  populateDb = require('./lib/populateDatabase.js'),
+  populateTrophy = require('./lib/populateTrophy.js'),
+  populatePlanet = require('./lib/populatePlanet.js'),
   pinger = require('./lib/pinger.js');
 
 //Set logging levels
 winston.cli();
-//winston.level = 'silly';
+winston.level = 'silly';
 //winston.level = 'debug';
 //winston.level = 'verbose';
-winston.level = 'info';
+//winston.level = 'info';
 //winston.level = 'warn';
 //winston.level = 'error';
 
@@ -25,13 +26,18 @@ var config = {
   //'env' : 'production',
   //'hostUrl': 'http://huntdemo.herokuapp.com/', //populated from environment
   //'redisUrl' : 'redis://somehost.com:6379',
+
+
+  'enableMongoose' : true,
+  'enableMongooseUsers' : true,
   //'mongoUrl' : 'mongo://localhost/hunt_dev',
-  //'uploadFiles': false, // do not allow upload of files by HTTP-POST
-  //'enableMongoose' : true,
-  //'enableMongooseUsers' : true,
-  'usersApi': true,
-  'disableCsrf': true,
-  //for password strategies
+
+  'enableSequilize':true,
+  'sequelizeUrl': 'sqlite://localhost/'+__dirname+'/huntjs.db',
+
+
+
+//configure passport strategies
   'passport': {
 //    'sessionExpireAfterSeconds':180,
     'local': true, //authorization by username/email and password, POST to /auth/login
@@ -79,8 +85,18 @@ var config = {
   },
   'huntKey': true, //disallow huntKey authorization by GET query field and POST,PUT,DELETE body parameter. Default is false - denied
   'huntKeyHeader': true, //allow huntKey authorization by header. Default is false - denied
-  'io': true, //enable socket.io support
-  'dialog': true,//enable dialogs api on /api/dialog
+
+//enable socket.io support
+  'io': true,
+
+//enable dialogs api on /api/v1/dialog(s)
+  'dialog': true,
+//enable users api on /api/v1/user(s)
+  'usersApi': true,
+
+//config for expressjs application
+  'disableCsrf': true,
+  'uploadFiles': false, // default value, do not allow upload of files by HTTP-POST
   'public': __dirname + '/public', //directory for assets - css, images, client side javascripts
   'views': __dirname + '/views', //directory for templates
 
@@ -98,6 +114,12 @@ var hunt = require('./../index.js')(config);
  */
 hunt.extendModel('Trophy', require('./models/trophy.model.js'));
 
+/*
+ * Creating Sequelize models of Planets
+ * So, this model is accessible by hunt.model.Planet
+ * and by request.model.Planet in controllers
+ */
+hunt.extendModel('Planet', require('./models/planet.model.js'));
 
 hunt.extendApp(function (core) {
 // we set server side template engine delimiters to be
@@ -361,9 +383,11 @@ hunt.once('start', function (startParameters) {
     }, 500);
     break;
   case 'background':
-    populateDb(hunt);
+    populateTrophy(hunt);
+    populatePlanet(hunt);
     setInterval(function () {
-      populateDb(hunt);
+      populateTrophy(hunt);
+      populatePlanet(hunt);
     }, 60 * 1000);
     break;
   default:
