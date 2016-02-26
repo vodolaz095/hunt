@@ -55,7 +55,13 @@ var
     }
   ];
 
-module.exports = exports = function (hunt) {
+module.exports = exports = function (hunt, callback) {
+  callback = callback || function(error){
+      if(error){
+        throw error;
+      }
+    }
+
   hunt.async.series([
     function (cb) {
       hunt.sequelize.sync().then(function () {
@@ -77,5 +83,5 @@ module.exports = exports = function (hunt) {
         }, clb);
       }, cb);
     }
-  ]);
+  ], callback);
 };

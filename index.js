@@ -1098,10 +1098,10 @@ Hunt.prototype.stop = function () {
   if (this.sequelize) {
     //this.sequelize.close();
   }
-  setTimeout(function(){
-    winston.verbose('Hunt process %d is stopped!', process.pid);
-    process.exit();
-  }, 100)
+  //setTimeout(function(){
+    winston.verbose('Hunt process %d is stoping...', process.pid);
+  //  process.exit();
+  //}, 100)
 };
 
 /**
