@@ -60,7 +60,7 @@ module.exports = exports = function (hunt, callback) {
       if(error){
         throw error;
       }
-    }
+    };
 
   hunt.async.series([
     function (cb) {

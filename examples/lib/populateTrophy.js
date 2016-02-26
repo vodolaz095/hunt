@@ -36,7 +36,13 @@ var
   };
 
 //populating the trophies' collection in database
-module.exports = exports = function (hunt) {
+module.exports = exports = function (hunt, callback) {
+  callback = callback || function (error) {
+      if (error) {
+        throw error;
+      }
+    };
+
   var gameMasterId = '55b0c81ee523c6a60c4325ad';
   hunt.async.series([
     function (cb) {
@@ -70,9 +76,5 @@ module.exports = exports = function (hunt) {
         });
       }, cb);
     }
-  ], function (error) {
-    if (error) {
-      throw error;
-    }
-  });
+  ], callback);
 };
