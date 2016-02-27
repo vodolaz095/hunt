@@ -2,10 +2,10 @@
 # Official docker file for building HuntJS powered applications
 #
 
-FROM fedora:22
+FROM fedora:23
 
 # Install dependencies
-RUN dnf upgrade -y
+RUN dnf upgrade -y && dnf clean all
 RUN dnf install -y gcc-c++ make dnf-plugins-core krb5-libs krb5-devel
 
 # Enable copr repo with more recent nodejs versions
@@ -64,3 +64,6 @@ RUN npm install
 
 # Run the image process. Point second argument to your entry point of application
 CMD ["/usr/bin/node","/srv/examples/index.js"]
+
+# For your application it can be something like this
+# CMD ["/usr/bin/node","/path/to/your/huntjs/application/index.js"]
