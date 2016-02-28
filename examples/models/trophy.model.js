@@ -64,7 +64,5 @@ module.exports = exports = function (core) {
 
 //this step is very important - bind mongoose model to current mongo database connection
 //and assign it to collection
-  var Trophy = core.mongoConnection.model('Trophy', TrophySchema);
-  Trophy.type = 'mongoose';
-  return Trophy;
+  return core.mongoConnection.model('Trophy', TrophySchema);
 };

@@ -142,7 +142,8 @@ hunt.extendApp(function (core) {
     {'url': '/documentation', 'name': 'Documentation'},
     {'url': 'http://docs.huntjs.apiary.io/', 'name': 'API'},
     {'url': '/#/events', 'name': 'Events'},
-    {'url': '/#/crud', 'name': 'CRUD'},
+    {'url': '/#/trophy', 'name': 'Trophies'},
+    {'url': '/#/planet', 'name': 'Planets'},
     {'url': '/#/cache', 'name': 'Caching'},
     {'url': '/#/cluster', 'name': 'Cluster'}
   ];

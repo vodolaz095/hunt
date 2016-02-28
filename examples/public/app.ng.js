@@ -9,13 +9,21 @@
             templateUrl: '/partials/events.html',
             controller: 'eventsController'
           })
-          .when('/crud', {
-            templateUrl: '/partials/crud.html',
-            controller: 'crudController'
+          .when('/trophy', {
+            templateUrl: '/partials/trophy.html',
+            controller: 'trophyController'
           })
-          .when('/crud/:id', {
-            templateUrl: '/partials/crudItem.html',
-            controller: 'crudItemController'
+          .when('/trophy/:id', {
+            templateUrl: '/partials/trophyItem.html',
+            controller: 'trophyItemController'
+          })
+          .when('/planet', {
+            templateUrl: '/partials/planet.html',
+            controller: 'planetController'
+          })
+          .when('/planet/:id', {
+            templateUrl: '/partials/planetItem.html',
+            controller: 'planetItemController'
           })
           .when('/cache', {
             templateUrl: '/partials/cache.html',
@@ -94,8 +102,8 @@
     .factory('trophy', ['huntModel', function (huntModel) {
       return huntModel('trophy');
     }])
-    //Controller for CRUD example
-    .controller('crudController', ['$scope', 'huntSocketIo', 'trophy', '$http', function ($scope, socket, trophy, $http) {
+    //Controller for Trophies CRUD example
+    .controller('trophyController', ['$scope', 'huntSocketIo', 'trophy', '$http', function ($scope, socket, trophy, $http) {
       $scope.trophies = [];
       $scope.codeSampleForCRUD = 'lalala';
       trophy.query({'sort': 'name'}).then(function (trophies) {
@@ -121,8 +129,49 @@
         });
       };
     }])
-    .controller('crudItemController', ['$scope', 'trophy', '$routeParams', '$location', function ($scope, trophy, $routeParams, $location) {
+    .controller('trophyItemController', ['$scope', 'trophy', '$routeParams', '$location', function ($scope, trophy, $routeParams, $location) {
       trophy
+        .findById($routeParams.id)
+        .then(function (item) {
+          $scope.item = item;
+          item.$watch($scope, 'item');
+        }).catch(function () {
+        $location.path('/crud');
+      });
+    }])
+
+    .factory('planet', ['huntModel', function (huntModel) {
+      return huntModel('planet');
+    }])
+    //Controller for Planets CRUD example
+    .controller('planetController', ['$scope', 'planet', '$http', function ($scope, planet, $http) {
+      $scope.trophies = [];
+      $scope.codeSampleForCRUD = 'lalala';
+      planet.query({'sort': 'name'}).then(function (trophies) {
+        $scope.trophies = trophies;
+      });
+
+      //$http.get('https://raw.githubusercontent.com/vodolaz095/hunt/master/examples/models/planet.model.js')
+      //  .success(function (data) {
+      //    $scope.codeSampleForCRUD = data;
+      //  })
+      //  .error(function () {
+      //    throw new Error('Error getting example code for `Trophy` model');
+      //  });
+
+      $scope.createTrophy = function () {
+        planet.create({
+          'name': $scope.newTrophyName,
+          'priority': $scope.newTrophyPriority
+        }).then(function (trophyCreated) {
+          $scope.newTrophyName = null;
+          $scope.newTrophyScore = null;
+          $scope.trophies.push(trophyCreated);
+        });
+      };
+    }])
+    .controller('planetItemController', ['$scope', 'planet', '$routeParams', '$location', function ($scope, planet, $routeParams, $location) {
+      planet
         .findById($routeParams.id)
         .then(function (item) {
           $scope.item = item;
