@@ -23,7 +23,7 @@ module.exports = exports = function (core) {
           callback(null, true, ['id', 'name', 'huntingAllowed', '$subscribeToken', 'createdAt', 'updatedAt']);
         },
         canUpdate: function (user, callback) {
-          callback(null, false);
+          callback(null, !!user, ['name', 'huntingAllowed']);
         },
         canDelete: function (user, callback) {
           callback(null, false);
@@ -31,6 +31,5 @@ module.exports = exports = function (core) {
       }
     }
   );
-  PlanetSchema.type = 'sequelize';
   return PlanetSchema;
 };

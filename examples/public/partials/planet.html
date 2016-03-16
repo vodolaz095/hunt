@@ -1,0 +1,58 @@
+<div>
+    <h1>Trophies</h1>
+
+    <p>We can easily expose Sequelize model to <a href="http://www.restapitutorial.com">REST</a>
+        interface with access control:</p>
+
+    <p><b>Hint</b>: open this page in 2 different browser tabs - you can see that changes persist between clients!</p>
+    <table class="table-responsive table-hover col-sm-12" border="1">
+        <thead>
+        <tr>
+            <th class="col-sm-3">#</th>
+            <th class="col-sm-3">Name <input type="text" ng-model="nameFilter" placeholder="filter"></th>
+            <th class="col-sm-1">Priority</th>
+            <th class="col-sm-1">Scored</th>
+        </tr>
+        </thead>
+        <tbody ng-repeat="trophy in trophies  | filter:nameFilter | orderBy:'+name'">
+        <tr ng-if="!trophy.$deleted">
+            <td ng-class="{active:trophy.$saving}">
+                <a href="/#/crud/{{ trophy.id }}">{{ trophy.id }}</a>
+                <span ng-show="trophy.$saving"><img src="/ajax-loader.gif">Saving...</span>
+            </td>
+            <td>
+                <input class="col-sm-12" type="text"
+                       ng-change="trophy.$ngChange('name',trophy.name, '{{ trophy.name }}')"
+                       ng-model="trophy.name">
+            </td>
+            <td>
+                <input class="col-sm-12" type="number"
+                       string-to-number
+                       ng-change="trophy.$ngChange('priority',trophy.priority, '{{ trophy.priority }}')"
+                       ng-model="trophy.priority">
+            </td>
+            <td>
+                <input class="col-sm-12" type="checkbox"
+                       ng-change="trophy.$ngChange('scored',trophy.scored, '{{ trophy.scored }}')" value="true"
+                       ng-model="trophy.scored">
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="2">
+                <input placeholder="Your name, please!"
+                       ng-model="newTrophyName" class="col-sm-12"
+                       type="text">
+            </td>
+            <td><input placeholder="1" ng-model="newTrophyPriority" class="col-sm-12" type="text"></td>
+            <td align="center">
+                <button ng-click="createTrophy()" type="button" class="btn btn-success">Enter the Hunt</button>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+    <p>It is done like this by providing a thick model (see
+        <a href="https://github.com/vodolaz095/hunt/blob/master/examples/models/trophy.model.js">source</a>):</p>
+    <pre>{{ codeSampleForCRUD }}</pre>
+</div>
