@@ -469,10 +469,11 @@ hunt.on(['REST', 'Message', 'CREATE', '*'], function (messageObj) {
  * we recommend 1 process per CPU core
  */
 
-//hunt.startWebServer();
+hunt.startWebServer();
+/*
 if (hunt.startCluster({'web': 1})) { // Hunt#startCluster returns true for MASTER process
   winston.info('We have started master process #%s', process.pid);
 } else {
   winston.info('We have started child process #%s', process.pid);
 }
-
+*/

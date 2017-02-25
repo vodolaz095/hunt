@@ -144,7 +144,7 @@
       return huntModel('planet');
     }])
     //Controller for Planets CRUD example
-    .controller('planetController', ['$scope', 'planet', '$http', function ($scope, planet, $http) {
+    .controller('planetController', ['$scope', 'planet', '$http', function ($scope, planet) {
       $scope.trophies = [];
       $scope.codeSampleForCRUD = 'lalala';
       planet.query({'sort': 'name'}).then(function (trophies) {

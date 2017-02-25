@@ -1,8 +1,5 @@
 'use strict';
 
-var
-  util = require('util');
-
 module.exports = exports = function (core) {
   var PlanetSchema = core.sequelize.define('Planet', {
       name: core.Sequelize.STRING,

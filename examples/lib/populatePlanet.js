@@ -72,14 +72,16 @@ module.exports = exports = function (hunt, callback) {
       hunt.model.Planet.destroy({
         where: {}
       }).then(function () {
-        cb(null)
+        cb(null);
       }, cb);
     },
     function (cb) {
       hunt.async.each(planets, function (planet, clb) {
         hunt.model.Planet.create(planet).then(function (planetEntryCreated) {
-          winston.info('Planet #%s - %s is recorded to database', planetEntryCreated.id, planetEntryCreated.name);
-          clb()
+          winston.info('Planet #%s - %s is recorded to database',
+            planetEntryCreated.id,
+            planetEntryCreated.name);
+          clb();
         }, clb);
       }, cb);
     }
