@@ -18,3 +18,5 @@ examples/public/documentation
 
 # Sequilize example database
 examples/huntjs.db
+
+*.log
