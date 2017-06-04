@@ -470,6 +470,7 @@ hunt.on(['REST', 'Message', 'CREATE', '*'], function (messageObj) {
  */
 
 //hunt.startWebServer();
+
 if (hunt.startCluster({'web': 1})) { // Hunt#startCluster returns true for MASTER process
   winston.info('We have started master process #%s', process.pid);
 } else {

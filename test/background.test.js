@@ -70,7 +70,7 @@ describe('HuntJS builds single threaded background application', function () {
       hunt.createRedisClient.should.be.an.Function;
     });
 
-    it('#redisClient profiling works', function (done) {
+    it.skip('#redisClient profiling works', function (done) {
       hunt.once(['profiling', 'redis', '*'], function (event) {
         event.startedAt.should.be.a.Date;
         event.finishedAt.should.be.a.Date;

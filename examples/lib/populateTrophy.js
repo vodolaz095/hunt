@@ -57,7 +57,7 @@ module.exports = exports = function (hunt, callback) {
         if (error) {
           cb(error);
         } else {
-          winston.info('Gamekeeper created with %s', gameMasterId);
+          winston.info('Gamekeeper created with %s and %s', gameMasterId, userCreated.displayName);
           cb(null);
         }
       });
